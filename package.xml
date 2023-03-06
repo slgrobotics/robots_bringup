@@ -4,7 +4,7 @@
   <name>robots_bringup</name>
   <version>0.0.0</version>
   <description>A package to launch different robots for different tasks</description>
-  <maintainer email="msghub@hotmail.com">sergei</maintainer>
+  <maintainer email="msghub@hotmail.com">Sergei Grichine</maintainer>
   <license>BSD-2.0</license>
 
   <depend>rclpy</depend>
