@@ -20,5 +20,20 @@ Arduino Mega code - wheels/sensors driver: https://github.com/slgrobotics/Misc/t
 
 "plucky" Raspberry Pi 3B code (ROS2 Differential Drive Control): https://github.com/slgrobotics/diffdrive_arduino
 
+## Build and Run Instructions:
 
+On the Desktop machine (Ubuntu 22.04)
+```
+mkdir -p ~/bringup_ws/src
+cd ~/bringup_ws/src/
+git clone https://github.com/slgrobotics/robots_bringup.git
+cd ~/bringup_ws
+colcon build
+
+source ~/bringup_ws/install/setup.bash
+ros2 launch robots_bringup bringup_launch.py map:=/home/sergei/my_map_plucky.yaml
+
+source ~/bringup_ws/install/setup.bash
+ros2 launch robots_bringup rviz_launch.py
+```
 
