@@ -26,6 +26,27 @@ The above will bring up full Nav2 stack and Rviz2
 
 Note, that *map->odom* transformation is published by **amcl** which was launched as a part of nav2_bringup. But **amcl** needs an initial pose to start working.
 
-So, in RViz:
+In RViz there's a confusing sequence of clicks when you run Nav2 - to enable AMCL posting "map->odom" transform. 
 
+First click on Startup in Nav2 Panel in Rviz. Wait a minute, map should appear. Click on "2D Pose Estimate", wait till LIDAR readings appear (i.e. map->odom TF starts publishing).
 
+If in doubt (i.e. not seeing "map" in TFs), you can always run static transform:
+```
+ros2 run tf2_ros static_transform_publisher 0 0 0 0 0 0 map odom
+```
+I wasn't able to make Slam Toolbox work (option slam:=True) with Nav2, but AMCL works fine.
+
+## Running Cartographer
+
+You may want to try Cartographer first - to see if odometry works well, and to create a map:
+```
+ros2 launch turtlebot3_cartographer cartographer.launch.py
+```
+Save map ("my_map.pgm"):
+```
+ros2 run nav2_map_server map_saver_cli -f my_map
+```
+If in doubt (for example, not seeing "map" in TFs), you can always run static transform:
+```
+ros2 run tf2_ros static_transform_publisher 0 0 0 0 0 0 map odom
+```
