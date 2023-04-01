@@ -15,26 +15,7 @@ cd ~/bringup_ws/src/
 git clone https://github.com/slgrobotics/robots_bringup.git
 cd ~/bringup_ws
 colcon build
-
-source ~/bringup_ws/install/setup.bash
-ros2 launch robots_bringup bringup_launch.py map:=/home/sergei/my_map_plucky.yaml
-
-source ~/bringup_ws/install/setup.bash
-ros2 launch robots_bringup rviz_launch.py
 ```
-The above will bring up full Nav2 stack and Rviz2
-
-Note, that *map->odom* transformation is published by **amcl** which was launched as a part of nav2_bringup. But **amcl** needs an initial pose to start working.
-
-In RViz there's a confusing sequence of clicks when you run Nav2 - to enable AMCL posting "map->odom" transform. 
-
-First click on Startup in Nav2 Panel in Rviz. Wait a minute, map should appear. Click on "2D Pose Estimate", wait till LIDAR readings appear (i.e. map->odom TF starts publishing).
-
-If in doubt (i.e. not seeing "map" in TFs), you can always run static transform:
-```
-ros2 run tf2_ros static_transform_publisher 0 0 0 0 0 0 map odom
-```
-I wasn't able to make Slam Toolbox work (option slam:=True) with Nav2, but AMCL works fine.
 
 ## Running Cartographer
 
@@ -50,3 +31,31 @@ If in doubt (for example, not seeing "map" in TFs), you can always run static tr
 ```
 ros2 run tf2_ros static_transform_publisher 0 0 0 0 0 0 map odom
 ```
+If your map doesn't come up well, and mapping fails when the robot turns - your odometry needs tuning.
+Ideally the "odom" and "map" points in RViz should stay close together at all times.
+If they separate, either ticks-per-rotation or wheels base are reported incorrectly.
+
+A good test is to start the robot, make sure odom and map are close, drive the bot forward 2 meters, turn 90 degrees.
+Odom should not move much.
+
+## Running Nav2
+
+This will bring up full Nav2 stack and Rviz2:
+```
+source ~/bringup_ws/install/setup.bash
+ros2 launch robots_bringup bringup_launch.py map:=/home/sergei/my_map_plucky.yaml
+
+source ~/bringup_ws/install/setup.bash
+ros2 launch robots_bringup rviz_launch.py
+```
+Note, that *map->odom* transformation is published by **amcl** which was launched as a part of nav2_bringup. But **amcl** needs an initial pose to start working.
+
+In RViz there's a confusing sequence of clicks when you run Nav2 - to enable AMCL posting "map->odom" transform. 
+
+First click on Startup in Nav2 Panel in Rviz. Wait a minute, map should appear. Click on "2D Pose Estimate", wait till LIDAR readings appear (i.e. map->odom TF starts publishing).
+
+If in doubt (i.e. not seeing "map" in TFs), you can always run static transform:
+```
+ros2 run tf2_ros static_transform_publisher 0 0 0 0 0 0 map odom
+```
+I wasn't able to make Slam Toolbox work (option slam:=True) with Nav2, but AMCL works fine.
