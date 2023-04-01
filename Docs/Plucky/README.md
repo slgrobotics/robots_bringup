@@ -26,23 +26,29 @@ https://www.facebook.com/ArticulatedRobotics/
 
 Plucky has several Arduino boards, some drive sensors - GPS, Ultrasonic Parking Sensor, MPU, - while the main Arduino Mega 2560 drives the wheels and combines all sensors data into a single serial stream for Raspberry Pi "plucky". This setup appeared historically through different experiments and at this time is mostly just an over-enginered legacy. "pluckysens" RPi has its own MPU9250, and GPS isn't useful indoors. But "plucky" RPi makes full use of wheels driving ability and odometry info. Parking sensors data will be likely used later, as ROS2 supports rangers for obstacle avoidance and mapping.
 
-Arduino Mega code - wheels/sensors driver: 
+Arduino Mega 2560 code - wheels/sensors driver: 
 
 https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/PluckyWheelsROS
 
-Parking sensors info and driver:
+Parking sensors info and driver (to be used later):
 
-TBD
+https://photos.app.goo.gl/WsqkA4XpYSLrVDX59
 
-GPS Driver:
+https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/ParkingSensorI2C
 
-TBD
+GPS Driver (obsolete for an indoors robot):
 
-Arduino MPU9250 Driver:
+https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/GPSKitchenSink
 
-TBD
+Arduino MPU9250 Driver (not used, as another MPU9250 is connecter to "pluckysens" RPi):
+
+https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/MPU9250GyroCompassShorty
 
 ### "pluckysens" Raspberry Pi 3B code (ROS2 LD14 LIDAR and MPU9250 Drivers):
+
+https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2    (Google Translate works here)
+
+https://github.com/hiwad-aziz/ros2_mpu9250_driver
 
 ```
 mkdir -p ~/plucky_ws/src
@@ -93,3 +99,4 @@ colcon build
 
 ### Note: Plucky Arduino Mega 2560 on /dev/ttyACM0
 ```
+Back to https://github.com/slgrobotics/robots_bringup
