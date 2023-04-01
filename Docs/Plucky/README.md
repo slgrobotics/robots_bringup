@@ -44,7 +44,19 @@ Arduino MPU9250 Driver (not used, as another MPU9250 is connecter to "pluckysens
 
 https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/MPU9250GyroCompassShorty
 
-### "pluckysens" Raspberry Pi 3B code (ROS2 LD14 LIDAR and MPU9250 Drivers):
+FPV Setup:
+
+https://www.amazon.com/dp/B06VY7L1N4
+
+https://www.amazon.com/dp/B07Q5MPC8V
+
+The receiver above, when plugged into a Ubuntu 22.04 Desktop USB port, shows up as /dev/video0 and video1
+
+It works with Cheese app and can be read by Python/OpenCV scripts, including custom ROS nodes written in Python.
+
+A sample will be published here later.
+
+### "pluckysens" Raspberry Pi 3B setup (ROS2 LD14 LIDAR and MPU9250 Drivers):
 
 https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2    (Google Translate works here)
 
@@ -76,7 +88,7 @@ colcon build
 ### Note: Plucky Arduino Mega 2560 should be on /dev/ttyACM0
 ```
 
-### "plucky" Raspberry Pi 3B code (ROS2 Differential Drive Control):
+### "plucky" Raspberry Pi 3B setup (ROS2 Differential Drive Control):
 
 https://github.com/slgrobotics/diffdrive_arduino
 
