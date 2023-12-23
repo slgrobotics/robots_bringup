@@ -2,7 +2,7 @@
 
 This is my *robots_bringup* ROS2 package, derived from Turtlebot3 Navigation and some Articulate Robotics code.
 
-It is intended to run navigation on my Tutrtlebot-like robots, starting with Plucky.
+It is intended to run navigation on my Turtlebot-like robots, starting with Plucky.
 
 Plucky is described here: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky
 
