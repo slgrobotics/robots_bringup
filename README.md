@@ -48,6 +48,7 @@ mkdir -p ~/bringup_ws/src
 cd ~/bringup_ws/src/
 git clone https://github.com/slgrobotics/robots_bringup.git
 cd ~/bringup_ws
+mkldir src/robots_bringup/worlds
 colcon build
 ```
 
