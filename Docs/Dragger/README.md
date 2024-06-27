@@ -126,6 +126,8 @@ Try running the _bootup_launch.sh_ from the command line to see if anything fail
 # /etc/systemd/system/robot.service
 [Unit]
 Description=robot
+StartLimitIntervalSec=60
+StartLimitBurst=5
 
 [Service]
 Type=simple
@@ -134,8 +136,6 @@ Group=ros
 WorkingDirectory=/home/ros/launch
 ExecStart=/home/ros/launch/bootup_launch.sh
 Restart=always
-StartLimitIntervalSec=60
-StartLimitBurst=5
 
 [Install]
 WantedBy=multi-user.target
