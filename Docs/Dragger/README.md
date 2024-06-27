@@ -117,7 +117,9 @@ cp ~/robot_ws/src/articubot_one/launch/dragger.py ~/launch/.
 cp ~/robot_ws/src/articubot_one/launch/bootup_launch.sh ~/launch/.
 chmod +x ~/launch/bootup_launch.sh    
 ```
-You can try running the bootup_launch.sh from the command line to see if anything fails.
+You must edit the _bootup_launch.sh_ file to match your robot launch file and related folders.
+
+Try running the _bootup_launch.sh_ from the command line to see if anything fails.
 
 2. Create service description file - /etc/systemd/system/robot.service :
 ```
