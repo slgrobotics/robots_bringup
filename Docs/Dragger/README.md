@@ -79,11 +79,13 @@ colcon build
 
 ### Continue "dragger" Raspberry Pi 4 setup (ROS2 Differential Drive Control):
 
-https://github.com/slgrobotics/diffdrive_arduino
+See https://github.com/slgrobotics/diffdrive_arduino (inspired by Articulated Robotics)
 
-Prerequisites: 
+Prerequisites:
+```
 sudo apt install ros-humble-ros2-control ros-humble-ros2-controllers
-
+```
+Now, to the business:
 ```
 mkdir -p ~/robot_ws/src
 cd ~/robot_ws/src
