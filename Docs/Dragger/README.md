@@ -143,22 +143,22 @@ WantedBy=multi-user.target
 
 3. Enable service:
 ```
-    sudo systemctl daemon-reload
-    sudo systemctl enable robot.service
-    sudo systemctl start robot.service
+sudo systemctl daemon-reload
+sudo systemctl enable robot.service
+sudo systemctl start robot.service
 ```
 Here are some useful commands:
+```
+systemctl status robot.service
+systemctl cat robot.service
+sudo systemctl reload-or-restart robot.service
+sudo journalctl -xeu robot.service
 
-    systemctl status robot.service
-    systemctl cat robot.service
-    sudo systemctl reload-or-restart robot.service
-    sudo journalctl -xeu robot.service
+sudo ls -al /etc/systemd/system/robot.service
+sudo ls -al /etc/systemd/system/robot.service.d/override.conf
+sudo ls -al /etc/systemd/system/multi-user.target.wants/robot.service
+ps -ef | grep driver
+```
+You can now reboot Raspberry Pi, and the three drivers will start automatically. Nodes (at least _robot_state_publisher_) should show up in **rqt** and **rqt_graph**
 
-    sudo ls -al /etc/systemd/system/robot.service
-    sudo ls -al /etc/systemd/system/robot.service.d/override.conf
-    sudo ls -al /etc/systemd/system/multi-user.target.wants/robot.service
-    ps -ef | grep driver
-
-You can now reboot Raspberry Pi, and the three drivers will start automatically. Nodes should show up in **rqt** and **rqt_graph**
-
-**Now you can proceed to Desktop setup:** https://github.com/slgrobotics/robots_bringup
+**Now you can proceed to Desktop setup (all Desktop operations are the same for all Turtlebot3 based robots):** https://github.com/slgrobotics/robots_bringup
