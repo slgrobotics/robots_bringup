@@ -44,17 +44,17 @@ Arduino MPU9250 Driver (not used, as another MPU9250 is connecter to "pluckysens
 
 https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/MPU9250GyroCompassShorty
 
-FPV Setup:
+FPV Camera and receiver Setup [optional]:
 
 https://www.amazon.com/dp/B06VY7L1N4
 
 https://www.amazon.com/dp/B07Q5MPC8V
 
-The receiver above, when plugged into a Ubuntu 22.04 Desktop USB port, shows up as /dev/video0 and video1
+The receiver above, when plugged into a Ubuntu 22.04 **Desktop USB port**, shows up as _/dev/video0_ and _video1_
 
 It works with Cheese app and can be read by Python/OpenCV scripts, including custom ROS nodes written in Python.
 
-A sample will be published here later.
+Here is the code I use for the camera **on the Desktop side**: https://github.com/slgrobotics/camera_publisher
 
 ### "pluckysens" Raspberry Pi 3B setup (ROS2 LD14 LIDAR and MPU9250 Drivers):
 
@@ -90,10 +90,13 @@ colcon build
 
 ### "plucky" Raspberry Pi 3B setup (ROS2 Differential Drive Control):
 
-https://github.com/slgrobotics/diffdrive_arduino
+See https://github.com/slgrobotics/diffdrive_arduino (inspired by Articulated Robotics)
 
-Prerequisites: 
+Prerequisites:
+```
 sudo apt install ros-humble-ros2-control ros-humble-ros2-controllers
+```
+Now, to the business:
 
 ```
 mkdir -p ~/plucky_ws/src
@@ -111,4 +114,9 @@ colcon build
 
 ### Note: Plucky Arduino Mega 2560 on /dev/ttyACM0
 ```
+
+### Finishing setup
+
+Follow **"Create a Linux service for on-boot autostart"** section here: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger
+
 Back to https://github.com/slgrobotics/robots_bringup
