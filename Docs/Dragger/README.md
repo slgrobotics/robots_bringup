@@ -115,36 +115,37 @@ As we already cloned this repository, these files should be here: ~/robot_ws/src
 mkdir ~/launch
 cp ~/robot_ws/src/articubot_one/launch/dragger.py ~/launch/.
 cp ~/robot_ws/src/articubot_one/launch/bootup_launch.sh ~/launch/.
+chmod +x ~/launch/bootup_launch.sh    
 ```
-2. Create a test run file /home/ros/run.sh :
+You can try running the bootup_launch.sh from the command line to see if anything fails.
+
+2. Create service description file - /etc/systemd/system/robot.service :
 ```
-#!/bin/bash
+# /etc/systemd/system/robot.service
+[Unit]
+Description=robot
 
-source ~/robot_ws/install/setup.bash
-source ~/xv_11_ws/install/setup.bash
-source ~/bno055_ws/install/setup.bash
+[Service]
+Type=simple
+User=ros
+Group=ros
+WorkingDirectory=/home/ros/launch
+ExecStart=/home/ros/launch/bootup_launch.sh
+Restart=always
+StartLimitIntervalSec=60
+StartLimitBurst=5
 
-ros2 launch ~/launch/dragger.py
+[Install]
+WantedBy=multi-user.target
 ```
-5. A service file /etc/systemd/system/robot.service
 
-Set file permissions:
-
-    chmod +x ~/launch/bootup_launch.sh    
-    chmod +x ~/run.sh
-
-Try running all three drivers from the terminal:
-
-    cd
-    ./run.sh
-
-Enable service:
+3. Enable service:
 
     sudo systemctl daemon-reload
     sudo systemctl enable robot.service
     sudo systemctl start robot.service
 
-Useful commands:
+Here are some useful commands:
 
     systemctl status robot.service
     systemctl cat robot.service
@@ -156,6 +157,6 @@ Useful commands:
     sudo ls -al /etc/systemd/system/multi-user.target.wants/robot.service
     ps -ef | grep driver
 
-You can now reboot Raspberry Pi, and the three drivers will start automatically and show up in **rqt** and **rqt_graph**
+You can now reboot Raspberry Pi, and the three drivers will start automatically. Nodes should show up in **rqt** and **rqt_graph**
 
 **Now you can proceed to Desktop setup:** https://github.com/slgrobotics/robots_bringup
