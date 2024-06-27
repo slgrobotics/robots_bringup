@@ -33,17 +33,17 @@ https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/ParkingSensor
 
 MPU9250 and GPS Drivers come standard with ROS
 
-FPV Setup [TBD]:
+FPV Camera and receiver Setup [TBD]:
 
 https://www.amazon.com/dp/B06VY7L1N4
 
 https://www.amazon.com/dp/B07Q5MPC8V
 
-The receiver above, when plugged into a Ubuntu 22.04 Desktop USB port, shows up as /dev/video0 and video1
+The receiver above, when plugged into a Ubuntu 22.04 **Desktop USB port**, shows up as _/dev/video0_ and _video1_
 
 It works with Cheese app and can be read by Python/OpenCV scripts, including custom ROS nodes written in Python.
 
-A sample will be published here later.
+Here is the code I use for the camera **on the Desktop side**: https://github.com/slgrobotics/camera_publisher
 
 ### "dragger" Raspberry Pi 4 sensors setup (ROS2 LD14 LIDAR and MPU9250 Drivers):
 
