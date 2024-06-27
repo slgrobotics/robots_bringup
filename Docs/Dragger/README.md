@@ -142,11 +142,11 @@ WantedBy=multi-user.target
 ```
 
 3. Enable service:
-
+```
     sudo systemctl daemon-reload
     sudo systemctl enable robot.service
     sudo systemctl start robot.service
-
+```
 Here are some useful commands:
 
     systemctl status robot.service
