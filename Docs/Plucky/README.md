@@ -21,10 +21,25 @@ https://articulatedrobotics.xyz/mobile-robot-full-list/
 
 https://www.facebook.com/ArticulatedRobotics/
 
+## FPV Camera and receiver Setup [optional]:
+
+https://www.amazon.com/dp/B06VY7L1N4
+
+https://www.amazon.com/dp/B07Q5MPC8V
+
+Camera and transmitter, of course, resides on Plucky. The receiver, when plugged into a Ubuntu 22.04 **Desktop USB port**, shows up as _/dev/video0_ and _video1_
+
+It works with Cheese app and can be read by Python/OpenCV scripts, including custom ROS nodes written in Python.
+
+Here is the code I use for the camera **on the Desktop side**: https://github.com/slgrobotics/camera_publisher
+
+Having the video link separated from WiFi and experiencing minimal delay allows driving the robot FPV-style and/or performing video stream processing on the Desktop.
 
 ## Build and Run Instructions:
 
-Plucky has several Arduino boards, some drive sensors - GPS, Ultrasonic Parking Sensor, MPU, - while the main Arduino Mega 2560 drives the wheels and combines all sensors data into a single serial stream for Raspberry Pi "plucky". This setup appeared historically through different experiments and at this time is mostly just an over-enginered legacy. "pluckysens" RPi has its own MPU9250, and GPS isn't useful indoors. But "plucky" RPi makes full use of wheels driving ability and odometry info. Parking sensors data will be likely used later, as ROS2 supports rangers for obstacle avoidance and mapping.
+Plucky has several Arduino boards, some drive the sensors - GPS, Ultrasonic Parking Sensor, MPU, - while the main Arduino Mega 2560 drives the wheels and combines all sensors data into a single serial stream for Raspberry Pi _"plucky"_. This setup appeared historically through different experiments and at this time is mostly just an over-enginered legacy. _"pluckysens"_ RPi has its own MPU9250, and GPS isn't useful indoors. But "plucky" RPi makes full use of wheels driving ability and odometry info. Parking sensors data will be likely used later, as ROS2 supports rangers for obstacle avoidance and mapping.
+
+Both Raspberry Pi 3B on Plucky have Ubuntu 22.04 Server 64 bit and ROS2 Humble Base installed - https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
 
 Arduino Mega 2560 code - wheels/sensors driver: 
 
@@ -43,18 +58,6 @@ https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/GPSKitchenSin
 Arduino MPU9250 Driver (not used, as another MPU9250 is connecter to "pluckysens" RPi):
 
 https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/MPU9250GyroCompassShorty
-
-FPV Camera and receiver Setup [optional]:
-
-https://www.amazon.com/dp/B06VY7L1N4
-
-https://www.amazon.com/dp/B07Q5MPC8V
-
-The receiver above, when plugged into a Ubuntu 22.04 **Desktop USB port**, shows up as _/dev/video0_ and _video1_
-
-It works with Cheese app and can be read by Python/OpenCV scripts, including custom ROS nodes written in Python.
-
-Here is the code I use for the camera **on the Desktop side**: https://github.com/slgrobotics/camera_publisher
 
 ### "pluckysens" Raspberry Pi 3B setup (ROS2 LD14 LIDAR and MPU9250 Drivers):
 
