@@ -98,7 +98,6 @@ cd ~/robot_ws
 sudo rosdep init
 rosdep update
 rosdep install --from-paths src --ignore-src -r -y
-### Note: build takes ~10 minutes
 colcon build
 
 ```
