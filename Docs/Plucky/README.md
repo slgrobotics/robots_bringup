@@ -65,6 +65,11 @@ https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2    (Google Translate works 
 
 https://github.com/hiwad-aziz/ros2_mpu9250_driver
 
+Prerequisites:
+```
+sudo apt install libi2c-dev
+```
+Drivers installation:
 ```
 mkdir -p ~/plucky_ws/src
 cd ~/plucky_ws/src
@@ -84,6 +89,7 @@ git clone https://github.com/hiwad-aziz/ros2_mpu9250_driver.git
 vi ~/plucky_ws/src/ros2_mpu9250_driver/src/mpu9250driver.cpp   - line 48:   message.header.frame_id = "imu_link"; (was "base_link")
 
 cd ~/plucky_ws
+sudo rosdep init
 rosdep update
 rosdep install --from-paths src --ignore-src -r -y
 colcon build
@@ -110,6 +116,7 @@ git clone https://github.com/slgrobotics/articubot_one.git
 
 cd ~/plucky_ws
 ### Note: See https://docs.ros.org/en/humble/Tutorials/Intermediate/Rosdep.html
+sudo rosdep init
 rosdep update
 rosdep install --from-paths src --ignore-src -r -y
 ### Note: build takes ~10 minutes
