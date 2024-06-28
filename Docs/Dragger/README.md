@@ -80,6 +80,7 @@ Prerequisites:
 ```
 sudo apt install ros-humble-ros2-control ros-humble-ros2-controllers
 sudo apt install ros-humble-xacro
+sudo apt install ros-humble-twist-mux
 sudo apt install libi2c-dev
 sudo adduser ros dialout
 ```
