@@ -79,7 +79,9 @@ See https://github.com/hiwad-aziz/ros2_mpu9250_driver
 Prerequisites:
 ```
 sudo apt install ros-humble-ros2-control ros-humble-ros2-controllers
+sudo apt install ros-humble-xacro
 sudo apt install libi2c-dev
+sudo adduser ros dialout
 ```
 Now, to the business:
 ```
@@ -118,8 +120,16 @@ cp ~/robot_ws/src/articubot_one/launch/dragger.launch.py ~/launch/.
 cp ~/robot_ws/src/articubot_one/launch/bootup_launch.sh ~/launch/.
 chmod +x ~/launch/bootup_launch.sh    
 ```
-You must edit the _bootup_launch.sh_ file to match your robot launch file and related folders.
+You must edit the _bootup_launch.sh_ file to match your robot launch file and related folders:
+```
+#!/bin/bash
 
+cd /home/ros/launch
+source /opt/ros/humble/setup.bash
+source /home/ros/robot_ws/install/setup.bash
+
+ros2 launch /home/ros/launch/dragger.launch.py
+```
 Try running the _bootup_launch.sh_ from the command line to see if anything fails.
 
 2. Create service description file - /etc/systemd/system/robot.service :
