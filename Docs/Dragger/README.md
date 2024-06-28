@@ -94,6 +94,7 @@ vi ~/robot_ws/src/ros2_mpu9250_driver/src/mpu9250driver.cpp   - line 48:   messa
 
 cd ~/robot_ws
 ### Note: See https://docs.ros.org/en/humble/Tutorials/Intermediate/Rosdep.html
+sudo rosdep init
 rosdep update
 rosdep install --from-paths src --ignore-src -r -y
 ### Note: build takes ~10 minutes
