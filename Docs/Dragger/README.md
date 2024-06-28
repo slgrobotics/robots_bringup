@@ -114,7 +114,7 @@ As we already cloned this repository, these files should be here: ~/robot_ws/src
 1. Create and populate launch folder: /home/ros/launch
 ```
 mkdir ~/launch
-cp ~/robot_ws/src/articubot_one/launch/dragger.py ~/launch/.
+cp ~/robot_ws/src/articubot_one/launch/dragger.launch.py ~/launch/.
 cp ~/robot_ws/src/articubot_one/launch/bootup_launch.sh ~/launch/.
 chmod +x ~/launch/bootup_launch.sh    
 ```
