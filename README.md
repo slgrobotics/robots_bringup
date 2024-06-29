@@ -1,12 +1,22 @@
-# Robots Bringup - Plucky (Desktop side)
+# Robots Bringup (Desktop side)
 
 This is my *robots_bringup* ROS2 package, derived from Turtlebot3 Navigation and some Articulated Robotics code.
 
 It is intended to run navigation on my Turtlebot-like robots, starting with Plucky.
 
-Plucky is described here (including its two RPi 3 **setup instructions**): https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky
-
 This section deals with Desktop ("Ground Station") setup and operation.
+
+This section equally applies to any robot, just keep an eye on the name in the instructions and replace it accordingly.
+
+You need to setup **TURTLEBOT3_MODEL** variable (normally in _.bashrc_) with the robot name. Robot description file will be picked from _~/bringup_ws/src/robots_bringup/urdf_ folder
+
+# Dragger
+
+Dragger is described here: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger
+
+# Plucky
+
+Plucky is described here (including its two RPi 3B **setup instructions**): https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky
 
 ## Tests - make sure Plucky "base" responds properly
 
@@ -36,7 +46,7 @@ sleep 3
 ros2 param set /teleop_twist_joy_node enable_button 0
 ros2 param set /teleop_twist_joy_node enable_turbo_button 3
 ```
-In theory the standard teleop will work with any joystick. The trick is to see where are your "enable" and "turbo" buttons are, as you have to hold one of these to have _cmd_vel_ published (safety measure).
+In theory the standard teleop will work with any joystick. The trick is to see where your "enable" and "turbo" buttons are, as you have to hold one of these to have _cmd_vel_ published (safety measure).
 
 On "Logitech Cordless RumblePad 2" (a.k.a. Logitech Wireless Gamepad F710) Button 0 is blue "X" and Button 3 is yellow "Y". Make sure the back switch is on "D", the "Mode" light is off - and operate Left stick while holding the blue "X" down. If in doubt, _rqt_ will show "joy" topic _axes_ (including buttons) and _cmd_vel_
 
@@ -59,6 +69,17 @@ You may want to try Cartographer first - to see if odometry works well, and to c
 ros2 launch turtlebot3_cartographer cartographer.launch.py
 ```
 This should bring up RViz and, with Lidar working, the (incomplete) map with all scan data. While driving the robot around you should see the map filled.
+
+Ideally, the map will stay put when the robot turns. If it doesn't and gets messed up, your odometry is not working properly. Check your **TURTLEBOT3_MODEL** variable and the following statement in https://github.com/slgrobotics/robots_bringup/tree/main/urdf
+```
+<param name="enc_counts_per_rev">2506</param>
+wheel parameters like this, also wheel base:
+<cylinder length="0.026" radius="0.033"/>
+
+```
+**this is not happenning, URDF files are hand edited:**
+  The URDF file should be generated from https://github.com/slgrobotics/articubot_one/blob/main/description/robot.urdf.xacro and are residing in the _~/bringup_ws/src/robots_bringup/urdf_ folder
+
 
 Save map ("my_map.pgm"):
 ```
