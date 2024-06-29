@@ -49,6 +49,24 @@ https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/ParkingSensor
 
 MPU9250 and GPS Drivers come standard with ROS
 
+### Making USB devices persistent on "dragger":
+
+Dragger has three USB-to-Serial devices: Arduino "wheels/base", GPS and LIDAR.
+
+While the Arduino Mega is the only one at /dev/ttyACM0, GPS and LIDAR can take any name under /dev/ttyUSB* pattern.
+
+To avoid reaasigning device names in the launch file after reboots, symlinks are created using the following recipe:
+
+https://unix.stackexchange.com/questions/705570/setting-persistent-name-for-usb-serial-device-with-udev-rule-without-symlink
+```
+$ cat /etc/udev/rules.d/99-robot.rules
+SUBSYSTEM=="tty",ENV{ID_PATH}=="platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.1:1.0",SYMLINK+="ttyUSBLDR"
+SUBSYSTEM=="tty",ENV{ID_PATH}=="platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.2:1.0",SYMLINK+="ttyUSBGPS"
+
+sudo apt-get install picocom
+picocom /dev/ttyUSBGPS -b 115200
+Press ctrl button and then without releasing it press a and then q. It will exit the picocom application.
+```
 ### "dragger" LD14 LIDAR setup:
 
 See https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2    (Google Translate works here)
@@ -63,7 +81,7 @@ git clone  https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2.git
 #define TIME_SHIFT_SEC 0
 #define TIME_SHIFT_NSEC 400000000
 
-// Lines 204, 310 correct:
+// Line 310 correction:
   output.header.stamp = start_scan_time - rclcpp::Duration(TIME_SHIFT_SEC, TIME_SHIFT_NSEC);
   //output.header.stamp = start_scan_time;
 
