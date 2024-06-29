@@ -53,20 +53,31 @@ MPU9250 and GPS Drivers come standard with ROS
 
 Dragger has three USB-to-Serial devices: Arduino "wheels/base", GPS and LIDAR.
 
-While the Arduino Mega is the only one at /dev/ttyACM0, GPS and LIDAR can take any name under /dev/ttyUSB* pattern.
+While the Arduino Mega is the only one at _/dev/ttyACM0_, GPS and LIDAR can take any name under _/dev/ttyUSB*_ pattern.
 
-To avoid reaasigning device names in the launch file after reboots, symlinks are created using the following recipe:
+To avoid reassigning device names in the launch file after reboots, symlinks are created using the following recipe:
 
 https://unix.stackexchange.com/questions/705570/setting-persistent-name-for-usb-serial-device-with-udev-rule-without-symlink
 ```
 $ cat /etc/udev/rules.d/99-robot.rules
 SUBSYSTEM=="tty",ENV{ID_PATH}=="platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.1:1.0",SYMLINK+="ttyUSBLDR"
 SUBSYSTEM=="tty",ENV{ID_PATH}=="platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.2:1.0",SYMLINK+="ttyUSBGPS"
-
+```
+After reboot, you should see something similar to this (which devices symbolic links point to is random):
+```
+$ ll /dev/ttyU*
+crw-rw---- 1 root dialout 188, 0 Nov 21  2023 /dev/ttyUSB0
+crw-rw---- 1 root dialout 188, 1 Nov 21  2023 /dev/ttyUSB1
+lrwxrwxrwx 1 root root         7 Nov 21  2023 /dev/ttyUSBGPS -> ttyUSB1
+lrwxrwxrwx 1 root root         7 Nov 21  2023 /dev/ttyUSBLDR -> ttyUSB0
+```
+Check the GPS stream:
+```
 sudo apt-get install picocom
 picocom /dev/ttyUSBGPS -b 115200
-Press ctrl button and then without releasing it press a and then q. It will exit the picocom application.
 ```
+Press _Ctrl_ button and then without releasing it press **a** and then **q**. It will exit the **picocom** application.
+
 ### "dragger" LD14 LIDAR setup:
 
 See https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2    (Google Translate works here)
