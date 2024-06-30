@@ -99,6 +99,25 @@ git clone  https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2.git
   //output.header.stamp = start_scan_time;
 
 ```
+
+### GPS setup:
+
+Dragger has a _"BN-880 GPS Module U8 with Flash HMC5883L Compass + GPS Active Antenna Support"_. A u-blox NEO-M8N module is part of it.
+
+We need to install standard ROS support for it:
+```
+sudo apt install ros-humble-ublox
+
+The following NEW packages will be installed:
+  libasio-dev ros-humble-ublox ros-humble-ublox-gps ros-humble-ublox-msgs ros-humble-ublox-serialization
+```
+Configuring is described here: https://github.com/KumarRobotics/ublox/blob/ros2/README.md
+
+sample config files: https://github.com/KumarRobotics/ublox/tree/ros2/ublox_gps/config
+
+sample launch files: https://github.com/KumarRobotics/ublox/tree/ros2/ublox_gps/launch
+
+
 ### "dragger" Differential Drive Control setup:
 
 See https://github.com/slgrobotics/diffdrive_arduino (inspired by Articulated Robotics)
