@@ -70,7 +70,26 @@ ros2 launch turtlebot3_cartographer cartographer.launch.py
 ```
 This should bring up RViz and, with Lidar working, the (incomplete) map with all scan data. While driving the robot around you should see the map filled.
 
-Ideally, the map will stay put when the robot turns. If it doesn't and gets messed up, your odometry is not working properly. Check your **TURTLEBOT3_MODEL** variable and the following statement in https://github.com/slgrobotics/robots_bringup/tree/main/urdf
+------------------------
+
+Ideally, the map will stay put when the robot moves or turns, and _map_ and _odom_ markers should not deviate far fom each other. If the map gets messed up, your odometry is not working properly.
+Check your **TURTLEBOT3_MODEL** variable and modify the following files on robot's Raspberry Pi:
+```
+~/robot_ws/src/articubot_one/description/ros2_control.xacro
+
+           look for  <param name="enc_counts_per_rev">13730</param>
+
+~/robot_ws/src/articubot_one/description/robot_core.xacro
+
+           look for <xacro:property name="wheel_radius" value="0.192"/>
+                    <xacro:property name="wheel_offset_y" value="0.290"/>
+```
+and rebuild the robot:
+```
+cd ~/robot_ws/
+colcon build
+```
+The _.xacro_ files should be generating the following statements in https://github.com/slgrobotics/robots_bringup/tree/main/urdf
 ```
 <param name="enc_counts_per_rev">2506</param>
 wheel parameters like this, also wheel base:
@@ -78,8 +97,9 @@ wheel parameters like this, also wheel base:
 
 ```
 **this is not happenning, URDF files are hand edited:**
-  The URDF file should be generated from https://github.com/slgrobotics/articubot_one/blob/main/description/robot.urdf.xacro and are residing in the _~/bringup_ws/src/robots_bringup/urdf_ folder
+  The URDF file should be generated from https://github.com/slgrobotics/articubot_one/blob/main/description/robot.urdf.xacro and somehow are residing in the _~/bringup_ws/src/robots_bringup/urdf_ folder
 
+------------------------
 
 Save map ("my_map.pgm"):
 ```
