@@ -8,11 +8,13 @@ Dragger is a *"larger Turtlebot"* - running, basically, standard ROS2 Turtlebot 
 
 Articulated Robotics (Josh Newans):
 
+https://articulatedrobotics.xyz/category/build-a-mobile-robot-with-ros
+
 https://articulatedrobotics.xyz/mobile-robot-1-project-overview/
 
 https://articulatedrobotics.xyz/mobile-robot-13-ros2-control-real/
 
-https://articulatedrobotics.xyz/mobile-robot-full-list/
+https://control.ros.org/humble/index.html
 
 https://www.facebook.com/ArticulatedRobotics/
 
