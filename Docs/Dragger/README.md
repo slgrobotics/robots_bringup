@@ -124,7 +124,20 @@ git clone https://github.com/slgrobotics/articubot_one.git
 # MPU9250 Driver:
 git clone https://github.com/hiwad-aziz/ros2_mpu9250_driver.git
 vi ~/robot_ws/src/ros2_mpu9250_driver/src/mpu9250driver.cpp   - line 48:   message.header.frame_id = "imu_link"; (was "base_link")
+```
+ROS nodes produce _robot description_ and needs to  know some basic parameters of the robot. Edit the following to match your values:
+```
+~/robot_ws/src/articubot_one/description/ros2_control.xacro
 
+           look for  <param name="enc_counts_per_rev">13730</param>
+
+~/robot_ws/src/articubot_one/description/robot_core.xacro
+
+           look for <xacro:property name="wheel_radius" value="0.192"/>
+                    <xacro:property name="wheel_offset_y" value="0.290"/>
+```
+Now you can build and deploy robot's components:
+```
 cd ~/robot_ws
 ### Note: See https://docs.ros.org/en/humble/Tutorials/Intermediate/Rosdep.html
 sudo rosdep init
