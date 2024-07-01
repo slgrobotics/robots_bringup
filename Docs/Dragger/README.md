@@ -16,6 +16,8 @@ https://articulatedrobotics.xyz/mobile-robot-13-ros2-control-real/
 
 https://control.ros.org/humble/index.html
 
+https://www.youtube.com/@ArticulatedRobotics/videos
+
 https://www.facebook.com/ArticulatedRobotics/
 
 
@@ -97,14 +99,16 @@ git clone  https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2.git
 // Line 310 correction:
   output.header.stamp = start_scan_time - rclcpp::Duration(TIME_SHIFT_SEC, TIME_SHIFT_NSEC);
   //output.header.stamp = start_scan_time;
-
 ```
 
 ### GPS setup:
 
 Dragger has a _"BN-880 GPS Module U8 with Flash HMC5883L Compass + GPS Active Antenna Support"_. A u-blox NEO-M8N module is part of it.
 
-We need to install standard ROS support for it:
+We need to install standard ROS support for it. The process is well described here:
+
+https://docs.fictionlab.pl/leo-rover/integrations/positioning-systems/ublox-evk-m8n
+
 ```
 sudo apt install ros-humble-ublox
 
