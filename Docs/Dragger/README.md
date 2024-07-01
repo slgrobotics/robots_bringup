@@ -105,21 +105,36 @@ git clone  https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2.git
 
 Dragger has a _"BN-880 GPS Module U8 with Flash HMC5883L Compass + GPS Active Antenna Support"_. A u-blox NEO-M8N module is part of it.
 
-We need to install standard ROS support for it. The process is well described here:
-
-https://docs.fictionlab.pl/leo-rover/integrations/positioning-systems/ublox-evk-m8n
-
+I used _u-center_ Windows app to set up the device initially, and saved settings to its Flash memory. Specifically, NMEA at 115200 baud at 10 Hz should be streaming on USB. Check it:
 ```
-sudo apt install ros-humble-ublox
+picocom /dev/ttyUSBGPS -b 115200
+```
+We need to install standard ROS Humble support for NMEA messages:
+```
+$ sudo pip3 install transforms3d
+$ sudo apt install ros-humble-nmea-navsat-driver
 
 The following NEW packages will be installed:
-  libasio-dev ros-humble-ublox ros-humble-ublox-gps ros-humble-ublox-msgs ros-humble-ublox-serialization
+  ros-humble-nmea-msgs ros-humble-nmea-navsat-driver ros-humble-tf-transformations
 ```
-Configuring is described here: https://github.com/KumarRobotics/ublox/blob/ros2/README.md
+The driver code is here ("ros2" branch) - look into _launch_ and _config_ folders:
 
-sample config files: https://github.com/KumarRobotics/ublox/tree/ros2/ublox_gps/config
+https://github.com/ros-drivers/nmea_navsat_driver/blob/ros2/config/nmea_serial_driver.yaml
 
-sample launch files: https://github.com/KumarRobotics/ublox/tree/ros2/ublox_gps/launch
+GPS Node will be run as part of the _dragger.launch.py_ process.
+
+>> [NOTE] The process described here didn't work with my NEO-M8N device:
+>>
+>> https://docs.fictionlab.pl/leo-rover/integrations/positioning-systems/ublox-evk-m8n
+>> ```
+>> sudo apt install ros-humble-ublox
+>> 
+>> The following NEW packages will be installed:
+>>   libasio-dev ros-humble-ublox ros-humble-ublox-gps ros-humble-ublox-msgs ros-humble-ublox-serialization
+>> ```
+>> Code is here: https://github.com/KumarRobotics/ublox/blob/ros2/README.md
+>>
+>>  There's a lot of chatter on the Internet about this problem.
 
 
 ### "dragger" Differential Drive Control setup:
