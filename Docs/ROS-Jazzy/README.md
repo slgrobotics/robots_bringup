@@ -6,7 +6,7 @@ Install "server" from DVD
 
        https://ubuntu.com/download/server
 
-Or, go for Desktop and skip this section (if your machine can boot up from USB media)
+Or, go for Desktop and skip the next section (if your machine can boot up from USB media)
 
        https://ubuntu.com/download/desktop
 
