@@ -21,7 +21,7 @@ locale
 sudo apt install software-properties-common
 ```
 
-### (setup Samba and other things here).
+### (...setup Samba and other OS things here...).
 
 ## installing ROS Jazzy Jalisco LTS:
 
@@ -46,7 +46,7 @@ sudo apt install ~nros-jazzy-rqt*
 sudo adduser <your account> dialout
 ```
 
-## Installing Gasebo Harmonic (using "Default Gazebo/ROS Pairing) ":
+## Installing Gasebo Harmonic (using "Default Gazebo/ROS Pairing"):
 
 https://gazebosim.org/docs/harmonic/ros_installation#installing-the-default-gazebo-ros-pairing
 ```
