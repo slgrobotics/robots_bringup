@@ -51,7 +51,7 @@ sudo adduser <your account> dialout
 https://gazebosim.org/docs/harmonic/ros_installation#installing-the-default-gazebo-ros-pairing
 ```
 sudo apt-get install ros-${ROS_DISTRO}-ros-gz
-sudo apt-get install ros-${ROS_DISTRO}-gz-cmake-vendor
+# I am not sure if this one is needed:  sudo apt-get install ros-${ROS_DISTRO}-gz-cmake-vendor
 gz sim
 ```
 
