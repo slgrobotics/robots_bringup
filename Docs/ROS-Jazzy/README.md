@@ -61,19 +61,23 @@ export QT_QPA_PLATFORM=xcb
 gz sim
 gz sim -v 4 shapes.sdf
 ```
-now Gazebo UI can show up on a different machine (Windows with VcXsrv):
-```
-export DISPLAY=<machine>.local:0.0
-```
-Running Gnome on Windows with VcXsrv:
+My Windows machine has good video card, and can act as X Window Server, relieving the Linux box.
+
+Running Gnome Desktop on a different machine (Windows 10 with VcXsrv):
 ```
 export DISPLAY=<machine>.local:0.0
 gnome-shell --x11 --replace
+```
+now Gazebo UI can show up on VcXsrv:
+```
+export DISPLAY=<machine>.local:0.0
+gz sim -v 4 shapes.sdf
 ```
 
 ## Installing Controller Manager and its infrastructure:
 ```
 sudo apt install ros-jazzy-ros2-control ros-jazzy-ros2-controllers
+
 # this puts in place /opt/ros/jazzy/lib/libgz_ros2_control-system.so :
 sudo apt install ros-jazzy-gz-ros2-control
 ```
