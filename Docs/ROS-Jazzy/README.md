@@ -44,6 +44,7 @@ sudo apt install ~nros-jazzy-rqt*
 ### for joystick operation (access to ports):
 ```
 sudo adduser <your account> dialout
+sudo apt install ros-jazzy-joy*
 ```
 
 ## Installing Gasebo Harmonic (using "Default Gazebo/ROS Pairing"):
@@ -80,6 +81,8 @@ sudo apt install ros-jazzy-ros2-control ros-jazzy-ros2-controllers
 
 # this puts in place /opt/ros/jazzy/lib/libgz_ros2_control-system.so :
 sudo apt install ros-jazzy-gz-ros2-control
+
+sudo apt install ros-jazzy-joint-state-publisher
 ```
 
 ### xacro processor and Joystick mixer:
@@ -117,4 +120,8 @@ source /opt/ros/jazzy/setup.bash
 source ~/robot_ws/install/setup.bash
 ros2 launch articubot_one launch_sim.launch.py
 ```
+## Useful links
+
+_How to Use ROS2 Jazzy and Gazebo Harmonic for Robot Simulation_: https://www.youtube.com/watch?v=b8VwSsbZYn0
+
 
