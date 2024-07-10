@@ -102,6 +102,7 @@ cd src
 git clone https://github.com/slgrobotics/diffdrive_arduino.git
 git clone https://github.com/joshnewans/serial.git
 git clone https://github.com/slgrobotics/articubot_one.git
+git clone https://github.com/joshnewans/twist_stamper.git
 cd ..
 sudo rosdep init
 rosdep update
