@@ -82,7 +82,7 @@ sudo apt install ros-jazzy-ros2-control ros-jazzy-ros2-controllers
 # this puts in place /opt/ros/jazzy/lib/libgz_ros2_control-system.so :
 sudo apt install ros-jazzy-gz-ros2-control
 
-sudo apt install ros-jazzy-joint-state-publisher
+sudo apt install ros-jazzy-joint-state-publisher ros-jazzy-joint-state-publisher-gui
 ```
 
 ### xacro processor and Joystick mixer:
