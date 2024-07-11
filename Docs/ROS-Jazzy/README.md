@@ -122,6 +122,10 @@ ros2 launch articubot_one launch_sim.launch.py
 ```
 ## Useful links
 
+_Gazebo Harmonic - Differential Drive project template_ : https://gazebosim.org/docs/latest/ros_gz_project_template_guide
+
+_and its GitHub repository_ : https://github.com/gazebosim/ros_gz_project_template/tree/main
+
 _How to Use ROS2 Jazzy and Gazebo Harmonic for Robot Simulation_: https://www.youtube.com/watch?v=b8VwSsbZYn0
 
 
