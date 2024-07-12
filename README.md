@@ -6,6 +6,8 @@ It is intended to run navigation on my Turtlebot-like robots, starting with Pluc
 
 This section deals with Desktop ("Ground Station") setup and operation.
 
+If you just want to run a simulation in Gazebo, see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy
+
 This section equally applies to any robot, just keep an eye on the name in the instructions and replace it accordingly.
 
 You need to setup **TURTLEBOT3_MODEL** variable (normally in _.bashrc_) with the robot name. Robot description file will be picked from _~/bringup_ws/src/robots_bringup/urdf_ folder
