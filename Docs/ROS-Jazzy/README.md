@@ -52,7 +52,7 @@ sudo apt install ros-jazzy-joy*
 https://gazebosim.org/docs/harmonic/ros_installation#installing-the-default-gazebo-ros-pairing
 ```
 sudo apt-get install ros-${ROS_DISTRO}-ros-gz
-# I am not sure if this one is needed:  sudo apt-get install ros-${ROS_DISTRO}-gz-cmake-vendor
+# see if Gazebo UI comes up without crashing:
 gz sim
 ```
 
