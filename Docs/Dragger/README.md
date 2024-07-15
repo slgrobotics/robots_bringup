@@ -112,7 +112,7 @@ picocom /dev/ttyUSBGPS -b 115200
 We need to install standard ROS Humble support for NMEA messages:
 ```
 $ sudo pip3 install transforms3d
-$ sudo apt install ros-humble-nmea-navsat-driver
+$ sudo apt install ros-${ROS_DISTRO}-nmea-navsat-driver
 
 The following NEW packages will be installed:
   ros-humble-nmea-msgs ros-humble-nmea-navsat-driver ros-humble-tf-transformations
@@ -127,7 +127,7 @@ GPS Node will be run as part of the _dragger.launch.py_ process.
 >>
 >> https://docs.fictionlab.pl/leo-rover/integrations/positioning-systems/ublox-evk-m8n
 >> ```
->> sudo apt install ros-humble-ublox
+>> sudo apt install ros-${ROS_DISTRO}-ublox
 >> 
 >> The following NEW packages will be installed:
 >>   libasio-dev ros-humble-ublox ros-humble-ublox-gps ros-humble-ublox-msgs ros-humble-ublox-serialization
@@ -147,9 +147,9 @@ See https://github.com/hiwad-aziz/ros2_mpu9250_driver
 
 Prerequisites:
 ```
-sudo apt install ros-humble-ros2-control ros-humble-ros2-controllers
-sudo apt install ros-humble-xacro
-sudo apt install ros-humble-twist-mux
+sudo apt install ros-${ROS_DISTRO}-ros2-control ros-${ROS_DISTRO}-ros2-controllers
+sudo apt install ros-${ROS_DISTRO}-xacro
+sudo apt install ros-${ROS_DISTRO}-twist-mux
 sudo apt install libi2c-dev
 sudo adduser ros dialout
 ```
