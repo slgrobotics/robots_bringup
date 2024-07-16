@@ -99,6 +99,9 @@ git clone  https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2.git
 // Line 310 correction:
   output.header.stamp = start_scan_time - rclcpp::Duration(TIME_SHIFT_SEC, TIME_SHIFT_NSEC);
   //output.header.stamp = start_scan_time;
+
+[Ubuntu 24.04 only]:
+vi ~/robot_ws/src/ldlidar_sl_ros2/ldlidar_driver/src/log_module.cpp  - Line 30 insert "#include <pthread.h>"
 ```
 
 ### GPS setup:
@@ -164,6 +167,9 @@ git clone https://github.com/slgrobotics/articubot_one.git
 # MPU9250 Driver:
 git clone https://github.com/hiwad-aziz/ros2_mpu9250_driver.git
 vi ~/robot_ws/src/ros2_mpu9250_driver/src/mpu9250driver.cpp   - line 48:   message.header.frame_id = "imu_link"; (was "base_link")
+
+[Ubuntu 24.04 only]:
+vi ~/robot_ws/src/ros2_mpu9250_driver/lib/mpu9250sensor/include/mpu9250sensor/mpu9250sensor.h   - line 6 insert "#include <array>"
 ```
 ROS nodes produce _robot description_ and needs to  know some basic parameters of the robot. Edit the following to match your values:
 ```
