@@ -114,8 +114,12 @@ picocom /dev/ttyUSBGPS -b 115200
 ```
 We need to install standard ROS Humble support for NMEA messages:
 ```
-$ sudo pip3 install transforms3d
-$ sudo apt install ros-${ROS_DISTRO}-nmea-navsat-driver
+[Ubuntu 22.04 only]:
+sudo pip3 install transforms3d
+[Ubuntu 24.04 only]:
+sudo apt install python3-transforms3d
+
+sudo apt install ros-${ROS_DISTRO}-nmea-navsat-driver
 
 The following NEW packages will be installed:
   ros-humble-nmea-msgs ros-humble-nmea-navsat-driver ros-humble-tf-transformations
