@@ -24,7 +24,7 @@ https://www.facebook.com/ArticulatedRobotics/
 
 ## Turtle Raspberry Pi 3B Build and Run Instructions:
 
-Turtle has _Ubuntu 24.04 Server 64 bit_ and _ROS2 Jazzy Base_ installed - https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html
+Turtle has _Ubuntu 24.04 Server (64 bit)_ and _ROS2 Jazzy Base_ installed - see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi for instructions.
 
 ### "Turtle" XV11 LIDAR setup:
 
