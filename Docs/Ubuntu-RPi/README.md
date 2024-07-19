@@ -16,31 +16,33 @@ For faster set up and updates, better use Ethernet cable initially. Later on, Wi
 
 _Optional:_ You may want to get better grip on your network setup, using ```/etc/netplan/*``` directly. Scroll to the end for directions.
 
-After boot, make sure your other accounts (if any) are privileged and are in _dialout_ group. Fix that - if not already set by Imager:
+After your RPi boots up, make sure your other accounts (if any) are privileged and are in _dialout_ group. Fix that - if not already set by Imager. For example:
 ```
 sudo adduser <other account> sudo
 sudo adduser ros dialout
 
 hostnamectl set-hostname turtle
 ```
-Wait for the first boot to finish initial maintenance. Update and reboot:
+Wait for the first boot to finish initial maintenance (is it updating in the background?). Update and reboot:
 ```
 sudo apt update
 sudo apt upgrade
 sudo apt full-upgrade
 sudo apt clean    (purges packages from SD   https://www.raspberrypi.org/forums/viewtopic.php?f=66&t=133691)
 ```
-You may want to disable unattended updates to avoid high CPU loads after booting:
+You may want to disable unattended updates to avoid high CPU loads at random times after booting up:
 ```
 sudo dpkg-reconfigure unattended-upgrades      (say No)
 ```
-Have some extra networking packages installed:
+Have some needed packages installed:
 ```
 sudo apt install raspi-config
 sudo apt install winbind samba smbclient net-tools wget
 sudo apt install python3-pip
 ```
 You should be able to ping your _turtle.local_ machine and ssh into it (```ssh ros@turtle.local``` from your Desktop machine).
+
+Have the I2C support installed and tested:
 ```
 sudo apt install i2c-tools
 sudo i2cdetect -y 1
@@ -61,10 +63,10 @@ bash ./build
 gpio -h
 sudo gpio readall
 ``` 
-You may need to set up a swap file to compensate for small RAM on RPi 3B:
+You may need to set up a 2G-4G swap file to compensate for small RAM on RPi 3B. Compiling C++ code takes a lot of RAM and will crash without it:
 ```
 sudo swapon --show     (if nothing shows up, swap isn't set up - https://www.linuxtut.com/en/71e3874cb83ed12ec405/)
-sudo fallocate -l 2G /swapfile
+sudo fallocate -l 4G /swapfile
 sudo chmod 600 /swapfile
 sudo mkswap /swapfile
 sudo swapon /swapfile    (now "top" shows MiB Swap: 2048.0)
@@ -107,26 +109,28 @@ echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
 ```
 _Optional:_ Try some basic things from Tutorials:
 ```
-sudo apt install ros-jazzy-demo-nodes-py ros-jazzy-demo-nodes-cpp
+sudo apt install ros-${ROS_DISTRO}-demo-nodes-py ros-${ROS_DISTRO}-demo-nodes-cpp
 ```
-now you can run these commands in separate terminals (even across your LAN machines):
+* now you can run these commands in separate terminals (even across your LAN machines):
 ```
 ros2 run demo_nodes_cpp talker
 ros2 run demo_nodes_py listener
 ```
 
-### 2. Install packages needed for our ROS nodes
+### 2. Install _control_ packages needed for our ROS nodes
 ```
 sudo apt install ros-${ROS_DISTRO}-ros2-control ros-${ROS_DISTRO}-ros2-controllers ros-${ROS_DISTRO}-xacro ros-${ROS_DISTRO}-twist-mux
 sudo apt install libi2c-dev
 ```
-Now your Raspberry Pi should be ready for installing and compiling your robot's Nodes in ~/robot_ws folder.
+Now your Raspberry Pi should be ready for installing and compiling your robot's Nodes in ```~/robot_ws``` folder.
 
 Choose one of the robots here: https://github.com/slgrobotics/robots_bringup/tree/main/Docs
 
-Or, review the following:
+-------------------------------
 
-### Optional: better network control using _/etc/netplan/_ directly
+*Or, review the following:*
+
+### _Optional:_ better network control using _/etc/netplan/_ directly
 
 It is possible, that after the initial boot your network won't be set up properly.
 
@@ -179,7 +183,7 @@ network:
 ```	
 **Note:** static addresses you assign should be within the "exclusion zone" of your router's DHCP service. This is easy setup on the router side. 
 
-### Optional: time sync using _chrony_
+### _Optional:_ time sync using _chrony_
 
 ROS nodes rely on tight time synchronization between participating machines. Default setup might not work well for you.
 
@@ -254,6 +258,29 @@ grep server /etc/chrony/chrony.conf
 ntpdate -q time.windows.com
 set +x
 ```
+
+### _Optional:_ Making compressed backups of an SD card
+
+Your SD card isn't immortal, and might fail if left without power for several months, for other reasons or without a reason at all. You need to make a backup on a less volatile media - for example, your PC. If you read 16 GB SD card into an image file, it will take the same 16 GB of PC disk space, and compression does not always helps to shrink it.
+
+There are many methods available (Pishrink etc.), some work on a live (mounted) system volume and rely on the file system's ability to recover a "live" image on boot.
+
+I prefer a safer method - fill unused space with zeroes and let the Zip shrink the SD image efficiently:
+```
+sudo apt autoremove
+sudo apt clean
+
+cat /dev/zero > zero.file
+(takes about an hour on RPi4, about 5 minutes on RPi5 to write 18.7 GB on 32 GB SD Card)
+rm zero.file
+```
+
+Then make an img file - using, for example, Win32DiskImager, and zip it on a PC. To restore it to an SD card, use Balena Etcher (it accepts compressed images).
+
+Here is more info:
+
+https://www.baeldung.com/linux/wipe-free-space
+
 
 **end of README file**
 
