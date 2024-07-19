@@ -1,8 +1,10 @@
-# Dragger Notes
+# Turtlebot Create 1 Notes (Jazzy version)
 
-Dragger photos are here: https://photos.app.goo.gl/eAdKiD7YYnL9Vou6A
+This is an updated and streamlined version of the prior document ( https://github.com/slgrobotics/turtlebot_create/tree/main/RPi_Setup ) - adjusted for ROS Jazzy.
 
-Dragger is a *"larger Turtlebot"* - running, basically, standard ROS2 Turtlebot 3 binaries for navigation (on the desktop "ground station" computer). Onboard it has a Raspberry Pi 4 ("dragger") [and an "FPV Drone" TV camera. - TBD] The RPi runs sensors drivers (GPS, LD14 LIDAR and MPU9250), and Differential Drive Control, inspired by Articulated Robotics.
+Familiarity with https://github.com/slgrobotics/turtlebot_create/blob/main/README.md is highly recommended.
+
+My Create 1 has a Raspberry Pi 3B ("turtle"). The RPi runs sensors drivers (XV11 LIDAR and BNO055), and Differential Drive Control, inspired by Articulated Robotics.
 
 ## Useful Links:
 
@@ -20,69 +22,11 @@ https://www.youtube.com/@ArticulatedRobotics/videos
 
 https://www.facebook.com/ArticulatedRobotics/
 
+## Turtle Raspberry Pi 3B Build and Run Instructions:
 
-### FPV Camera and receiver Setup [TBD]:
+Turtle has _Ubuntu 24.04 Server 64 bit_ and _ROS2 Jazzy Base_ installed - https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html
 
-https://www.amazon.com/dp/B06VY7L1N4
-
-https://www.amazon.com/dp/B07Q5MPC8V
-
-Camera and transmitter, of course, resides on Dragger. The receiver, when plugged into a Ubuntu 22.04 **Desktop USB port**, shows up as _/dev/video0_ and _video1_
-
-It works with Cheese app and can be read by Python/OpenCV scripts, including custom ROS nodes written in Python.
-
-Here is the code I use for the camera **on the Desktop side**: https://github.com/slgrobotics/camera_publisher
-
-Having the video link separated from WiFi and experiencing minimal delay allows driving the robot FPV-style and/or performing video stream processing on the Desktop.
-
-## Dragger Raspberry Pi 4 Build and Run Instructions:
-
-Dragger has Ubuntu 22.04 Server 64 bit and ROS2 Humble Base installed - https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
-
-Dragger has several Arduino boards, some drive the sensors - GPS, Ultrasonic Parking Sensor, IMU, - while the main Arduino Mega 2560 drives the wheels and combines all sensors data into a single serial stream for Raspberry Pi "dragger". This setup appeared historically through different experiments and at this time is mostly just an over-enginered legacy. The "dragger" RPi makes full use of wheels driving ability and odometry info. Parking sensors data will be likely used later, as ROS2 supports rangers for obstacle avoidance and mapping.
-
-Arduino Mega 2560 code - wheels/sensors driver, talking to Articulated Robotics ROS node: 
-
-https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/DraggerROS
-
-Parking sensors info and driver (to be used later):
-
-https://photos.app.goo.gl/WsqkA4XpYSLrVDX59
-
-https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/ParkingSensorI2C
-
-MPU9250 and GPS Drivers come standard with ROS
-
-### Making USB devices persistent on "dragger":
-
-Dragger has three USB-to-Serial devices: Arduino "wheels/base", GPS and LIDAR.
-
-While the Arduino Mega is the only one at _/dev/ttyACM0_, GPS and LIDAR can take any name under _/dev/ttyUSB*_ pattern.
-
-To avoid reassigning device names in the launch file after reboots, symlinks are created using the following recipe:
-
-https://unix.stackexchange.com/questions/705570/setting-persistent-name-for-usb-serial-device-with-udev-rule-without-symlink
-```
-$ cat /etc/udev/rules.d/99-robot.rules
-SUBSYSTEM=="tty",ENV{ID_PATH}=="platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.1:1.0",SYMLINK+="ttyUSBLDR"
-SUBSYSTEM=="tty",ENV{ID_PATH}=="platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.2:1.0",SYMLINK+="ttyUSBGPS"
-```
-After reboot, you should see something similar to this (which devices symbolic links point to is random):
-```
-$ ll /dev/ttyU*
-crw-rw---- 1 root dialout 188, 0 Nov 21  2023 /dev/ttyUSB0
-crw-rw---- 1 root dialout 188, 1 Nov 21  2023 /dev/ttyUSB1
-lrwxrwxrwx 1 root root         7 Nov 21  2023 /dev/ttyUSBGPS -> ttyUSB1
-lrwxrwxrwx 1 root root         7 Nov 21  2023 /dev/ttyUSBLDR -> ttyUSB0
-```
-Check the GPS stream:
-```
-sudo apt-get install picocom
-picocom /dev/ttyUSBGPS -b 115200
-```
-Press _Ctrl_ button and then without releasing it press **a** and then **q**. It will exit the **picocom** application.
-
-### "dragger" LD14 LIDAR setup:
+### "Turtle" XV11 LIDAR setup:
 
 See https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2    (Google Translate works here)
 ```
@@ -104,53 +48,13 @@ git clone  https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2.git
 vi ~/robot_ws/src/ldlidar_sl_ros2/ldlidar_driver/src/log_module.cpp  - Line 30 insert "#include <pthread.h>"
 ```
 
-### GPS setup:
-
-Dragger has a _"BN-880 GPS Module U8 with Flash HMC5883L Compass + GPS Active Antenna Support"_. A u-blox NEO-M8N module is part of it.
-
-I used _u-center_ Windows app to set up the device initially, and saved settings to its Flash memory. Specifically, NMEA at 115200 baud at 10 Hz should be streaming on USB. Check it:
-```
-picocom /dev/ttyUSBGPS -b 115200
-```
-We need to install standard ROS Humble support for NMEA messages:
-```
-[Ubuntu 22.04 only]:
-sudo pip3 install transforms3d
-[Ubuntu 24.04 only]:
-sudo apt install python3-transforms3d
-
-sudo apt install ros-${ROS_DISTRO}-nmea-navsat-driver
-
-The following NEW packages will be installed:
-  ros-humble-nmea-msgs ros-humble-nmea-navsat-driver ros-humble-tf-transformations
-```
-The driver code is here ("ros2" branch) - look into _launch_ and _config_ folders:
-
-https://github.com/ros-drivers/nmea_navsat_driver/blob/ros2/config/nmea_serial_driver.yaml
-
-GPS Node will be run as part of the _dragger.launch.py_ process.
-
->> [NOTE] The process described here didn't work with my NEO-M8N device:
->>
->> https://docs.fictionlab.pl/leo-rover/integrations/positioning-systems/ublox-evk-m8n
->> ```
->> sudo apt install ros-${ROS_DISTRO}-ublox
->> 
->> The following NEW packages will be installed:
->>   libasio-dev ros-humble-ublox ros-humble-ublox-gps ros-humble-ublox-msgs ros-humble-ublox-serialization
->> ```
->> Code is here: https://github.com/KumarRobotics/ublox/blob/ros2/README.md
->>
->>  There's a lot of chatter on the Internet about this problem.
-
-
-### "dragger" Differential Drive Control setup:
+### "turtle" Differential Drive Control setup:
 
 See https://github.com/slgrobotics/diffdrive_arduino (inspired by Articulated Robotics)
 
 See https://github.com/hiwad-aziz/ros2_mpu9250_driver
 
-#### Note: Dragger Arduino Mega 2560 should be on /dev/ttyACM0
+#### Note: turtle _Create 1 base_ should be on /dev/ttyACM0
 
 Prerequisites:
 ```
@@ -169,14 +73,11 @@ git clone https://github.com/joshnewans/serial.git
 git clone https://github.com/slgrobotics/articubot_one.git
 git clone https://github.com/joshnewans/twist_stamper.git
 
-# MPU9250 Driver:
+# BNO055 Driver:
 git clone https://github.com/hiwad-aziz/ros2_mpu9250_driver.git
-vi ~/robot_ws/src/ros2_mpu9250_driver/src/mpu9250driver.cpp   - line 48:   message.header.frame_id = "imu_link"; (was "base_link")
 
-[Ubuntu 24.04 only]:
-vi ~/robot_ws/src/ros2_mpu9250_driver/lib/mpu9250sensor/include/mpu9250sensor/mpu9250sensor.h   - line 6 insert "#include <array>"
 ```
-ROS nodes produce _robot description_ and needs to  know some basic parameters of the robot. Edit the following to match your values:
+ROS nodes produce _robot description_ and needs to  know some basic parameters of the robot. Edit the following to match Create 1 values:
 ```
 ~/robot_ws/src/articubot_one/description/ros2_control.xacro
 
@@ -201,7 +102,7 @@ Now we need to put it all together, the same way the Create 1 Turtlebot has been
 
 ### Create a Linux service for on-boot autostart
 
-With Dragger base (Arduino wheels driver), Laser Scanner and IMU ROS2 nodes tested, it is time to set up autostart on boot for hands-free operation.
+With turtle base (Arduino wheels driver), Laser Scanner and IMU ROS2 nodes tested, it is time to set up autostart on boot for hands-free operation.
 
 We need launch files (residing in this repository): https://github.com/slgrobotics/articubot_one/tree/main/launch
 
@@ -210,7 +111,7 @@ As we already cloned this repository, these files should be here: ~/robot_ws/src
 1. Create and populate launch folder: /home/ros/launch
 ```
 mkdir ~/launch
-cp ~/robot_ws/src/articubot_one/launch/dragger.launch.py ~/launch/.
+cp ~/robot_ws/src/articubot_one/launch/turtle.launch.py ~/launch/.
 cp ~/robot_ws/src/articubot_one/launch/bootup_launch.sh ~/launch/.
 chmod +x ~/launch/bootup_launch.sh    
 ```
@@ -222,7 +123,7 @@ cd /home/ros/launch
 source /opt/ros/humble/setup.bash
 source /home/ros/robot_ws/install/setup.bash
 
-ros2 launch /home/ros/launch/dragger.launch.py
+ros2 launch /home/ros/launch/turtle.launch.py
 ```
 Try running the _bootup_launch.sh_ from the command line to see if anything fails.
 
