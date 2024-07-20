@@ -2,11 +2,11 @@
 
 This is my *robots_bringup* ROS2 package, derived from Turtlebot3 Navigation and some Articulated Robotics code.
 
-It is intended to run navigation on my Turtlebot-like robots, starting with Plucky.
+It is intended to run navigation on my Turtlebot-like robots - in Gazebo simulation or with physical robots.
 
 This section deals with Desktop ("Ground Station") setup and operation.
 
-If you just want to run a simulation in Gazebo, see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy
+If you just want to run a simulation in Gazebo, or need to set up your Desktop with ROS Jazzy - see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy
 
 This section equally applies to any robot, just keep an eye on the name in the instructions and replace it accordingly.
 
@@ -14,13 +14,17 @@ You need to setup **TURTLEBOT3_MODEL** variable (normally in _.bashrc_) with the
 
 # Dragger
 
-Dragger is described here: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger
+The outdoorsy Dragger (Raspberry 5, GPS) is described here: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger
 
 # Plucky
 
-Plucky is described here (including its two RPi 3B **setup instructions**): https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky
+An indoors mapper Plucky is described here (including its two RPi 3B **setup instructions**): https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky
 
-## Tests - make sure Plucky "base" responds properly
+# Create 1 Turtlebot
+
+Classic Turtlebot from the ancient times, now Jazzified - https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1
+
+## Tests - make sure robot's "base" responds properly
 
 1. Publish _cmd_vel_ and see the wheels rotating
 
@@ -35,7 +39,7 @@ ros2 topic pub /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.1, y: 0.0, z: 0.
 
 ```
 
-2. Use Desktop's joystick to drive Plucky
+2. Use Desktop's joystick to drive the robot
 
 Run the following script on the Desktop:
 ```
@@ -54,7 +58,7 @@ On "Logitech Cordless RumblePad 2" (a.k.a. Logitech Wireless Gamepad F710) Butto
 
 ## Build and Run Instructions:
 
-On the Desktop machine (Ubuntu 22.04)
+On the Desktop machine (Ubuntu 24.04, ROS Jazzy)
 ```
 mkdir -p ~/bringup_ws/src
 cd ~/bringup_ws/src/
