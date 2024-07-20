@@ -1,18 +1,18 @@
 # Setup Desktop ROS Jazzy "Clean Machine" from scratch
 
-We set up a new Desktop PC to become a ROS playground machine, and a Ground Station for our robots. 
+Here we set up a new Desktop PC to become a ROS playground machine, and a Ground Station for our robots. 
 
 ## Installing Ubuntu 24.04 LTS ("Noble")
 
-Install "server" image from DVD:
+Install "server" image from DVD (Desktop image doesn't fit on DVD):
 
        https://ubuntu.com/download/server
 
-Or, if your machine can boot up from USB media, go for Desktop image and skip the next section
+Or, if your machine can boot up from USB media, go for the Desktop image and skip the next section
 
        https://ubuntu.com/download/desktop
 
-### Expanding "server" edition to "desktop":
+### Expanding "server" edition to "desktop" (just add GUI):
 ```
 sudo apt update
 sudo apt upgrade
@@ -29,18 +29,9 @@ Take a look at Raspberry Pi setup and choose what is relevant to your Desktop in
 
 https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/README.md
 
-## Installing ROS Jazzy Jalisco LTS:
+## Installing ROS Jazzy Jalisco Desktop LTS:
 
 https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html
-```
-sudo add-apt-repository universe
-sudo apt update && sudo apt install curl -y
-sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
-sudo apt update && sudo apt install ros-dev-tools
-sudo apt upgrade
-sudo apt install ros-jazzy-desktop
-```
 
 ### Install rqt and rqt_graph with all plugins:
 ```
@@ -70,7 +61,7 @@ gz sim -v 4 shapes.sdf
 ```
 My Windows machine has a good video card, and can act as X Window Server, relieving the Linux box.
 
-Running Gnome Desktop on a different machine (Windows 10 with VcXsrv):
+Running Gnome Desktop on a different machine (Windows 10 with VcXsrv in my case):
 ```
 export DISPLAY=<machine>.local:0.0
 gnome-shell --x11 --replace
@@ -85,9 +76,10 @@ gz sim -v 4 shapes.sdf
 ```
 sudo apt install ros-jazzy-ros2-control ros-jazzy-ros2-controllers
 
-# this puts in place /opt/ros/jazzy/lib/libgz_ros2_control-system.so for Gazebo:
+# this puts in place /opt/ros/jazzy/lib/libgz_ros2_control-system.so - a plugin for Gazebo:
 sudo apt install ros-jazzy-gz-ros2-control
 
+# some extras just in case:
 sudo apt install ros-jazzy-joint-state-publisher ros-jazzy-joint-state-publisher-gui
 ```
 
@@ -104,11 +96,9 @@ https://github.com/slgrobotics/articubot_one
 ```
 cd
 mkdir robot_ws
-cd robot_ws/
+cd ~/robot_ws/
 mkdir src
 cd src
-git clone https://github.com/slgrobotics/diffdrive_arduino.git
-git clone https://github.com/joshnewans/serial.git
 git clone https://github.com/slgrobotics/articubot_one.git
 git clone https://github.com/joshnewans/twist_stamper.git
 cd ..
@@ -124,6 +114,12 @@ source /opt/ros/jazzy/setup.bash
 source ~/robot_ws/install/setup.bash
 ros2 launch articubot_one launch_sim.launch.py
 ```
+You should see Gazebo and RViz GUI coming up. The simulated robot should respond to Joystick via teleop.
+
+Make sure that your "enable" and "turbo" buttons are assigned correctly in ~/robot_ws/src/articubot_one/launch/joystick.launch.py
+
+You must do "colcon build" in ~/robot_ws every time you change anything.
+
 ## Useful links
 
 _Gazebo Harmonic - Differential Drive project template_ : https://gazebosim.org/docs/latest/ros_gz_project_template_guide
