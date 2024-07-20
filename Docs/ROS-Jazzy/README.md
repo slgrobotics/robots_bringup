@@ -1,16 +1,18 @@
-# ROS Jazzy "Clean Machine" - setup from scratch
+# Setup Desktop ROS Jazzy "Clean Machine" from scratch
+
+We set up a new Desktop PC to become a ROS playground machine, and a Ground Station for our robots. 
 
 ## Installing Ubuntu 24.04 LTS ("Noble")
 
-Install "server" from DVD
+Install "server" image from DVD:
 
        https://ubuntu.com/download/server
 
-Or, go for Desktop and skip the next section (if your machine can boot up from USB media)
+Or, if your machine can boot up from USB media, go for Desktop image and skip the next section
 
        https://ubuntu.com/download/desktop
 
-### expanding "server" edition to "desktop":
+### Expanding "server" edition to "desktop":
 ```
 sudo apt update
 sudo apt upgrade
@@ -21,9 +23,13 @@ locale
 sudo apt install software-properties-common
 ```
 
-### (...setup Samba and other OS things here...).
+### (...setup Samba, Chrony and other OS things here...).
 
-## installing ROS Jazzy Jalisco LTS:
+Take a look at Raspberry Pi setup and choose what is relevant to your Desktop installation:
+
+https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/README.md
+
+## Installing ROS Jazzy Jalisco LTS:
 
 https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html
 ```
@@ -36,12 +42,12 @@ sudo apt upgrade
 sudo apt install ros-jazzy-desktop
 ```
 
-### rqt and rqt_graph with all plugins:
+### Install rqt and rqt_graph with all plugins:
 ```
 sudo apt install ~nros-jazzy-rqt*
 ```
 
-### for joystick operation (access to ports):
+### for joystick operation - make sure your "ros" account has access to ports:
 ```
 sudo adduser <your account> dialout
 sudo apt install ros-jazzy-joy*
@@ -56,13 +62,13 @@ sudo apt-get install ros-${ROS_DISTRO}-ros-gz
 gz sim
 ```
 
-### solving Gazebo crash on startup:
+### Solving Gazebo crash on startup:
 ```
 export QT_QPA_PLATFORM=xcb
 gz sim
 gz sim -v 4 shapes.sdf
 ```
-My Windows machine has good video card, and can act as X Window Server, relieving the Linux box.
+My Windows machine has a good video card, and can act as X Window Server, relieving the Linux box.
 
 Running Gnome Desktop on a different machine (Windows 10 with VcXsrv):
 ```
@@ -79,7 +85,7 @@ gz sim -v 4 shapes.sdf
 ```
 sudo apt install ros-jazzy-ros2-control ros-jazzy-ros2-controllers
 
-# this puts in place /opt/ros/jazzy/lib/libgz_ros2_control-system.so :
+# this puts in place /opt/ros/jazzy/lib/libgz_ros2_control-system.so for Gazebo:
 sudo apt install ros-jazzy-gz-ros2-control
 
 sudo apt install ros-jazzy-joint-state-publisher ros-jazzy-joint-state-publisher-gui
@@ -87,8 +93,7 @@ sudo apt install ros-jazzy-joint-state-publisher ros-jazzy-joint-state-publisher
 
 ### xacro processor and Joystick mixer:
 ```
-sudo apt install ros-jazzy-xacro
-sudo apt install ros-jazzy-twist-mux
+sudo apt install ros-jazzy-xacro ros-jazzy-twist-mux
 ```
 
 ## Testing it all with my version of Articubot:
@@ -113,8 +118,7 @@ rosdep install --from-paths src --ignore-src -r -y
 colcon build
 ```
 
-## Bringing up Dragger robot in Gazebo:
-
+## Bringing up Dragger robot simulation in Gazebo:
 ```
 source /opt/ros/jazzy/setup.bash
 source ~/robot_ws/install/setup.bash
@@ -128,4 +132,17 @@ _and its GitHub repository_ : https://github.com/gazebosim/ros_gz_project_templa
 
 _How to Use ROS2 Jazzy and Gazebo Harmonic for Robot Simulation_: https://www.youtube.com/watch?v=b8VwSsbZYn0
 
+_ros2_control documentation :_ https://control.ros.org/jazzy/index.html
+
+**Articulated Robotics (Josh Newans):**
+
+https://articulatedrobotics.xyz/category/build-a-mobile-robot-with-ros
+
+https://articulatedrobotics.xyz/mobile-robot-1-project-overview/
+
+https://articulatedrobotics.xyz/mobile-robot-13-ros2-control-real/
+
+https://www.youtube.com/@ArticulatedRobotics/videos
+
+https://www.facebook.com/ArticulatedRobotics/
 
