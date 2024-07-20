@@ -42,6 +42,21 @@ source ~/robot_ws/install/setup.bash
 ros2 run xv_11_driver xv_11_driver &
 ```
 
+**Note:** Rviz **on your desktop machine** needs at least a static transform, to relate the grid to the laser frame ("_neato_laser_" in this case).
+
+    rviz2 &
+    ros2 run tf2_ros static_transform_publisher 0 0 0 0 0 0 map neato_laser &
+
+For Rviz you need:
+
+    Global Options to have Fixed Frame set to a known TF ("map")
+  
+    Grid reference frame - set to "map"
+  
+    Add LaserScan, topic "/scan", Style :Spheres" size 0.02
+  
+    ros2 run tf2_ros tf2_echo map neato_laser            -- to see published TF
+
 ### Compile ROS2 driver for BNO055 IMU
 
 Connect to I2C: SCL - pin 05, SDA - pin 03 of Raspberry Pi
