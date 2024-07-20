@@ -6,22 +6,6 @@ Familiarity with https://github.com/slgrobotics/turtlebot_create/blob/main/READM
 
 My Create 1 has a Raspberry Pi 3B ("turtle"). The RPi runs sensors drivers (XV11 LIDAR and BNO055), and Differential Drive Control, inspired by Articulated Robotics.
 
-## Useful Links:
-
-Articulated Robotics (Josh Newans):
-
-https://articulatedrobotics.xyz/category/build-a-mobile-robot-with-ros
-
-https://articulatedrobotics.xyz/mobile-robot-1-project-overview/
-
-https://articulatedrobotics.xyz/mobile-robot-13-ros2-control-real/
-
-https://control.ros.org/humble/index.html
-
-https://www.youtube.com/@ArticulatedRobotics/videos
-
-https://www.facebook.com/ArticulatedRobotics/
-
 ## Turtle Raspberry Pi 3B Build and Run Instructions:
 
 Turtle has _Ubuntu 24.04 Server (64 bit)_ and _ROS2 Jazzy Base_ installed - see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi for instructions.
@@ -30,155 +14,151 @@ Turtle has _Ubuntu 24.04 Server (64 bit)_ and _ROS2 Jazzy Base_ installed - see 
 
 Surreal XV Lidar controller v1.2 (Neato Lidar) - connected via USB
 
-    https://github.com/getSurreal/XV_Lidar_Controller  - Teensy software
-    https://www.getsurreal.com/product/lidar-controller-v2-0/   - hardware (Teensy 2.0)
+https://github.com/getSurreal/XV_Lidar_Controller  - Teensy software
 
-Connect to the USB port at 115200 baud. (minicom -D /dev/ttyACM0 -b 115200)
+https://www.getsurreal.com/product/lidar-controller-v2-0/   - hardware (Teensy 2.0)
 
-ROS2 driver port (by Mark Johnston): https://github.com/mjstn/xv_11_driver
+Connect to the USB port at 115200 baud. (test with ```minicom -D /dev/ttyACM0 -b 115200```)
 
-The following file needs editing (as  declare_parameter() now requires a default value as a second parameter):
+Original ROS2 driver port (by Mark Johnston): https://github.com/mjstn/xv_11_driver
 
-    /home/sergei/xv_11_ws/src/xv_11_driver/src/xv_11_driver.cpp
-
-```
-    int main(int argc, char * argv[])
-    {
-      rclcpp::init(argc, argv);
-
-      auto node = rclcpp::Node::make_shared("xv11_laser");
-
-      node->declare_parameter("port",XV11_PORT_DEFAULT);
-      auto port_param      = rclcpp::Parameter("port", XV11_PORT_DEFAULT);
-
-      node->declare_parameter("baud_rate", XV11_BAUD_RATE_DEFAULT);
-      auto baud_rate_param = rclcpp::Parameter("baud_rate", XV11_BAUD_RATE_DEFAULT);
-
-      node->declare_parameter("frame_id", XV11_FRAME_ID_DEFAULT);
-      auto frame_id_param  = rclcpp::Parameter("frame_id", XV11_FRAME_ID_DEFAULT);
-
-      node->declare_parameter("firmware_version", XV11_FIRMWARE_VERSION_DEFAULT);
-      auto firmware_param  = rclcpp::Parameter("firmware_version", XV11_FIRMWARE_VERSION_DEFAULT);
-```
+In my fork I modified one file, ```.../xv_11_driver/src/xv_11_driver.cpp```, as _declare_parameter()_ now requires a default value as a second parameter.
+I also redefined ```XV11_PORT_DEFAULT``` as ```/dev/ttyACM0```
 
 Commands to compile and install:
-
-    mkdir -p ~/xv_11_ws/src
-    cd ~/xv_11_ws/src
-    git clone https://github.com/mjstn/xv_11_driver.git
-    
-      (edit the xv_11_driver/src/xv_11_driver.cpp here - also define XV11_PORT_DEFAULT as /dev/ttyACM0)
-
-    cd ..
-    colcon build
-    source ~/xv_11_ws/install/setup.bash
-    ros2 run xv_11_driver xv_11_driver &
-
 ```
-### 5. Compile ROS2 driver for BNO055 IMU
+mkdir -p ~/robot_ws/src
+cd ~/robot_ws/src
+git clone https://github.com/slgrobotics/xv_11_driver.git
+
+  (edit the xv_11_driver/src/xv_11_driver.cpp here - XV11_PORT_DEFAULT if your port is not /dev/ttyACM0)
+
+cd ..
+colcon build
+```
+Try running it, see _/scan_ messages in rqt on the Desktop:
+```
+source ~/robot_ws/install/setup.bash
+ros2 run xv_11_driver xv_11_driver &
+```
+
+### Compile ROS2 driver for BNO055 IMU
 
 Connect to I2C: SCL - pin 05, SDA - pin 03 of Raspberry Pi
 
 Info and tests:
 
-    https://learn.adafruit.com/adafruit-bno055-absolute-orientation-sensor
-    https://learn.adafruit.com/adafruit-bno055-absolute-orientation-sensor/webserial-visualizer
-    https://hackmd.io/@edgesense/ryzAq3IFs
+https://learn.adafruit.com/adafruit-bno055-absolute-orientation-sensor
 
-BNO055 IMU (via UART or I2C - Python) - seems well supported, active development, ROS2 node
+https://learn.adafruit.com/adafruit-bno055-absolute-orientation-sensor/webserial-visualizer
 
-    https://github.com/flynneva/bno055
+https://hackmd.io/@edgesense/ryzAq3IFs
 
-    mkdir -p ~/bno055_ws/src
-    cd ~/bno055_ws/src/
-    git clone https://github.com/flynneva/bno055.git
-    cd ..
-    colcon build
-    vi ~/bno055_ws/src/bno055/bno055/params/bno055_params_i2c.yaml   - change i2c_bus to 1. Use i2cdetect -y 1
-    sudo pip3 install smbus
- 
- Try running it, see IMU messages in rqt:
- 
-    source ~/bno055_ws/install/setup.bash
-    ros2 run bno055 bno055  --ros-args --params-file ~/bno055_ws/src/bno055/bno055/params/bno055_params_i2c.yaml
+BNO055 IMU (via UART or I2C - Python) - seems well supported, active development, ROS2 node:
 
-
-### "turtle" Differential Drive Control setup:
-
-See https://github.com/slgrobotics/diffdrive_arduino (inspired by Articulated Robotics)
-
-See https://github.com/hiwad-aziz/ros2_mpu9250_driver
-
-#### Note: turtle _Create 1 base_ should be on /dev/ttyACM0
-
-Prerequisites:
+https://github.com/flynneva/bno055
 ```
-sudo apt install ros-${ROS_DISTRO}-ros2-control ros-${ROS_DISTRO}-ros2-controllers
-sudo apt install ros-${ROS_DISTRO}-xacro
-sudo apt install ros-${ROS_DISTRO}-twist-mux
-sudo apt install libi2c-dev
-sudo adduser ros dialout
+sudo pip3 install smbus
+
+# mkdir -p ~/robot_ws/src
+cd ~/robot_ws/src/
+git clone https://github.com/flynneva/bno055.git
+vi ~/robot_ws/src/bno055/bno055/params/bno055_params_i2c.yaml   - change i2c_bus to 1. Use i2cdetect -y 1
+cd ~/robot_ws
+colcon build
+``` 
+Try running it, see IMU messages in rqt on the Desktop:
+``` 
+source ~/robot_ws/install/setup.bash
+ros2 run bno055 bno055  --ros-args --params-file ~/robot_ws/src/bno055/bno055/params/bno055_params_i2c.yaml
 ```
-Now, to the business:
+
+### Compile ROS2 driver for Create 1 base
+
+For iRobot Create 1 (released in 2004, based on Roomba 500 series) and other roombas of 400, 500 and 600 series (https://en.wikipedia.org/wiki/IRobot_Create).
+
+It can be connected via FTDI USB Serial (_/dev/ttyUSB0_ on turtle) or via TTL Serial (pins 1-RXD and 2-TXD on the DB25 connector). A desktop machine can connect via RS232 serial, using special iRobot Create serial cable (/dev/ttyS0 on desktop).
+
+Generally, we follow this guide:
+
+https://github.com/girvenavery2022/create_robot/tree/galactic
+    
+Review the following. Create 1 requires analog gyro, connected to pin 4 of its Cargo Bay DB25:
+
+https://github.com/AutonomyLab/create_robot/issues/28
+
+https://github.com/slgrobotics/create_robot/tree/foxy
+
+https://github.com/slgrobotics/libcreate
+
+https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/MPU9250GyroTurtlebot
+
+here are all commands:
 ```
-mkdir -p ~/robot_ws/src
+# mkdir -p ~/robot_ws/src
 cd ~/robot_ws/src
-git clone https://github.com/slgrobotics/diffdrive_arduino.git
-git clone https://github.com/joshnewans/serial.git
-git clone https://github.com/slgrobotics/articubot_one.git
-git clone https://github.com/joshnewans/twist_stamper.git
+git clone https://github.com/slgrobotics/create_robot.git --branch foxy
+git clone https://github.com/slgrobotics/libcreate.git
+vi ~/robot_ws/src/create_robot/create_bringup/config/default.yaml    (edit port - /dev/ttyS0 if on desktop, /dev/ttyUSB0 on turtle)
 
-# BNO055 Driver:
-git clone https://github.com/hiwad-aziz/ros2_mpu9250_driver.git
-
-```
-ROS nodes produce _robot description_ and needs to  know some basic parameters of the robot. Edit the following to match Create 1 values:
-```
-~/robot_ws/src/articubot_one/description/ros2_control.xacro
-
-           look for  <param name="enc_counts_per_rev">13730</param>
-
-~/robot_ws/src/articubot_one/description/robot_core.xacro
-
-           look for <xacro:property name="wheel_radius" value="0.192"/>
-                    <xacro:property name="wheel_offset_y" value="0.290"/>
-```
-Now you can build and deploy robot's components:
-```
 cd ~/robot_ws
 ### Note: See https://docs.ros.org/en/humble/Tutorials/Intermediate/Rosdep.html
-sudo rosdep init
+sudo rosdep init     -- do it once
 rosdep update
 rosdep install --from-paths src --ignore-src -r -y
 colcon build
 
+# Test it:
+source ~/create_ws/install/setup.bash
+ros2 launch create_bringup create_1.launch
+    or, for Roomba 500/600 series:
+ros2 launch create_bringup create_2.launch
+```    
+
+### Driving Create 1 Turtlebot with _teleop_
+
+At this point you should be able to use teleop **from your desktop machine:**
+
+(skip this if you don't have a joystick on the desktop machine, use keyboard or something else)
+
+Joystick teleop friendly blog:
+
+https://articulatedrobotics.xyz/mobile-robot-14a-teleop/
+
+To test your joystick:
 ```
-Now we need to put it all together, the same way the Create 1 Turtlebot has been set up here: https://github.com/slgrobotics/turtlebot_create/tree/main/RPi_Setup
+ros2 run joy joy_enumerate_devices
+ros2 run joy joy_node      # <-- Run in first terminal
+ros2 topic echo /joy       # <-- Run in second terminal
+```
+https://index.ros.org/p/teleop_twist_joy/github-ros2-teleop_twist_joy/
 
-### Create a Linux service for on-boot autostart
+**__Note:__** *joy_node sends cmd_vel messages ONLY when enable_button is pressed (Usually btn 1, 0 for ROS)
+	you MUST set enable_button to desired value (0 for btn 1, the "front trigger").
+	ros2 param get /teleop_twist_joy_node enable_button  - to see current value*
 
-With turtle base (Arduino wheels driver), Laser Scanner and IMU ROS2 nodes tested, it is time to set up autostart on boot for hands-free operation.
+-----  **Tip:**  Create teleop.sh to run/configure joystick driver:  -------- 
+```
+#!/bin/bash
+set +x
+ros2 launch teleop_twist_joy teleop-launch.py &
+sleep 3
+ros2 param set /teleop_twist_joy_node enable_button 0
+ros2 param set /teleop_twist_joy_node enable_turbo_button 3
+set -x
+```
 
-We need launch files (residing in this repository): https://github.com/slgrobotics/articubot_one/tree/main/launch
+### 6. Create a Linux service for on-boot autostart
 
-As we already cloned this repository, these files should be here: ~/robot_ws/src/articubot_one/launch
+With Create base, XV11 Laser Scanner and BNO055 IMU ROS2 nodes tested, it is time to set up autostart on boot for hands-free operation.
+
+We need some files (copy them from this repository, under and around https://github.com/slgrobotics/turtlebot_create/tree/main/RPi_Setup/launch):
 
 1. Create and populate launch folder: /home/ros/launch
 ```
 mkdir ~/launch
-cp ~/robot_ws/src/articubot_one/launch/turtle.launch.py ~/launch/.
-cp ~/robot_ws/src/articubot_one/launch/bootup_launch.sh ~/launch/.
+ -- place myturtle.py and bootup_launch.sh here --
 chmod +x ~/launch/bootup_launch.sh    
-```
-You must edit the _bootup_launch.sh_ file to match your robot launch file and related folders:
-```
-#!/bin/bash
-
-cd /home/ros/launch
-source /opt/ros/humble/setup.bash
-source /home/ros/robot_ws/install/setup.bash
-
-ros2 launch /home/ros/launch/turtle.launch.py
 ```
 Try running the _bootup_launch.sh_ from the command line to see if anything fails.
 
@@ -186,7 +166,7 @@ Try running the _bootup_launch.sh_ from the command line to see if anything fail
 ```
 # /etc/systemd/system/robot.service
 [Unit]
-Description=robot
+Description=turtle
 StartLimitIntervalSec=60
 StartLimitBurst=5
 
@@ -205,23 +185,26 @@ WantedBy=multi-user.target
 3. Enable service:
 ```
 sudo systemctl daemon-reload
-sudo systemctl enable robot.service
-sudo systemctl start robot.service
+sudo systemctl enable turtle.service
+sudo systemctl start turtle.service
 ```
 If all went well, the service will start automatically after you reboot the RPi, and all related nodes will show up on _rpt_ and _rpt_graph_
 
 Here are some useful commands:
 ```
-systemctl status robot.service
-systemctl cat robot.service
-sudo systemctl reload-or-restart robot.service
-sudo journalctl -xeu robot.service
+systemctl status turtle.service
+systemctl cat turtle.service
+sudo systemctl reload-or-restart turtle.service
+sudo journalctl -xeu turtle.service
 
-sudo ls -al /etc/systemd/system/robot.service
-sudo ls -al /etc/systemd/system/robot.service.d/override.conf
-sudo ls -al /etc/systemd/system/multi-user.target.wants/robot.service
+sudo ls -al /etc/systemd/system/turtle.service
+sudo ls -al /etc/systemd/system/turtle.service.d/override.conf
+sudo ls -al /etc/systemd/system/multi-user.target.wants/turtle.service
 ps -ef | grep driver
 ```
-You can now reboot Raspberry Pi, and the three drivers will start automatically. Nodes (at least _robot_state_publisher_) should show up in **rqt** and **rqt_graph**
+You can now reboot Raspberry Pi, and the three drivers will start automatically and show up in **rqt** and **rqt_graph** on the Desktop
 
-**Now you can proceed to Desktop setup (all Desktop operations are the same for all Turtlebot3 based robots):** https://github.com/slgrobotics/robots_bringup
+**Now you can proceed to Desktop (Turtle_Setup) folder:**   https://github.com/slgrobotics/turtlebot_create/tree/main/Turtle_Setup
+
+## Useful Links:
+
