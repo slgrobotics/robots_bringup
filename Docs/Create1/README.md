@@ -24,29 +24,84 @@ https://www.facebook.com/ArticulatedRobotics/
 
 ## Turtle Raspberry Pi 3B Build and Run Instructions:
 
-Turtle has _Ubuntu 24.04 Server 64 bit_ and _ROS2 Jazzy Base_ installed - https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html
+Turtle has _Ubuntu 24.04 Server (64 bit)_ and _ROS2 Jazzy Base_ installed - see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi for instructions.
 
 ### "Turtle" XV11 LIDAR setup:
 
-See https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2    (Google Translate works here)
+Surreal XV Lidar controller v1.2 (Neato Lidar) - connected via USB
+
+    https://github.com/getSurreal/XV_Lidar_Controller  - Teensy software
+    https://www.getsurreal.com/product/lidar-controller-v2-0/   - hardware (Teensy 2.0)
+
+Connect to the USB port at 115200 baud. (minicom -D /dev/ttyACM0 -b 115200)
+
+ROS2 driver port (by Mark Johnston): https://github.com/mjstn/xv_11_driver
+
+The following file needs editing (as  declare_parameter() now requires a default value as a second parameter):
+
+    /home/sergei/xv_11_ws/src/xv_11_driver/src/xv_11_driver.cpp
+
 ```
-mkdir -p ~/robot_ws/src
-cd ~/robot_ws/src
-// LiDAR LD14 (on /dev/ttyUSB0):
-git clone  https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2.git
+    int main(int argc, char * argv[])
+    {
+      rclcpp::init(argc, argv);
 
-// For rviz2: time shift corrections :  /home/ros/robot_ws/src/ldlidar_sl_ros2/src/demo.cpp
-// Line 24:
-#define TIME_SHIFT_SEC 0
-#define TIME_SHIFT_NSEC 400000000
+      auto node = rclcpp::Node::make_shared("xv11_laser");
 
-// Line 310 correction:
-  output.header.stamp = start_scan_time - rclcpp::Duration(TIME_SHIFT_SEC, TIME_SHIFT_NSEC);
-  //output.header.stamp = start_scan_time;
+      node->declare_parameter("port",XV11_PORT_DEFAULT);
+      auto port_param      = rclcpp::Parameter("port", XV11_PORT_DEFAULT);
 
-[Ubuntu 24.04 only]:
-vi ~/robot_ws/src/ldlidar_sl_ros2/ldlidar_driver/src/log_module.cpp  - Line 30 insert "#include <pthread.h>"
+      node->declare_parameter("baud_rate", XV11_BAUD_RATE_DEFAULT);
+      auto baud_rate_param = rclcpp::Parameter("baud_rate", XV11_BAUD_RATE_DEFAULT);
+
+      node->declare_parameter("frame_id", XV11_FRAME_ID_DEFAULT);
+      auto frame_id_param  = rclcpp::Parameter("frame_id", XV11_FRAME_ID_DEFAULT);
+
+      node->declare_parameter("firmware_version", XV11_FIRMWARE_VERSION_DEFAULT);
+      auto firmware_param  = rclcpp::Parameter("firmware_version", XV11_FIRMWARE_VERSION_DEFAULT);
 ```
+
+Commands to compile and install:
+
+    mkdir -p ~/xv_11_ws/src
+    cd ~/xv_11_ws/src
+    git clone https://github.com/mjstn/xv_11_driver.git
+    
+      (edit the xv_11_driver/src/xv_11_driver.cpp here - also define XV11_PORT_DEFAULT as /dev/ttyACM0)
+
+    cd ..
+    colcon build
+    source ~/xv_11_ws/install/setup.bash
+    ros2 run xv_11_driver xv_11_driver &
+
+```
+### 5. Compile ROS2 driver for BNO055 IMU
+
+Connect to I2C: SCL - pin 05, SDA - pin 03 of Raspberry Pi
+
+Info and tests:
+
+    https://learn.adafruit.com/adafruit-bno055-absolute-orientation-sensor
+    https://learn.adafruit.com/adafruit-bno055-absolute-orientation-sensor/webserial-visualizer
+    https://hackmd.io/@edgesense/ryzAq3IFs
+
+BNO055 IMU (via UART or I2C - Python) - seems well supported, active development, ROS2 node
+
+    https://github.com/flynneva/bno055
+
+    mkdir -p ~/bno055_ws/src
+    cd ~/bno055_ws/src/
+    git clone https://github.com/flynneva/bno055.git
+    cd ..
+    colcon build
+    vi ~/bno055_ws/src/bno055/bno055/params/bno055_params_i2c.yaml   - change i2c_bus to 1. Use i2cdetect -y 1
+    sudo pip3 install smbus
+ 
+ Try running it, see IMU messages in rqt:
+ 
+    source ~/bno055_ws/install/setup.bash
+    ros2 run bno055 bno055  --ros-args --params-file ~/bno055_ws/src/bno055/bno055/params/bno055_params_i2c.yaml
+
 
 ### "turtle" Differential Drive Control setup:
 
