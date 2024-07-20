@@ -1,4 +1,4 @@
-# Setup Desktop ROS Jazzy "Clean Machine" from scratch
+# Set up Desktop ROS Jazzy "Clean Machine" from scratch
 
 Here we set up a new Desktop PC to become a ROS playground machine, and a Ground Station for our robots. 
 
@@ -23,7 +23,7 @@ locale
 sudo apt install software-properties-common
 ```
 
-### (...setup Samba, Chrony and other OS things here...).
+### (...set up Samba, Chrony and other OS things here...).
 
 Take a look at Raspberry Pi setup and choose what is relevant to your Desktop installation:
 
