@@ -27,6 +27,8 @@ I also redefined ```XV11_PORT_DEFAULT``` as ```/dev/ttyACM0```
 
 Commands to compile and install:
 ```
+sudo apt install libboost-dev
+
 mkdir -p ~/robot_ws/src
 cd ~/robot_ws/src
 git clone https://github.com/slgrobotics/xv_11_driver.git
@@ -36,7 +38,7 @@ git clone https://github.com/slgrobotics/xv_11_driver.git
 cd ..
 colcon build
 ```
-Try running it, see _/scan_ messages in rqt on the Desktop:
+Try running it on _turtle_, see _/scan_ messages in rqt on the Desktop:
 ```
 source ~/robot_ws/install/setup.bash
 ros2 run xv_11_driver xv_11_driver &
@@ -73,16 +75,21 @@ BNO055 IMU (via UART or I2C - Python) - seems well supported, active development
 
 https://github.com/flynneva/bno055
 ```
-sudo pip3 install smbus
+sudo apt install python3-smbus
 
 # mkdir -p ~/robot_ws/src
 cd ~/robot_ws/src/
 git clone https://github.com/flynneva/bno055.git
 vi ~/robot_ws/src/bno055/bno055/params/bno055_params_i2c.yaml   - change i2c_bus to 1. Use i2cdetect -y 1
+
 cd ~/robot_ws
+### Note: See https://docs.ros.org/en/humble/Tutorials/Intermediate/Rosdep.html
+sudo rosdep init     -- do it once
+rosdep update
+rosdep install --from-paths src --ignore-src -r -y
 colcon build
 ``` 
-Try running it, see IMU messages in rqt on the Desktop:
+Try running it on _turtle_, see IMU messages in rqt on the Desktop:
 ``` 
 source ~/robot_ws/install/setup.bash
 ros2 run bno055 bno055  --ros-args --params-file ~/robot_ws/src/bno055/bno055/params/bno055_params_i2c.yaml
@@ -118,12 +125,12 @@ vi ~/robot_ws/src/create_robot/create_bringup/config/default.yaml    (edit port 
 
 cd ~/robot_ws
 ### Note: See https://docs.ros.org/en/humble/Tutorials/Intermediate/Rosdep.html
-sudo rosdep init     -- do it once
+# sudo rosdep init     -- do it once
 rosdep update
 rosdep install --from-paths src --ignore-src -r -y
 colcon build
 
-# Test it:
+# Test it on _turtle_:
 source ~/create_ws/install/setup.bash
 ros2 launch create_bringup create_1.launch
     or, for Roomba 500/600 series:
