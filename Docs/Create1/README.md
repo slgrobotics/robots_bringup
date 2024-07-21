@@ -127,7 +127,13 @@ cd ~/robot_ws
 ### Note: See https://docs.ros.org/en/humble/Tutorials/Intermediate/Rosdep.html
 # sudo rosdep init     -- do it once
 rosdep update
+# this will take a while, many packages installed:
 rosdep install --from-paths src --ignore-src -r -y
+
+# Build will take a long while (over an hour) and needs at least 2GB swap space on RPi 3B.
+# You can try limiting number of parallel threads:
+# export MAKEFLAGS="-j 1"
+# colcon build --parallel-workers=1 --executor sequential
 colcon build
 
 # Test it on _turtle_:
