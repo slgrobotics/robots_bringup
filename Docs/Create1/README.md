@@ -109,19 +109,21 @@ Review the following. Create 1 requires analog gyro, connected to pin 4 of its C
 
 https://github.com/AutonomyLab/create_robot/issues/28
 
-https://github.com/slgrobotics/create_robot/tree/foxy
+https://github.com/slgrobotics/create_robot   (branch _"jazzy"_ is default there, forked from upstream _"iron"_)
 
 https://github.com/slgrobotics/libcreate
 
 https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/MPU9250GyroTurtlebot
 
-here are all commands:
+Here are all commands:
 ```
 # mkdir -p ~/robot_ws/src
 cd ~/robot_ws/src
-git clone https://github.com/slgrobotics/create_robot.git --branch foxy
+git clone https://github.com/slgrobotics/create_robot.git
 git clone https://github.com/slgrobotics/libcreate.git
-vi ~/robot_ws/src/create_robot/create_bringup/config/default.yaml    (edit port - /dev/ttyS0 if on desktop, /dev/ttyUSB0 on turtle)
+
+# you may edit Create Base port here - /dev/ttyS0 if on desktop, /dev/ttyUSB0 on turtle:
+vi ~/robot_ws/src/create_robot/create_bringup/config/default.yaml
 
 cd ~/robot_ws
 ### Note: See https://docs.ros.org/en/humble/Tutorials/Intermediate/Rosdep.html
@@ -130,18 +132,59 @@ rosdep update
 # this will take a while, many additional packages installed:
 rosdep install --from-paths src --ignore-src -r -y
 
-# On RPi 3B build will take VERY long time (over 16 hours in my case) and needs at least 2GB swap space.
+# On RPi 3B build will take VERY long time (over 14 hours in my case) and needs at least 2GB swap space.
 # You can try limiting number of parallel threads:
 # export MAKEFLAGS="-j 1"
 # colcon build --parallel-workers=1 --executor sequential
 colcon build
+```
+This is how it looked on my Raspberry Pi 3B with 1 GB RAM:
+```
+ros@turtle:~/robot_ws$ colcon build --parallel-workers=1 --executor sequential
+[5.063s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/ros/robot_ws/install/create_robot'
+                  in the environment variable AMENT_PREFIX_PATH doesn't exist
+...
+Starting >>> bno055
+Finished <<< bno055 [14.3s]
+Starting >>> create_description
+Finished <<< create_description [2.29s]
+Starting >>> create_msgs
+Finished <<< create_msgs [6min 3s]
+Starting >>> libcreate
+Finished <<< libcreate [7min 48s]
+Starting >>> xv_11_driver
+Finished <<< xv_11_driver [4min 24s]
+Starting >>> create_driver
+Finished <<< create_driver [14h 14min 39s]
+Starting >>> create_bringup
+Finished <<< create_bringup [16.5s]
+Starting >>> create_robot
+Finished <<< create_robot [10.9s]
 
-# Test it on _turtle_:
-source ~/create_ws/install/setup.bash
+Summary: 8 packages finished [14h 33min 43s]
+ros@turtle:~/robot_ws$
+```
+Test it on _turtle_:
+```
+source ~/robot_ws/install/setup.bash
 ros2 launch create_bringup create_1.launch
     or, for Roomba 500/600 series:
 ros2 launch create_bringup create_2.launch
-```    
+```
+This is how the robot comes up on my screen:
+```
+ros@turtle:~/robot_ws$ ros2 launch create_bringup create_1.launch
+[INFO] [launch]: All log files can be found below /home/ros/.ros/log/2024-07-23-09-11-31-032285-turtle-26928
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [create_driver-1]: process started with pid [26934]
+[INFO] [robot_state_publisher-2]: process started with pid [26935]
+[robot_state_publisher-2] [INFO] [1721743897.733288931] [robot_state_publisher]: Robot initialized
+[create_driver-1] [INFO] [1721743897.817175928] [create_driver]: [CREATE] gyro_offset: 0    gyro_scale: 1
+[create_driver-1] [INFO] [1721743897.818827061] [create_driver]: [CREATE] "CREATE_1" selected
+[create_driver-1] [INFO] [1721743898.881177255] [create_driver]: [CREATE] Connection established.
+[create_driver-1] [INFO] [1721743898.881650532] [create_driver]: [CREATE] Battery level 100.00 %
+[create_driver-1] [INFO] [1721743899.054224697] [create_driver]: [CREATE] Ready.
+```
 
 ### Driving Create 1 Turtlebot with _teleop_
 
@@ -185,12 +228,15 @@ We need some files (copy them from this repository, under and around https://git
 1. Create and populate launch folder: /home/ros/launch
 ```
 mkdir ~/launch
- -- place myturtle.py and bootup_launch.sh here --
+cd ~/launch
+# place myturtle.py and bootup_launch.sh here:
+cp ~/robot_ws/src/create_robot/create_bringup/launch/bootup_launch.sh .
+cp ~/robot_ws/src/create_robot/create_bringup/launch/myturtle.py .
 chmod +x ~/launch/bootup_launch.sh    
 ```
 Try running the _bootup_launch.sh_ from the command line to see if anything fails.
 
-2. Create service description file - /etc/systemd/system/robot.service :
+2. Create service description file (as _"sudo"_) - _/etc/systemd/system/robot.service_ :
 ```
 # /etc/systemd/system/robot.service
 [Unit]
@@ -213,21 +259,23 @@ WantedBy=multi-user.target
 3. Enable service:
 ```
 sudo systemctl daemon-reload
-sudo systemctl enable turtle.service
-sudo systemctl start turtle.service
+sudo systemctl enable robot.service
+sudo systemctl start robot.service
 ```
 If all went well, the service will start automatically after you reboot the RPi, and all related nodes will show up on _rpt_ and _rpt_graph_
 
+**Note:** Logs are stored in _/home/ros/.ros/log_ folder - these can grow if things go wrong.
+
 Here are some useful commands:
 ```
-systemctl status turtle.service
-systemctl cat turtle.service
-sudo systemctl reload-or-restart turtle.service
-sudo journalctl -xeu turtle.service
+systemctl status robot.service
+systemctl cat robot.service
+sudo systemctl reload-or-restart robot.service
+sudo journalctl -xeu robot.service
 
-sudo ls -al /etc/systemd/system/turtle.service
-sudo ls -al /etc/systemd/system/turtle.service.d/override.conf
-sudo ls -al /etc/systemd/system/multi-user.target.wants/turtle.service
+sudo ls -al /etc/systemd/system/robot.service
+sudo ls -al /etc/systemd/system/robot.service.d/override.conf
+sudo ls -al /etc/systemd/system/multi-user.target.wants/robot.service
 ps -ef | grep driver
 ```
 You can now reboot Raspberry Pi, and the three drivers will start automatically and show up in **rqt** and **rqt_graph** on the Desktop
