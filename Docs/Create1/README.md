@@ -264,7 +264,11 @@ sudo systemctl start robot.service
 ```
 If all went well, the service will start automatically after you reboot the RPi, and all related nodes will show up on _rpt_ and _rpt_graph_
 
-**Note:** Logs are stored in _/home/ros/.ros/log_ folder - these can grow if things go wrong.
+**Notes:** 
+
+1. Logs are stored in _/home/ros/.ros/log_ folder - these can grow if things go wrong.
+
+2. Raspberry Pi 3B is adequate for the "headless" Turtlebot (except for 14+ hours compilation) - it runs at <30% CPU load and low memory consumption.
 
 Here are some useful commands:
 ```
