@@ -268,7 +268,13 @@ If all went well, the service will start automatically after you reboot the RPi,
 
 1. Logs are stored in _/home/ros/.ros/log_ folder - these can grow if things go wrong.
 
-2. Raspberry Pi 3B is adequate for the "headless" Turtlebot (except for 14+ hours compilation) - it runs at <30% CPU load and low memory consumption.
+2. Raspberry Pi 3B is adequate for the _"headless"_ Turtlebot (except for the 14+ hours compilation) - it runs at <30% CPU load and low memory consumption.
+
+3. Any time you need to produce robot URDF from ```.xacro``` files:
+```
+source ~/robot_ws/install/setup.bash
+xacro ~/robot_ws/install/articubot_one/share/articubot_one/description/robot.urdf.xacro use_ros2_control:=true sim_mode:=true > ~/robot_ws/src/articubot_one/description/robot.urdf
+```
 
 Here are some useful commands:
 ```
