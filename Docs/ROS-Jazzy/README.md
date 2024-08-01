@@ -6,11 +6,11 @@ Here we set up a new Desktop PC to become a ROS playground machine, and a Ground
 
 Install "server" image from DVD (Desktop image doesn't fit on DVD):
 
-       https://ubuntu.com/download/server
+https://ubuntu.com/download/server
 
 Or, if your machine can boot up from USB media, go for the Desktop image and skip the next section
 
-       https://ubuntu.com/download/desktop
+https://ubuntu.com/download/desktop
 
 ### Expanding "server" edition to "desktop" (just add GUI):
 ```
@@ -31,17 +31,17 @@ https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/README.m
 
 ## Installing ROS Jazzy Jalisco Desktop LTS:
 
-https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html
+Follow  https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html
 
 ### Install rqt and rqt_graph with all plugins:
 ```
-sudo apt install ~nros-jazzy-rqt*
+sudo apt install ~nros-${ROS_DISTRO}-rqt*
 ```
 
 ### for joystick operation - make sure your "ros" account has access to ports:
 ```
 sudo adduser <your account> dialout
-sudo apt install ros-jazzy-joy*
+sudo apt install ros-${ROS_DISTRO}-joy*
 ```
 
 ## Installing Gasebo Harmonic (using "Default Gazebo/ROS Pairing"):
@@ -74,18 +74,22 @@ gz sim -v 4 shapes.sdf
 
 ## Installing Controller Manager and its infrastructure:
 ```
-sudo apt install ros-jazzy-ros2-control ros-jazzy-ros2-controllers
+sudo apt install ros-${ROS_DISTRO}-ros2-control ros-${ROS_DISTRO}-ros2-controllers
 
 # this puts in place /opt/ros/jazzy/lib/libgz_ros2_control-system.so - a plugin for Gazebo:
-sudo apt install ros-jazzy-gz-ros2-control
+sudo apt install ros-${ROS_DISTRO}-gz-ros2-control
 
 # some extras just in case:
-sudo apt install ros-jazzy-joint-state-publisher ros-jazzy-joint-state-publisher-gui
+sudo apt install ros-${ROS_DISTRO}-joint-state-publisher ros-${ROS_DISTRO}-joint-state-publisher-gui
+
+# "topic relay" tool for remapping '/diff_cont/odom' -> '/odom'
+#  which cannot be done in Gazebo contreoller_manager by parameters:
+sudo apt install ros-${ROS_DISTRO}-topic-tools
 ```
 
 ### xacro processor and Joystick mixer:
 ```
-sudo apt install ros-jazzy-xacro ros-jazzy-twist-mux
+sudo apt install ros-${ROS_DISTRO}-xacro ros-${ROS_DISTRO}-twist-mux
 ```
 
 ## Testing it all with my version of Articubot:
@@ -110,7 +114,7 @@ colcon build
 
 ## Bringing up Dragger robot simulation in Gazebo:
 ```
-source /opt/ros/jazzy/setup.bash
+source /opt/ros/${ROS_DISTRO}/setup.bash
 source ~/robot_ws/install/setup.bash
 ros2 launch articubot_one launch_sim.launch.py
 ```
