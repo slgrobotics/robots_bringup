@@ -6,23 +6,33 @@ It is intended to run navigation on my Turtlebot-like robots - in Gazebo simulat
 
 This section deals with Desktop ("Ground Station") setup and operation.
 
-If you just want to run a simulation in Gazebo, or need to set up your Desktop with ROS Jazzy - see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy
+If you just want to run a simulation in Gazebo, or need to set up your Desktop with ROS Jazzy -
+
+see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy
 
 This section equally applies to any robot, just keep an eye on the name in the instructions and replace it accordingly.
 
 You need to setup **TURTLEBOT3_MODEL** variable (normally in _.bashrc_) with the robot name. Robot description file will be picked from _~/bringup_ws/src/robots_bringup/urdf_ folder
 
-# Dragger
+## Dragger
 
-The outdoorsy Dragger (Raspberry 5, GPS) is described here: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger
+The outdoorsy robot Dragger (Raspberry 5, GPS) is described here:
 
-# Plucky
+https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger
 
-An indoors mapper Plucky is described here (including its two RPi 3B **setup instructions**): https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky
+## Plucky
 
-# Create 1 Turtlebot
+An indoors mapper robot Plucky is described here (including its two RPi 3B **setup instructions**):
 
-Classic Turtlebot from the ancient times, now Jazzified - https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1
+https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky
+
+## Create 1 Turtlebot
+
+Classic Turtlebot, a visitor from the ancient times, now Jazzified:
+
+https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1
+
+# Any of the robots above:
 
 ## Tests - make sure robot's "base" responds properly
 
@@ -67,6 +77,11 @@ cd ~/bringup_ws
 mkldir src/robots_bringup/worlds
 colcon build
 ```
+## Build Turtlebot3 from sources (ROS Jazzy)
+
+Follow https://github.com/slgrobotics/turtlebot3
+
+make sure you ```source ~/turtlebot3_ws/install/setup.bash```
 
 ## Running Cartographer
 
