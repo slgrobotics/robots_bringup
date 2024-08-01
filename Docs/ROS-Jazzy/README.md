@@ -126,6 +126,20 @@ Make sure that your "enable" and "turbo" buttons are assigned correctly in ~/rob
 
 You must do "colcon build" in ~/robot_ws every time you change anything.
 
+## Building Turtlebot3 suite and running Cartographer
+
+You can use well-designed ROBOTIS Turtlebot 3 package to launch Cartographer and Nav2 packages.
+
+There is no _turtlebot3_ binary package for ROS Jazzy. Compile one from my fork, with minor changes:
+
+Follow instructions here: https://github.com/slgrobotics/turtlebot3
+
+When running Cartographer, specify simulated time:
+```
+source ~/turtlebot3_ws/install/setup.bash
+ros2 launch turtlebot3_cartographer cartographer.launch.py use_sim_time:=true
+```
+
 ## Useful links
 
 _Gazebo Harmonic - Differential Drive project template_ : https://gazebosim.org/docs/latest/ros_gz_project_template_guide
