@@ -74,7 +74,6 @@ mkdir -p ~/bringup_ws/src
 cd ~/bringup_ws/src/
 git clone https://github.com/slgrobotics/robots_bringup.git
 cd ~/bringup_ws
-mkldir src/robots_bringup/worlds
 colcon build
 ```
 ## Build Turtlebot3 from sources (ROS Jazzy)
@@ -122,7 +121,7 @@ wheel parameters like this, also wheel base:
 
 ------------------------
 
-Save map ("my_map.pgm"):
+Save map (produces two files - "my_map.pgm", "my_map.yaml"):
 ```
 ros2 run nav2_map_server map_saver_cli -f my_map
 ```
@@ -139,10 +138,10 @@ Odom should not move much.
 
 ## Running Nav2
 
-This will bring up full Nav2 stack and Rviz2:
+This will bring up full Nav2 stack and Rviz2 (better specify fill path to *my_map.yaml*):
 ```
 source ~/bringup_ws/install/setup.bash
-ros2 launch robots_bringup bringup_launch.py map:=/home/sergei/my_map_plucky.yaml
+ros2 launch robots_bringup bringup_launch.py map:=my_map.yaml
 
 source ~/bringup_ws/install/setup.bash
 ros2 launch robots_bringup rviz_launch.py
