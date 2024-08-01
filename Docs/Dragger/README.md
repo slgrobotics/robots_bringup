@@ -91,7 +91,7 @@ cd ~/robot_ws/src
 // LiDAR LD14 (on /dev/ttyUSB0):
 git clone  https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2.git
 
-// For rviz2: time shift corrections :  /home/ros/robot_ws/src/ldlidar_sl_ros2/src/demo.cpp
+// Optional - For rviz2: time shift corrections :  /home/ros/robot_ws/src/ldlidar_sl_ros2/src/demo.cpp
 // Line 24:
 #define TIME_SHIFT_SEC 0
 #define TIME_SHIFT_NSEC 400000000
