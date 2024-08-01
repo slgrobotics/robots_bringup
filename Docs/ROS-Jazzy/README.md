@@ -83,7 +83,7 @@ sudo apt install ros-${ROS_DISTRO}-gz-ros2-control
 sudo apt install ros-${ROS_DISTRO}-joint-state-publisher ros-${ROS_DISTRO}-joint-state-publisher-gui
 
 # "topic relay" tool for remapping '/diff_cont/odom' -> '/odom'
-#  which cannot be done in Gazebo contreoller_manager by parameters:
+#  which cannot be done in Gazebo controller_manager by parameters:
 sudo apt install ros-${ROS_DISTRO}-topic-tools
 ```
 
