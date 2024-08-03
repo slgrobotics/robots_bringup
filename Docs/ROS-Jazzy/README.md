@@ -120,9 +120,9 @@ source /opt/ros/${ROS_DISTRO}/setup.bash
 source ~/robot_ws/install/setup.bash
 ros2 launch articubot_one launch_sim.launch.py
 ```
-You should see Gazebo and RViz GUI coming up. The simulated robot should respond to Joystick via teleop.
+You should see Gazebo and RViz GUI coming up. At this point Fixed Frame *"map"* doesn't exist for RViz. Select *"base_footprint"* in Global Options. 
 
-Make sure that your "enable" and "turbo" buttons are assigned correctly in ~/robot_ws/src/articubot_one/launch/joystick.launch.py
+The simulated robot should respond to Joystick via teleop. Make sure that your "enable" and "turbo" buttons are assigned correctly in ~/robot_ws/src/articubot_one/launch/joystick.launch.py
 
 You must do "colcon build" in ~/robot_ws every time you change anything.
 
