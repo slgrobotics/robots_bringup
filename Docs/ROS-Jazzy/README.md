@@ -93,6 +93,34 @@ sudo apt install ros-${ROS_DISTRO}-topic-tools
 ```
 sudo apt install ros-${ROS_DISTRO}-xacro ros-${ROS_DISTRO}-twist-mux
 ```
+### Joystick setup
+
+Joystick teleop friendly blog:
+
+https://articulatedrobotics.xyz/mobile-robot-14a-teleop/
+
+To test your joystick:
+```
+ros2 run joy joy_enumerate_devices
+ros2 run joy joy_node      # <-- Run in first terminal
+ros2 topic echo /joy       # <-- Run in second terminal
+```
+https://index.ros.org/p/teleop_twist_joy/github-ros2-teleop_twist_joy/
+
+**__Note:__** *joy_node sends cmd_vel messages ONLY when enable_button is pressed (Usually btn 1, 0 for ROS)
+	you MUST set enable_button to desired value (0 for btn 1, the "front trigger").
+	ros2 param get /teleop_twist_joy_node enable_button  - to see current value*
+
+-----  **Tip:**  Create teleop.sh to run/configure joystick driver:  -------- 
+```
+#!/bin/bash
+set +x
+ros2 launch teleop_twist_joy teleop-launch.py &
+sleep 3
+ros2 param set /teleop_twist_joy_node enable_button 0
+ros2 param set /teleop_twist_joy_node enable_turbo_button 3
+set -x
+```
 
 ## Testing it all with my version of Articubot:
 
