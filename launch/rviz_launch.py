@@ -28,7 +28,8 @@ from nav2_common.launch import ReplaceString
 
 def generate_launch_description():
     # Get the launch directory
-    bringup_dir = get_package_share_directory('robots_bringup')
+    package_name='robots_bringup'
+    package_path = get_package_share_directory(package_name)
 
     # Create the launch configuration variables
     namespace = LaunchConfiguration('namespace')
@@ -49,7 +50,7 @@ def generate_launch_description():
 
     declare_rviz_config_file_cmd = DeclareLaunchArgument(
         'rviz_config',
-        default_value=os.path.join(bringup_dir, 'rviz', 'nav2_default_view.rviz'),
+        default_value=os.path.join(package_path, 'rviz', 'nav2_default_view.rviz'),
         description='Full path to the RVIZ config file to use')
 
     # Launch rviz
