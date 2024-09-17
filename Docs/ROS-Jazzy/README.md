@@ -122,6 +122,14 @@ ros2 param set /teleop_twist_joy_node enable_turbo_button 3
 set -x
 ```
 
+## Installing additional navigation components
+
+To allow GPS operation in sim install localization package:
+```
+sudo apt-get install ros-jazzy-robot-localization
+```
+More info - see "Useful Links" below.
+
 ## Visualizing terrain maps
 
 There are two ways of visualizing robot position on a map - *mapviz* and *rviz-satellite*
@@ -213,4 +221,14 @@ https://articulatedrobotics.xyz/mobile-robot-13-ros2-control-real/
 https://www.youtube.com/@ArticulatedRobotics/videos
 
 https://www.facebook.com/ArticulatedRobotics/
+
+**GPS - localization and navigation:**
+
+https://automaticaddison.com/sensor-fusion-using-the-robot-localization-package-ros-2/
+
+https://docs.ros.org/en/melodic/api/robot_localization/html/integrating_gps.html
+
+https://docs.nav2.org/tutorials/docs/navigation2_with_gps.html
+
+https://index.ros.org/p/robot_localization/#jazzy
 
