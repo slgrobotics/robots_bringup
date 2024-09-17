@@ -143,6 +143,13 @@ GPS Node will be run as part of the _dragger.launch.py_ process.
 >>
 >>  There's a lot of chatter on the Internet about this problem.
 
+## Installing additional navigation components
+
+To allow GPS operation in sim install localization package:
+```
+sudo apt-get install ros-${ROS_DISTRO}-robot-localization
+```
+More info - see "Useful Links" below.
 
 ### "dragger" Differential Drive Control setup:
 
@@ -269,3 +276,22 @@ ps -ef | grep driver
 You can now reboot Raspberry Pi, and the three drivers will start automatically. Nodes (at least _robot_state_publisher_) should show up in **rqt** and **rqt_graph**
 
 **Now you can proceed to Desktop setup (all Desktop operations are the same for all Turtlebot3 based robots):** https://github.com/slgrobotics/robots_bringup
+
+## Useful links
+
+**Articulated Robotics (Josh Newans):**
+
+https://articulatedrobotics.xyz/category/build-a-mobile-robot-with-ros
+
+https://www.facebook.com/ArticulatedRobotics/
+
+**GPS - localization and navigation:**
+
+https://automaticaddison.com/sensor-fusion-using-the-robot-localization-package-ros-2/
+
+https://docs.ros.org/en/melodic/api/robot_localization/html/integrating_gps.html
+
+https://docs.nav2.org/tutorials/docs/navigation2_with_gps.html
+
+https://index.ros.org/p/robot_localization/#jazzy
+

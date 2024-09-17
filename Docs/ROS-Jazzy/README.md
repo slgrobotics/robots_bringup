@@ -122,6 +122,38 @@ ros2 param set /teleop_twist_joy_node enable_turbo_button 3
 set -x
 ```
 
+## Installing additional navigation components
+
+To allow GPS operation in sim install localization package:
+```
+sudo apt-get install ros-jazzy-robot-localization
+```
+More info - see "Useful Links" below.
+
+## Visualizing terrain maps
+
+There are two ways of visualizing robot position on a map - *mapviz* and *rviz-satellite*
+
+Here are the links:
+
+https://swri-robotics.github.io/mapviz/
+
+https://github.com/nobleo/rviz_satellite/tree/main/
+
+There is no binary distribution of *mapviz* for Jazzy, you have to compile it from sources.
+Microsoft deprecated Bing Maps keys, and Azure keys don't seem to work with mapviz.
+I wasn't able to make the sim work with mapviz anyway.
+
+For *rviz-satellite* things are much easier. It works as an Rviz2 "AerialMap" plugin. To install it:
+```
+sudo apt install ros-${ROS_DISTRO}-rviz-satellite
+```
+Object URI ```https://tile.openstreetmap.org/{z}/{x}/{y}.png```  works just fine and doesn't require API keys.
+
+The plugin is sensitive to time stamps, so all components must use the same *use_sim_time* settings.
+
+Running the sim as described below brings Rviz2 with a map view.
+
 ## Testing it all with my version of Articubot:
 
 https://github.com/slgrobotics/robots_bringup
@@ -189,4 +221,14 @@ https://articulatedrobotics.xyz/mobile-robot-13-ros2-control-real/
 https://www.youtube.com/@ArticulatedRobotics/videos
 
 https://www.facebook.com/ArticulatedRobotics/
+
+**GPS - localization and navigation:**
+
+https://automaticaddison.com/sensor-fusion-using-the-robot-localization-package-ros-2/
+
+https://docs.ros.org/en/melodic/api/robot_localization/html/integrating_gps.html
+
+https://docs.nav2.org/tutorials/docs/navigation2_with_gps.html
+
+https://index.ros.org/p/robot_localization/#jazzy
 
