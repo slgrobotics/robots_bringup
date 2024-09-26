@@ -35,7 +35,7 @@ Follow  https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html
 
 ### Install rqt and rqt_graph with all plugins:
 ```
-sudo apt install ~nros-${ROS_DISTRO}-rqt*
+sudo apt install ros-${ROS_DISTRO}-rqt*
 ```
 
 ### for joystick operation - make sure your "ros" account has access to ports:
@@ -48,7 +48,7 @@ sudo apt install ros-${ROS_DISTRO}-joy*
 
 https://gazebosim.org/docs/harmonic/ros_installation#installing-the-default-gazebo-ros-pairing
 ```
-sudo apt-get install ros-${ROS_DISTRO}-ros-gz
+sudo apt install ros-${ROS_DISTRO}-ros-gz
 # see if Gazebo UI comes up without crashing:
 gz sim
 ```
@@ -122,11 +122,12 @@ ros2 param set /teleop_twist_joy_node enable_turbo_button 3
 set -x
 ```
 
-## Installing additional navigation components
+## Installing additional navigation and visualization components
 
 To allow GPS operation in sim install localization package:
 ```
-sudo apt-get install ros-jazzy-robot-localization
+sudo apt install ros-${ROS_DISTRO}-robot-localization
+sudo apt install ros-${ROS_DISTRO}-imu-tools
 ```
 More info - see "Useful Links" below.
 
@@ -208,7 +209,10 @@ _and its GitHub repository_ : https://github.com/gazebosim/ros_gz_project_templa
 
 _How to Use ROS2 Jazzy and Gazebo Harmonic for Robot Simulation_: https://www.youtube.com/watch?v=b8VwSsbZYn0
 
-_ros2_control documentation :_ https://control.ros.org/jazzy/index.html
+_ros2_control documentation_ : https://control.ros.org/jazzy/index.html
+
+_IMU tools for Rviz_ : https://github.com/CCNYRoboticsLab/imu_tools/tree/humble
+
 
 **Articulated Robotics (Josh Newans):**
 
