@@ -143,6 +143,10 @@ GPS Node will be run as part of the _dragger.launch.py_ process.
 >>
 >>  There's a lot of chatter on the Internet about this problem.
 
+### MPU9250 Driver:
+
+see https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/MPU9250.md
+
 ## Installing additional navigation components
 
 To allow GPS operation in sim install localization package:
@@ -175,13 +179,6 @@ git clone https://github.com/slgrobotics/diffdrive_arduino.git
 git clone https://github.com/joshnewans/serial.git
 git clone https://github.com/slgrobotics/articubot_one.git
 git clone https://github.com/joshnewans/twist_stamper.git
-
-# MPU9250 Driver:
-git clone https://github.com/hiwad-aziz/ros2_mpu9250_driver.git
-vi ~/robot_ws/src/ros2_mpu9250_driver/src/mpu9250driver.cpp   - line 48:   message.header.frame_id = "imu_link"; (was "base_link")
-
-[Ubuntu 24.04 only]:
-vi ~/robot_ws/src/ros2_mpu9250_driver/lib/mpu9250sensor/include/mpu9250sensor/mpu9250sensor.h   - line 6 insert "#include <array>"
 ```
 ROS nodes produce _robot description_ and needs to  know some basic parameters of the robot. Edit the following to match your values:
 ```
@@ -197,13 +194,13 @@ ROS nodes produce _robot description_ and needs to  know some basic parameters o
 Now you can build and deploy robot's components:
 ```
 cd ~/robot_ws
-### Note: See https://docs.ros.org/en/humble/Tutorials/Intermediate/Rosdep.html
+# Note: See https://docs.ros.org/en/humble/Tutorials/Intermediate/Rosdep.html
 sudo rosdep init
 rosdep update
 rosdep install --from-paths src --ignore-src -r -y
 colcon build
-
 ```
+
 Now we need to put it all together, the same way the Create 1 Turtlebot has been set up here: https://github.com/slgrobotics/turtlebot_create/tree/main/RPi_Setup
 
 ### Create a Linux service for on-boot autostart
@@ -235,7 +232,7 @@ Try running the _bootup_launch.sh_ from the command line to see if anything fail
 
 2. Create service description file - /etc/systemd/system/robot.service :
 ```
-# /etc/systemd/system/robot.service
+#### /etc/systemd/system/robot.service
 [Unit]
 Description=robot
 StartLimitIntervalSec=60
