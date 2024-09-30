@@ -128,6 +128,7 @@ To allow GPS operation in sim install localization package:
 ```
 sudo apt install ros-${ROS_DISTRO}-robot-localization
 sudo apt install ros-${ROS_DISTRO}-imu-tools
+sudo apt install ros-${ROS_DISTRO}-slam-toolbox
 ```
 More info - see "Useful Links" below.
 
@@ -235,4 +236,18 @@ https://docs.ros.org/en/melodic/api/robot_localization/html/integrating_gps.html
 https://docs.nav2.org/tutorials/docs/navigation2_with_gps.html
 
 https://index.ros.org/p/robot_localization/#jazzy
+
+**SLAM Toolbox**
+
+https://www.youtube.com/watch?v=0G6LDuslqmA
+
+https://www.youtube.com/watch?v=hMTxb8Y2cxI
+
+https://github.com/SteveMacenski/slam_toolbox/tree/jazzy
+
+https://docs.nav2.org/tutorials/docs/navigation2_with_slam.html
+
+https://roboticsbackend.com/ros2-nav2-generate-a-map-with-slam_toolbox/  <- DDS change
+
+https://stevengong.co/notes/slam_toolbox
 
