@@ -1,6 +1,6 @@
-# Set up Desktop ROS Jazzy "Clean Machine" from scratch
-
 _"It takes all the running you can do, to keep in the same place. If you want to get somewhere else, you must run at least twice as fast as that!"_ - Alice in Wonderland
+
+# Set up Desktop ROS Jazzy "Clean Machine" from scratch
 
 Here we set up a new Desktop PC to become a ROS playground machine, and a Ground Station for our robots. 
 
