@@ -124,12 +124,21 @@ set -x
 
 ## Installing additional navigation and visualization components
 
-To allow GPS operation in sim install localization package:
+To allow GPS operation in sim install localization package, SLAM Toolbox and Nav2:
 ```
-sudo apt install ros-${ROS_DISTRO}-robot-localization
-sudo apt install ros-${ROS_DISTRO}-imu-tools
-sudo apt install ros-${ROS_DISTRO}-slam-toolbox
+sudo apt install ros-${ROS_DISTRO}-robot-localization ros-${ROS_DISTRO}-imu-tools ros-${ROS_DISTRO}-slam-toolbox
+sudo apt install ros-${ROS_DISTRO}-navigation2 ros-${ROS_DISTRO}-nav2-bringup
+sudo apt install ros-${ROS_DISTRO}-rmw-cyclonedds-cpp
 ```
+You need to configure ROS to use Cyclone DDS. Make sure the tail of your _.bashrc_ looks like this:
+```
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+source /opt/ros/jazzy/setup.bash
+export ROS_DOMAIN_ID=0
+# gz sim crashes without the following:
+#export QT_QPA_PLATFORM=xcb
+```
+
 More info - see "Useful Links" below.
 
 ## Visualizing terrain maps
@@ -182,13 +191,13 @@ source /opt/ros/${ROS_DISTRO}/setup.bash
 source ~/robot_ws/install/setup.bash
 ros2 launch articubot_one launch_sim.launch.py
 ```
-You should see Gazebo and RViz GUI coming up. At this point Fixed Frame *"map"* doesn't exist for RViz. Select *"base_footprint"* in Global Options. 
+You should see Gazebo and RViz GUI coming up. SLAM Toolbox should be building map as you move the robot around with joystick. If you zoom a bit out in RViz, you will see aerial map. 
 
-The simulated robot should respond to Joystick via teleop. Make sure that your "enable" and "turbo" buttons are assigned correctly in ~/robot_ws/src/articubot_one/launch/joystick.launch.py
+The simulated robot should respond to Joystick via teleop. Make sure that your "enable" and "turbo" buttons are assigned correctly in _~/robot_ws/src/articubot_one/launch/joystick.launch.py_
 
-You must do "colcon build" in ~/robot_ws every time you change anything.
+You must do _"colcon build"_ in _~/robot_ws_ every time you change anything.
 
-## Building Turtlebot3 suite and running Cartographer
+## Optional: Building Turtlebot3 suite and running Cartographer
 
 You can use well-designed ROBOTIS Turtlebot 3 package to launch Cartographer and Nav2 packages.
 
@@ -247,7 +256,7 @@ https://github.com/SteveMacenski/slam_toolbox/tree/jazzy
 
 https://docs.nav2.org/tutorials/docs/navigation2_with_slam.html
 
-https://roboticsbackend.com/ros2-nav2-generate-a-map-with-slam_toolbox/  <- DDS change
+https://roboticsbackend.com/ros2-nav2-generate-a-map-with-slam_toolbox/  <- DDS change to CycloneDDS
 
 https://stevengong.co/notes/slam_toolbox
 
