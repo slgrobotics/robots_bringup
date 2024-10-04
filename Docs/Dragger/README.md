@@ -198,6 +198,41 @@ colcon build
 
 Now we need to put it all together, the same way the Create 1 Turtlebot has been set up here: https://github.com/slgrobotics/turtlebot_create/tree/main/RPi_Setup
 
+### Run the robot (on-board Raspberry 5)
+
+For convenience, create and populate _launch_ directory:
+```
+mkdir ~/launch
+cp ~/robot_ws/src/articubot_one/launch/bootup_launch.sh ~/launch/.
+chmod +x ~/launch/bootup_launch.sh    
+```
+The script looks like this:
+```
+#!/bin/bash
+
+cd /home/ros/launch
+source /opt/ros/jazzy/setup.bash
+source /home/ros/robot_ws/install/setup.bash
+
+ros2 launch /home/ros/robot_ws/src/articubot_one/launch/dragger.launch.py
+```
+Robot can be started with:
+```
+cd ~/launch
+./bootup_launch.sh
+```
+There are two ways to control the robot **from a Desktop**: 
+```
+ros2 launch articubot_one launch_rviz.launch.py use_sim_time:=false
+  -- or --
+ros2 launch robots_bringup rviz_launch.py
+```
+As Nav2 is started on the robot with _autostart=false_ you need to click on _Startup_ button in RViz to start navigation.
+
+If you choose to save maps (using _slam_toolkit_ RViz2 control) - the files will appear in _~/launch_ directory.
+
+**Note:** See https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy  for Desktop setup.
+
 ### Create a Linux service for on-boot autostart
 
 With Dragger base (Arduino wheels driver), Laser Scanner and IMU ROS2 nodes tested, it is time to set up autostart on boot for hands-free operation.
@@ -206,23 +241,10 @@ We need launch files (residing in this repository): https://github.com/slgroboti
 
 As we already cloned this repository, these files should be here: ~/robot_ws/src/articubot_one/launch
 
-1. Create and populate launch folder: /home/ros/launch
-```
-mkdir ~/launch
-cp ~/robot_ws/src/articubot_one/launch/dragger.launch.py ~/launch/.
-cp ~/robot_ws/src/articubot_one/launch/bootup_launch.sh ~/launch/.
-chmod +x ~/launch/bootup_launch.sh    
-```
-You must edit the _bootup_launch.sh_ file to match your robot launch file and related folders:
-```
-#!/bin/bash
+1. Create and populate launch folder: /home/ros/launch (see above)
 
-cd /home/ros/launch
-source /opt/ros/humble/setup.bash
-source /home/ros/robot_ws/install/setup.bash
+You may edit the _bootup_launch.sh_ file to match your robot launch file and related folders:
 
-ros2 launch /home/ros/launch/dragger.launch.py
-```
 Try running the _bootup_launch.sh_ from the command line to see if anything fails.
 
 2. Create service description file - /etc/systemd/system/robot.service :
