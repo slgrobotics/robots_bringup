@@ -88,7 +88,8 @@ Original code: https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2    (Google T
 
 We will be using my fork https://github.com/slgrobotics/ldlidar_sl_ros2.git with minor corrections.
 
-**Note:** Original code delivers various beam counts (378...393) between messages, and ROS (i.e. SLAM Toolbox) doesn't tolerate this. 
+**Note:** Original code delivers various beam counts (378...393) between messages, and ROS (i.e. SLAM Toolbox) doesn't tolerate this.
+So, I added code to ensure that the number of points in a scan is constant between LIDAR head revolutions.
 
 LiDAR LD14 should appear on /dev/ttyUSB0
 
