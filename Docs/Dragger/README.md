@@ -2,7 +2,7 @@
 
 Dragger photos are here: https://photos.app.goo.gl/eAdKiD7YYnL9Vou6A
 
-Dragger is a *"larger Turtlebot"* - running, basically, standard ROS2 Turtlebot 3 binaries for navigation (on the desktop "ground station" computer). Onboard it has a Raspberry Pi 4 ("dragger") [and an "FPV Drone" TV camera. - TBD] The RPi runs sensors drivers (GPS, LD14 LIDAR and MPU9250), and Differential Drive Control, inspired by Articulated Robotics.
+Dragger is a *"larger Turtlebot"* - running, basically, standard ROS2 Turtlebot 3 binaries for navigation (on the desktop "ground station" computer). Onboard it has a Raspberry Pi 5 ("dragger") [and an "FPV Drone" TV camera. - TBD] The RPi runs sensors drivers (GPS, LD14 LIDAR and MPU9250), and Differential Drive Control, inspired by Articulated Robotics.
 
 ## Useful Links:
 
@@ -35,11 +35,11 @@ Here is the code I use for the camera **on the Desktop side**: https://github.co
 
 Having the video link separated from WiFi and experiencing minimal delay allows driving the robot FPV-style and/or performing video stream processing on the Desktop.
 
-## Dragger Raspberry Pi 4 Build and Run Instructions:
+## "dragger" Raspberry Pi 5 Build and Run Instructions:
 
 Dragger has _Ubuntu 24.04 Server (64 bit)_ and _ROS2 Jazzy Base_ installed - see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi for instructions.
 
-Dragger has several Arduino boards, some drive the sensors - GPS, Ultrasonic Parking Sensor, IMU, - while the main Arduino Mega 2560 drives the wheels and combines all sensors data into a single serial stream for Raspberry Pi "dragger". This setup appeared historically through different experiments and at this time is mostly just an over-enginered legacy. The "dragger" RPi makes full use of wheels driving ability and odometry info. Parking sensors data will be likely used later, as ROS2 supports rangers for obstacle avoidance and mapping.
+Dragger has several Arduino boards, some drive the sensors - GPS, Ultrasonic Parking Sensor, IMU, - while the main Arduino Mega 2560 drives the wheels and combines all sensors data into a single serial stream for Raspberry Pi Dragger. This setup appeared historically through different experiments and at this time is mostly just an over-enginered legacy. The Dragger RPi makes full use of wheels driving ability and odometry info. Parking sensors data will be likely used later, as ROS2 supports rangers for obstacle avoidance and mapping.
 
 Arduino Mega 2560 code - wheels/sensors driver, talking to Articulated Robotics ROS node: 
 
@@ -53,7 +53,7 @@ https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/ParkingSensor
 
 MPU9250 and GPS Drivers come standard with ROS
 
-### Making USB devices persistent on "dragger":
+### Making USB devices persistent on Dragger:
 
 Dragger has three USB-to-Serial devices: Arduino "wheels/base", GPS and LIDAR.
 
@@ -82,7 +82,7 @@ picocom /dev/ttyUSBGPS -b 115200
 ```
 Press _Ctrl_ button and then without releasing it press **a** and then **q**. It will exit the **picocom** application.
 
-### "dragger" LD14 LIDAR setup:
+### Dragger LD14 LIDAR setup:
 
 Original code: https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2    (Google Translate works here)
 
@@ -150,7 +150,7 @@ sudo apt-get install ros-${ROS_DISTRO}-robot-localization
 ```
 More info - see "Useful Links" below.
 
-### "dragger" Differential Drive Control setup:
+### Dragger Differential Drive Control setup:
 
 See https://github.com/slgrobotics/diffdrive_arduino (inspired by Articulated Robotics)
 
@@ -186,17 +186,17 @@ ROS nodes produce _robot description_ and needs to  know some basic parameters o
            look for <xacro:property name="wheel_radius" value="0.192"/>
                     <xacro:property name="wheel_offset_y" value="0.290"/>
 ```
-Now you can build and deploy robot's components:
+
+### Build and deploy robot's components
+
 ```
 cd ~/robot_ws
-# Note: See https://docs.ros.org/en/humble/Tutorials/Intermediate/Rosdep.html
 sudo rosdep init
 rosdep update
 rosdep install --from-paths src --ignore-src -r -y
 colcon build
 ```
-
-Now we need to put it all together, the same way the Create 1 Turtlebot has been set up here: https://github.com/slgrobotics/turtlebot_create/tree/main/RPi_Setup
+**Note:** For _rosdep_ see https://docs.ros.org/en/humble/Tutorials/Intermediate/Rosdep.html
 
 ### Run the robot (on-board Raspberry 5)
 
@@ -221,7 +221,7 @@ Robot can be started with:
 cd ~/launch
 ./bootup_launch.sh
 ```
-There are two ways to control the robot **from a Desktop**: 
+There are two ways to control the robot **from a Desktop machine**: 
 ```
 ros2 launch articubot_one launch_rviz.launch.py use_sim_time:=false
   -- or --
@@ -231,23 +231,23 @@ As Nav2 is started on the robot with _autostart=false_ you need to click on _Sta
 
 If you choose to save maps (using _slam_toolkit_ RViz2 control) - the files will appear in _~/launch_ directory.
 
-**Note:** See https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy  for Desktop setup.
+**Note:** See https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy  for Desktop machine setup.
 
 ### Create a Linux service for on-boot autostart
 
 With Dragger base (Arduino wheels driver), Laser Scanner and IMU ROS2 nodes tested, it is time to set up autostart on boot for hands-free operation.
 
-We need launch files (residing in this repository): https://github.com/slgrobotics/articubot_one/tree/main/launch
+We need launch files (residing in this repository): _https://github.com/slgrobotics/articubot_one/tree/main/launch_
 
-As we already cloned this repository, these files should be here: ~/robot_ws/src/articubot_one/launch
+As we already cloned this repository, these files should be here: _~/robot_ws/src/articubot_one/launch_
 
-1. Create and populate launch folder: /home/ros/launch (see above)
+1. Create and populate launch folder: _/home/ros/launch_ (see above)
 
-You may edit the _bootup_launch.sh_ file to match your robot launch file and related folders:
+You may edit the _bootup_launch.sh_ file to match your robot launch file and related folders.
 
 Try running the _bootup_launch.sh_ from the command line to see if anything fails.
 
-2. Create service description file - /etc/systemd/system/robot.service :
+2. Create service description file - _/etc/systemd/system/robot.service_ :
 ```
 #### /etc/systemd/system/robot.service
 [Unit]
@@ -273,7 +273,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable robot.service
 sudo systemctl start robot.service
 ```
-If all went well, the service will start automatically after you reboot the RPi, and all related nodes will show up on _rpt_ and _rpt_graph_
+If all went well, the service will start automatically after you reboot the RPi, and all related nodes will show up on _rpt_ and _rpt_graph_ on the Desktop.
 
 Here are some useful commands:
 ```
@@ -287,9 +287,9 @@ sudo ls -al /etc/systemd/system/robot.service.d/override.conf
 sudo ls -al /etc/systemd/system/multi-user.target.wants/robot.service
 ps -ef | grep driver
 ```
-You can now reboot Raspberry Pi, and the three drivers will start automatically. Nodes (at least _robot_state_publisher_) should show up in **rqt** and **rqt_graph**
+You can now reboot Raspberry Pi, and the three drivers will start automatically. Nodes should show up in **rqt** and **rqt_graph**
 
-**Now you can proceed to Desktop setup (all Desktop operations are the same for all Turtlebot3 based robots):** https://github.com/slgrobotics/robots_bringup
+**Back to main page:** https://github.com/slgrobotics/robots_bringup
 
 ## Useful links
 
