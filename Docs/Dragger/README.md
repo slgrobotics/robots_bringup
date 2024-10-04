@@ -84,24 +84,18 @@ Press _Ctrl_ button and then without releasing it press **a** and then **q**. It
 
 ### "dragger" LD14 LIDAR setup:
 
-See https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2    (Google Translate works here)
+Original code: https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2    (Google Translate works here)
+
+We will be using my fork https://github.com/slgrobotics/ldlidar_sl_ros2.git with minor corrections.
+
+**Note:** Original code delivers various beam counts (378...393) between messages, and ROS (i.e. SLAM Toolbox) doesn't tolerate this. 
+
+LiDAR LD14 should appear on /dev/ttyUSB0
+
 ```
 mkdir -p ~/robot_ws/src
 cd ~/robot_ws/src
-// LiDAR LD14 (on /dev/ttyUSB0):
-git clone  https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2.git
-
-// Optional - For rviz2: time shift corrections :  /home/ros/robot_ws/src/ldlidar_sl_ros2/src/demo.cpp
-// Line 24:
-#define TIME_SHIFT_SEC 0
-#define TIME_SHIFT_NSEC 400000000
-
-// Line 310 correction:
-  output.header.stamp = start_scan_time - rclcpp::Duration(TIME_SHIFT_SEC, TIME_SHIFT_NSEC);
-  //output.header.stamp = start_scan_time;
-
-[Ubuntu 24.04 only]:
-vi ~/robot_ws/src/ldlidar_sl_ros2/ldlidar_driver/src/log_module.cpp  - Line 30 insert "#include <pthread.h>"
+git clone https://github.com/slgrobotics/ldlidar_sl_ros2.git
 ```
 
 ### GPS setup:
