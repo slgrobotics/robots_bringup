@@ -4,9 +4,7 @@ Dragger photos are here: https://photos.app.goo.gl/eAdKiD7YYnL9Vou6A
 
 Dragger is a *"larger Turtlebot"* - running, basically, standard ROS2 Turtlebot 3 binaries for navigation (on the desktop "ground station" computer). Onboard it has a Raspberry Pi 5 ("dragger") [and an "FPV Drone" TV camera. - TBD] The RPi runs sensors drivers (GPS, LD14 LIDAR and MPU9250), and Differential Drive Control, inspired by Articulated Robotics.
 
-## Useful Links:
-
-Articulated Robotics (Josh Newans):
+#### Articulated Robotics (by Josh Newans):
 
 https://articulatedrobotics.xyz/category/build-a-mobile-robot-with-ros
 
@@ -21,7 +19,7 @@ https://www.youtube.com/@ArticulatedRobotics/videos
 https://www.facebook.com/ArticulatedRobotics/
 
 
-### FPV Camera and receiver Setup [TBD]:
+### FPV Camera and receiver Setup
 
 https://www.amazon.com/dp/B06VY7L1N4
 
@@ -35,7 +33,7 @@ Here is the code I use for the camera **on the Desktop side**: https://github.co
 
 Having the video link separated from WiFi and experiencing minimal delay allows driving the robot FPV-style and/or performing video stream processing on the Desktop.
 
-## "dragger" Raspberry Pi 5 Build and Run Instructions:
+## "dragger" Raspberry Pi 5 Build and Run Instructions
 
 Dragger has _Ubuntu 24.04 Server (64 bit)_ and _ROS2 Jazzy Base_ installed - see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi for instructions.
 
@@ -53,7 +51,7 @@ https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/ParkingSensor
 
 MPU9250 and GPS Drivers come standard with ROS
 
-### Making USB devices persistent on Dragger:
+### Making USB devices persistent on Dragger
 
 Dragger has three USB-to-Serial devices: Arduino "wheels/base", GPS and LIDAR.
 
@@ -82,7 +80,7 @@ picocom /dev/ttyUSBGPS -b 115200
 ```
 Press _Ctrl_ button and then without releasing it press **a** and then **q**. It will exit the **picocom** application.
 
-### Dragger LD14 LIDAR setup:
+### Dragger LD14 LIDAR setup
 
 Original code: https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2    (Google Translate works here)
 
@@ -99,7 +97,7 @@ cd ~/robot_ws/src
 git clone https://github.com/slgrobotics/ldlidar_sl_ros2.git
 ```
 
-### GPS setup:
+### GPS setup
 
 Dragger has a _"BN-880 GPS Module U8 with Flash HMC5883L Compass + GPS Active Antenna Support"_. A u-blox NEO-M8N module is part of it.
 
@@ -138,7 +136,7 @@ GPS Node will be run as part of the _dragger.launch.py_ process.
 >>
 >>  There's a lot of chatter on the Internet about this problem.
 
-### MPU9250 Driver:
+### MPU9250 Driver
 
 see https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/MPU9250.md
 
@@ -150,7 +148,7 @@ sudo apt-get install ros-${ROS_DISTRO}-robot-localization
 ```
 More info - see "Useful Links" below.
 
-### Dragger Differential Drive Control setup:
+### Dragger Differential Drive Control setup
 
 See https://github.com/slgrobotics/diffdrive_arduino (inspired by Articulated Robotics)
 
@@ -233,7 +231,7 @@ If you choose to save maps (using _slam_toolkit_ RViz2 control) - the files will
 
 **Note:** See https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy  for Desktop machine setup.
 
-### Create a Linux service for on-boot autostart
+## Creating a Linux service for on-boot autostart
 
 With Dragger base (Arduino wheels driver), Laser Scanner and IMU ROS2 nodes tested, it is time to set up autostart on boot for hands-free operation.
 
