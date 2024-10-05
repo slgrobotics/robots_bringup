@@ -14,7 +14,7 @@ https://articulatedrobotics.xyz/mobile-robot-1-project-overview/
 
 https://articulatedrobotics.xyz/mobile-robot-13-ros2-control-real/
 
-https://control.ros.org/humble/index.html
+https://control.ros.org/jazzy/index.html
 
 https://www.youtube.com/@ArticulatedRobotics/videos
 
@@ -107,7 +107,7 @@ I used _u-center_ Windows app to set up the device initially, and saved settings
 ```
 picocom /dev/ttyUSBGPS -b 115200
 ```
-We need to install standard ROS Humble support for NMEA messages:
+We need to install standard ROS Jazzy support for NMEA messages:
 ```
 [Ubuntu 22.04 only]:
 sudo pip3 install transforms3d
@@ -117,7 +117,7 @@ sudo apt install python3-transforms3d
 sudo apt install ros-${ROS_DISTRO}-nmea-navsat-driver
 
 The following NEW packages will be installed:
-  ros-humble-nmea-msgs ros-humble-nmea-navsat-driver ros-humble-tf-transformations
+  ros-jazzy-nmea-msgs ros-jazzy-nmea-navsat-driver ros-jazzy-tf-transformations
 ```
 The driver code is here ("ros2" branch) - look into _launch_ and _config_ folders:
 
@@ -132,7 +132,7 @@ GPS Node will be run as part of the _dragger.launch.py_ process.
 >> sudo apt install ros-${ROS_DISTRO}-ublox
 >> 
 >> The following NEW packages will be installed:
->>   libasio-dev ros-humble-ublox ros-humble-ublox-gps ros-humble-ublox-msgs ros-humble-ublox-serialization
+>>   libasio-dev ros-jazzy-ublox ros-jazzy-ublox-gps ros-jazzy-ublox-msgs ros-jazzy-ublox-serialization
 >> ```
 >> Code is here: https://github.com/KumarRobotics/ublox/blob/ros2/README.md
 >>
@@ -196,7 +196,7 @@ rosdep update
 rosdep install --from-paths src --ignore-src -r -y
 colcon build
 ```
-**Note:** For _rosdep_ see https://docs.ros.org/en/humble/Tutorials/Intermediate/Rosdep.html
+**Note:** For _rosdep_ see https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Rosdep.html
 
 ### Run the robot (on-board Raspberry 5)
 
