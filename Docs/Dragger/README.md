@@ -99,11 +99,38 @@ git clone https://github.com/slgrobotics/ldlidar_sl_ros2.git
 
 ### GPS setup
 
-Dragger has a _"BN-880 GPS Module U8 with Flash HMC5883L Compass + GPS Active Antenna Support"_. A u-blox NEO-M8N module is part of it.
+Dragger has a _"BE-880 GPS Receiver Module with Flash HMC5883L Compass 10th Chip GPS Antenna"_, available on Amazon. A u-blox NEO-M10N module is part of it.
 
-I used _u-center_ Windows app to set up the device initially, and saved settings to its Flash memory. Specifically, NMEA at 115200 baud at 10 Hz should be streaming on USB. Check it:
+Features:
+```
+Chip: M10050
+Frequency: GPS L1 C/A,QZSS L1 C/A/S,BDS B1I/B1C,Galileo E1B/C,SBAS L1 C/A:WAAS,EGNOS,MSAS,GAGAN
+Operation Mode: GPS+BDS+GALILEO+SBAS+QZSS
+Sensitivity: Track -166dBm, Re-arrest -160dBm, Cold Start -148dBm, Hot Start -160dBm
+Horizontal Accuracy: 1.5m CEP 2D RMS SBAS Auxiliary(for open sky)
+Speed Accuracy: 0.05m/s
+Dynamic Heading Angle Accuracy: 0.3 deg
+1PPS Time Accuracy: RMS 30ns, 99% 60ns
+Start Time: Cold Start 27s, Hot Start 1s, Assisted Start 1s
+Baud Rate: 4800bps - 921600bps, default 38400bps
+Output Level: TTL level
+Output Protocol: NMEA, UBX
+NMEA Sentences: RMC, VTG, GGA, GSA, GSV, GLL
+Update Frequency: 0.25Hz - 18Hz, default 1Hz
+Second Pulse: Configurable from 0.25Hz to 10MHz, default period 1s, high level last for 100ms
+Graviational Acceleration: <4g
+Voltage: DC 3.6V - 5.5V, Typical 5.0V
+Current: Normal 50mA/5.0V
+Size: 28*28*11mm
+Connector: 1.25mm 6pin
+```
+Default baud rate is 38400, and it works out of the box at 1 Hz.
+
+You can use _u-center_ Windows app to set up the device initially, saving settings to its Flash memory. Specifically, set NMEA at 115200 baud at 10 Hz to be streaming on USB. Check it:
 ```
 picocom /dev/ttyUSBGPS -b 115200
+
+(Use Ctrl/A + Ctrl/X to exit)
 ```
 We need to install standard ROS Jazzy support for NMEA messages:
 ```
