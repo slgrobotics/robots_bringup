@@ -200,7 +200,6 @@ cd ~/robot_ws/src
 git clone https://github.com/slgrobotics/diffdrive_arduino.git
 git clone https://github.com/joshnewans/serial.git
 git clone https://github.com/slgrobotics/articubot_one.git
-git clone https://github.com/joshnewans/twist_stamper.git
 ```
 ROS nodes produce _robot description_ and needs to  know some basic parameters of the robot. Edit the following to match your values:
 ```
