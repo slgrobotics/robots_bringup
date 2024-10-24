@@ -84,7 +84,7 @@ sudo apt install ros-${ROS_DISTRO}-gz-ros2-control
 # some extras just in case:
 sudo apt install ros-${ROS_DISTRO}-joint-state-publisher ros-${ROS_DISTRO}-joint-state-publisher-gui
 ```
-Install _"topic relay"_ tool for remapping *'/diff_cont/odom' -> '/odom'*  which cannot be done in Gazebo _controller_manager_ by parameters.
+Install _"topic relay"_ tool for remapping - in case you ever need it.
 
 See https://github.com/ros-tooling/topic_tools/blob/jazzy/README.md for details.
 ```
@@ -179,9 +179,8 @@ cd ~/robot_ws/
 mkdir src
 cd src
 git clone https://github.com/slgrobotics/articubot_one.git
-git clone https://github.com/joshnewans/twist_stamper.git
 cd ..
-sudo rosdep init
+sudo rosdep init    # do it once, if you haven't done it before
 rosdep update
 rosdep install --from-paths src --ignore-src -r -y
 colcon build
