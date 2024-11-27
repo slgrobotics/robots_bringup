@@ -216,7 +216,7 @@ ROS nodes produce _robot description_ and needs to  know some basic parameters o
 ```
 ### Environment variables setup
 
-Make sure that the "tail" of your ~/.bashrc file look like this:
+Make sure that the "tail" of your _~/.bashrc_ file looks like this:
 ```
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 source /opt/ros/jazzy/setup.bash
