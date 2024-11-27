@@ -173,7 +173,9 @@ see https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/MPU9250
 
 To allow GPS operation in sim install localization package:
 ```
-sudo apt-get install ros-${ROS_DISTRO}-robot-localization
+sudo apt install ros-${ROS_DISTRO}-robot-localization ros-${ROS_DISTRO}-imu-tools ros-${ROS_DISTRO}-slam-toolbox
+sudo apt install ros-${ROS_DISTRO}-navigation2 ros-${ROS_DISTRO}-nav2-bringup
+sudo apt install ros-${ROS_DISTRO}-rmw-cyclonedds-cpp
 ```
 More info - see "Useful Links" below.
 
@@ -211,6 +213,14 @@ ROS nodes produce _robot description_ and needs to  know some basic parameters o
 
            look for <xacro:property name="wheel_radius" value="0.192"/>
                     <xacro:property name="wheel_offset_y" value="0.290"/>
+```
+### Environment variables setup
+
+Make sure that the "tail" of your ~/.bashrc file look like this:
+```
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+source /opt/ros/jazzy/setup.bash
+export ROS_DOMAIN_ID=0
 ```
 
 ### Build and deploy robot's components
