@@ -1,4 +1,9 @@
 # Dragger Notes
+```
+/ˈdrægər/ Other forms: draggers. Definitions of dragger. noun.
+ someone who pulls or tugs or drags in an effort to move something.
+ well, this robot drags his casters across the lawn...
+```
 
 Dragger photos are here: https://photos.app.goo.gl/eAdKiD7YYnL9Vou6A
 
@@ -42,7 +47,7 @@ Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/
 
 ### MPU9250 Driver
 
-see https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/MPU9250.md
+See https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/MPU9250.md
 
 ## Installing additional navigation components
 
