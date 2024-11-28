@@ -4,38 +4,9 @@ Dragger photos are here: https://photos.app.goo.gl/eAdKiD7YYnL9Vou6A
 
 Dragger is a *"larger Turtlebot"* - running all ROS2 nodes on-board. Only RViz2 runs on a desktop "ground station" computer. On board Dragger has a Raspberry Pi 5 ("dragger") [and an "FPV Drone" TV camera. - TBD].
 
-The RPi runs sensors drivers (GPS, LD14 LIDAR and MPU9250), Differential Drive Control (inspired by Articulated Robotics), SLAM Toolkit and Nav2. Arduino Mega 2650 drives wheels and reports encoder readings over serial.
+Robot's Raspberry Pi 5 (8GB) runs sensors drivers (GPS, LD14 LIDAR and MPU9250), Differential Drive Control (inspired by Articulated Robotics), SLAM Toolkit and Nav2. Arduino Mega 2650 drives wheels and reports encoder readings over serial.
 
-#### Articulated Robotics (by Josh Newans):
-
-https://articulatedrobotics.xyz/category/build-a-mobile-robot-with-ros
-
-https://articulatedrobotics.xyz/mobile-robot-1-project-overview/
-
-https://articulatedrobotics.xyz/mobile-robot-13-ros2-control-real/
-
-https://control.ros.org/jazzy/index.html
-
-https://www.youtube.com/@ArticulatedRobotics/videos
-
-https://www.facebook.com/ArticulatedRobotics/
-
-
-### FPV Camera and receiver Setup
-
-https://www.amazon.com/dp/B06VY7L1N4
-
-https://www.amazon.com/dp/B07Q5MPC8V
-
-Camera and transmitter, of course, resides on Dragger. The receiver, when plugged into a Ubuntu 22.04 **Desktop USB port**, shows up as _/dev/video0_ and _video1_
-
-It works with Cheese app and can be read by Python/OpenCV scripts, including custom ROS nodes written in Python.
-
-Here is the code I use for the camera **on the Desktop side**: https://github.com/slgrobotics/camera_publisher
-
-Having the video link separated from WiFi and experiencing minimal delay allows driving the robot FPV-style and/or performing video stream processing on the Desktop.
-
-## "dragger" Raspberry Pi 5 Build and Run Instructions
+## Raspberry Pi 5 ("dragger") Build and Run Instructions
 
 Dragger has _Ubuntu 24.04 Server (64 bit)_ and _ROS2 Jazzy Base_ installed - see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi for instructions.
 
@@ -53,125 +24,21 @@ https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/ParkingSensor
 
 MPU9250 and GPS Drivers come standard with ROS
 
-### Making USB devices persistent on Dragger
-
-Dragger has three USB-to-Serial devices: Arduino "wheels/base", GPS and LIDAR.
-
-While the Arduino Mega is the only one at _/dev/ttyACM0_, GPS and LIDAR can take any name under _/dev/ttyUSB*_ pattern.
-
-To avoid reassigning device names in the launch file after reboots, symlinks are created using the following recipe:
-
-https://unix.stackexchange.com/questions/705570/setting-persistent-name-for-usb-serial-device-with-udev-rule-without-symlink
-
-https://unix.stackexchange.com/questions/541156/udev-rules-for-usb-serial-by-path-not-working
-```
-$ udevadm info /dev/ttyUSB0 | grep "ID_PATH="
-
-$ cat /etc/udev/rules.d/99-robot.rules   (edit it based on the output above)
-SUBSYSTEM=="tty",ENV{ID_PATH}=="platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.1:1.0",SYMLINK+="ttyUSBLDR"
-SUBSYSTEM=="tty",ENV{ID_PATH}=="platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.2:1.0",SYMLINK+="ttyUSBGPS"
-
-$ sudo udevadm control --reload-rules
-```
-Now (or after reboot) you should see something similar to this (which devices symbolic links point to is random):
-```
-$ ll /dev/ttyU*
-crw-rw---- 1 root dialout 188, 0 Nov 21  2023 /dev/ttyUSB0
-crw-rw---- 1 root dialout 188, 1 Nov 21  2023 /dev/ttyUSB1
-lrwxrwxrwx 1 root root         7 Nov 21  2023 /dev/ttyUSBGPS -> ttyUSB1
-lrwxrwxrwx 1 root root         7 Nov 21  2023 /dev/ttyUSBLDR -> ttyUSB0
-```
-Check the GPS stream (note the baud rate, yours might be different):
-
-**To exit picocom:** Press _Ctrl_ button and then without releasing it press **a** and then **q**.
-
-```
-sudo apt-get install picocom
-picocom /dev/ttyUSBGPS -b 115200
-```
-
 ### Dragger LD14 LIDAR setup
 
-Original code: https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2    (Google Translate works here)
-
-We will be using my fork https://github.com/slgrobotics/ldlidar_sl_ros2.git with minor corrections.
-
-**Note:** Original code delivers various beam counts (378...393) between messages, and ROS (i.e. SLAM Toolbox) doesn't tolerate this.
-So, I added code to ensure that the number of points in a scan is constant between LIDAR head revolutions.
-
-LiDAR LD14 should appear on /dev/ttyUSB0
-
-```
-mkdir -p ~/robot_ws/src
-cd ~/robot_ws/src
-git clone https://github.com/slgrobotics/ldlidar_sl_ros2.git
-```
+Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/LD14.md
 
 ### GPS setup
 
 Dragger has a _"BE-880 GPS Receiver Module with Flash HMC5883L Compass 10th Chip GPS Antenna"_, available on Amazon. A u-blox NEO-M10N module is part of it.
 
-Features:
-```
-Chip: M10050
-Frequency: GPS L1 C/A,QZSS L1 C/A/S,BDS B1I/B1C,Galileo E1B/C,SBAS L1 C/A:WAAS,EGNOS,MSAS,GAGAN
-Operation Mode: GPS+BDS+GALILEO+SBAS+QZSS
-Sensitivity: Track -166dBm, Re-arrest -160dBm, Cold Start -148dBm, Hot Start -160dBm
-Horizontal Accuracy: 1.5m CEP 2D RMS SBAS Auxiliary(for open sky)
-Speed Accuracy: 0.05m/s
-Dynamic Heading Angle Accuracy: 0.3 deg
-1PPS Time Accuracy: RMS 30ns, 99% 60ns
-Start Time: Cold Start 27s, Hot Start 1s, Assisted Start 1s
-Baud Rate: 4800bps - 921600bps, default 38400bps
-Output Level: TTL level
-Output Protocol: NMEA, UBX
-NMEA Sentences: RMC, VTG, GGA, GSA, GSV, GLL
-Update Frequency: 0.25Hz - 18Hz, default 1Hz
-Second Pulse: Configurable from 0.25Hz to 10MHz, default period 1s, high level last for 100ms
-Graviational Acceleration: <4g
-Voltage: DC 3.6V - 5.5V, Typical 5.0V
-Current: Normal 50mA/5.0V
-Size: 28*28*11mm
-Connector: 1.25mm 6pin
-```
-Default baud rate is 38400, and it works out of the box at 1 Hz.
+Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/GPS.md
 
-You can use _u-center_ Windows app to set up the device initially, saving settings to its Flash memory. Specifically, set NMEA at 115200 baud at 10 Hz to be streaming on USB. Check it:
-```
-picocom /dev/ttyUSBGPS -b 115200
+### Making USB devices persistent on Dragger
 
-(Use Ctrl/A + Ctrl/X to exit)
-```
-We need to install standard ROS Jazzy support for NMEA messages:
-```
-[Ubuntu 22.04 only]:
-sudo pip3 install transforms3d
-[Ubuntu 24.04 only]:
-sudo apt install python3-transforms3d
+Dragger has three USB-to-Serial devices: Arduino "wheels/base", GPS and LIDAR.
 
-sudo apt install ros-${ROS_DISTRO}-nmea-navsat-driver
-
-The following NEW packages will be installed:
-  ros-jazzy-nmea-msgs ros-jazzy-nmea-navsat-driver ros-jazzy-tf-transformations
-```
-The driver code is here ("ros2" branch) - look into _launch_ and _config_ folders:
-
-https://github.com/ros-drivers/nmea_navsat_driver/blob/ros2/config/nmea_serial_driver.yaml
-
-GPS Node will be run as part of the _dragger.launch.py_ process.
-
->> [NOTE] The process described here didn't work with my NEO-M8N device:
->>
->> https://docs.fictionlab.pl/leo-rover/integrations/positioning-systems/ublox-evk-m8n
->> ```
->> sudo apt install ros-${ROS_DISTRO}-ublox
->> 
->> The following NEW packages will be installed:
->>   libasio-dev ros-jazzy-ublox ros-jazzy-ublox-gps ros-jazzy-ublox-msgs ros-jazzy-ublox-serialization
->> ```
->> Code is here: https://github.com/KumarRobotics/ublox/blob/ros2/README.md
->>
->>  There's a lot of chatter on the Internet about this problem.
+Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/USB.md
 
 ### MPU9250 Driver
 
@@ -242,7 +109,7 @@ colcon build
 ```
 **Note:** For _rosdep_ see https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Rosdep.html
 
-### Run the robot (on-board Raspberry 5)
+### Run the robot (on-board Raspberry 5 8GB)
 
 For convenience, create and populate _launch_ directory:
 ```
@@ -342,6 +209,14 @@ You can now reboot Raspberry Pi, and the three drivers will start automatically.
 https://articulatedrobotics.xyz/category/build-a-mobile-robot-with-ros
 
 https://www.facebook.com/ArticulatedRobotics/
+
+https://articulatedrobotics.xyz/mobile-robot-1-project-overview/
+
+https://articulatedrobotics.xyz/mobile-robot-13-ros2-control-real/
+
+https://control.ros.org/jazzy/index.html
+
+https://www.youtube.com/@ArticulatedRobotics/videos
 
 **GPS - localization and navigation:**
 
