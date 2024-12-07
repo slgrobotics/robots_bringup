@@ -1,6 +1,6 @@
 _"hus·​sar (ˌ)hə-ˈzär  -ˈsär : a member of any of various European military units originally modeled on the Hungarian light cavalry of the 15th century"_
 
-# Set up Husarnet
+# Set up Husarnet VPN
 
 Here we set up a virtual private network (VPN), specifically designed to overcome limitations of ROS2 DDS.
 
