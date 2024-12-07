@@ -210,7 +210,9 @@ source ~/turtlebot3_ws/install/setup.bash
 ros2 launch turtlebot3_cartographer cartographer.launch.py use_sim_time:=true
 ```
 
-## Optional: Installing Husarnet
+## Optional: Install Husarnet VPN
+
+If you want Cyclone DDS to work across LAN _subnets_, 5G/LTE phone hotspots etc. - you need Husarnet VPN.
 
 See https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README-Husarnet.md
 
