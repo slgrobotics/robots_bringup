@@ -2,7 +2,7 @@ _"hus·​sar (ˌ)hə-ˈzär  -ˈsär : a member of any of various European mili
 
 # Set up Husarnet
 
-Here we set up a virtual private network (VPN) specifically designed to overcome limitations of ROS2 DDS.
+Here we set up a virtual private network (VPN), specifically designed to overcome limitations of ROS2 DDS.
 
 Any ROS2 DDS implementation (here we are interested in Cyclone DDS specifically):
 
@@ -16,7 +16,7 @@ Here are the links:
 
 https://husarnet.com/docs/how-husarnet-works/
 
-https://husarnet.com/docs/tutorial-ros2/
+https://husarion.com/tutorials/other-tutorials/husarnet-cyclone-dds/
 
 https://husarion.com/tutorials/
 
@@ -38,23 +38,23 @@ ifconfig -a
 
 systemctl status husarnet
 
-sudo husarnet join <your key here>
+sudo husarnet join <your private key here>
 
 husarnet status
 ```
 Do it on your robot(s) and on the desktop "workstation", run "ifconfig -a hnet0" and make a list of you machine's IPv6 addresses:
 ```
+mydesktop: ab35:f451:xxx:xxx:xxx:xxx:xxx:678
 plucky:    ab35:69d9:xxx:xxx:xxx:xxx:xxx:123
 dragger:   ab35:e0b1:xxx:xxx:xxx:xxx:xxx:345
-mydesktop: ab35:f451:xxx:xxx:xxx:xxx:xxx:678
 ```
-Keep an eye on the list at https://app.husarnet.com too.
+Keep an eye on the list at the VPN Dashboard - https://app.husarnet.com too.
 
 ## Configuring Cyclone DDS
 
 On each machine:
 
-- Create a file
+- Create a file:
 
 cat ~/cyclonedds.xml
 ```
@@ -71,7 +71,7 @@ cat ~/cyclonedds.xml
     </Domain>
 </CycloneDDS>
 ```
-Modify .bashrc on each machine to look like this:
+- Edit .bashrc on each machine to look like this:
 
 Dragger's .bashrc:
 ```
@@ -86,11 +86,13 @@ source /opt/ros/jazzy/setup.bash
 export ROS_DOMAIN_ID=0
 ```
 
-After you source the .bashrc, whatever you launch (ROS2 related) will talk directly (peer-to-peer) across VPN, not flooding LAN with trafic.
+After you source the .bashrc, whatever you launch (ROS2 related) will talk directly (peer-to-peer) across VPN, not flooding LAN with UDP trafic.
 
 And, magically, it should talk the same way while your robot is connected to a phone hotspot WiFi or anything similar.
 
-## Note: I am using static IPv4 addresses
+## Note: I am using static IPv4 addresses and subnets
+
+Just in case...
 
 For example, consider two "chained" routers (cable-modem ---> router167 ---> router168) - each with their LANs. That makes two _subnets_.
 
