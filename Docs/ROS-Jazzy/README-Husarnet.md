@@ -98,6 +98,8 @@ After you source the _.bashrc_, whatever you launch (ROS2 related) will talk dir
 
 And, magically, it should talk the same way while your robot is across subnets, or connected to a phone hotspot WiFi or anything similar.
 
+**Note:** after a reboot, the "_husarnet status_" shows that everything is operational, but the machine is "_not joined_". ROS still works across the subnets, and it _seems_ that the joining operation is only needed for larger scope (across the Internet, 5G and similar). There is no "_unjoin_" operation.
+
 ## Note: I am using static IPv4 addresses and subnets
 
 Just in case...
