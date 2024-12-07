@@ -14,27 +14,30 @@ Husarnet VPN is built specifically with ROS2 in mind and solves the above proble
 
 Here are the links:
 
-https://husarnet.com/docs/how-husarnet-works/
+https://husarnet.com/docs/how-husarnet-works/ - straight from the horse's mouth
 
-https://husarion.com/tutorials/other-tutorials/husarnet-cyclone-dds/
+https://husarion.com/tutorials/other-tutorials/husarnet-cyclone-dds/ - good tutorial from a robot vendor
 
-https://husarion.com/tutorials/
+Note that Husarnet web site/server _arranges_ direct peer-to-peer communication, but doesn't _participate_ in traffic.
+
+Below is a simplified version of the setup, without unnecessary options.
 
 ## Creating Husarnet account
 
 Sign up here: https://app.husarnet.com
 
-Assign a name to your VPN and get a private key (keep it secret).
+Assign a name to your new VPN and get a _private key_ (keep it secret).
 
 ## Installing Husarnet
 
 See: https://husarnet.com/docs/platform-linux-install
 
+Do it on your robot(s) and on the desktop "workstation":
 ```
 curl https://install.husarnet.com/install.sh | sudo bash
 
 ifconfig -a
-(shows "hnet0" network adapter now)
+(shows _"hnet0"_ network adapter now, representing the VPN)
 
 systemctl status husarnet
 
@@ -42,7 +45,7 @@ sudo husarnet join <your private key here>
 
 husarnet status
 ```
-Do it on your robot(s) and on the desktop "workstation", run "ifconfig -a hnet0" and make a list of you machine's IPv6 addresses:
+Run "_ifconfig -a hnet0_" and make a list of you machine's IPv6 addresses:
 ```
 mydesktop: ab35:f451:xxx:xxx:xxx:xxx:xxx:678
 plucky:    ab35:69d9:xxx:xxx:xxx:xxx:xxx:123
@@ -52,9 +55,13 @@ Keep an eye on the list at the VPN Dashboard - https://app.husarnet.com too.
 
 ## Configuring Cyclone DDS
 
+If you haven't installed Cyclone DDS, do it now:
+```
+sudo apt install ros-${ROS_DISTRO}-rmw-cyclonedds-cpp
+```
 On each machine:
 
-- Create a file:
+- Create a configuration file:
 
 cat ~/cyclonedds.xml
 ```
@@ -73,30 +80,31 @@ cat ~/cyclonedds.xml
 ```
 - Edit .bashrc on each machine to look like this:
 
-Dragger's .bashrc:
+Dragger's _.bashrc_, for example:
 ```
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 export CYCLONEDDS_URI=file:///home/ros/cyclonedds.xml # !actual path! enable IPv6 in Cyclone DDS
 export ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST #optional: thanks to this env, you make sure all remote traffic goes through Husarnet
-#export ROS_STATIC_PEERS="mydesktop;dragger"
+#export ROS_STATIC_PEERS="mydesktop;dragger"  # try static addresses here, if you are using IPv4
 # or with IPv6 addresses - a robot has two, workstation has three (for all robots):
 export ROS_STATIC_PEERS="ab35:f451:xxx:xxx:xxx:xxx:xxx:678;ab35:e0b1:xxx:xxx:xxx:xxx:xxx:345"
 
 source /opt/ros/jazzy/setup.bash
 export ROS_DOMAIN_ID=0
 ```
+**Note:** Workstation's _.bashrc_ should refer to all robots' IPv6 addresses.
 
-After you source the .bashrc, whatever you launch (ROS2 related) will talk directly (peer-to-peer) across VPN, not flooding LAN with UDP trafic.
+After you source the _.bashrc_, whatever you launch (ROS2 related) will talk directly (_peer-to-peer_) across VPN, not flooding LAN with UDP trafic.
 
-And, magically, it should talk the same way while your robot is connected to a phone hotspot WiFi or anything similar.
+And, magically, it should talk the same way while your robot is across subnets, or connected to a phone hotspot WiFi or anything similar.
 
 ## Note: I am using static IPv4 addresses and subnets
 
 Just in case...
 
-For example, consider two "chained" routers (cable-modem ---> router167 ---> router168) - each with their LANs. That makes two _subnets_.
+For example, consider two "chained" routers (_cable-modem ---> router167 ---> router168_) - each with their LANs. That makes two _subnets_.
 
-Router168 has firewall disabled. Both have static routing tables defined to direct trafic to each other.
+_Router168_ has firewall disabled. Both have static routing tables defined to direct trafic to each other.
 
 And the robot's _/etc/netplan/50-cloud-init.yaml_ may look like this (I am open to suggestions):
 ```
@@ -129,10 +137,13 @@ network:
             - 192.168.1.1
 ```
 
-Desktop/Workstation is residing on LAN168, that's why the routing and we need Husarnet to work across subnets.
+Desktop/Workstation is residing on _LAN168 subnet_, robot - on _LAN167 subnet_, that's why the routing. So, as ROS doesn't go across subnets with its UDP discovery - I needed Husarnet to work across subnets.
 
 ## Useful Links:
 
 https://husarnet.com/docs/cli-guide
 
+https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy
+
+https://github.com/slgrobotics/robots_bringup/tree/main
 
