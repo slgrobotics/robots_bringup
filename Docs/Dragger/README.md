@@ -7,6 +7,8 @@
 
 Dragger photos are here: https://photos.app.goo.gl/eAdKiD7YYnL9Vou6A
 
+If you want to browse robot's code look here: https://github.com/slgrobotics/articubot_one
+
 Dragger is a *"larger Turtlebot"* - running all ROS2 nodes on-board. Only RViz2 runs on a desktop "ground station" computer. On board Dragger has a Raspberry Pi 5 ("dragger") [and an "FPV Drone" TV camera. - TBD].
 
 Robot's Raspberry Pi 5 (8GB) runs sensors drivers (GPS, LD14 LIDAR and MPU9250), Differential Drive Control (inspired by Articulated Robotics), SLAM Toolkit and Nav2. Arduino Mega 2650 drives wheels and reports encoder readings over serial.

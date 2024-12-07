@@ -169,9 +169,7 @@ Running the sim as described below brings Rviz2 with a map view.
 
 ## Testing it all with my version of Articubot:
 
-https://github.com/slgrobotics/robots_bringup
-
-https://github.com/slgrobotics/articubot_one
+If you want to browse robot's code look here: https://github.com/slgrobotics/articubot_one
 ```
 cd
 mkdir robot_ws

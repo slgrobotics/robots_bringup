@@ -10,6 +10,10 @@ If you just want to run a simulation in Gazebo, or need to set up your Desktop w
 
 see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy
 
+If you want to browse robot's code look here:
+
+https://github.com/slgrobotics/articubot_one
+
 This section equally applies to any robot, just keep an eye on the name in the instructions and replace it accordingly.
 
 You need to setup **TURTLEBOT3_MODEL** variable (normally in _.bashrc_) with the robot name. Robot description file will be picked from _~/bringup_ws/src/robots_bringup/urdf_ folder
