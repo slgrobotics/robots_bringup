@@ -140,6 +140,7 @@ colcon build
 ```
 This is how it looked on my Raspberry Pi 3B with 1 GB RAM:
 ```
+ros@turtle:~/robot_ws$ export MAKEFLAGS="-j 1"
 ros@turtle:~/robot_ws$ colcon build --parallel-workers=1 --executor sequential
 [5.063s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/home/ros/robot_ws/install/create_robot'
                   in the environment variable AMENT_PREFIX_PATH doesn't exist
