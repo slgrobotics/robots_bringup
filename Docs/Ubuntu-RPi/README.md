@@ -132,6 +132,10 @@ Choose one of the robots here: https://github.com/slgrobotics/robots_bringup/tre
 
 *Or, review the following:*
 
+### _Optional:_ Husarnet VPN for better DDS communication 
+
+https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README-Husarnet.md
+
 ### _Optional:_ better network control using _/etc/netplan/_ directly
 
 It is possible, that after the initial boot your network won't be set up properly.
