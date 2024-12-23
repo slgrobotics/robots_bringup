@@ -6,7 +6,9 @@
 
 Connect to Raspberry Pi  **I2C**: **SCL** - pin 05, **SDA** - pin 03
 
-_Optional:_ Consider 3 KOhm to 6.8 KOhm pull-up resistors to 3.3 V bus.
+RPi GPIO header pinout: https://www.raspberrypi.com/documentation/computers/images/GPIO-Pinout-Diagram-2.png
+
+_Optional:_ Consider 3 KOhm to 6.8 KOhm pull-up resistors from SDA and SCL to 3.3 V bus.
 
 Use ```i2cdetect -y 1``` to see **address 0x28**
 
