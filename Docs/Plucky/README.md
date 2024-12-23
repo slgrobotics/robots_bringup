@@ -127,8 +127,12 @@ colcon build
 ### Note: Plucky Arduino Mega 2560 on /dev/ttyACM0
 ```
 
-### Finishing setup
+### _Optional:_ Create a Linux service for on-boot autostart
 
-Follow **"Create a Linux service for on-boot autostart"** section here: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger
+With _Plucky base_ (Arduino wheels driver), _Laser Scanner_ and _IMU_ ROS2 nodes tested, it is time to set up autostart on boot for hands-free operation.
+
+Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/LinuxService.md
+
+----------------
 
 Back to https://github.com/slgrobotics/robots_bringup
