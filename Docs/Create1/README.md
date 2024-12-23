@@ -2,9 +2,11 @@
 
 This is an updated and streamlined version of the prior document ( https://github.com/slgrobotics/turtlebot_create/tree/main/RPi_Setup ) - adjusted for ROS Jazzy.
 
-Familiarity with https://github.com/slgrobotics/turtlebot_create/blob/main/README.md is highly recommended.
+Familiarity with (now outdated) https://github.com/slgrobotics/turtlebot_create/blob/main/README.md is highly recommended.
 
-My Create 1 has a Raspberry Pi 3B ("turtle"). The RPi runs sensors drivers (XV11 LIDAR and BNO055), and Differential Drive Control, inspired by Articulated Robotics.
+My Create 1 has a Raspberry Pi 3B ("turtle"). The RPi runs sensors drivers (XV11 LIDAR and BNO055 IMU), and Autonomy Lab _base_ code (https://github.com/slgrobotics/create_robot). 
+
+The rest of the robot nodes run on the Desktop, using my *articubot_one* codebase, inspired by Articulated Robotics.
 
 ## Turtle Raspberry Pi 3B Build and Run Instructions:
 
@@ -22,7 +24,7 @@ Refer to https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/BN
 
 Alternatively, use MPU9250 sensor: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/MPU9250.md
 
-### Compile ROS2 driver for Create 1 base
+### Compile forked Autonomy Lab ROS2 driver for Create 1 base
 
 For iRobot Create 1 (released in 2004, based on Roomba 500 series) and other roombas of 400, 500 and 600 series (https://en.wikipedia.org/wiki/IRobot_Create).
 
@@ -59,10 +61,10 @@ rosdep update
 # this will take a while, many additional packages installed:
 rosdep install --from-paths src --ignore-src -r -y
 
-# On RPi 3B build will take VERY long time (over 14 hours in my case) and needs at least 2GB swap space.
-# You can try limiting number of parallel threads:
-# export MAKEFLAGS="-j 1"
-# colcon build --parallel-workers=1 --executor sequential
+# On an RPi 3B build will take VERY long time (over 14 hours in my case) and needs at least 2GB swap space.
+# For RPi 3B and 4 you must limit number of parallel threads, no need to do it for RPi 5 8GB:
+export MAKEFLAGS="-j 1"
+colcon build --parallel-workers=1 --executor sequential
 colcon build
 ```
 This is how it looked on my Raspberry Pi 3B with 1 GB RAM:
@@ -114,54 +116,21 @@ ros@turtle:~/robot_ws$ ros2 launch create_bringup create_1.launch
 [create_driver-1] [INFO] [1721743899.054224697] [create_driver]: [CREATE] Ready.
 ```
 
-### Driving Create 1 Turtlebot with _teleop_
-
-**Note:** in ROS2 Jazzy *cmd_vel* is now **TwistStamped** type, my fork has been modified to support it. I also added remappings to /diff_cont/* to match Jazzy Controller architecture. Your regular _teleop_ might not work with it, use instructions below.
-
-To use joystick, you first need to build my *articubot_one* fork, which supports **TwistStamped** type:
+**Tip:** Any time you need to produce a robot URDF from ```.xacro``` files, use "_xacro_" command, for example:
 ```
-cd
-mkdir robot_ws
-cd ~/robot_ws/
-mkdir src
-cd src
-git clone https://github.com/slgrobotics/articubot_one.git
-cd ..
-sudo rosdep init    # do it once, if you haven't done it before
-rosdep update
-rosdep install --from-paths src --ignore-src -r -y
-colcon build
-```
-Take a look at ```~/robot_ws/src/articubot_one/launch/joystick.launch.py``` - you may want to tweak *cmd_vel_joy* there for experiments (for example, make it "*cmd_vel*"). Do ```cd ~/robot_ws; colcon build``` after all changes.
-
-At this point you should be able to use teleop **from your desktop machine:**
-
-(skip this if you don't have a joystick on the desktop machine, use keyboard or something else)
-
-Joystick teleop friendly blog:
-
-https://articulatedrobotics.xyz/mobile-robot-14a-teleop/
-
-To test your joystick:
-```
-ros2 run joy joy_enumerate_devices
-ros2 run joy joy_node      # <-- Run in first terminal
-ros2 topic echo /joy       # <-- Run in second terminal
-```
-https://index.ros.org/p/teleop_twist_joy/github-ros2-teleop_twist_joy/
-
-**__Note:__** *joy_node sends cmd_vel messages ONLY when enable_button is pressed (Usually btn 1, 0 for ROS)
-	you MUST set enable_button to desired value (0 for btn 1, the "front trigger").
-	ros2 param get /teleop_twist_joy_node enable_button  - to see current value*
-
------  **Tip:**  Create teleop.sh to run/configure joystick driver:  -------- 
-```
-#!/bin/bash
-
-ros2 launch articubot_one joystick.launch.py &
+source ~/robot_ws/install/setup.bash
+xacro ~/robot_ws/install/articubot_one/share/articubot_one/robots/turtle/description/robot.urdf.xacro sim_mode:=true > /tmp/robot.urdf
 ```
 
-### 6. Create a Linux service for on-boot autostart
+### Test-driving Create 1 Turtlebot with _teleop_
+
+Check out https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Joystick.md
+
+Keep in mind, that Create 1 base expects */diff_cont/cmd_vel* - while joystick without tweaking produces */cmd_vel_joy*
+
+You may want to temporarily modify *joystick.launch.py* for this test.
+
+### _Optional:_ Create a Linux service for on-boot autostart
 
 With Create base, XV11 Laser Scanner and BNO055 IMU ROS2 nodes tested, it is time to set up autostart on boot for hands-free operation.
 
@@ -206,17 +175,9 @@ sudo systemctl start robot.service
 ```
 If all went well, the service will start automatically after you reboot the RPi, and all related nodes will show up on _rpt_ and _rpt_graph_
 
-**Notes:** 
-
+**Note:** 
 1. Logs are stored in _/home/ros/.ros/log_ folder - these can grow if things go wrong.
-
 2. Raspberry Pi 3B is adequate for the _"headless"_ Turtlebot (except for the 14+ hours compilation) - it runs at <30% CPU load and low memory consumption.
-
-3. Any time you need to produce robot URDF from ```.xacro``` files:
-```
-source ~/robot_ws/install/setup.bash
-xacro ~/robot_ws/install/articubot_one/share/articubot_one/description/robot.urdf.xacro use_ros2_control:=true sim_mode:=true > ~/robot_ws/src/articubot_one/description/robot.urdf
-```
 
 Here are some useful commands:
 ```
@@ -231,8 +192,6 @@ sudo ls -al /etc/systemd/system/multi-user.target.wants/robot.service
 ps -ef | grep driver
 ```
 You can now reboot Raspberry Pi, and the three drivers will start automatically and show up in **rqt** and **rqt_graph** on the Desktop
-
-**Now you can proceed to Desktop (Turtle_Setup) folder:**   https://github.com/slgrobotics/turtlebot_create/tree/main/Turtle_Setup
 
 ## Useful Links:
 
