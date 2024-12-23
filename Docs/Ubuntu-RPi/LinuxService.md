@@ -1,12 +1,14 @@
-### _Optional:_ Create a Linux service for on-boot autostart
+## _Optional:_ Create a Linux service for on-boot autostart
 
 **Note:** This guide is written for _Create 1 Turtlebot_, but it applies to any other robot with minor changes.
 
-See 
+See https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1
 
-With Create base, XV11 Laser Scanner and BNO055 IMU ROS2 nodes tested, it is time to set up autostart on boot for hands-free operation.
+With _Create base_, _XV11 Laser Scanner_ and _BNO055 IMU_ ROS2 nodes tested, it is time to set up your Raspberry Pi to autostart on boot for hands-free operation.
 
-We need some files (copy them from this repository, under and around https://github.com/slgrobotics/turtlebot_create/tree/main/RPi_Setup/launch):
+We need some files - copy them from this repository, under and around https://github.com/slgrobotics/turtlebot_create/tree/main/RPi_Setup/launch
+
+### Here are the steps:
 
 1. Create and populate launch folder: /home/ros/launch
 ```
@@ -51,7 +53,7 @@ If all went well, the service will start automatically after you reboot the RPi,
 1. Logs are stored in _/home/ros/.ros/log_ folder - these can grow if things go wrong.
 2. Raspberry Pi 3B is adequate for the _"headless"_ Turtlebot (except for the 14+ hours compilation) - it runs at <30% CPU load and low memory consumption.
 
-Here are some useful commands:
+### Here are some useful commands:
 ```
 systemctl status robot.service
 systemctl cat robot.service
@@ -63,4 +65,4 @@ sudo ls -al /etc/systemd/system/robot.service.d/override.conf
 sudo ls -al /etc/systemd/system/multi-user.target.wants/robot.service
 ps -ef | grep driver
 ```
-You can now reboot Raspberry Pi, and the three drivers will start automatically and show up in **rqt** and **rqt_graph** on the Desktop
+You can now reboot Raspberry Pi, and the three drivers will start automatically and show up in **rqt** and **rqt_graph** on the Desktop.
