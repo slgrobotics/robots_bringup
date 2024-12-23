@@ -10,90 +10,17 @@ My Create 1 has a Raspberry Pi 3B ("turtle"). The RPi runs sensors drivers (XV11
 
 Turtle has _Ubuntu 24.04 Server (64 bit)_ and _ROS2 Jazzy Base_ installed - see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi for instructions.
 
-### "Turtle" XV11 LIDAR setup:
+### XV11 LIDAR setup
 
-Surreal XV Lidar controller v1.2 (Neato Lidar) - connected via USB
+Refer to https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/XV11_LIDAR.md
 
-https://github.com/getSurreal/XV_Lidar_Controller  - Teensy software
+Alternatively, use LD14 LIDAR: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/LD14.md
 
-https://www.getsurreal.com/product/lidar-controller-v2-0/   - hardware (Teensy 2.0)
+### ROS2 driver for BNO055 9DOF IMU
 
-Connect to the USB port at 115200 baud. (test with ```minicom -D /dev/ttyACM0 -b 115200```)
+Refer to https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/BNO055%20IMU.md
 
-Original ROS2 driver port (by Mark Johnston): https://github.com/mjstn/xv_11_driver
-
-In my fork I modified one file, ```.../xv_11_driver/src/xv_11_driver.cpp```, as _declare_parameter()_ now requires a default value as a second parameter.
-I also redefined ```XV11_PORT_DEFAULT``` as ```/dev/ttyACM0```
-
-Commands to compile and install:
-```
-sudo apt install libboost-dev
-
-mkdir -p ~/robot_ws/src
-cd ~/robot_ws/src
-git clone https://github.com/slgrobotics/xv_11_driver.git
-
-  (edit the xv_11_driver/src/xv_11_driver.cpp here - XV11_PORT_DEFAULT if your port is not /dev/ttyACM0)
-
-cd ..
-colcon build
-```
-Try running it on _turtle_, see _/scan_ messages in rqt on the Desktop:
-```
-source ~/robot_ws/install/setup.bash
-ros2 run xv_11_driver xv_11_driver &
-```
-
-**Note:** Rviz **on your desktop machine** needs at least a static transform, to relate the grid to the laser frame ("_neato_laser_" in this case).
-
-    rviz2 &
-    ros2 run tf2_ros static_transform_publisher 0 0 0 0 0 0 map neato_laser &
-
-For Rviz you need:
-
-    Global Options to have Fixed Frame set to a known TF ("map")
-  
-    Grid reference frame - set to "map"
-  
-    Add LaserScan, topic "/scan", Style :Spheres" size 0.02
-  
-    ros2 run tf2_ros tf2_echo map neato_laser            -- to see published TF
-
-### Compile ROS2 driver for BNO055 IMU
-
-Connect to I2C: SCL - pin 05, SDA - pin 03 of Raspberry Pi
-
-Info and tests:
-
-https://learn.adafruit.com/adafruit-bno055-absolute-orientation-sensor
-
-https://learn.adafruit.com/adafruit-bno055-absolute-orientation-sensor/webserial-visualizer
-
-https://hackmd.io/@edgesense/ryzAq3IFs
-
-BNO055 IMU (via UART or I2C - Python) - seems well supported, active development, ROS2 node:
-
-https://github.com/flynneva/bno055
-```
-sudo apt install python3-smbus
-
-# mkdir -p ~/robot_ws/src
-cd ~/robot_ws/src/
-git clone https://github.com/flynneva/bno055.git
-vi ~/robot_ws/src/bno055/bno055/params/bno055_params_i2c.yaml   - change i2c_bus to 1. Use i2cdetect -y 1
-
-cd ~/robot_ws
-### Note: See https://docs.ros.org/en/humble/Tutorials/Intermediate/Rosdep.html
-sudo rosdep init     -- do it once
-rosdep update
-rosdep install --from-paths src --ignore-src -r -y
-colcon build
-``` 
-Try running it on _turtle_, see IMU messages in rqt on the Desktop:
-``` 
-source ~/robot_ws/install/setup.bash
-ros2 run bno055 bno055  --ros-args --params-file ~/robot_ws/src/bno055/bno055/params/bno055_params_i2c.yaml
-```
+Alternatively, use MPU9250 sensor: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/MPU9250.md
 
 ### Compile ROS2 driver for Create 1 base
 
