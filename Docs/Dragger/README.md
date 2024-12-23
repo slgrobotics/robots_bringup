@@ -151,63 +151,17 @@ If you choose to save maps (using _slam_toolkit_ RViz2 control) - the files will
 
 **Note:** See https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy  for Desktop machine setup.
 
-## Creating a Linux service for on-boot autostart
+### _Optional:_ Create a Linux service for on-boot autostart
 
-With Dragger base (Arduino wheels driver), Laser Scanner and IMU ROS2 nodes tested, it is time to set up autostart on boot for hands-free operation.
+With _Dragger base_ (Arduino wheels driver), _Laser Scanner_ and _IMU_ ROS2 nodes tested, it is time to set up autostart on boot for hands-free operation.
 
-We need launch files (residing in this repository): _https://github.com/slgrobotics/articubot_one/tree/main/launch_
+Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/LinuxService.md
 
-As we already cloned this repository, these files should be here: _~/robot_ws/src/articubot_one/launch_
-
-1. Create and populate launch folder: _/home/ros/launch_ (see above)
-
-You may edit the _bootup_launch.sh_ file to match your robot launch file and related folders.
-
-Try running the _bootup_launch.sh_ from the command line to see if anything fails.
-
-2. Create service description file - _/etc/systemd/system/robot.service_ :
-```
-#### /etc/systemd/system/robot.service
-[Unit]
-Description=robot
-StartLimitIntervalSec=60
-StartLimitBurst=5
-
-[Service]
-Type=simple
-User=ros
-Group=ros
-WorkingDirectory=/home/ros/launch
-ExecStart=/home/ros/launch/bootup_launch.sh
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-```
-
-3. Enable service:
-```
-sudo systemctl daemon-reload
-sudo systemctl enable robot.service
-sudo systemctl start robot.service
-```
-If all went well, the service will start automatically after you reboot the RPi, and all related nodes will show up on _rpt_ and _rpt_graph_ on the Desktop.
-
-Here are some useful commands:
-```
-systemctl status robot.service
-systemctl cat robot.service
-sudo systemctl reload-or-restart robot.service
-sudo journalctl -xeu robot.service
-
-sudo ls -al /etc/systemd/system/robot.service
-sudo ls -al /etc/systemd/system/robot.service.d/override.conf
-sudo ls -al /etc/systemd/system/multi-user.target.wants/robot.service
-ps -ef | grep driver
-```
-You can now reboot Raspberry Pi, and the three drivers will start automatically. Nodes should show up in **rqt** and **rqt_graph**
+-------------------------
 
 **Back to main page:** https://github.com/slgrobotics/robots_bringup
+
+-------------------------
 
 ## Useful links
 
