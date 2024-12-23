@@ -1,4 +1,4 @@
-## "Turtle" XV11 LIDAR setup:
+## "Turtle" XV11 LIDAR setup
 
 Surreal XV Lidar controller v1.2 (Neato Lidar) - connected via USB
 
@@ -8,12 +8,18 @@ https://www.getsurreal.com/product/lidar-controller-v2-0/   - hardware (Teensy 2
 
 Connect to the USB port at 115200 baud. (test with ```minicom -D /dev/ttyACM0 -b 115200```)
 
+See https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/PersistentUSB.md
+
+### ROS2 Driver
+
 Original ROS2 driver port (by Mark Johnston): https://github.com/mjstn/xv_11_driver
 
 In my fork I modified one file, ```.../xv_11_driver/src/xv_11_driver.cpp```, as _declare_parameter()_ now requires a default value as a second parameter.
 I also redefined ```XV11_PORT_DEFAULT``` as ```/dev/ttyACM0```
 
-Commands to compile and install:
+My fork is here: https://github.com/slgrobotics/xv_11_driver
+
+### Compile and install
 ```
 sudo apt install libboost-dev
 
@@ -26,6 +32,8 @@ git clone https://github.com/slgrobotics/xv_11_driver.git
 cd ..
 colcon build
 ```
+### Test
+
 Try running it on _turtle_, see _/scan_ messages in rqt on the Desktop:
 ```
 source ~/robot_ws/install/setup.bash
@@ -46,4 +54,3 @@ For Rviz you need:
     Add LaserScan, topic "/scan", Style :Spheres" size 0.02
   
     ros2 run tf2_ros tf2_echo map neato_laser            -- to see published TF
-
