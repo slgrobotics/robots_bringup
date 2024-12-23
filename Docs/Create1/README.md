@@ -1,10 +1,10 @@
 # Turtlebot Create 1 Notes (Jazzy version)
 
-This is an updated and streamlined version of the prior document ( https://github.com/slgrobotics/turtlebot_create/tree/main/RPi_Setup ) - adjusted for ROS Jazzy.
+This is an updated and streamlined version of the prior document ( [RPi_Setup](https://github.com/slgrobotics/turtlebot_create/tree/main/RPi_Setup) ) - adjusted for ROS Jazzy.
 
-Familiarity with (now outdated) https://github.com/slgrobotics/turtlebot_create/blob/main/README.md is highly recommended.
+Familiarity with (now outdated) [Old README](https://github.com/slgrobotics/turtlebot_create/blob/main/README.md) is highly recommended.
 
-My Create 1 has a Raspberry Pi 3B ("turtle"). The RPi runs sensors drivers (XV11 LIDAR and BNO055 IMU), and Autonomy Lab _base_ code (https://github.com/slgrobotics/create_robot). 
+My Create 1 has a Raspberry Pi 3B ("turtle"). The RPi runs sensors drivers (XV11 LIDAR and BNO055 IMU), and [Autonomy Lab _base_ code](https://github.com/slgrobotics/create_robot). 
 
 The rest of the robot nodes run on the Desktop, using my *articubot_one* codebase, inspired by Articulated Robotics.
 
@@ -44,7 +44,7 @@ https://github.com/slgrobotics/libcreate
 
 https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/MPU9250GyroTurtlebot
 
-Here are all commands:
+Here are all commands on the Raspberry Pi:
 ```
 # mkdir -p ~/robot_ws/src
 cd ~/robot_ws/src
@@ -115,14 +115,12 @@ ros@turtle:~/robot_ws$ ros2 launch create_bringup create_1.launch
 [create_driver-1] [INFO] [1721743898.881650532] [create_driver]: [CREATE] Battery level 100.00 %
 [create_driver-1] [INFO] [1721743899.054224697] [create_driver]: [CREATE] Ready.
 ```
-
 **Tip:** Any time you need to produce a robot URDF from ```.xacro``` files, use "_xacro_" command, for example:
 ```
 source ~/robot_ws/install/setup.bash
 xacro ~/robot_ws/install/articubot_one/share/articubot_one/robots/turtle/description/robot.urdf.xacro sim_mode:=true > /tmp/robot.urdf
 ```
-
-### Test-driving Create 1 Turtlebot with _teleop_
+## Test-driving Create 1 Turtlebot with _teleop_
 
 Check out https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Joystick.md
 
@@ -130,68 +128,11 @@ Keep in mind, that Create 1 base expects */diff_cont/cmd_vel* - while joystick w
 
 You may want to temporarily modify *joystick.launch.py* for this test.
 
-### _Optional:_ Create a Linux service for on-boot autostart
+## _Optional:_ Create a Linux service for on-boot autostart
 
-With Create base, XV11 Laser Scanner and BNO055 IMU ROS2 nodes tested, it is time to set up autostart on boot for hands-free operation.
+With _Create base_, _XV11 Laser Scanner_ and _BNO055 IMU_ ROS2 nodes tested, it is time to set up autostart on boot for hands-free operation.
 
-We need some files (copy them from this repository, under and around https://github.com/slgrobotics/turtlebot_create/tree/main/RPi_Setup/launch):
-
-1. Create and populate launch folder: /home/ros/launch
-```
-mkdir ~/launch
-cd ~/launch
-# place myturtle.py and bootup_launch.sh here:
-cp ~/robot_ws/src/create_robot/create_bringup/launch/bootup_launch.sh .
-cp ~/robot_ws/src/create_robot/create_bringup/launch/myturtle.py .
-chmod +x ~/launch/bootup_launch.sh    
-```
-Try running the _bootup_launch.sh_ from the command line to see if anything fails.
-
-2. Create service description file (as _"sudo"_) - _/etc/systemd/system/robot.service_ :
-```
-# /etc/systemd/system/robot.service
-[Unit]
-Description=turtle
-StartLimitIntervalSec=60
-StartLimitBurst=5
-
-[Service]
-Type=simple
-User=ros
-Group=ros
-WorkingDirectory=/home/ros/launch
-ExecStart=/home/ros/launch/bootup_launch.sh
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-```
-
-3. Enable service:
-```
-sudo systemctl daemon-reload
-sudo systemctl enable robot.service
-sudo systemctl start robot.service
-```
-If all went well, the service will start automatically after you reboot the RPi, and all related nodes will show up on _rpt_ and _rpt_graph_
-
-**Note:** 
-1. Logs are stored in _/home/ros/.ros/log_ folder - these can grow if things go wrong.
-2. Raspberry Pi 3B is adequate for the _"headless"_ Turtlebot (except for the 14+ hours compilation) - it runs at <30% CPU load and low memory consumption.
-
-Here are some useful commands:
-```
-systemctl status robot.service
-systemctl cat robot.service
-sudo systemctl reload-or-restart robot.service
-sudo journalctl -xeu robot.service
-
-sudo ls -al /etc/systemd/system/robot.service
-sudo ls -al /etc/systemd/system/robot.service.d/override.conf
-sudo ls -al /etc/systemd/system/multi-user.target.wants/robot.service
-ps -ef | grep driver
-```
-You can now reboot Raspberry Pi, and the three drivers will start automatically and show up in **rqt** and **rqt_graph** on the Desktop
+See https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/LinuxService.md
 
 ## Useful Links:
 
