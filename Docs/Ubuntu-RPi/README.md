@@ -132,6 +132,10 @@ Choose one of the robots here: https://github.com/slgrobotics/robots_bringup/tre
 
 *Or, review the following:*
 
+### _Optional:_ Create a Linux service for on-boot autostart
+
+https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/LinuxService.md
+
 ### _Optional:_ Husarnet VPN for better DDS communication 
 
 https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README-Husarnet.md
