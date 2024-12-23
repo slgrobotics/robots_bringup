@@ -10,6 +10,10 @@ Connect to the USB port at 115200 baud. (test with ```minicom -D /dev/ttyACM0 -b
 
 See https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/PersistentUSB.md
 
+### Positioning on the robot
+
+https://photos.app.goo.gl/jvCmoPTPyVJtSjZW9
+
 ### ROS2 Driver
 
 Original ROS2 driver port (by Mark Johnston): https://github.com/mjstn/xv_11_driver
