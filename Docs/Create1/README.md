@@ -116,6 +116,24 @@ ros@turtle:~/robot_ws$ ros2 launch create_bringup create_1.launch
 
 ### Driving Create 1 Turtlebot with _teleop_
 
+**Note:** in ROS2 Jazzy *cmd_vel* is now **TwistStamped** type, my fork has been modified to support it. I also added remappings to /diff_cont/* to match Jazzy Controller architecture. Your regular _teleop_ might not work with it, use instructions below.
+
+To use joystick, you first need to build my *articubot_one* fork, which supports **TwistStamped** type:
+```
+cd
+mkdir robot_ws
+cd ~/robot_ws/
+mkdir src
+cd src
+git clone https://github.com/slgrobotics/articubot_one.git
+cd ..
+sudo rosdep init    # do it once, if you haven't done it before
+rosdep update
+rosdep install --from-paths src --ignore-src -r -y
+colcon build
+```
+Take a look at ```~/robot_ws/src/articubot_one/launch/joystick.launch.py``` - you may want to tweak *cmd_vel_joy* there for experiments (for example, make it "*cmd_vel*"). Do ```cd ~/robot_ws; colcon build``` after all changes.
+
 At this point you should be able to use teleop **from your desktop machine:**
 
 (skip this if you don't have a joystick on the desktop machine, use keyboard or something else)
@@ -139,12 +157,8 @@ https://index.ros.org/p/teleop_twist_joy/github-ros2-teleop_twist_joy/
 -----  **Tip:**  Create teleop.sh to run/configure joystick driver:  -------- 
 ```
 #!/bin/bash
-set +x
-ros2 launch teleop_twist_joy teleop-launch.py &
-sleep 3
-ros2 param set /teleop_twist_joy_node enable_button 0
-ros2 param set /teleop_twist_joy_node enable_turbo_button 3
-set -x
+
+ros2 launch articubot_one joystick.launch.py &
 ```
 
 ### 6. Create a Linux service for on-boot autostart
