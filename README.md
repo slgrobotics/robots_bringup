@@ -63,3 +63,5 @@ https://docs.ros.org/en/melodic/api/robot_localization/html/integrating_gps.html
 https://docs.nav2.org/tutorials/docs/navigation2_with_gps.html
 
 https://index.ros.org/p/robot_localization/#jazzy
+
+https://roboticsbackend.com/ros2-nav2-tutorial/
