@@ -134,6 +134,6 @@ With _Create base_, _XV11 Laser Scanner_ and _BNO055 IMU_ ROS2 nodes tested, it 
 
 See https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/LinuxService.md
 
-## Useful Links:
+---------------------
 
-https://roboticsbackend.com/ros2-nav2-tutorial/
+Back to main page: https://github.com/slgrobotics/robots_bringup/tree/main
