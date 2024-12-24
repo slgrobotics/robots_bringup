@@ -1,5 +1,7 @@
 ## _Optional:_ Create a Linux service for on-boot autostart
 
+**Tip:** this complicates making changes to robot software, use with caution. 
+
 **Note:** This guide is written for _Create 1 Turtlebot_, but it applies to any other robot with minor changes.
 
 See https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1
