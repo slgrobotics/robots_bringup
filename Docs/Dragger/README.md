@@ -31,7 +31,7 @@ https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/ParkingSensor
 
 MPU9250 and GPS Drivers come standard with ROS
 
-### Dragger LD14 LIDAR setup
+### LD14 LIDAR setup
 
 Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/LD14.md
 
@@ -41,7 +41,7 @@ Dragger has a _"BE-880 GPS Receiver Module with Flash HMC5883L Compass 10th Chip
 
 Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/GPS.md
 
-### Making USB devices persistent on Dragger
+### Making USB devices persistent
 
 Dragger has three USB-to-Serial devices: Arduino "wheels/base", GPS and LIDAR.
 
@@ -56,25 +56,22 @@ See https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/MPU9250
 To allow GPS operation in sim install localization package:
 ```
 sudo apt install ros-${ROS_DISTRO}-robot-localization ros-${ROS_DISTRO}-imu-tools ros-${ROS_DISTRO}-slam-toolbox
-sudo apt install ros-${ROS_DISTRO}-navigation2 ros-${ROS_DISTRO}-nav2-bringup
-sudo apt install ros-${ROS_DISTRO}-rmw-cyclonedds-cpp
+sudo apt install ros-${ROS_DISTRO}-navigation2 ros-${ROS_DISTRO}-nav2-bringup ros-${ROS_DISTRO}-rmw-cyclonedds-cpp
 ```
 More info - see "Useful Links" below.
 
-### Dragger Differential Drive Control setup
+### Differential Drive Control setup
 
 See https://github.com/slgrobotics/diffdrive_arduino (inspired by Articulated Robotics)
 
 See https://github.com/hiwad-aziz/ros2_mpu9250_driver
 
-#### Note: Dragger Arduino Mega 2560 should be on /dev/ttyACM0
+#### Note: Arduino Mega 2560 should be on /dev/ttyACM0
 
 Prerequisites:
 ```
 sudo apt install ros-${ROS_DISTRO}-ros2-control ros-${ROS_DISTRO}-ros2-controllers
-sudo apt install ros-${ROS_DISTRO}-xacro
-sudo apt install ros-${ROS_DISTRO}-twist-mux
-sudo apt install libi2c-dev
+sudo apt install ros-${ROS_DISTRO}-xacro ros-${ROS_DISTRO}-twist-mux libi2c-dev
 sudo adduser ros dialout
 ```
 Now, to the business:
@@ -87,14 +84,18 @@ git clone https://github.com/slgrobotics/articubot_one.git
 ```
 ROS nodes produce _robot description_ and needs to  know some basic parameters of the robot. Edit the following to match your values:
 ```
-~/robot_ws/src/articubot_one/description/ros2_control.xacro
+~/robot_ws/src/articubot_one/robots/dragger/description/ros2_control.xacro
 
            look for  <param name="enc_counts_per_rev">13730</param>
 
-~/robot_ws/src/articubot_one/description/robot_core.xacro
+~/robot_ws/src/articubot_one/robots/dragger/description/robot_core.xacro
 
            look for <xacro:property name="wheel_radius" value="0.192"/>
                     <xacro:property name="wheel_offset_y" value="0.290"/>
+
+~/robot_ws/src/articubot_one/robots/dragger/config/controllers.yaml
+
+           look for "wheel_separation" and "wheel_radius", "Velocity and acceleration limits"
 ```
 ### Environment variables setup
 
@@ -128,24 +129,28 @@ The script looks like this:
 ```
 #!/bin/bash
 
-cd /home/ros/launch
 source /opt/ros/jazzy/setup.bash
+
+cd /home/ros/robot_ws
+colcon build
+cd /home/ros/launch
+
 source /home/ros/robot_ws/install/setup.bash
 
-ros2 launch /home/ros/robot_ws/src/articubot_one/launch/dragger.launch.py
+ros2 launch /home/ros/robot_ws/src/articubot_one/robots/dragger/launch/dragger.launch.py
 ```
 Robot can be started with:
 ```
 cd ~/launch
 ./bootup_launch.sh
 ```
-There are two ways to control the robot **from a Desktop machine**: 
+On the Desktop, run the following:
 ```
-ros2 launch articubot_one launch_rviz.launch.py use_sim_time:=false
-  -- or --
-ros2 launch robots_bringup rviz_launch.py
+cd ~/robot_ws
+source ~/robot_ws/install/setup.bash
+colcon build; ros2 launch articubot_one launch_rviz.launch.py use_sim_time:=false
 ```
-As Nav2 is started on the robot with _autostart=false_ you need to click on _Startup_ button in RViz to start navigation.
+For diagnostics, run *rqt* and *rqt_graph*
 
 If you choose to save maps (using _slam_toolkit_ RViz2 control) - the files will appear in _~/launch_ directory.
 
@@ -153,7 +158,7 @@ If you choose to save maps (using _slam_toolkit_ RViz2 control) - the files will
 
 ### _Optional:_ Create a Linux service for on-boot autostart
 
-With _Dragger base_ (Arduino wheels driver), _Laser Scanner_ and _IMU_ ROS2 nodes tested, it is time to set up autostart on boot for hands-free operation.
+With _Dragger_ ROS2 nodes tested, you can set up autostart on boot for hands-free operation.
 
 Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/LinuxService.md
 
