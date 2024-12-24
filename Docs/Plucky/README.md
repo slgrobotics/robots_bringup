@@ -85,17 +85,3 @@ Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/
 
 Back to https://github.com/slgrobotics/robots_bringup
 
-----------------
-
-## Useful Links:
-
-Articulated Robotics (Josh Newans):
-
-https://articulatedrobotics.xyz/mobile-robot-1-project-overview/
-
-https://articulatedrobotics.xyz/mobile-robot-13-ros2-control-real/
-
-https://articulatedrobotics.xyz/mobile-robot-full-list/
-
-https://www.facebook.com/ArticulatedRobotics/
-
