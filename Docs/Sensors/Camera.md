@@ -18,4 +18,6 @@ Here is the code I use for the camera **on the Desktop side**: https://github.co
 
 The video link is separated from WiFi and doesn't interfere with normal ROS2 traffic. Experiencing minimal delay allows driving the robot FPV-style and/or performing complex video stream processing on the Desktop.
 
-**Note:** Ubuntu 24.04 introduced breaking changes in the way the video stream is handled ("libcamera" vs. "v4l2"). Cameras on Raspberry Pi 5 don't work anymore (at least, without extra setup effort - see discussion here https://groups.google.com/g/hbrobotics/c/4VITfijo2cM/m/80LidlKAAgAJ). This needs further exploration.
+**Note:** 
+1. The camera and receiver I tested are designed to work outdoors within visual range, without obstructions. Indoors they were performing poorly.
+2. Ubuntu 24.04 introduced breaking changes in the way the video stream is handled ("libcamera" vs. "v4l2"). Cameras on Raspberry Pi 5 don't work anymore (at least, without extra setup effort - see discussion here https://groups.google.com/g/hbrobotics/c/4VITfijo2cM/m/80LidlKAAgAJ). This needs further exploration.
