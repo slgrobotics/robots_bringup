@@ -6,6 +6,8 @@ Here we set up a new Desktop PC to become a ROS playground machine, and a Ground
 
 ## Installing Ubuntu 24.04 LTS ("Noble")
 
+If your machine can't boot from USB Flash Drive:
+
 Install "server" image from DVD (Desktop image doesn't fit on DVD):
 
 https://ubuntu.com/download/server
@@ -14,7 +16,7 @@ Or, if your machine can boot up from USB media, go for the Desktop image and ski
 
 https://ubuntu.com/download/desktop
 
-### Expanding "server" edition to "desktop" (just add GUI):
+### Expand "server" edition to "desktop" (just add GUI):
 ```
 sudo apt update
 sudo apt upgrade
@@ -31,7 +33,7 @@ Take a look at Raspberry Pi setup and choose what is relevant to your Desktop in
 
 https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/README.md
 
-## Installing ROS Jazzy Jalisco Desktop LTS:
+## Install ROS Jazzy Jalisco Desktop LTS:
 
 Follow  https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html
 
@@ -91,46 +93,20 @@ See https://github.com/ros-tooling/topic_tools/blob/jazzy/README.md for details.
 sudo apt install ros-${ROS_DISTRO}-topic-tools
 ```
 
-### xacro processor and Joystick mixer:
+### Install xacro processor and Joystick mixer:
 ```
 sudo apt install ros-${ROS_DISTRO}-xacro ros-${ROS_DISTRO}-twist-mux
 ```
 ### Joystick setup
 
-Joystick teleop friendly blog:
-
-https://articulatedrobotics.xyz/mobile-robot-14a-teleop/
-
-To test your joystick:
-```
-ros2 run joy joy_enumerate_devices
-ros2 run joy joy_node      # <-- Run in first terminal
-ros2 topic echo /joy       # <-- Run in second terminal
-```
-https://index.ros.org/p/teleop_twist_joy/github-ros2-teleop_twist_joy/
-
-**__Note:__** *joy_node sends cmd_vel messages ONLY when enable_button is pressed (Usually btn 1, 0 for ROS)
-	you MUST set enable_button to desired value (0 for btn 1, the "front trigger").
-	ros2 param get /teleop_twist_joy_node enable_button  - to see current value*
-
------  **Tip:**  Create teleop.sh to run/configure joystick driver:  -------- 
-```
-#!/bin/bash
-set +x
-ros2 launch teleop_twist_joy teleop-launch.py &
-sleep 3
-ros2 param set /teleop_twist_joy_node enable_button 0
-ros2 param set /teleop_twist_joy_node enable_turbo_button 3
-set -x
-```
+Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Joystick.md
 
 ## Installing additional navigation and visualization components
 
 To allow GPS operation in sim install localization package, SLAM Toolbox and Nav2:
 ```
 sudo apt install ros-${ROS_DISTRO}-robot-localization ros-${ROS_DISTRO}-imu-tools ros-${ROS_DISTRO}-slam-toolbox
-sudo apt install ros-${ROS_DISTRO}-navigation2 ros-${ROS_DISTRO}-nav2-bringup
-sudo apt install ros-${ROS_DISTRO}-rmw-cyclonedds-cpp
+sudo apt install ros-${ROS_DISTRO}-navigation2 ros-${ROS_DISTRO}-nav2-bringup ros-${ROS_DISTRO}-rmw-cyclonedds-cpp
 ```
 You need to configure ROS to use Cyclone DDS. Make sure the tail of your _.bashrc_ looks like this:
 ```
@@ -196,19 +172,14 @@ The simulated robot should respond to Joystick via teleop. Make sure that your "
 
 You must do _"colcon build"_ in _~/robot_ws_ every time you change anything.
 
-## Optional: Building Turtlebot3 suite and running Cartographer
+## Optional: run Cartographer
 
-You can use well-designed ROBOTIS Turtlebot 3 package to launch Cartographer and Nav2 packages.
-
-There is no _turtlebot3_ binary package for ROS Jazzy. Compile one from my fork, with minor changes:
-
-Follow instructions here: https://github.com/slgrobotics/turtlebot3
-
-When running Cartographer, specify simulated time:
+When running Cartographer, specify simulated time (true or false):
 ```
-source ~/turtlebot3_ws/install/setup.bash
-ros2 launch turtlebot3_cartographer cartographer.launch.py use_sim_time:=true
+source ~/robot_ws/install/setup.bash
+ros2 launch articubot_one cartographer.launch.py use_sim_time:=true
 ```
+Cartographer can be launched from any robot's launch file instead of other _localizers_ (*slam_toolbox* or *map_server*).
 
 ## Optional: Install Husarnet VPN
 
