@@ -7,9 +7,85 @@ Synonyms of plucky: SPIRITED, BRAVE
 ```
 Plucky photos are here: https://photos.app.goo.gl/YdYQ8kQrNmLkVXTM7
 
-If you want to browse robot's code look here: https://github.com/slgrobotics/articubot_one
+Plucky is a *"larger Turtlebot"* - running [my *articubot_one* code](https://github.com/slgrobotics/articubot_one). Desktop only needs to run RViz for robot control.
 
-Plucky is a *"larger Turtlebot"* - running, basically, standard ROS2 Turtlebot 3 binaries for navigation (on the desktop "ground station" computer). Onboard it has two Raspberry Pi 3B ("plucky" and "pluckysens") and an "FPV Drone" TV camera. One RPi runs sensors drivers (LD14 LIDAR and MPU9250), the other - Differential Drive Control, inspired by Articulated Robotics.
+Onboard Plucky has a Raspberry Pi 5 8GB ("plucky"). It runs sensors drivers (LD14 LIDAR, MPU9250 and GPS) and Differential Drive Control (inspired by Articulated Robotics), as well as localization and navigation packages.
+
+Plucky has two Arduino boards, one drives Ultrasonic Parking Sensor, and the other, main Arduino Mega 2560, drives the wheels and combines odometry and health data into a single serial stream for the Raspberry Pi.
+
+There's an option of having an "FPV Drone" TV camera and using _Ultrasonic Parking Sensor_ ("_rangers_" in ROS2 terminology). Parking sensors data will be likely used later, as ROS2 supports rangers for obstacle avoidance and mapping.
+
+The Raspberry Pi 5 on Plucky have Ubuntu 24.04 Server 64 bit and ROS2 Jazzy Base installed - https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html
+
+Arduino Mega 2560 code - wheels/sensors driver: 
+
+https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/PluckyWheelsROS
+
+**Note:** Plucky Arduino Mega 2560 should be on /dev/ttyACM0
+
+Parking sensors info and driver (to be used later):
+
+https://photos.app.goo.gl/WsqkA4XpYSLrVDX59
+
+https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/ParkingSensorI2C
+
+## Build and Run Instructions:
+
+Follow "Dragger" robot guide starting with "_Raspberry Pi 5 ("dragger") Build and Run Instructions_":
+
+https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger
+
+## Running the robot
+
+For convenience, create and populate _launch_ directory:
+```
+mkdir ~/launch
+cp ~/robot_ws/src/articubot_one/launch/bootup_launch.sh ~/launch/.
+chmod +x ~/launch/bootup_launch.sh    
+```
+The script looks like this:
+```
+#!/bin/bash
+
+source /opt/ros/jazzy/setup.bash
+
+cd /home/ros/robot_ws
+colcon build
+cd /home/ros/launch
+
+source /home/ros/robot_ws/install/setup.bash
+
+ros2 launch /home/ros/robot_ws/src/articubot_one/robots/plucky/launch/plucky.launch.py
+```
+Robot can be started with:
+```
+cd ~/launch
+./bootup_launch.sh
+```
+On the Desktop, run the following:
+```
+cd ~/robot_ws
+source ~/robot_ws/install/setup.bash
+colcon build; ros2 launch articubot_one launch_rviz.launch.py use_sim_time:=false
+```
+For diagnostics, run *rqt* and *rqt_graph*
+
+
+### _Optional:_ Create a Linux service for on-boot autostart
+
+With _Plucky_ ROS2 nodes tested, you can set up autostart on boot for hands-free operation.
+
+Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/LinuxService.md
+
+## _Optional_: FPV Camera and receiver Setup
+
+Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md
+
+----------------
+
+Back to https://github.com/slgrobotics/robots_bringup
+
+----------------
 
 ## Useful Links:
 
@@ -23,116 +99,3 @@ https://articulatedrobotics.xyz/mobile-robot-full-list/
 
 https://www.facebook.com/ArticulatedRobotics/
 
-## FPV Camera and receiver Setup [optional]:
-
-https://www.amazon.com/dp/B06VY7L1N4
-
-https://www.amazon.com/dp/B07Q5MPC8V
-
-Camera and transmitter, of course, resides on Plucky. The receiver, when plugged into a Ubuntu 22.04 **Desktop USB port**, shows up as _/dev/video0_ and _video1_
-
-It works with Cheese app and can be read by Python/OpenCV scripts, including custom ROS nodes written in Python.
-
-Here is the code I use for the camera **on the Desktop side**: https://github.com/slgrobotics/camera_publisher
-
-Having the video link separated from WiFi and experiencing minimal delay allows driving the robot FPV-style and/or performing video stream processing on the Desktop.
-
-## Build and Run Instructions:
-
-Plucky has several Arduino boards, some drive the sensors - GPS, Ultrasonic Parking Sensor, MPU, - while the main Arduino Mega 2560 drives the wheels and combines all sensors data into a single serial stream for Raspberry Pi _"plucky"_. This setup appeared historically through different experiments and at this time is mostly just an over-enginered legacy. _"pluckysens"_ RPi has its own MPU9250, and GPS isn't useful indoors. But "plucky" RPi makes full use of wheels driving ability and odometry info. Parking sensors data will be likely used later, as ROS2 supports rangers for obstacle avoidance and mapping.
-
-Both Raspberry Pi 3B on Plucky have Ubuntu 22.04 Server 64 bit and ROS2 Humble Base installed - https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
-
-Arduino Mega 2560 code - wheels/sensors driver: 
-
-https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/PluckyWheelsROS
-
-Parking sensors info and driver (to be used later):
-
-https://photos.app.goo.gl/WsqkA4XpYSLrVDX59
-
-https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/ParkingSensorI2C
-
-GPS Driver (obsolete for an indoors robot):
-
-https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/GPSKitchenSink
-
-Arduino MPU9250 Driver (not used, as another MPU9250 is connecter to "pluckysens" RPi):
-
-https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/MPU9250GyroCompassShorty
-
-### "pluckysens" Raspberry Pi 3B setup (ROS2 LD14 LIDAR and MPU9250 Drivers):
-
-https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2    (Google Translate works here)
-
-https://github.com/hiwad-aziz/ros2_mpu9250_driver
-
-Prerequisites:
-```
-sudo apt install libi2c-dev
-```
-Drivers installation:
-```
-mkdir -p ~/plucky_ws/src
-cd ~/plucky_ws/src
-// LiDAR LD14 (on /dev/ttyUSB0):
-git clone  https://github.com/ldrobotSensorTeam/ldlidar_sl_ros2.git
-
-// For rviz2: time shift corrections :  /home/ros/plucky_ws/src/ldlidar_sl_ros2/src/demo.cpp
-// Line 24:
-#define TIME_SHIFT_SEC 0
-#define TIME_SHIFT_NSEC 400000000
-
-// Lines 204, 310 correct:
-  output.header.stamp = start_scan_time - rclcpp::Duration(TIME_SHIFT_SEC, TIME_SHIFT_NSEC);
-  //output.header.stamp = start_scan_time;
-
-git clone https://github.com/hiwad-aziz/ros2_mpu9250_driver.git
-vi ~/plucky_ws/src/ros2_mpu9250_driver/src/mpu9250driver.cpp   - line 48:   message.header.frame_id = "imu_link"; (was "base_link")
-
-cd ~/plucky_ws
-sudo rosdep init
-rosdep update
-rosdep install --from-paths src --ignore-src -r -y
-colcon build
-
-### Note: Plucky Arduino Mega 2560 should be on /dev/ttyACM0
-```
-
-### "plucky" Raspberry Pi 3B setup (ROS2 Differential Drive Control):
-
-See https://github.com/slgrobotics/diffdrive_arduino (inspired by Articulated Robotics)
-
-Prerequisites:
-```
-sudo apt install ros-humble-ros2-control ros-humble-ros2-controllers
-```
-Now, to the business:
-
-```
-mkdir -p ~/plucky_ws/src
-cd ~/plucky_ws/src
-git clone https://github.com/slgrobotics/diffdrive_arduino.git
-git clone https://github.com/joshnewans/serial.git
-git clone https://github.com/slgrobotics/articubot_one.git
-
-cd ~/plucky_ws
-### Note: See https://docs.ros.org/en/humble/Tutorials/Intermediate/Rosdep.html
-sudo rosdep init
-rosdep update
-rosdep install --from-paths src --ignore-src -r -y
-### Note: build takes ~10 minutes
-colcon build
-
-### Note: Plucky Arduino Mega 2560 on /dev/ttyACM0
-```
-
-### _Optional:_ Create a Linux service for on-boot autostart
-
-With _Plucky base_ (Arduino wheels driver), _Laser Scanner_ and _IMU_ ROS2 nodes tested, it is time to set up autostart on boot for hands-free operation.
-
-Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/LinuxService.md
-
-----------------
-
-Back to https://github.com/slgrobotics/robots_bringup
