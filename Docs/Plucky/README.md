@@ -71,7 +71,7 @@ colcon build; ros2 launch articubot_one launch_rviz.launch.py use_sim_time:=fals
 For diagnostics, run *rqt* and *rqt_graph*
 
 
-### _Optional:_ Create a Linux service for on-boot autostart
+## _Optional:_ Create a Linux service for on-boot autostart
 
 With _Plucky_ ROS2 nodes tested, you can set up autostart on boot for hands-free operation.
 
