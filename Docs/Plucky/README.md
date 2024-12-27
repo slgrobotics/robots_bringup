@@ -9,6 +9,9 @@ Plucky photos are here: https://photos.app.goo.gl/YdYQ8kQrNmLkVXTM7
 
 Plucky is a *"larger Turtlebot"* - running [my *articubot_one* code](https://github.com/slgrobotics/articubot_one). Desktop only needs to run RViz for robot control.
 
+**Note:** You can just run Plucky robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
+refer to [this section](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README.md#build-articubot_one-robot-codebase)
+
 Onboard Plucky has a Raspberry Pi 5 8GB ("plucky"). It runs sensors drivers (LD14 LIDAR, MPU9250 and GPS) and Differential Drive Control (inspired by Articulated Robotics), as well as localization and navigation packages.
 
 Plucky has two Arduino boards, one drives Ultrasonic Parking Sensor, and the other, main Arduino Mega 2560, drives the wheels and combines odometry and health data into a single serial stream for the Raspberry Pi.
@@ -29,7 +32,7 @@ https://photos.app.goo.gl/WsqkA4XpYSLrVDX59
 
 https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/ParkingSensorI2C
 
-## Build and Run Instructions:
+## Build and Run Instructions (on the robot's Raspberry Pi 5):
 
 Follow "Dragger" robot guide starting with "_Raspberry Pi 5 ("dragger") Build and Run Instructions_":
 
