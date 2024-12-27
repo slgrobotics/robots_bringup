@@ -13,6 +13,9 @@ Dragger is a *"larger Turtlebot"* - running all ROS2 nodes on-board. Only RViz2 
 
 Robot's Raspberry Pi 5 (8GB) runs sensors drivers (GPS, LD14 LIDAR and MPU9250), Differential Drive Control (inspired by Articulated Robotics), SLAM Toolkit and Nav2. Arduino Mega 2650 drives wheels and reports encoder readings over serial.
 
+**Note:** You can just run Dragger robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
+refer to [this section](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README.md#build-articubot_one-robot-codebase)
+
 ## Raspberry Pi 5 ("dragger") Build and Run Instructions
 
 Dragger has _Ubuntu 24.04 Server (64 bit)_ and _ROS2 Jazzy Base_ installed - see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi for instructions.
