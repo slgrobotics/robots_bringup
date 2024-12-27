@@ -119,7 +119,9 @@ export ROS_DOMAIN_ID=0
 
 More info - see "Useful Links" below.
 
-## Visualizing terrain maps
+## Note: Visualizing terrain maps
+
+Some robots could be designed for outdoors operation and will use GPS for localization - for example, Dragger. So, we want to see where it is on the aerial map.
 
 There are two ways of visualizing robot position on a map - *mapviz* and *rviz-satellite*
 
@@ -143,43 +145,90 @@ The plugin is sensitive to time stamps, so all components must use the same *use
 
 Running the sim as described below brings Rviz2 with a map view.
 
-## Testing it all with my version of Articubot:
+## Build "articubot_one" robot codebase.
 
-If you want to browse robot's code look here: https://github.com/slgrobotics/articubot_one
+**Note:** If you want to browse robot's code look here: https://github.com/slgrobotics/articubot_one
+
+Here we build a ROS2 package we need to run *Dragger*, *Plucky* or *Turtle* in Gazebo sim or use RViz to control them.
+
+So, on the Desktop machine:
+
 ```
 cd
-mkdir robot_ws
-cd ~/robot_ws/
-mkdir src
-cd src
+mkdir -p ~/robot_ws/src
+cd ~/robot_ws/src
 git clone https://github.com/slgrobotics/articubot_one.git
-cd ..
+cd ~/robot_ws
+
 sudo rosdep init    # do it once, if you haven't done it before
 rosdep update
 rosdep install --from-paths src --ignore-src -r -y
+
 colcon build
 ```
 
-## Bringing up Dragger robot simulation in Gazebo:
+If all goes well, we can now:
+1. Use joystick to control the robots - simulated or physical.
+2. Run any robot in Gazebo with RViz to monitor simulated robot.
+3. Run RViz alone to monitor a physical robot.
+
+## Bringing up robot simulation in Gazebo
+
+Once the *articubot_one* package is built on the Desktop machine, we can run simulation in Gazebo.
+
 ```
 source /opt/ros/${ROS_DISTRO}/setup.bash
+cd ~/robot_ws
+colcon build
 source ~/robot_ws/install/setup.bash
-ros2 launch articubot_one launch_sim.launch.py
+ros2 launch articubot_one dragger_sim.launch.py
+
+or
+ros2 launch articubot_one plucky_sim.launch.py
+
+or
+ros2 launch articubot_one turtle_sim.launch.py
 ```
-You should see Gazebo and RViz GUI coming up. SLAM Toolbox should be building map as you move the robot around with joystick. If you zoom a bit out in RViz, you will see aerial map. 
+You should see Gazebo and RViz GUI coming up. You may see a white 150m x 150m square ("empty_map" from *map_server*) or SLAM Toolbox or Cartographer should be building map as you move the robot around with joystick. If you zoom a bit out in RViz, for an outdoor robot you will see aerial map. 
 
 The simulated robot should respond to Joystick via teleop. Make sure that your "enable" and "turbo" buttons are assigned correctly in _~/robot_ws/src/articubot_one/launch/joystick.launch.py_
 
 You must do _"colcon build"_ in _~/robot_ws_ every time you change anything.
 
-## Optional: run Cartographer
+## Running a physical robot
+
+**Note:** Consult physical robot pages:
+- Dragger: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger
+- Plucky: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky
+- Turtle:https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1
+
+You are unlikely to have an exact clone of Dragger or Plucky, although Create 1 Turtlebot might be still alive in your collection. Or you could've made files for your own robot in the _robots/_ directory.
+
+There are launch files in _robots/_ directories for real robots, intended to *run on their Raspbery Pi's*. So, once the Pi is up and is running robot's nodes, this is how to launch RViz alone on the Desktop computer:
+```
+cd ~/robot_ws
+source ~/robot_ws/install/setup.bash
+ros2 launch articubot_one rviz.launch.py
+```
+While Raspberry Pi 5 on Dragger and Plucky run all robots' Nodes (including Nav2), the Turtle's Raspberry Pi 3B only runs Create 1 _base_ and sensors Nodes.
+So, the turtle launch file must run all the remaining robot's nodes on the Desktop. It is still started the same way (and brings up RViz):
+```
+cd ~/robot_ws
+source ~/robot_ws/install/setup.bash
+ros2 launch articubot_one turtle.launch.py
+```
+
+--------------------------------------------
+
+## Optional: running Cartographer
+
+Cartographer is just one of localaizers - *slam_toolbox* and *map_server* being the other two I use. It can be run from a robot's launch file or separately, as described here.
 
 When running Cartographer, specify simulated time (true or false):
 ```
 source ~/robot_ws/install/setup.bash
 ros2 launch articubot_one cartographer.launch.py use_sim_time:=true
 ```
-Cartographer can be launched from any robot's launch file instead of other _localizers_ (*slam_toolbox* or *map_server*).
 
 ## Optional: Install Husarnet VPN
 
