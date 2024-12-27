@@ -208,7 +208,7 @@ There are launch files in _robots/_ directories for real robots, intended to *ru
 ```
 cd ~/robot_ws
 source ~/robot_ws/install/setup.bash
-ros2 launch articubot_one rviz.launch.py
+ros2 launch articubot_one launch_rviz.launch.py
 ```
 While Raspberry Pi 5 on Dragger and Plucky run all robots' Nodes (including Nav2), the Turtle's Raspberry Pi 3B only runs Create 1 _base_ and sensors Nodes.
 So, the turtle launch file must run all the remaining robot's nodes on the Desktop. It is still started the same way (and brings up RViz):
