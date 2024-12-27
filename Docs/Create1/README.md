@@ -8,6 +8,9 @@ My Create 1 has a Raspberry Pi 3B ("turtle"). The RPi runs sensors drivers (XV11
 
 The rest of the robot nodes run on the Desktop, using my *articubot_one* codebase, inspired by Articulated Robotics.
 
+**Note:** You can just run Turtle robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
+refer to [this section](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README.md#build-articubot_one-robot-codebase)
+
 ## Turtle Raspberry Pi 3B Build and Run Instructions:
 
 Turtle has _Ubuntu 24.04 Server (64 bit)_ and _ROS2 Jazzy Base_ installed - see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi for instructions.
