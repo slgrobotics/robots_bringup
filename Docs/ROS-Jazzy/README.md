@@ -20,8 +20,7 @@ https://ubuntu.com/download/desktop
 ```
 sudo apt update
 sudo apt upgrade
-sudo apt install ubuntu-desktop
-sudo apt install gdm3
+sudo apt install ubuntu-desktop gdm3
 sudo reboot now
 locale
 sudo apt install software-properties-common
