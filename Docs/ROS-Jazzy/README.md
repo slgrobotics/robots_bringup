@@ -106,7 +106,7 @@ Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/
 To allow GPS operation in sim install localization package, SLAM Toolbox and Nav2:
 ```
 sudo apt install ros-${ROS_DISTRO}-robot-localization ros-${ROS_DISTRO}-imu-tools ros-${ROS_DISTRO}-slam-toolbox
-sudo apt install ros-${ROS_DISTRO}-navigation2 ros-${ROS_DISTRO}-nav2-bringup ros-${ROS_DISTRO}-rmw-cyclonedds-cpp
+sudo apt install ros-${ROS_DISTRO}-navigation2 ros-${ROS_DISTRO}-nav2* ros-${ROS_DISTRO}-rmw-cyclonedds-cpp
 ```
 You need to configure ROS to use Cyclone DDS. Make sure the tail of your _.bashrc_ looks like this:
 ```
