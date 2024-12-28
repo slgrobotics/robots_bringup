@@ -53,6 +53,7 @@ https://gazebosim.org/docs/harmonic/ros_installation#installing-the-default-gaze
 ```
 sudo apt install ros-${ROS_DISTRO}-ros-gz
 # see if Gazebo UI comes up without crashing:
+source ~/.bashrc
 gz sim
 ```
 
