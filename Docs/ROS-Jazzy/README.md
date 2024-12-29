@@ -154,7 +154,6 @@ Here we build a ROS2 package we need to run *Dragger*, *Plucky* or *Turtle* in G
 So, on the Desktop machine:
 
 ```
-cd
 mkdir -p ~/robot_ws/src
 cd ~/robot_ws/src
 git clone https://github.com/slgrobotics/articubot_one.git
@@ -193,7 +192,7 @@ You should see Gazebo and RViz GUI coming up. You may see a white 150m x 150m sq
 
 The simulated robot should respond to Joystick via teleop. Make sure that your "enable" and "turbo" buttons are assigned correctly in _~/robot_ws/src/articubot_one/launch/joystick.launch.py_
 
-You must do _"colcon build"_ in _~/robot_ws_ every time you change anything.
+You must do _"colcon build"_ in _~/robot_ws_ every time you change anything. The "_source ..._" statements above should be put in your _.bashrc_ for convenience.
 
 ## Running a physical robot
 
