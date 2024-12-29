@@ -4,7 +4,7 @@ _"It takes all the running you can do, to keep in the same place. If you want to
 
 Here we set up a new Desktop PC to become a ROS playground machine, and a Ground Station for our robots. 
 
-## Installing Ubuntu 24.04 LTS ("Noble")
+## Install Ubuntu 24.04 LTS ("Noble")
 
 If your machine can't boot from USB Flash Drive:
 
@@ -47,7 +47,7 @@ sudo adduser <your account> dialout
 sudo apt install ros-${ROS_DISTRO}-joy*
 ```
 
-## Installing Gasebo Harmonic (using "Default Gazebo/ROS Pairing"):
+## Install Gasebo Harmonic (using "Default Gazebo/ROS Pairing"):
 
 https://gazebosim.org/docs/harmonic/ros_installation#installing-the-default-gazebo-ros-pairing
 ```
@@ -76,7 +76,7 @@ export DISPLAY=<machine>.local:0.0
 gz sim -v 4 shapes.sdf
 ```
 
-## Installing Controller Manager and its infrastructure:
+## Install Controller Manager and its infrastructure:
 ```
 sudo apt install ros-${ROS_DISTRO}-ros2-control ros-${ROS_DISTRO}-ros2-controllers
 
@@ -101,7 +101,7 @@ sudo apt install ros-${ROS_DISTRO}-xacro ros-${ROS_DISTRO}-twist-mux
 
 Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Joystick.md
 
-## Installing additional navigation and visualization components
+## Install additional navigation and visualization components
 
 To allow GPS operation in sim install localization package, SLAM Toolbox and Nav2:
 ```
@@ -117,7 +117,21 @@ export ROS_DOMAIN_ID=0
 #export QT_QPA_PLATFORM=xcb
 ```
 
-More info - see "Useful Links" below.
+## Verify your installation
+
+At this point you should verify your installation by trying a "Turtlebot SIM Test", described here:
+
+https://docs.nav2.org/getting_started/index.html
+
+There's no need to install anything else or set up Turtle environment variables for Jazzy.
+
+Just bring up a new terminal (so that your updated _.bashrc_ is sourced) and paste the following:
+```
+ros2 launch nav2_bringup tb3_simulation_launch.py headless:=False
+```
+You should see Gazebo and RViz windows coming up. In RViz set _2D Pose Estimate_ as described [here](https://docs.nav2.org/getting_started/index.html#navigating).
+
+You should see costmap and should be able to set a _Nav2 Goal_ and watch the robot navigating there autonomously.
 
 ## Note: Visualizing terrain maps
 
