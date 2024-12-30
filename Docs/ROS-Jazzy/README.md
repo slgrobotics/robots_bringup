@@ -175,7 +175,7 @@ cd ~/robot_ws
 
 sudo rosdep init    # do it once, if you haven't done it before
 rosdep update
-rosdep install --from-paths src --ignore-src -r -y
+rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y
 
 colcon build
 ```
@@ -237,8 +237,13 @@ ros2 launch articubot_one turtle.launch.py
 
 Cartographer is just one of localaizers - *slam_toolbox* and *map_server* being the other two I use. It can be run from a robot's launch file or separately, as described here.
 
-When running Cartographer, specify simulated time (true or false):
+Cartographer is not actively supported for ROS2 and cannot be installed from binaries, but can be compiled from Turtlebot3 sources. We modified just a few files to make it work with our hardware.
+
+Follow instructions here: [https://github.com/slgrobotics/turtlebot3](https://github.com/slgrobotics/turtlebot3?tab=readme-ov-file#build-and-run-instructions-your-desktop-machine)
+
+When running Cartographer, source its .bash file and specify simulated time (true or false):
 ```
+source ~/turtlebot3_ws/install/setup.bash
 source ~/robot_ws/install/setup.bash
 ros2 launch articubot_one cartographer.launch.py use_sim_time:=true
 ```
