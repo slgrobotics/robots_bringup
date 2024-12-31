@@ -216,7 +216,7 @@ You must do _"colcon build"_ in _~/robot_ws_ every time you change anything. The
 - Plucky: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky
 - Turtle:https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1
 
-You are unlikely to have an exact clone of Dragger or Plucky, although Create 1 Turtlebot might be still alive in your collection. Or you could've made files for your own robot in the _robots/_ directory.
+You are unlikely to have an exact clone of _Dragger_ or _Plucky_, although and old _Create 1 Turtlebot_ might be still alive in your collection. Or you could've created files for your own robot in the _robots/_ directory.
 
 There are launch files in _robots/_ directories for real robots, intended to *run on their Raspbery Pi's*. So, once the Pi is up and is running robot's nodes, this is how to launch RViz alone on the Desktop computer:
 ```
