@@ -10,33 +10,64 @@ Some of the docs here deal with Desktop ("*Ground Station*") setup and operation
 
 We assume:
 
-- On the Desktop machine (Intel, AMD) - Ubuntu 24.04 64-bit *desktop*, ROS Jazzy
+- On the Desktop machine (Intel, AMD) - Ubuntu 24.04 64-bit *desktop*, ROS Jazzy _desktop_
 
-- On-board single board computer (SBC) - Raspberry Pi 5 8GB or similar, Ubuntu *server* 24.04 64-bit, ROS Jazzy
+- On-board single board computer (SBC) - Raspberry Pi 5 8GB or similar, Ubuntu *server* 24.04 64-bit, ROS Jazzy _base_ (access via _ssh_)
 
 If you just want to run a simulation in Gazebo, or need to set up your Desktop with ROS Jazzy -
 
 see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy (no robot hardware required).
 
+# Here are the robots:
+
 ## Dragger
 
 The outdoorsy robot Dragger (Raspberry 5, GPS) is described here:
-
-https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger
+[Docs/Dragger](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger)
 
 ## Plucky
 
 An indoors mapper robot Plucky is described here (Raspberry 5):
+[Docs/Plucky](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky)
 
-https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky
+## The Venerable _Create 1_ Turtlebot, now Jazzified
 
-## Create 1 Turtlebot
+Classic Turtlebot, a visitor from the ancient times, running on Raspberry 3B:
+[Docs/Create1](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1)
 
-Classic Turtlebot, a visitor from the ancient times, running on Raspberry 3B, now Jazzified:
+# How to use this repository
 
-https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1
+**Note:** you don't need to download or build anything from this repository, just browse the Docs folder.
 
-**Note:** you don't need to download or build anything from this repository, just browse the Docs folder.  
+Here are the likely scenarios for your work.
+
+### 1. Just set up a "Clean Machine" for ROS2 Jazzy work
+
+- Desktop workstation: see [Docs/ROS-Jazzy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy) (no robot hardware required).
+
+- Set up Raspberry PI: see [Docs/Ubuntu-RPi](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi)
+
+### 2. Try my robots in Gazebo simulation, browse the code
+
+- See the #1 above, just follow the build and run instructions there for Dragger, Plucky or Turtle sims.
+
+- Bonus: ROS2 Jazzy comes with _Turtlebot3_ simulation, try that to see Nav2 working.
+
+- To browse robot's code look under *~/robot_ws/src/articubot_one* - use VS Code or your favorite IDE.
+
+### 3. Work on your own codebase
+
+- *articubot_one* codebase offers a working example of indoors and outdoors (GPS) operation, use Copy/Paste
+
+- Fork my *articubot_one* repository and make your own robot in ~/robot_ws/src/articubot_one/robots folder
+
+### Found a bug? Want to contribute a fix?
+
+- Report here: https://github.com/slgrobotics/articubot_one/issues
+
+- Create a _Pull Request_: https://github.com/slgrobotics/articubot_one/pulls
+
+---------------------------------
 
 ## Useful links
 
