@@ -107,6 +107,7 @@ To allow GPS operation in sim install localization package, SLAM Toolbox and Nav
 ```
 sudo apt install ros-${ROS_DISTRO}-robot-localization ros-${ROS_DISTRO}-imu-tools ros-${ROS_DISTRO}-slam-toolbox
 sudo apt install ros-${ROS_DISTRO}-navigation2 ros-${ROS_DISTRO}-nav2* ros-${ROS_DISTRO}-rmw-cyclonedds-cpp
+sudo apt install ros-${ROS_DISTRO}-cartographer-ros
 ```
 You need to configure ROS to use Cyclone DDS. Make sure the tail of your _.bashrc_ looks like this:
 ```
@@ -233,26 +234,19 @@ ros2 launch articubot_one turtle.launch.py
 
 --------------------------------------------
 
-## Optional: running Cartographer
+## Optional: running Cartographer instead of Slam_Toolbox
 
 Cartographer is just one of localaizers - *slam_toolbox* and *map_server* being the other two I use. It can be run from a robot's launch file or separately, as described here.
 
-Cartographer is not actively supported for ROS2 and cannot be installed from binaries, but can be compiled from Turtlebot3 sources. We modified just a few files to make it work with our hardware.
-
-Follow instructions here: [https://github.com/slgrobotics/turtlebot3](https://github.com/slgrobotics/turtlebot3?tab=readme-ov-file#build-and-run-instructions-your-desktop-machine)
-
-When running Cartographer, source its .bash file and specify simulated time (true or false):
-```
-source ~/turtlebot3_ws/install/setup.bash
-source ~/robot_ws/install/setup.bash
-ros2 launch articubot_one cartographer.launch.py use_sim_time:=true
-```
+Cartographer nodes are normally commented out in my _*.launch.py_ files, you need to edit them to try Cartographer.
 
 ## Optional: Install Husarnet VPN
 
 If you want Cyclone DDS to work across LAN _subnets_, 5G/LTE phone hotspots etc. - you need Husarnet VPN.
 
 See https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README-Husarnet.md
+
+--------------------------------------------
 
 ## Useful links
 
