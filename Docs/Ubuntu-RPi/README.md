@@ -176,8 +176,8 @@ network:
       wlan0:
         optional: true
         access-points:
-                "<my network SSID>":
-                    password: "<your WiFi password here>"
+          "<your WiFi network SSID>":
+            password: "<your WiFi password here>"
         dhcp6: true
         dhcp4: false
         addresses:
