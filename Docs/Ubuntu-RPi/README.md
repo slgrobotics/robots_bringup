@@ -157,7 +157,7 @@ Now, in sudo mode, you can edit _/etc/netplan/50-cloud-init.yaml_ directly - set
 
 Google "_how to assign static ip address on ubuntu 24.04 server_" for details.
 
-This is an example file I use in _/etc/netplan/50-cloud-init.yaml_ - to assign "192.168.1.137 address (your network may be other than ```192.168.*.*```):
+This is an example file I use in _/etc/netplan/50-cloud-init.yaml_ - to assign "192.168.1.137 address (your local network may be other than ```192.168.*.*```):
 ```	
 # This file is generated from information provided by the datasource.  Changes
 # to it will not persist across an instance reboot.  To disable cloud-init's
@@ -167,29 +167,27 @@ This is an example file I use in _/etc/netplan/50-cloud-init.yaml_ - to assign "
 network:
     version: 2
     ethernets:
-        eth0:
-            optional: true
-            dhcp6: true
-            dhcp4: false
-            addresses:
-                    - 192.168.1.137/24
-            gateway4: 192.168.1.1
-            nameservers:
-                    addresses: [192.168.1.1]
+      eth0:
+        optional: true
+        dhcp6: true
+        dhcp4: true
 
     wifis:
-        wlan0:
-            optional: true
-            access-points:
+      wlan0:
+        optional: true
+        access-points:
                 "<my network SSID>":
                     password: "<your WiFi password here>"
-            dhcp6: true
-            dhcp4: false
-            addresses:
-                    - 192.168.1.137/24
-            gateway4: 192.168.1.1
-            nameservers:
-                    addresses: [192.168.1.1]
+        dhcp6: true
+        dhcp4: false
+        addresses:
+          - 192.168.1.137/24
+        routes:
+          - to: default
+            via: 192.168.1.1/24
+        nameservers:
+          addresses:
+            - 192.168.1.1
 ```	
 **Note:** static addresses you assign should be within the "exclusion zone" of your router's DHCP service. This is easy setup on the router side. 
 
