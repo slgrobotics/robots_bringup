@@ -144,9 +144,9 @@ https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README-Hu
 
 It is possible, that after the initial boot your network won't be set up properly.
 
-On top of that, your mobile robot will work much better, if it is assigned static network address and it doesn't have to query DSHP service on your router.
+On top of that, your mobile robot will work much better, if it is assigned static network address and it doesn't have to query DHCP service on your router.
 
-Ubuntu uses "cloud-init" service to set up your network every time you boot up. Turn it off:
+Ubuntu uses "_cloud-init_" service to set up your network every time you boot up. Turn it off:
 
 In sudo mode, create a file _/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg_ with the following content:
 ```
@@ -189,7 +189,16 @@ network:
           addresses:
             - 192.168.1.1
 ```	
-**Note:** static addresses you assign should be within the "exclusion zone" of your router's DHCP service. This is easy setup on the router side. 
+**Note:** static addresses you assign should be within the "exclusion zone" of your router's DHCP service. This is easy setup on the router side.
+
+Now reload configuration and check the result:
+```
+sudo netplan apply
+
+ifconfig -a
+  or
+ip a
+```
 
 ### _Optional:_ time sync using _chrony_
 
