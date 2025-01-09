@@ -118,10 +118,19 @@ ros@turtle:~/robot_ws$ ros2 launch create_bringup create_1.launch
 [create_driver-1] [INFO] [1721743898.881650532] [create_driver]: [CREATE] Battery level 100.00 %
 [create_driver-1] [INFO] [1721743899.054224697] [create_driver]: [CREATE] Ready.
 ```
-**Tip:** Any time you need to produce a robot URDF from ```.xacro``` files, use "_xacro_" command, for example:
+### Populate _launch_ folder: _/home/ros/launch_
 ```
-source ~/robot_ws/install/setup.bash
-xacro ~/robot_ws/install/articubot_one/share/articubot_one/robots/turtle/description/robot.urdf.xacro sim_mode:=true > /tmp/robot.urdf
+mkdir ~/launch
+cd ~/launch
+# place myturtle.py and bootup_launch.sh here:
+cp ~/robot_ws/src/create_robot/create_bringup/launch/bootup_launch.sh .
+cp ~/robot_ws/src/create_robot/create_bringup/launch/myturtle.py .
+chmod +x ~/launch/bootup_launch.sh    
+```
+Now, when you need to run the on-board nodes on the robot using SSH, just type:
+```
+cd ~/launch
+./bootup_launch.sh
 ```
 ## Test-driving Create 1 Turtlebot with _teleop_
 
@@ -137,6 +146,17 @@ With _Create base_, _XV11 Laser Scanner_ and _BNO055 IMU_ ROS2 nodes tested, it 
 
 See https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/LinuxService.md
 
+## On the Desktop:
+
+Once you have Turtlebot on-board nodes (hardware "drivers") running, it is time to run the rest of the nodes and RViz on the Desktop.
+
+Consult [running-a-physical-robot](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#running-a-physical-robot)
+
+**Tip:** Any time you need to produce a robot URDF from ```.xacro``` files, use "_xacro_" command, for example:
+```
+source ~/robot_ws/install/setup.bash
+xacro ~/robot_ws/install/articubot_one/share/articubot_one/robots/turtle/description/robot.urdf.xacro sim_mode:=true > /tmp/robot.urdf
+```
 ---------------------
 
 Back to main page: https://github.com/slgrobotics/robots_bringup/tree/main
