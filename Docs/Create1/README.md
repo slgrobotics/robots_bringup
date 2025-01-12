@@ -71,6 +71,8 @@ colcon build --parallel-workers=1 --executor sequential
 colcon build
 ```
 This is how it looked on my Raspberry Pi 3B with 1 GB RAM:
+
+**Note:** use HDMI monitor and USB keyboard, as SSH will be interrupted on RPi 3 for the lack of resources.
 ```
 ros@turtle:~/robot_ws$ export MAKEFLAGS="-j 1"
 ros@turtle:~/robot_ws$ colcon build --parallel-workers=1 --executor sequential
