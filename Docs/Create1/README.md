@@ -127,6 +127,8 @@ cd ~/launch
 # place myturtle.py and bootup_launch.sh here:
 cp ~/robot_ws/src/create_robot/create_bringup/launch/bootup_launch.sh .
 cp ~/robot_ws/src/create_robot/create_bringup/launch/myturtle.py .
+# You might need a helper program to adjust "gyro_offset":
+cp ~/robot_ws/src/create_robot/create_bringup/launch/roomba.py .
 chmod +x ~/launch/bootup_launch.sh    
 ```
 Now, when you need to run the on-board nodes on the robot using SSH, just type:
@@ -162,11 +164,11 @@ Any analog gyro will do. The original accessory interface board which plugs into
 
 I had to create an _"analog gyro emulator"_ by connecting arduino mini to MPU9250 - and producing the same analog signal via PWM (https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/MPU9250GyroTurtlebot).
 
-*Create base* does not read the gyro (or gyro emulator) - it just passes it through from the analog input (DB25 pin 4 of Cargo Bay) to the serial stream (which sends all sensor data every 15ms).
+*Create base* does not read the gyro (or gyro emulator) directly - it just passes it through from the analog input (DB25 pin 4 of Cargo Bay) to the serial stream (which sends all sensor data every 15ms).
 
-Your gyro output will produce an ADC value between 0 and 1024, hopefully around 512, when stationary, and that value will vary with rotation (reflecting, naturally, robot's turn rate).
+When stationary, the gyro output will produce an ADC value between 0 and 1024, hopefully around 512, and that value will vary with rotation (reflecting, naturally, robot's turn rate).
 
-Autonomy Lab Create driver with my modifications reads this value, adds gyro_offset and multiplies it by gyro_scale - and then integrates it (by dt) to produce turn angle.
+Autonomy Lab *Create driver* [with my modifications](https://github.com/slgrobotics/create_robot) reads this value, adds gyro_offset and multiplies it by gyro_scale - and then integrates it (by dt) to produce turn angle.
 
 https://github.com/slgrobotics/libcreate/blob/master/src/create.cpp : 148
 ```
@@ -182,11 +184,7 @@ Create driver needs *angle* to correctly publish *diff_cont/odom* topic, which i
 
 You will need to calibrate your gyro, by tweaking parameters (see launch file at https://github.com/slgrobotics/turtlebot_create/tree/main/RPi_Setup/launch ).
 
-I describe this process as follows (at https://github.com/slgrobotics/create_robot): 
-
-**Tuning gyro_offset and gyro_scale**
-
-You need to bring up Rviz2 to see odometry vector. The best way is to follow "On the Desktop" section above.
+**Tuning gyro_offset, gyro_scale and distance_scale**
 
 There are three parameters in *~/launch/myturtle.py* (which you copied above). By adjusting them you make odometry (reported by *Create base driver*) work properly.
 ```
@@ -194,11 +192,15 @@ There are three parameters in *~/launch/myturtle.py* (which you copied above). B
 'gyro_scale': 1.19,
 'distance_scale': 1.02
 ```
-"Cargo Bay Analog Signal", as read by *Create 1 base* on DB25 pin 4, connected in our case to gyro, is expected to be 512 when the robot is stationary. If it differs (say, 202 when robot doesn't move) - gyro_offset compensates for that (say, 512-202=310). Adjust it accordingly.
+"Cargo Bay Analog Signal", as read by *Create 1 base* on DB25 pin 4, connected in our case to gyro, is expected to be 512 when the robot is stationary. If it differs (say, 202 when robot doesn't move) - gyro_offset compensates for that (say, 512-202=310). Adjust it accordingly using a helper program: ```cd ~/launch; python3 roomba.py```.
 
-The turn rate scale, as reported by gyro, usually needs adjustment. You need to drive the robot forward a couple meters and watch the odom point in Rviz to stay at the launch point. Then turn the robot (using teleop) and watch the *odom* point move. Adjust the gyro_scale for minimal odom displacement during rotations.
+Now you need to bring up Rviz2 to see odometry vector. The best way is to follow "On the Desktop" section above.
+
+The turn rate scale, as reported by gyro, usually needs adjustment. Drive the robot using joystick - turn it 360 degrees and see if the Odometry vector (showing *diff_cont/odom*) is lagging behind or gaining over the robot's orientation. Adjust 'gyro_scale' to have them match.
 
 The *distance_scale* can be adjusted so that *diff_cont/odom* **pose** reports proper distance when robot is driven forward or backward.
+
+As a final test, you need to drive the robot forward a couple meters and watch the odom point in Rviz to stay at the launch point. Then turn the robot and watch the *odom* point move. You should strive for minimal odom displacement during straight runs and rotations.
 
 Once the parameters are adjusted, your robot will be able to map the area, and the _odom_ point will not move dramatically when the robot drives and turns in any direction.
 
