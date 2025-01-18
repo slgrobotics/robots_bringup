@@ -55,11 +55,35 @@ https://docs.nav2.org/configuration/packages/costmap-plugins/range.html
 
 https://automaticaddison.com/ros-2-navigation-tuning-guide-nav2/  (scroll down to or search for "*range_sensor_layer*")
 
-https://github.com/ros-navigation/docs.nav2.org/blob/master/configuration/packages/costmap-plugins/range.rst
-
 https://github.com/ros-navigation/navigation2/blob/main/nav2_costmap_2d/plugins/range_sensor_layer.cpp
 
 https://github.com/ros-navigation/navigation2/blob/main/nav2_costmap_2d/include/nav2_costmap_2d/range_sensor_layer.hpp
 
 https://robotics.stackexchange.com/questions/66885/adding-range-sensor-layer-to-layered-costmap-for-global-planning
+
+The _costmap_ section in *nav2_params.yaml* should look like this:
+```
+# see https://docs.nav2.org/configuration/packages/configuring-costmaps.html
+local_costmap:
+  local_costmap:
+    ros__parameters:
+      enable_stamped_cmd_vel: true
+   ...
+      plugins: ["static_layer", "obstacle_layer", "inflation_layer", "sonar_layer"]
+      inflation_layer:
+   ...
+      obstacle_layer:
+   ...
+      static_layer:
+   ...
+      sonar_layer:
+        plugin: "nav2_costmap_2d::RangeSensorLayer"
+        enabled: True
+        topics: ["/sonarLeft", "/sonarRight"]
+        mark_threshold: 0.7
+        inflate_cone: 0.99
+      always_send_full_costmap: True
+```
+Refer to https://github.com/ros-navigation/docs.nav2.org/blob/master/configuration/packages/costmap-plugins/range.rst for configuration details.
+
 
