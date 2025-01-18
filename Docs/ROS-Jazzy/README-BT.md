@@ -1,6 +1,6 @@
-## Behavior trees
+## Behavior Trees in Nav2 package
 
-Your typical nav2_params.yaml contains sections related to behavior trees, the most obvious are:
+Your typical *nav2_params.yaml* file contains sections related to behavior trees, the most obvious are:
 ```
 # see https://docs.nav2.org/configuration/packages/configuring-bt-navigator.html
 bt_navigator:
@@ -19,14 +19,18 @@ behavior_server:
     local_footprint_topic: local_costmap/published_footprint
   ...
 ```
-Here are some original docs:
+Here are some original docs to help understanding Nav2 operation:
 
+- https://roscon.ros.org/2019/talks/roscon2019_navigation2_overview_final.pdf
+- https://docs.nav2.org/configuration/packages/configuring-bt-navigator.html
 - https://www.behaviortree.dev/docs/intro
 - https://www.behaviortree.dev/docs/ros2_integration
+- https://docs.nav2.org/behavior_trees/overview/detailed_behavior_tree_walkthrough.html
+- https://automaticaddison.com/ros-2-navigation-tuning-guide-nav2/
 
 ### Using Groot2
 
-Groot2 is a visualization tool for BTs.
+_Groot2_ is a visualization tool for Behavior Trees.
 
 First, install it - https://www.behaviortree.dev/groot/
 
@@ -37,6 +41,25 @@ chmod +x Groot2-v1.6.1-x86_64.AppImage
 ./Groot2-v1.6.1-x86_64.AppImage 
 ```
 Groot2 will come up and can be used now. Try opening the following file (or any other in that directory):
-
+```
 /opt/ros/jazzy/share/nav2_bt_navigator/behavior_trees/navigate_through_poses_w_replanning_and_recovery.xml
+```
+Refer to https://docs.nav2.org/tutorials/docs/using_groot.html for instructions
+
+### Range sensors in cosmap layer
+
+LIDAR scans are not the only possible source of information for Nav2 costmaps. 
+You can integrate sonars or any other range sensors into Nav2 using standard plugins.
+
+https://docs.nav2.org/configuration/packages/costmap-plugins/range.html
+
+https://automaticaddison.com/ros-2-navigation-tuning-guide-nav2/  (scroll down to or search for "*range_sensor_layer*")
+
+https://github.com/ros-navigation/docs.nav2.org/blob/master/configuration/packages/costmap-plugins/range.rst
+
+https://github.com/ros-navigation/navigation2/blob/main/nav2_costmap_2d/plugins/range_sensor_layer.cpp
+
+https://github.com/ros-navigation/navigation2/blob/main/nav2_costmap_2d/include/nav2_costmap_2d/range_sensor_layer.hpp
+
+https://robotics.stackexchange.com/questions/66885/adding-range-sensor-layer-to-layered-costmap-for-global-planning
 
