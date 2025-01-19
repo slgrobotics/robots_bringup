@@ -19,7 +19,7 @@ behavior_server:
     local_footprint_topic: local_costmap/published_footprint
   ...
 ```
-Here are some original docs to help understanding Nav2 operation:
+Here are some original docs to help understanding Nav2 architecture and operation:
 
 - https://roscon.ros.org/2019/talks/roscon2019_navigation2_overview_final.pdf
 - https://docs.nav2.org/configuration/packages/configuring-bt-navigator.html
@@ -46,7 +46,7 @@ Groot2 will come up and can be used now. Try opening the following file (or any 
 ```
 Refer to https://docs.nav2.org/tutorials/docs/using_groot.html for instructions
 
-### Range sensors in cosmap layer
+### Range sensors in costmap layer
 
 LIDAR scans are not the only possible source of information for Nav2 costmaps. 
 You can integrate sonars or any other range sensors into Nav2 using standard plugins.
@@ -61,7 +61,7 @@ https://github.com/ros-navigation/navigation2/blob/main/nav2_costmap_2d/include/
 
 https://robotics.stackexchange.com/questions/66885/adding-range-sensor-layer-to-layered-costmap-for-global-planning
 
-The _costmap_ section in *nav2_params.yaml* should look like this:
+Either *_costmap_ section in *nav2_params.yaml* should look like this:
 ```
 # see https://docs.nav2.org/configuration/packages/configuring-costmaps.html
 local_costmap:
