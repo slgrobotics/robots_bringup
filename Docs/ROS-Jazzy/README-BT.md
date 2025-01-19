@@ -28,6 +28,8 @@ Here are some original docs to help understanding Nav2 architecture and operatio
 - https://docs.nav2.org/behavior_trees/overview/detailed_behavior_tree_walkthrough.html
 - https://automaticaddison.com/ros-2-navigation-tuning-guide-nav2/
 
+Nav2 source code resides on GitHub: https://github.com/ros-navigation/navigation2
+
 ### Using Groot2
 
 _Groot2_ is a visualization tool for Behavior Trees.
@@ -40,7 +42,7 @@ cd ~/Downloads
 chmod +x Groot2-v1.6.1-x86_64.AppImage 
 ./Groot2-v1.6.1-x86_64.AppImage 
 ```
-Groot2 will come up and can be used now. Try opening the following file (or any other in that directory):
+Groot2 GUI will come up and can be used now. Try opening the following file (or any other in that directory):
 ```
 /opt/ros/jazzy/share/nav2_bt_navigator/behavior_trees/navigate_through_poses_w_replanning_and_recovery.xml
 ```
