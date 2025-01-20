@@ -246,6 +246,12 @@ If you want Cyclone DDS to work across LAN _subnets_, 5G/LTE phone hotspots etc.
 
 See https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README-Husarnet.md
 
+## Optional: Explore Nav2 and Behavior Trees
+
+Robot's path planning and its ability to reach its goals is programmed in Nav2 package. Behavior Trees library is used it that package.
+
+See https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README-BT.md
+
 --------------------------------------------
 
 ## Useful links
