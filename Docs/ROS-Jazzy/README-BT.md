@@ -48,6 +48,39 @@ Groot2 GUI will come up and can be used now. Try opening the following file (or 
 ```
 Refer to https://docs.nav2.org/tutorials/docs/using_groot.html for instructions
 
+### Behavior Trees and RViz2
+
+Navigator plugins expose _service ports_, which accept requests from other programs.
+RViz2 can connect to two "*standard*" ports, and therefore interact with two "*standard*" plugins.
+
+When you click on "*Nav2 Goal*" button or use "*Navigate through poses*" mode in RViz2 left panel, those service ports are called. 
+
+Here is the *nav2_params.yaml* code which allows such interaction:
+```
+# Two navigators and their trees supporting different RViz2 mouse-click navigation modes: 
+navigators: ["navigate_to_pose", "navigate_through_poses"]
+# These two lines should be here for the param_substitutions in "*_nav.launch.py" to work:
+default_nav_to_pose_bt_xml: "/opt/ros/jazzy/share/nav2_bt_navigator/behavior_trees/navigate_to_pose_w_replanning_and_recovery.xml"
+default_nav_through_poses_bt_xml: "/opt/ros/jazzy/share/nav2_bt_navigator/behavior_trees/navigate_through_poses_w_replanning_and_recovery.xml"
+navigate_to_pose:
+  plugin: "nav2_bt_navigator::NavigateToPoseNavigator"
+navigate_through_poses:
+  plugin: "nav2_bt_navigator::NavigateThroughPosesNavigator"
+```
+To substitute either of these trees, the following code in "*_nav.launch.py" can be used:
+```
+    param_substitutions = {
+        # Two navigators and their trees supporting different RViz2 mouse-click navigation modes: 
+        #'default_nav_through_poses_bt_xml': os.path.join(robot_path,"behavior_trees","navigate_through_poses_w_replanning_and_recovery.xml"),
+        'default_nav_to_pose_bt_xml': os.path.join(robot_path,"behavior_trees","odometry_calibration.xml"),
+        #'default_nav_to_pose_bt_xml': os.path.join(robot_path,"behavior_trees","navigate_to_pose_w_replanning_and_recovery.xml")
+    }
+  ...
+```
+In the above case, when you click on "*Nav2 Goal*" button and then anywhere on the map area, the "odometry_calibration.xml" will be activated.
+
+Refer to https://github.com/slgrobotics/articubot_one for actual code. _Dev_ branch is usually more current, while _main_ is stable.
+
 ### Range sensors in costmap layer
 
 LIDAR scans are not the only possible source of information for Nav2 costmaps. 
