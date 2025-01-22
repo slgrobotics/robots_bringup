@@ -32,6 +32,10 @@ An indoors mapper robot Plucky is described here (Raspberry 5):
 Classic Turtlebot, a visitor from the ancient times, running on Raspberry 3B:
 [Docs/Create1](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1)
 
+# Note: Purpose and Limitations of this Project
+
+This software is not ready for production use. It has neither been developed nor tested for a specific use case. However, the license conditions of the applicable Open Source licenses allow you to adapt the software to your needs. Before using it in a safety relevant setting, make sure that the software fulfills your requirements and adjust it according to any applicable safety standards, e.g., ISO 26262.
+
 # How to use this repository
 
 **Note:** you don't need to download or build anything from this repository, just browse the Docs folder.
