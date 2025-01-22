@@ -266,7 +266,6 @@ _ros2_control documentation_ : https://control.ros.org/jazzy/index.html
 
 _IMU tools for Rviz_ : https://github.com/CCNYRoboticsLab/imu_tools/tree/humble
 
-
 **Articulated Robotics (Josh Newans):**
 
 https://articulatedrobotics.xyz/category/build-a-mobile-robot-with-ros
@@ -279,9 +278,13 @@ https://www.youtube.com/@ArticulatedRobotics/videos
 
 https://www.facebook.com/ArticulatedRobotics/
 
-**GPS - localization and navigation:**
+**"Automatic Addison" (Addison Sears-Collins) tutorials:**
+
+https://automaticaddison.com/tutorials/
 
 https://automaticaddison.com/sensor-fusion-using-the-robot-localization-package-ros-2/
+
+**GPS - localization and navigation:**
 
 https://docs.ros.org/en/melodic/api/robot_localization/html/integrating_gps.html
 
