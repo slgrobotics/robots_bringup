@@ -68,7 +68,7 @@ rosdep install --from-paths src --ignore-src -r -y
 # For RPi 3B and 4 you must limit number of parallel threads, no need to do it for RPi 5 8GB:
 export MAKEFLAGS="-j 1"
 colcon build --parallel-workers=1 --executor sequential
-colcon build
+(or, just "colcon build" on a Raspberry Pi 4 or 5 - which takes minutes)
 ```
 This is how it looked on my Raspberry Pi 3B with 1 GB RAM:
 
