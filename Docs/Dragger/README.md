@@ -74,6 +74,7 @@ See https://github.com/hiwad-aziz/ros2_mpu9250_driver
 Prerequisites:
 ```
 sudo apt install ros-${ROS_DISTRO}-ros2-control ros-${ROS_DISTRO}-ros2-controllers
+sudo apt install ros-${ROS_DISTRO}-battery-state-broadcaster ros-${ROS_DISTRO}-range-sensor-broadcaster
 sudo apt install ros-${ROS_DISTRO}-xacro ros-${ROS_DISTRO}-twist-mux libi2c-dev
 sudo adduser ros dialout
 ```
