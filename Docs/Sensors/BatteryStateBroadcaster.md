@@ -39,7 +39,6 @@ The modified code is, naturally, here: https://github.com/slgrobotics/ros_batter
 
 **Note:**
 - My code still doesn't populate *cell_voltage[]* and *cell_temperature[]* arrays of individual cell values for each cell in the pack.
-- There is a limit of total 6 interfaces that can be configured for any Broadcaster in ROS2 Jazzy.
 
 ### Installation (with my version of BatteryStateBroadcaster)
 
@@ -69,6 +68,11 @@ Here are the files that configure and work with BatteryStateBroadcaster:
 - https://github.com/slgrobotics/articubot_one/blob/dev/robots/plucky/description/robot.urdf.xacro : line 41
 - https://github.com/slgrobotics/articubot_one/blob/dev/robots/plucky/launch/plucky.launch.py : line 113, 156, 257
 
+### Credits
+
+Original code: Jonas Otto and "official" ROS2 BatteryStateBroadcaster - [ros_battery_monitoring](https://github.com/ipa320/ros_battery_monitoring)
+
+Ideas and code for parameters handling: _HarvestX_ team - [battery_state_broadcaster](https://github.com/HarvestX/h6x_ros2_controllers/tree/humble/battery_state_broadcaster)
 
 ### Useful links
 
