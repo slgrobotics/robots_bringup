@@ -11,7 +11,7 @@ Here we are interested in using the second option, as it best conforms to a pref
 
 For traditional (#1) approach, see https://automaticaddison.com/how-to-create-a-battery-state-publisher-in-ros-2/
 
-**Note:** when in Gazebo Sim, _BatteryState_ message originates from [Gazebo System](https://gazebosim.org/api/sim/8/battery.html) and is published by *gz_bridge*, avoiding *ros2_control* framework.
+**Note:** when in Gazebo Sim, _BatteryState_ message originates from [Gazebo System](https://gazebosim.org/api/sim/8/battery.html) and is published by *gz_bridge*, avoiding *ros2_control* framework overall.
 So, we are talking only about real hardware here.
 
 ### Installation (standard ROS2 Jazzy binary)
