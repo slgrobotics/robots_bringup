@@ -55,7 +55,7 @@ cd ~/robot_ws
 rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y
 colcon build
 ```
-After this installation, the package compiled from sources will override the standard binary installation.
+After this installation, the package compiled from sources will override the standard binary installation, after ```install/setup.bash``` is sourced.
 
 Here are the files that configure and work with BatteryStateBroadcaster:
 - https://github.com/slgrobotics/diffdrive_arduino/blob/main/src/diffdrive_arduino.cpp : line 74
@@ -72,7 +72,7 @@ Here are the files that configure and work with BatteryStateBroadcaster:
 
 Original code: Jonas Otto and "official" ROS2 BatteryStateBroadcaster - [ros_battery_monitoring](https://github.com/ipa320/ros_battery_monitoring)
 
-Ideas and code for parameters handling: _HarvestX_ team - [battery_state_broadcaster](https://github.com/HarvestX/h6x_ros2_controllers/tree/humble/battery_state_broadcaster)
+Ideas and donor code for parameters handling: _HarvestX_ team - [battery_state_broadcaster](https://github.com/HarvestX/h6x_ros2_controllers/tree/humble/battery_state_broadcaster)
 
 ### Useful links
 
