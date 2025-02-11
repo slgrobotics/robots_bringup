@@ -68,6 +68,35 @@ Here are the files that configure and work with BatteryStateBroadcaster:
 - https://github.com/slgrobotics/articubot_one/blob/dev/robots/plucky/description/robot.urdf.xacro : line 41
 - https://github.com/slgrobotics/articubot_one/blob/dev/robots/plucky/launch/plucky.launch.py : line 113, 156, 257
 
+### Displaying battery state data in RViz2
+
+There are two ROS2 packages that allow battery information to be displayed in an RViz2 "overlay":
+- *battery_state_rviz_overlay* (installed with *ros_battery_monitoring* above)
+- *rviz-2d-overlay-plugins* - to be installed separately:
+```
+sudo apt install ros-${ROS_DISTRO}-rviz-2d-overlay-plugins
+```
+The second package subscribes to [OverlayText.msg](https://github.com/teamspatzenhirn/rviz_2d_overlay_plugins/blob/main/rviz_2d_overlay_msgs/msg/OverlayText.msg) - which
+is published by the first package, subscribing, naturally, to [BatteryState.msg](https://docs.ros.org/en/jazzy/p/sensor_msgs/interfaces/msg/BatteryState.html)
+
+You have to launch and configure the node as follows (note remappings in my case):
+```
+rviz_overlay = Node(
+    package='battery_state_rviz_overlay',
+    executable='battery_state_rviz_overlay',
+    #namespace=namespace,
+    #parameters=[{'use_sim_time': use_sim_time}],
+    output='screen',
+    remappings=[('battery_state','battery/battery_state')]
+)
+```
+Then you can just run RViz2 and "Add" a panel "By Topic" (*/battery_display_text->TextOverlay*) or "By Type" (*rviz_2d_overlay_plugins->TextOverlay*)
+
+The overlay should appear on top-left side of the display by default.
+
+**Note:** Text font, size and location are hardcoded [here](https://github.com/slgrobotics/ros_battery_monitoring/blob/main/battery_state_rviz_overlay/src/BatteryStateDisplay.cpp),
+but I plan to make it configurable soon.
+
 ### Credits
 
 Original code: Jonas Otto and "official" ROS2 BatteryStateBroadcaster - [ros_battery_monitoring](https://github.com/ipa320/ros_battery_monitoring)
