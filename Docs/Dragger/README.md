@@ -74,7 +74,7 @@ See https://github.com/hiwad-aziz/ros2_mpu9250_driver
 Prerequisites:
 ```
 sudo apt install ros-${ROS_DISTRO}-ros2-control ros-${ROS_DISTRO}-ros2-controllers
-sudo apt install ros-${ROS_DISTRO}-battery-state-broadcaster ros-${ROS_DISTRO}-range-sensor-broadcaster
+sudo apt ros-${ROS_DISTRO}-range-sensor-broadcaster
 sudo apt install ros-${ROS_DISTRO}-xacro ros-${ROS_DISTRO}-twist-mux libi2c-dev
 sudo adduser ros dialout
 ```
@@ -86,7 +86,15 @@ git clone https://github.com/slgrobotics/diffdrive_arduino.git
 git clone https://github.com/joshnewans/serial.git
 git clone https://github.com/slgrobotics/articubot_one.git
 ```
-ROS nodes produce _robot description_ and needs to  know some basic parameters of the robot. Edit the following to match your values:
+Dragger, Plucky and any other robot using _[diffdive_arduino](https://github.com/slgrobotics/diffdrive_arduino)_ package need a _BatteryStateBroadcaster_ component.
+In my code it is configured to use all 9 available State interfaces, not only "voltage" available in official distribution at this time.
+
+Please follow [this guide](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/BatteryStateBroadcaster.md) to install modified version,
+until the [official distribution](https://github.com/ipa320/ros_battery_monitoring/pull/3) catches up with latest changes and you could just install it using _apt_:
+```
+git clone https://github.com/slgrobotics/ros_battery_monitoring.git
+```
+ROS nodes produce _robot description_ and needs to  know some basic parameters of the robot. Edit the following to match your values, for example:
 ```
 ~/robot_ws/src/articubot_one/robots/dragger/description/ros2_control.xacro
 
