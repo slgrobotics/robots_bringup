@@ -76,8 +76,9 @@ There are two ROS2 packages that allow battery information to be displayed in an
 ```
 sudo apt install ros-${ROS_DISTRO}-rviz-2d-overlay-plugins
 ```
-The second package subscribes to [OverlayText.msg](https://github.com/teamspatzenhirn/rviz_2d_overlay_plugins/blob/main/rviz_2d_overlay_msgs/msg/OverlayText.msg) - which
-is published by the first package, subscribing, naturally, to [BatteryState.msg](https://docs.ros.org/en/jazzy/p/sensor_msgs/interfaces/msg/BatteryState.html)
+The second [package](https://github.com/teamspatzenhirn/rviz_2d_overlay_plugins)
+subscribes to [OverlayText.msg](https://github.com/teamspatzenhirn/rviz_2d_overlay_plugins/blob/main/rviz_2d_overlay_msgs/msg/OverlayText.msg) - which
+is published by the first package, subscribing, naturally, to our [BatteryState.msg](https://docs.ros.org/en/jazzy/p/sensor_msgs/interfaces/msg/BatteryState.html)
 
 You have to launch and configure the node as follows (note remappings in my case):
 ```
