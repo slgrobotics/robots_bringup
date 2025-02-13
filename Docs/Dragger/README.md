@@ -20,13 +20,15 @@ refer to [this section](https://github.com/slgrobotics/robots_bringup/blob/main/
 
 Dragger has _Ubuntu 24.04 Server (64 bit)_ and _ROS2 Jazzy Base_ installed - see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi for instructions.
 
-Dragger has several Arduino boards, some drive the sensors - GPS, Ultrasonic Parking Sensor, IMU, - while the main Arduino Mega 2560 drives the wheels and combines all sensors data into a single serial stream for Raspberry Pi Dragger. This setup appeared historically through different experiments and at this time is mostly just an over-enginered legacy. The Dragger RPi makes full use of wheels driving ability and odometry info. Parking sensors data will be likely used later, as ROS2 supports rangers for obstacle avoidance and mapping.
+Dragger and Plucky both have two Arduino boards, one drives the Ultrasonic Parking Sensor - while the main Arduino Mega 2560 drives the wheels and combines all sensors data into a single serial stream for Raspberry Pi Dragger.
+
+Dragger and Plucky use parking sensor (four ultrasonic rangers) for obstacle avoidance and mapping, converting its data to *sensor_msgs/msg/Range* messages.
 
 Arduino Mega 2560 code - wheels/sensors driver, talking to Articulated Robotics ROS node: 
 
 https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/DraggerROS
 
-Parking sensors info and driver (to be used later):
+Parking sensor info and driver:
 
 https://photos.app.goo.gl/WsqkA4XpYSLrVDX59
 
