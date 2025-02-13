@@ -95,8 +95,35 @@ Then you can just run RViz2 and "Add" a panel "By Topic" (*/battery_display_text
 
 The overlay should appear on top-left side of the display by default.
 
-**Note:** Text font, size and location are hardcoded [here](https://github.com/slgrobotics/ros_battery_monitoring/blob/main/battery_state_rviz_overlay/src/BatteryStateDisplay.cpp),
-but I plan to make it configurable soon.
+**Note:** Text font, size and other parameters are configurable if you install my version.
+
+Here is how parameters look in a launch file:
+
+https://github.com/slgrobotics/articubot_one/blob/dev/launch/launch_rviz.launch.py
+```
+    rviz_overlay = Node(
+        package='battery_state_rviz_overlay',
+        executable='battery_state_rviz_overlay',
+        namespace=namespace,
+        parameters=[{
+            'use_sim_time': use_sim_time,
+            # see https://github.com/slgrobotics/ros_battery_monitoring/blob/main/battery_state_rviz_overlay/src/battery_state_rviz_overlay_parameters.yaml
+            'width' : 450,
+            'height' : 10,
+            'line_height' : 25,
+            'horizontal_distance' : 20,
+            'vertical_distance' : 20,
+            'font' : 'DejaVu Sans Mono',
+            'text_size' : 15.0,
+            'horizontal_alignment' : 0,
+            'vertical_alignment' : 3,
+            'bg_color_a' : 0.1,
+            'fg_color_rgba' : '0.0 0.8 0.6 1.0'
+        }],
+        output='screen',
+        remappings=[('battery_state','battery/battery_state')]
+    )
+```
 
 ### Credits
 
