@@ -124,6 +124,29 @@ https://github.com/slgrobotics/articubot_one/blob/dev/launch/launch_rviz.launch.
         remappings=[('battery_state','battery/battery_state')]
     )
 ```
+### Pie Chart Display
+
+The *rviz-2d-overlay-plugins* package (installed above for battery display) contains a "_Circular Gauge Overlay_" (a.k.a. _Pie Chart_)
+[plugin](https://github.com/teamspatzenhirn/rviz_2d_overlay_plugins/tree/main/rviz_2d_overlay_plugins#circular-gauge-overlay).
+It accepts standard Float32 message, which you can publish, for example, from the command line:
+```
+ros2 topic pub /piechart std_msgs/Float32 "data: 0.6"
+```
+You need to add it in RViz2 ("_By Display Type_" or "_By Topic_") and can configure it in the _Displays_ panel (_max_ and _min_ values are especially important).
+
+In real life you can either publish it from your code, or, more conveniently, produce it
+by running a [*relay_field*](https://github.com/ros-tooling/topic_tools/blob/jazzy/README.md#relayfield) node:
+```
+    battery_pie_chart_relay = Node(
+        package='topic_tools',
+        executable='relay_field',
+        name='battery_pie_chart_relay',
+        output='screen',
+        respawn=True,
+        respawn_delay=2.0,
+        arguments=['battery/battery_state', 'battery/percentage', 'std_msgs/Float32', '{ data: m.percentage }', '--qos-reliability', 'reliable' ]
+    )
+```
 
 ### Credits
 
