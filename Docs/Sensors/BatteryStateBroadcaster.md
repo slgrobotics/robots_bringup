@@ -61,12 +61,10 @@ Here are the files that configure and work with BatteryStateBroadcaster:
 - https://github.com/slgrobotics/diffdrive_arduino/blob/main/src/diffdrive_arduino.cpp : line 74
 - https://github.com/slgrobotics/diffdrive_arduino/blob/main/src/battery.cpp
 
-**Note:** using the "_dev_" branch:
-
-- https://github.com/slgrobotics/articubot_one/blob/dev/description/battery.xacro
-- https://github.com/slgrobotics/articubot_one/blob/dev/robots/plucky/config/controllers.yaml
-- https://github.com/slgrobotics/articubot_one/blob/dev/robots/plucky/description/robot.urdf.xacro : line 41
-- https://github.com/slgrobotics/articubot_one/blob/dev/robots/plucky/launch/plucky.launch.py : line 113, 156, 257
+- https://github.com/slgrobotics/articubot_one/blob/main/description/battery.xacro
+- https://github.com/slgrobotics/articubot_one/blob/main/robots/plucky/config/controllers.yaml
+- https://github.com/slgrobotics/articubot_one/blob/main/robots/plucky/description/robot.urdf.xacro : line 41
+- https://github.com/slgrobotics/articubot_one/blob/main/robots/plucky/launch/plucky.launch.py : line 113, 156, 257
 
 ### Displaying battery state data in RViz2
 
