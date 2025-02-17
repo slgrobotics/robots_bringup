@@ -1,7 +1,7 @@
 ## BatteryStateBroadcaster setup
 
 There are two ways of publishing _BatteryState_ message:
-1. Have a node (ROS or, usually, MicroROS) communicate to robot hardware and publish [_BatteryState_ message](https://docs.ros.org/en/jazzy/p/sensor_msgs/interfaces/msg/BatteryState.html) directly
+1. Have a node (ROS or, usually, MicroROS) communicate to robot hardware and publish [_BatteryState_ message](https://docs.ros.org/en/jazzy/p/sensor_msgs/msg/BatteryState.html) directly
 
 or,
    
@@ -76,7 +76,7 @@ sudo apt install ros-${ROS_DISTRO}-rviz-2d-overlay-plugins
 ```
 The second [package](https://github.com/teamspatzenhirn/rviz_2d_overlay_plugins)
 subscribes to [OverlayText.msg](https://github.com/teamspatzenhirn/rviz_2d_overlay_plugins/blob/main/rviz_2d_overlay_msgs/msg/OverlayText.msg) - which
-is published by the first package, subscribing, naturally, to our [BatteryState.msg](https://docs.ros.org/en/jazzy/p/sensor_msgs/interfaces/msg/BatteryState.html)
+is published by the first package, subscribing, naturally, to our [BatteryState.msg](https://docs.ros.org/en/jazzy/p/sensor_msgs/msg/BatteryState.html)
 
 You have to launch and configure the node as follows (note remappings in my case):
 ```
@@ -156,7 +156,7 @@ Ideas and donor code for parameters handling: _HarvestX_ team - [battery_state_b
 
 https://www.jackery.com/blogs/knowledge/ultimate-guide-to-lifepo4-voltage-chart
 
-https://docs.ros.org/en/jazzy/p/sensor_msgs/interfaces/msg/BatteryState.html
+https://docs.ros.org/en/jazzy/p/sensor_msgs/msg/BatteryState.html
 
 https://control.ros.org/jazzy/doc/ros2_control/doc/index.html
 
