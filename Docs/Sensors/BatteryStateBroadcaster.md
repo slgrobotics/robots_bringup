@@ -145,6 +145,9 @@ by running a [*relay_field*](https://github.com/ros-tooling/topic_tools/blob/jaz
         arguments=['battery/battery_state', 'battery/percentage', 'std_msgs/Float32', '{ data: m.percentage }', '--qos-reliability', 'reliable' ]
     )
 ```
+### Beyond just voltage - monitoring current
+
+Refer to https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/CurrentSensors.md
 
 ### Credits
 
