@@ -31,10 +31,12 @@ https://github.com/flynneva/bno055
 mkdir -p ~/robot_ws/src
 cd ~/robot_ws/src/
 git clone https://github.com/flynneva/bno055.git
-cd ..
-colcon build
+cd ~/robot_ws
 vi ~/robot_ws/src/bno055/bno055/params/bno055_params_i2c.yaml   - *** Here you change i2c_bus to 1
+rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y
 sudo pip3 install smbus
+(sudo apt install python3-smbus   -- this might work instead)
+colcon build
 ``` 
 Try running it, see IMU messages in rqt:
 ``` 
