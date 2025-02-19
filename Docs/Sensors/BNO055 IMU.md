@@ -53,4 +53,10 @@ https://robofoundry.medium.com/lessons-learned-while-working-with-imu-sensor-ros
 
 https://github.com/adafruit/Adafruit_CircuitPython_BNO055/blob/main/README.rst
 
+Datasheet: https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bno055-ds000.pdf
+
+Quick start guide: https://www.bosch-sensortec.com/media/boschsensortec/downloads/application_notes_1/bst-bno055-an007.pdf
+
+Other docs: https://www.bosch-sensortec.com/products/smart-sensors/bno055/
+
 
