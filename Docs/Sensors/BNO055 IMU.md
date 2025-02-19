@@ -43,4 +43,14 @@ Try running it, see IMU messages in rqt:
 source ~/robot_ws/install/setup.bash
 ros2 run bno055 bno055  --ros-args --params-file ~/robot_ws/src/bno055/bno055/params/bno055_params_i2c.yaml
 ```
+Refer to [this file](https://github.com/slgrobotics/articubot_one/blob/dev/robots/turtle/launch/myturtle.py) for real-life parameters for running BNO055 node.
+
+### Useful Links
+
+BNO055 calibration utility: https://github.com/fm4dd/pi-bno055
+
+https://robofoundry.medium.com/lessons-learned-while-working-with-imu-sensor-ros2-and-raspberry-pi-a4fec18a7c7
+
+https://github.com/adafruit/Adafruit_CircuitPython_BNO055/blob/main/README.rst
+
 
