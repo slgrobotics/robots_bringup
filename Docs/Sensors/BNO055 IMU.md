@@ -47,6 +47,8 @@ Refer to [this file](https://github.com/slgrobotics/articubot_one/blob/dev/robot
 
 ### Useful Links
 
+Pinout and BNO055 varieties: https://gr33nonline.wordpress.com/2019/04/19/dont-get-the-wrong-bno055
+
 BNO055 calibration utility: https://github.com/fm4dd/pi-bno055
 
 https://robofoundry.medium.com/lessons-learned-while-working-with-imu-sensor-ros2-and-raspberry-pi-a4fec18a7c7
