@@ -12,6 +12,8 @@ _Optional:_ Consider 3 KOhm to 6.8 KOhm pull-up resistors from SDA and SCL to 3.
 
 Use ```i2cdetect -y 1``` to see **address 0x28**
 
+**Note:** Adafruit sensor will show 0x28, GY-BNO055 clone - 0x29 (with both jumpers closed). Match that in Node startup code.
+
 ### Info and tests:
 
 https://learn.adafruit.com/adafruit-bno055-absolute-orientation-sensor
