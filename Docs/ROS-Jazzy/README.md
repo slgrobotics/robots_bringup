@@ -165,7 +165,7 @@ Running the sim as described below brings Rviz2 with a map view.
 
 **Note:** If you want to browse robot's code look here: https://github.com/slgrobotics/articubot_one
 
-Here we build a ROS2 package we need to run *Dragger*, *Plucky* or *Turtle* in Gazebo sim or use RViz to control them.
+Here we build a ROS2 package we need to run *Dragger*, *Plucky* or *Turtle* in Gazebo sim - or use RViz to control physical robots.
 
 So, on the Desktop machine:
 
@@ -173,6 +173,7 @@ So, on the Desktop machine:
 mkdir -p ~/robot_ws/src
 cd ~/robot_ws/src
 git clone https://github.com/slgrobotics/articubot_one.git
+git clone https://github.com/slgrobotics/ros_battery_monitoring.git
 cd ~/robot_ws
 
 sudo rosdep init    # do it once, if you haven't done it before
