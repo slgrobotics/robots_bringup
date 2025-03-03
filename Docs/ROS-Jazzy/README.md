@@ -258,6 +258,9 @@ See https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/READM
 
 ## Useful links
 
+**Note:** there is plenty of information in this repository under the
+[Docs/Sensors](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Sensors), [Docs/Ubuntu-PRi](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi) and other folders.
+
 _Gazebo Harmonic - Differential Drive project template_ : https://gazebosim.org/docs/latest/ros_gz_project_template_guide
 
 _and its GitHub repository_ : https://github.com/gazebosim/ros_gz_project_template/tree/main
