@@ -20,14 +20,14 @@ See "Useful links" below.
 
 **Note:** 
 1. The left joystick controls robot's movements, "A" and "Y" buttos serve as "Enable" and "Turbo". Hold "Enable" button while operating left joystick.
-2. In ROS2 Jazzy *cmd_vel* messages are now **TwistStamped** type, my fork has been modified to support it.
+2. In ROS2 Jazzy *cmd_vel* messages are now **TwistStamped** type, my code has been modified to support it.
    I also added remappings to _/diff_cont/*_ to match Jazzy Controller architecture.
    Your regular _teleop_ might not work with it your robot _base_, use instructions below.
 3. There's a **twist_mux** node, which is run by each robot _*.launch.py_ file. It combines various *cmd_vel* inputs and delivers filtered message to robot's base. Pay close attention to names of these topics.
 
 ![twist_mux](https://github.com/user-attachments/assets/7007fc56-699a-475a-b5d8-a371beb6be31)
 
-To use joystick, you first need to build my *articubot_one* fork, which supports **TwistStamped** type:
+To use joystick, you first need to build my *articubot_one* codebase, which supports **TwistStamped** type:
 ```
 mkdir -p ~/robot_ws/src
 cd ~/robot_ws/src
