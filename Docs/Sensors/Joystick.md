@@ -32,11 +32,12 @@ To use joystick, you first need to build my *articubot_one* fork, which supports
 mkdir -p ~/robot_ws/src
 cd ~/robot_ws/src
 git clone https://github.com/slgrobotics/articubot_one.git
+git clone https://github.com/slgrobotics/ros_battery_monitoring.git
 cd ~/robot_ws
 
 sudo rosdep init    # do it once, if you haven't done it before
 rosdep update
-rosdep install --from-paths src --ignore-src -r -y
+rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y
 
 colcon build
 ```
