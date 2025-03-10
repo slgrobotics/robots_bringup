@@ -31,9 +31,11 @@ sudo udevadm control --reload-rules && sudo udevadm trigger
 
 ## Luxonis Software Installation
 
-There is a collection of python examples, which is not needed for ROS2, but is useful for testing.
+There is a collection of python examples, which is not needed for ROS2, but is useful for testing. 
 
-Note _virtual environment_ setup and activation.
+It can be only installed if you have a **Desktop** edition of Ubuntu 24.04
+
+Note the _virtual environment_ setup and activation.
 ```
 mkdir ~/depthai
 cd ~/depthai
@@ -59,7 +61,7 @@ Connected cameras: [
 Usb speed: SUPER
 Device name: OAK-D-LITE  Product name: OAK-D-LITE
 ```
-Note "_Usb speed_" value - it will be "_SUPER_" on USB3 and "_HIGH_" on USB2.
+Note the "_Usb speed_" value - it will be "_SUPER_" on USB3 and "_HIGH_" on USB2.
 
 
 ## ROS2 operation
