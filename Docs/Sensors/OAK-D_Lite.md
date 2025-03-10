@@ -59,7 +59,7 @@ Connected cameras: [
 Usb speed: SUPER
 Device name: OAK-D-LITE  Product name: OAK-D-LITE
 ```
-Note "Usb speed" value - it will be "SUPER" on USB3 aand "HIGH" on USB2.
+Note "_Usb speed_" value - it will be "_SUPER_" on USB3 and "_HIGH_" on USB2.
 
 
 ## ROS2 operation
