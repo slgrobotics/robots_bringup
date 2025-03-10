@@ -32,6 +32,8 @@ sudo udevadm control --reload-rules && sudo udevadm trigger
 ## Luxonis Software Installation
 
 There is a collection of python examples, which is not needed for ROS2, but is useful for testing.
+
+Note _virtual environment_ setup and activation.
 ```
 mkdir ~/depthai
 cd ~/depthai
