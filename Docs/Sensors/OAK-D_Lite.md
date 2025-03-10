@@ -62,12 +62,12 @@ By default, the */oak/rgb/image_raw* has 1280x720 size, and can be consumed comp
 
 ## Useful Links
 
-https://robofoundry.medium.com/oak-d-lite-camera-ros2-setup-1e74ed03350d
+Basic setup: https://robofoundry.medium.com/oak-d-lite-camera-basic-setup-38a563cd594f
+
+ROS2 Setup: https://robofoundry.medium.com/oak-d-lite-camera-ros2-setup-1e74ed03350d
 
 https://docs.luxonis.com/software/ros/depthai-ros/
 
 https://docs.luxonis.com/software/ros/depthai-ros/driver/
-
-https://www.sundance.com/oak-d-lite/
 
 https://github.com/luxonis/depthai-ros
