@@ -6,7 +6,7 @@ This guide describes how to run it under Ubuntu 24.04 and ROS2 Jazzy - first on 
 
 ## Basic hardware test
 
-The camera requires USB3 cable and socket. 
+The camera requires USB3 cable and _prefers_ a USB3 socket, but will work if plugged into USB2 socket. 
 
 After plugging it in, see if it shows up:
 ```
