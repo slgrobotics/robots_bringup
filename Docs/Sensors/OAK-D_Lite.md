@@ -19,7 +19,7 @@ sudo dmesg
 [11017.916717] usb 7-1: SerialNumber: 03e72485
 
 lsusb
-Look for "Intel Movidius MyriadX"
+Look for "ID 03e7:2485 Intel Movidius MyriadX"
 ```
 Do not expect _/dev/video*_ descriptor appear, OAK-D uses different mechanism for accessing hardware.
 
@@ -40,15 +40,27 @@ cd ~/depthai
 git clone https://github.com/luxonis/depthai-python.git
 cd ~/depthai/depthai-python/examples
 sudo apt install python3.12-venv
-python3 -m venv /home/ros/depthai/depthai-python/.env
-source /home/ros/depthai/depthai-python/.env/bin/activate
+
+python3 -m venv ~/depthai/depthai-python/.env
+source ~/depthai/depthai-python/.env/bin/activate
 python3 install_requirements.py
 ```
 Here is how to see video preview in a window: 
 ```
-cd ~/depthai/depthai-python/examples
-python3 ColorCamera/rgb_preview.py
+(.env) ros@machine:~/depthai/depthai-python/examples$ cd ~/depthai/depthai-python/examples
+(.env) ros@machine:~/depthai/depthai-python/examples$ python3 ColorCamera/rgb_preview.py
+Connected cameras: [
+    {socket: CAM_A, sensorName: IMX214, width: 4208, height: 3120, orientation: AUTO,
+             supportedTypes: [COLOR], hasAutofocus: 0, hasAutofocusIC: 1, name: color},
+    {socket: CAM_B, sensorName: OV7251, width: 640, height: 480, orientation: AUTO,
+             supportedTypes: [MONO], hasAutofocus: 0, hasAutofocusIC: 0, name: left},
+    {socket: CAM_C, sensorName: OV7251, width: 640, height: 480, orientation: AUTO,
+             supportedTypes: [MONO], hasAutofocus: 0, hasAutofocusIC: 0, name: right}]
+Usb speed: SUPER
+Device name: OAK-D-LITE  Product name: OAK-D-LITE
 ```
+Note "Usb speed" value - it will be "SUPER" on USB3 aand "HIGH" on USB2.
+
 
 ## ROS2 operation
 
@@ -58,7 +70,7 @@ sudo apt install ros-${ROS_DISTRO}-depthai-ros
 
 ros2 launch depthai_ros_driver camera.launch.py
 ```
-By default, the */oak/rgb/image_raw* has 1280x720 size, and can be consumed compressed. It is published at VERY low frame rate, below 1 Hz.
+By default, the */oak/rgb/image_raw* has 1280x720 size, and can be consumed compressed. It is published at ~10 Hz, if run locally on Intel I7 Desktop.
 
 ## Useful Links
 
