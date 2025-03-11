@@ -1,12 +1,12 @@
 ## OAK-D Lite setup
 
-I have a "Kickstarter Edition" OAK-D Lite stereo camera. 
+I have a "_Kickstarter Edition_" OAK-D Lite stereo camera. It doesn't have an IMU, but otherwise should be identical to units produced later.
 
 This guide describes how to run it under Ubuntu 24.04 and ROS2 Jazzy - first on an Intel 5 Desktop, an then on Raspberry 4 or 5 under the Ubuntu 24.04 Server and ROS2 Jazzy Base.
 
 ## Basic hardware test
 
-The camera requires USB3 cable and _prefers_ a USB3 socket, but will work if plugged into USB2 socket. 
+The camera requires a quality USB3 cable and _prefers_ a USB3 socket, but will work if plugged into USB2 socket. 
 
 After plugging it in, see if it shows up:
 ```
@@ -72,7 +72,34 @@ sudo apt install ros-${ROS_DISTRO}-depthai-ros
 
 ros2 launch depthai_ros_driver camera.launch.py
 ```
-By default, the */oak/rgb/image_raw* has 1280x720 size, and can be consumed compressed. It is published at ~10 Hz, if run locally on Intel I7 Desktop.
+By default, the */oak/rgb/image_raw* has 1280x720 size, and can be consumed raw or compressed. It is published at ~10 Hz, if run locally on Intel I7 Desktop.
+
+## ROS2 examples
+
+With *depthai-ros* installation you are getting the following packages (under */opt/ros/jazzy/share*):
+
+	depthai_bridge
+	depthai_descriptions
+	depthai_examples
+	depthai_filters
+	depthai-ros
+	depthai_ros_driver
+	depthai_ros_msgs
+
+If you are working on a Desktop, the following example will show *pointCloud* in RViz2:
+
+    ros2 launch depthai_examples stereo.launch.py
+
+Other examples produce topics which can be viewed in _rqt_:
+    
+    ros2 launch depthai_examples rgb_stereo_node.launch.py
+    ros2 launch depthai_examples tracker_yolov4_node.launch.py
+    ros2 launch depthai_examples tracker_yolov4_spatial_node.launch.py
+    ros2 launch depthai_examples mobile_publisher.launch.py
+
+There are examples above that publish data from [_yolo_](https://encord.com/blog/yolo-object-detection-guide/) model. Note that camera resolution in the examples is downgraded to 300x300 or 480P, so the frame rate and CPU load becomes reasonable (I saw 10 FPS, 34 FPS).
+
+I didn't have much luck with the examples on my Intel I7 Desktop machine, some were freezing after a short while. Raspberry Pi 4 and 5 were even more problematic. 
 
 ## Useful Links
 
@@ -85,3 +112,5 @@ https://docs.luxonis.com/software/ros/depthai-ros/
 https://docs.luxonis.com/software/ros/depthai-ros/driver/
 
 https://github.com/luxonis/depthai-ros
+
+Alternative ROS2 Publisher: https://github.com/jmguerreroh/oak_d_camera  (works, but I had to edit out all IMU stuff in the C++ code)
