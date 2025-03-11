@@ -47,9 +47,10 @@ python3 -m venv ~/depthai/depthai-python/.env
 source ~/depthai/depthai-python/.env/bin/activate
 python3 install_requirements.py
 ```
-Here is how to see video preview in a window: 
+Here is how to see video preview in a window (note Python _virtual environment_ activation): 
 ```
-(.env) ros@machine:~/depthai/depthai-python/examples$ cd ~/depthai/depthai-python/examples
+ros@machine:~$ source ~/depthai/depthai-python/.env/bin/activate
+(.env) ros@machine:~$ cd ~/depthai/depthai-python/examples
 (.env) ros@machine:~/depthai/depthai-python/examples$ python3 ColorCamera/rgb_preview.py
 Connected cameras: [
     {socket: CAM_A, sensorName: IMX214, width: 4208, height: 3120, orientation: AUTO,
@@ -61,8 +62,7 @@ Connected cameras: [
 Usb speed: SUPER
 Device name: OAK-D-LITE  Product name: OAK-D-LITE
 ```
-Note the "_Usb speed_" value - it will be "_SUPER_" on USB3 and "_HIGH_" on USB2.
-
+Note the "_Usb speed_" value - it will be "_SUPER_" on USB3 and "_HIGH_" if plugged into an USB2 socket.
 
 ## ROS2 operation
 
