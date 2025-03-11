@@ -64,6 +64,14 @@ Device name: OAK-D-LITE  Product name: OAK-D-LITE
 ```
 Note the "_Usb speed_" value - it will be "_SUPER_" on USB3 and "_HIGH_" if plugged into an USB2 socket.
 
+## Configuration and Troubleshooting
+
+There's a number of [environment variables](https://docs.oakchina.cn/projects/api/components/device.html#environment-variables), which can help reconfiguring camera system.
+
+Use ```export DEPTHAI_LEVEL=info; export XLINK_LEVEL=info``` to display temperatures (default is "_warn_", see https://docs.luxonis.com/software/depthai/debugging/ for options).
+
+Most operation parameters (frame size etc.) are convigured via arguments to launch files.
+
 ## ROS2 operation
 
 ROS2 Jazzy has binary distribution:
