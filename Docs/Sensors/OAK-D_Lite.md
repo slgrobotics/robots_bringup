@@ -122,3 +122,7 @@ https://docs.luxonis.com/software/ros/depthai-ros/driver/
 https://github.com/luxonis/depthai-ros
 
 Alternative ROS2 Publisher: https://github.com/jmguerreroh/oak_d_camera  (works, but I had to edit out all IMU stuff in the C++ code)
+
+https://github.com/ARLunan/depthai_desktop
+
+https://github.com/ARLunan/depthai_robot
