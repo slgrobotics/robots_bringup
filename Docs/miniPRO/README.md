@@ -4,7 +4,7 @@ I have an original _2016 Ninebot miniPRO N3M320_. That was the first model to be
 
 I bought it then to turn into a robot, bit once I tried riding it - I got hooked. 
 I somehow avoided the nasty "_safety firmware upgrade_", and avoided broken bones.
-It helped me to get around when traveling on an RV, and then here - getting to my mailbox 😉.
+It helped me to get around when traveling in an RV, and then here - getting to my mailbox 😉.
 Its battery is still very healthy in 2025, but I am not using it that often anymore, and riding those is a perishable skill.
 So, it's time to quit - i.e. to turn it into a robot.
 
