@@ -1,4 +1,4 @@
-# Ninebot _miniPRO_ Notes
+## Ninebot _miniPRO_ Notes
 
 I have an original _2016 Ninebot miniPRO N3M320_. That was the first model to be sold in the US.
 
@@ -56,8 +56,9 @@ At this point you should be able to drive your miniPRO using your XBox 360 game 
 
 **Notes:**
 - the code works for my miniPRO with _original firmware_. Yours could be with "_safety upgrade_" and might not work. I haven't tested that.
-- while I set a pairing code when I bought the miniPRO, this program doesn't need it and connects fine
-- there is also _gattclient_ program there, I have to investigate it later:
+- not all miniPRO models had remote control feature.
+- while I set a pairing code when I bought the miniPRO, this program doesn't need it and connects fine without it.
+- there is also _gattclient_ program there (part of _lib/bluez_), I have to investigate it later:
 ```
 me@mycomp:~/ninebot/build/minipro$ ./gattclient --help
 btgatt-client
