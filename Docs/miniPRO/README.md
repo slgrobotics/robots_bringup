@@ -19,11 +19,11 @@ Here is how I compile and run this code on my Ubuntu 24.04 Desktop computer:
 ```
 sudo apt install bluez-tools liblog4cxx-dev
 ```
-2. Clone the repository:
+2. Clone the repository (using [my fork](https://github.com/slgrobotics/minipro) of the original):
 ```
 mkdir ~/ninebot/src
 cd ~/ninebot/src
-git clone https://github.com/mjeronimo/minipro.git
+git clone https://github.com/slgrobotics/minipro.git
 ```
 At this point you have to figure out how to use Bluetooth and try enabling your BT/LE adapter.
 
@@ -34,13 +34,12 @@ Added devices:
 17-86-B6-F9-11-5C (17:86:B6:F9:11:5C)
  NinebotMini0671 (AA:BB:CC:DD:EE:FF)  <- your Bluetooth address will be here
 ```
-4. Edit some files:
-```
-vi ~/ninebot/src/minipro/CMakeLists.txt 
-// Line 1: change to 3.5: cmake_minimum_required(VERSION 3.0)
+You may want to use VS Code to open *~/ninebot/src/minipro* folder, or just use your favorite editor (_vi_, of course)
 
-vi ~/ninebot/src/minipro/test/minipro/t_minipro.cpp
+4. Edit *t_minipro.cpp* file:
+```
 // Line 41: change to your Bluetooth address.
+vi ~/ninebot/src/minipro/test/minipro/t_minipro.cpp
 ```
 5. Build it (install colcon if you don't have it):
 ```
