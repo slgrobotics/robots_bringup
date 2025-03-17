@@ -27,6 +27,23 @@ git clone https://github.com/slgrobotics/minipro.git
 ```
 At this point you have to figure out how to use Bluetooth and try enabling your BT/LE adapter.
 
+With a bit of luck, you'll have a single BT-LE device, supported by Ubuntu - and you'll be able to see powered-up miniPRO in *Settings/Bluetooth*.
+
+Use ```lsusb (-v)```, ```bluetoothctl (list/show/devices)``` and ```bt-device -l``` to discover your hardware and connections.
+
+In my case, I had a built-in *Qualcomm Atheros Communications AR3011 Bluetooth* - which wasn't working right, and I had to disable it:
+```
+lsusb
+Bus 002 Device 006: ID 0cf3:3005 Qualcomm Atheros Communications AR3011 Bluetooth
+
+sudo vi /etc/udev/rules.d/81-bluetooth-hci.rules
+
+# Disable Qualcomm Atheros Communications AR3011 Bluetooth:
+SUBSYSTEM=="usb", ATTRS{idVendor}=="0cf3", ATTRS{idProduct}=="3005", ATTR{authorized}="0"
+
+reboot
+```
+
 3. Find out your miniPRO Bluetooth address:
 ```
 bt-device -l
