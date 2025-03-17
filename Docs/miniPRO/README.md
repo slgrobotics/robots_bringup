@@ -68,12 +68,17 @@ colcon build
 cd ~/ninebot/build/minipro
 ./t_minipro
 ```
-At this point you should be able to drive your miniPRO using your XBox 360 game controller. 
+At this point you should be able to drive your miniPRO using your XBox 360 game controller.
 
-**Notes:**
+Caution: miniPRO is a beast!
+
+**Observations:**
 - the code works for my miniPRO with _original firmware_. Yours could be with "_safety upgrade_" and might not work. I haven't tested that.
 - not all miniPRO models had remote control feature.
 - while I set a pairing code when I bought the miniPRO, this program doesn't need it and connects fine without it.
+- original XBox 340 joystick code misinterpreted joystick events, so that turns were handled by triggers. I fixed that in my fork.
+- the code sends commands, but doesn't read BT stream. The program (*t_minipro*) hangs after several minutes driving.
+- the included _bluez_ code is old, but seems to work fine. If it ain't broken, don't fix it.
 - there is also _gattclient_ program there (part of _lib/bluez_), I have to investigate it later:
 ```
 me@mycomp:~/ninebot/build/minipro$ ./gattclient --help
@@ -91,8 +96,6 @@ Options:
 Example:
 btgattclient -v -d C4:BE:84:70:29:04
 ```
-- I see miniPRO reacting to XBox 340 joystick - moving forward and backwards. No turns yet. Need to investigate this.
-
 ----------------
 
 Back to https://github.com/slgrobotics/robots_bringup
