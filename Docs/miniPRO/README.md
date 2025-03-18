@@ -10,6 +10,10 @@ So, it's time to quit - i.e. to turn it into a robot.
 
 My Ninebot miniPRO photos are here: https://photos.app.goo.gl/yHXs7fP7u7ae8fa78
 
+**Note:** the _add-on platform_ is just an experiment, and would be only useful if there's a way to
+precisely and directly control miniPRO's wheels, not its balance (as Bluetooth link currently allows).
+Without such control, the platform makes the miniPRO very difficult to drive.
+
 While the mechanical stuff is optional and relatively easy, controlling it could be a challenge.
 Fortunately, there's a repository with sample code here: https://github.com/mjeronimo/minipro (please STAR it!)
 
@@ -77,7 +81,7 @@ Caution: miniPRO is a beast!
 - the code works for my miniPRO with _original firmware_. Yours could be with "_safety upgrade_" and might not work. I haven't tested that.
 - not all miniPRO models had remote control feature.
 - while I set a pairing code when I bought the miniPRO, this program doesn't need it and connects fine without it.
-- original XBox 340 joystick code misinterpreted joystick events, so that turns were handled by triggers. I fixed that in my fork.
+- original XBox 340 joystick code misinterpreted joystick events, so that turns were handled by triggers. I fixed that in my fork, the miniPRO is now controlled by _left thumbstick_ only.
 - the code sends commands, but doesn't read BT stream. The program (*t_minipro*) hangs after several minutes driving.
 - the included _bluez_ code is old, but seems to work fine. If it ain't broken, don't fix it.
 - there is also _gattclient_ program there (part of _lib/bluez_), I have to investigate it later:
