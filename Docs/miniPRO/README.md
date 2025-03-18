@@ -13,6 +13,9 @@ My Ninebot miniPRO photos are here: https://photos.app.goo.gl/yHXs7fP7u7ae8fa78
 **Note:** the _add-on platform_ is just an experiment, and would be only useful if there's a way to
 precisely and directly control miniPRO's wheels, not its balance (as Bluetooth link currently allows).
 Without such control, the platform makes the miniPRO very difficult to drive.
+MiniPRO has that option - "_Mecha mode_" is mentioned [here](https://forum.electricunicycle.org/topic/32214-ninebot-mecha-kit-ble-protocol%EF%BC%9F/) 
+and is used for [Mecha Kit](https://www.amazon.com/Segway-Applicable-Self-Balancing-Human-Body-Integration/dp/B09GFHNRV3?th=1).
+It needs further investigation.
 
 While the mechanical stuff is optional and relatively easy, controlling it could be a challenge.
 Fortunately, there's a repository with sample code here: https://github.com/mjeronimo/minipro (please STAR it!)
