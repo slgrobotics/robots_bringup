@@ -43,6 +43,7 @@ SUBSYSTEM=="usb", ATTRS{idVendor}=="0cf3", ATTRS{idProduct}=="3005", ATTR{author
 
 reboot
 ```
+I then could plug in an *ORICO BTA-403 USB Bluetooth 4.0 adapter* - and it worked fine.  
 
 3. Find out your miniPRO Bluetooth address:
 ```
