@@ -54,10 +54,20 @@ Reboot
 
 ## Basic testing
 
-After installation you should see _/dev/video*_ and _/dev/media*_ descriptors.
+After installation you should see _/dev/video*_ and _/dev/media*_ descriptors: ```v4l2-ctl --list-devices```
 
 Try: 
 ```
+sudo dmesg | fgrep -i imx
+    [    2.909225] platform 1f00128000.csi: Fixed dependency cycle(s) with /axi/pcie@120000/rp1/i2c@80000/imx219@10
+    [    5.738149] rp1-cfe 1f00128000.csi: found subdevice /axi/pcie@120000/rp1/i2c@80000/imx219@10
+    [    5.738170] rp1-cfe 1f00128000.csi: Using sensor imx219 4-0010 for capture
+
+Marco's note: "imx" works for the Sony sensors, but ov<num> potentially for others, ...
+              That helps to verify, that the kernel actually found the device.
+              If that does not show anything (with a couple different/relevant string
+              fragments) or shows errors, chances are, nothing afterwards will work.
+
 LIBCAMERA_LOG_LEVELS=*:DEBUG cam -l"
     # shows the camera:
     Available cameras:
@@ -66,7 +76,53 @@ LIBCAMERA_LOG_LEVELS=*:DEBUG cam -l"
 libcamera-jpeg -o test.jpg
     # produces a file:
     -rw-rw-r-- 1 ros ros 1318903 Mar 21 14:03 test.jpg
+
+rpicam-hello --list -v
+Available cameras
+-----------------
+0 : imx219 [3280x2464 10-bit RGGB] (/base/axi/pcie@120000/rp1/i2c@80000/imx219@10)
+    Modes: 'SRGGB10_CSI2P' : 640x480 [103.33 fps - (1000, 752)/1280x960 crop]
+                             1640x1232 [41.85 fps - (0, 0)/3280x2464 crop]
+                             1920x1080 [47.57 fps - (680, 152)/1920x2160 crop]
+                             3280x2464 [21.19 fps - (0, 0)/3280x2464 crop]
+           'SRGGB8' : 640x480 [103.33 fps - (1000, 752)/1280x960 crop]
+                      1640x1232 [41.85 fps - (0, 0)/3280x2464 crop]
+                      1920x1080 [47.57 fps - (680, 152)/1920x2160 crop]
+                      3280x2464 [21.19 fps - (0, 0)/3280x2464 crop]
+
+    Available controls for 3280x2464 SRGGB10_CSI2P mode:
+    ----------------------------------------------------
+    AeConstraintMode : [0..3]
+    AeEnable : [false..true]
+    AeExposureMode : [0..3]
+    AeFlickerMode : [0..1]
+    AeFlickerPeriod : [100..1000000]
+    AeMeteringMode : [0..3]
+    AnalogueGain : [1.000000..10.666667]
+    AwbEnable : [false..true]
+    AwbMode : [0..7]
+    Brightness : [-1.000000..1.000000]
+    CnnEnableInputTensor : [false..true]
+    ColourGains : [0.000000..32.000000]
+    ColourTemperature : [100..100000]
+    Contrast : [0.000000..32.000000]
+    ExposureTime : [75..1238765]
+    ExposureValue : [-8.000000..8.000000]
+    FrameDurationLimits : [47183..1238841]
+    HdrMode : [0..4]
+    NoiseReductionMode : [0..4]
+    Saturation : [0.000000..32.000000]
+    ScalerCrop : [(0, 0)/51x39..(0, 0)/3280x2464]
+    Sharpness : [0.000000..16.000000]
+    StatsOutputEnable : [false..true]
+    SyncFrames : [1..1000000]
+    SyncMode : [0..2]
 ```
+
+If you have a Ubuntu with GUI ("Desktop" edition) - 
+try [GNOME Snapshot](https://discourse.ubuntu.com/t/whats-happening-in-noble-repositories/43729/40) or _Cheese_.
+
+**Note:** _Cheese_ has been removed in Ubuntu 24.04 - replaced by _gnome-snapshot_. It can be still installed via _snap_.
 
 ## Testing Python bindings
 
@@ -78,7 +134,7 @@ from picamera2 import Picamera2, Preview
 import time
 
 picam2 = Picamera2()
-# the following line requires GUI:
+# the following line requires GUI, won't work for headless machines:
 #picam2.start_preview(Preview.QTGL) # other options include Preview.DRM, Preview.FULLSCREEN
 preview_config = picam2.create_preview_configuration()
 picam2.configure(preview_config)
@@ -101,6 +157,7 @@ ros@plucky:~/camera_ws/tests$ python3 test.py
                              (0) 640x480-XBGR8888 (1) 640x480-BGGR_PISP_COMP1
 [18:49:01.246996049] [8765]  INFO RPI pisp.cpp:1484 Sensor: /base/axi/pcie@120000/rp1/i2c@80000/imx219@10
                              - Selected sensor format: 640x480-SBGGR10_1X10 - Selected CFE format: 640x480-PC1B
+
 ros@plucky:~/camera_ws/tests$ ll
 total 1328
 drwxrwxr-x 2 ros ros    4096 Mar 21 14:03 ./
@@ -122,3 +179,12 @@ There is some discussion about it [here](https://stackoverflow.com/questions/754
 
 I might create a version of my *camera_publisher* to capture the image using *pycamera2*, not OpenCV.
 The tricky part is "*CvBridge # Package to convert between ROS and OpenCV Images*" - whatever I capture in Pycamera2 must be converted to ROS2 format.
+
+## Useful links
+
+Here is a document from Ross Lunan with more detail and coverage of other _native_ cameras:
+
+https://github.com/ARLunan/Raspberry-Pi-Camera-ROS
+
+
+
