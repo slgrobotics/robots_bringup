@@ -2,6 +2,8 @@
 
 Here is my attempt to provide a zero-delay video link between robot and ROS2 Camera Publisher.
 
+**Note:** for Raspberry Pi _native_ camera setup see https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md
+
 I used an affordable FPV drone camera with analog (NTSC) video transmitter, and an analog receiver capable of feeding video stream to computer via USB.
 
 "*WT07 Micro 5.8GHz 25mW FPV Transmitter and 600TVL Camera with OSD Interface for FPV Quadcopter Drone Wireless Radio Transmission*":
