@@ -1,6 +1,6 @@
 ## _Native_ Raspberry Pi Camera (_Arducam_) Setup
 
-Ubuntu 24.04 introduced breaking changes in the way the video stream is handled ("libcamera" vs. "v4l2"). 
+Ubuntu 24.04 introduced breaking changes in the way the video stream is handled ("libcamera" vs. "V4L2"). 
 So, [CSI-connected Cameras](https://www.raspberrypi.com/documentation/accessories/camera.html) on Raspberry Pi 5 don't work anymore under Ubuntu 24.04. 
 See our Club discussion [here](https://groups.google.com/g/hbrobotics/c/4VITfijo2cM/m/80LidlKAAgAJ).
 
@@ -180,9 +180,11 @@ There is some discussion about it [here](https://stackoverflow.com/questions/754
 I might create a version of my *camera_publisher* to capture the image using *pycamera2*, not OpenCV.
 The tricky part is "*CvBridge # Package to convert between ROS and OpenCV Images*" - whatever I capture in Pycamera2 must be converted to ROS2 format.
 
+UPD: Marco recommended https://github.com/christianrauch/camera_ros (I haven't tested it yet).
+
 ## Useful links
 
-Here is a document from Ross Lunan with more detail and coverage of other _native_ cameras:
+Here is a document from Ross Lunan with more detail (and coverage of other _native_ cameras):
 
 https://github.com/ARLunan/Raspberry-Pi-Camera-ROS
 
