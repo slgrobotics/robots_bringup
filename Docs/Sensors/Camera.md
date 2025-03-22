@@ -176,25 +176,56 @@ ros@plucky:~/camera_ws/tests$
 
 ## ROS2 Camera Publisher.
 
-*this section is work in progress, please visit later*
-  
-Here is the code I use for the camera before on the Desktop machine: [camera_publisher](https://github.com/slgrobotics/camera_publisher/blob/main/cv_basics/webcam_pub.py)
+Here is the code I used for FPV camera before on the Desktop machine: [camera_publisher](https://github.com/slgrobotics/camera_publisher/blob/main/cv_basics/webcam_pub.py)
 
 It relies on OpenCV _V4L2_ bindings, which don't work for IMX219 sensor.
 There is some discussion about it [here](https://stackoverflow.com/questions/75463789/error-pipeline-have-not-been-created-in-python-opencv)
 
-I might create a version of my *camera_publisher* to capture the image using *pycamera2*, not OpenCV.
+Using OpenCV allows some image processing and publishing custom topics. 
+For example, I could detect color blobs and publish their offsets.
+But image processing in camera node makes sense in FPV scenario (NTSC receiver at the Desktop), where resources are plentiful, but not on the robot's RPi.
+
+Someday I might create a version of my *camera_publisher* to capture the image using *pycamera2*, not OpenCV - or find a way to feed OpenCV properly.
 The tricky part is "*CvBridge # Package to convert between ROS and OpenCV Images*" - whatever I capture in Pycamera2 must be converted to ROS2 format.
 
-UPD: Marco recommended https://github.com/christianrauch/camera_ros.
+Meanwhile, Marco recommended https://github.com/christianrauch/camera_ros.
 
 I was able to run it and see the video on my Desktop machine at ~15 FPS:
 ```
-RPI:
+RPi (Plucky):
+cd ~/robot_ws/src
+git clone https://github.com/christianrauch/camera_ros.git
+cd ~/robot_ws
+# Do it once. Note the "--skip-keys=libcamera" which preserves Marco's installed package:
+rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} --skip-keys=libcamera -r -y
+colcon build
+
+source install/setup.bash
 ros2 run camera_ros camera_node --ros-args -p width:=640 -p height:=480 -p camera:=0
 
 Desktop:
 ros2 run image_view image_view --ros-args -r image:=/camera/image_raw -p image_transport:=compressed
+```
+You can see images published at 15 FPS:
+```
+ros@plucky:~$ ros2 topic hz /camera/image_raw
+average rate: 14.990
+min: 0.065s max: 0.069s std dev: 0.00118s window: 16
+```
+**Note:**
+
+If during a system update or after running rosdep Marco's packages are replaced, you can fix that easily, for example:
+```
+ros@plucky:~/cam_ws$ apt list --installed |grep libcamera
+libcamera-dev/noble,now 0.4.0+rpt20250213-1ubuntu1~marco1 arm64 [installed]
+libcamera-ipa/noble,now 0.4.0+rpt20250213-1ubuntu1~marco1 arm64 [installed,automatic]
+libcamera-tools/noble,now 0.4.0+rpt20250213-1ubuntu1~marco1 arm64 [installed]
+libcamera0.2/noble,now 0.2.0-3fakesync1build6 arm64 [installed,auto-removable] <- this is bad
+libcamera0.4/noble,now 0.4.0+rpt20250213-1ubuntu1~marco1 arm64 [installed,automatic]
+python3-libcamera/noble,now 0.4.0+rpt20250213-1ubuntu1~marco1 arm64 [installed]
+ros-jazzy-libcamera/noble,now 0.4.0-1noble.20250102.132330 arm64 [installed] <- this might be bad
+
+ros@plucky:~/cam_ws$ sudo apt remove libcamera0.2 ros-jazzy-libcamera
 ```
 
 ## Useful links
