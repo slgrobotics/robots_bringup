@@ -186,7 +186,16 @@ There is some discussion about it [here](https://stackoverflow.com/questions/754
 I might create a version of my *camera_publisher* to capture the image using *pycamera2*, not OpenCV.
 The tricky part is "*CvBridge # Package to convert between ROS and OpenCV Images*" - whatever I capture in Pycamera2 must be converted to ROS2 format.
 
-UPD: Marco recommended https://github.com/christianrauch/camera_ros (I haven't tested it yet).
+UPD: Marco recommended https://github.com/christianrauch/camera_ros.
+
+I was able to run it and see the video on my Desktop machine at ~15 FPS:
+```
+RPI:
+ros2 run camera_ros camera_node --ros-args -p width:=640 -p height:=480 -p camera:=0
+
+Desktop:
+ros2 run image_view image_view --ros-args -r image:=/camera/image_raw -p image_transport:=compressed
+```
 
 ## Useful links
 
