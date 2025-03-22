@@ -50,6 +50,12 @@ sudo apt upgrade
 # on my machine previously installed "libcamera" package was automatically upgraded with Marco's binary.
 sudo apt install libcamera-tools rpicam-apps-lite python3-picamera2
 ```
+Make sure you are a member of group "_video_", for example my "_ros_" account already is:
+```
+ros@plucky:~$ sudo adduser ros video
+[sudo] password for ros: 
+info: The user `ros' is already a member of `video'.
+```
 Reboot
 
 ## Basic testing
