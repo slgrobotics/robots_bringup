@@ -1,10 +1,10 @@
 ## Robots Bringup (Documentation)
 
-This repository contains instructions and other documents related to my "[*articubot_one*](https://github.com/slgrobotics/articubot_one)" project.
+This repository contains instructions and other [documents](https://github.com/slgrobotics/robots_bringup/tree/main/Docs) related to my "[*articubot_one*](https://github.com/slgrobotics/articubot_one)" project.
 
 It is intended to run navigation on my Turtlebot-like robots - in Gazebo simulation or with physical robots, indoors or outdoors.
 
-Some of the docs here deal with Desktop ("*Ground Station*") setup and operation, while others describe setup of on-board Raspberry Pi computers.
+Some of the [docs](https://github.com/slgrobotics/robots_bringup/tree/main/Docs) here deal with Desktop ("*Ground Station*") setup and operation, while others describe setup of on-board Raspberry Pi computers.
 
 We assume:
 
@@ -12,7 +12,7 @@ We assume:
 
 - On-board single board computer (SBC) - Raspberry Pi 5 8GB or similar, Ubuntu *server* 24.04 64-bit, ROS Jazzy _base_ (access via _ssh_)
 
-If you just want to run a simulation in Gazebo, or need to set up your Desktop with ROS Jazzy -
+If you just want to run a **simulation in Gazebo**, or need to set up your Desktop with ROS Jazzy -
 see [ROS2 Jazzy Setup](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy) (no robot hardware required).
 
 ## Here are the robots:
