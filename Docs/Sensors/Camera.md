@@ -183,7 +183,7 @@ cap = cv2.VideoCapture(0)
 ...
 ```
 It doesn't work with Raspberry Pi _native_ cameras and _libcamera_. 
-Fortunately, OpenCV can be built with GStreamer support, and _libcamerasrc_ plugin feeds the pipeline if _libcamera_ is working properly.
+Fortunately, OpenCV can be built with [GStreamer](https://gstreamer.freedesktop.org/features/) support, and _libcamerasrc_ plugin feeds the pipeline, if _libcamera_ is working properly.
 
 First, we need to install required components:
 ```
@@ -242,10 +242,10 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 ```
-To see discussions about this, follow:
+To see discussions about this, follow to these links:
 - https://github.com/raspberrypi/libcamera/issues/163
 - https://github.com/opencv/opencv/issues/25072
-
+- https://libcamera.org/getting-started.html
 
 ## ROS2 Camera Publisher.
 
