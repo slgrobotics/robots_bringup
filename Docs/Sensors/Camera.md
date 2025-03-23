@@ -174,19 +174,92 @@ drwxrwxr-x 7 ros ros    4096 Mar 20 19:55 ../
 ros@plucky:~/camera_ws/tests$ 
 ```
 
+## Python, OpenCV and GStreamer
+
+A standard way of capturing frames in Python scripts is as follows:
+```
+import cv2
+cap = cv2.VideoCapture(0)
+...
+```
+It doesn't work with Raspberry Pi _native_ cameras and _libcamera_. 
+Fortunately, OpenCV can be built with GStreamer support, and _libcamerasrc_ plugin feeds the pipeline if _libcamera_ is working properly.
+
+First, we need to install required components:
+```
+sudo apt install gstreamer1.0-tools gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad
+# I am not sure that "gstreamer1.0-plugins-bad" is needed here
+sudo apt install gstreamer1.0-libcamera
+```
+Now you can see if your camera shows up properly in GStreamer queries:
+```
+gst-device-monitor-1.0 Video
+gst-inspect-1.0 libcamerasrc
+gst-inspect-1.0 videoconvert
+```
+Note your camera name:
+```
+libcamera-hello --list-cameras
+   or
+gst-device-monitor-1.0 Video 2>/dev/null | grep name
+```
+Here is a Python script that works for me:
+```
+import cv2
+#print(cv2.getBuildInformation())  # see if your OpenCV was built with GStreamer support (mine was, no need to build from sources)
+
+# camera name and available resolutions: libcamera-hello --list-cameras
+camera = "/base/axi/pcie@120000/rp1/i2c@80000/imx219@10"
+
+print("IP: opening camera: ", camera)
+
+cam_pipeline_str = "libcamerasrc camera-name=%s ! video/x-raw,width=640,height=480,framerate=10/1,format=RGBx ! videoconvert ! videoscale ! video/x-raw,width=640,height=480,format=BGR ! appsink" % (camera)
+# shorter version, produces 1280x1080 frames:
+#cam_pipeline_str = 'libcamerasrc camera-name=%s ! video/x-raw,format=RGBx ! videoconvert ! appsink' % (camera)
+
+cap = cv2.VideoCapture(cam_pipeline_str, cv2.CAP_GSTREAMER)
+#cap = cv2.VideoCapture(0)
+
+if not cap.isOpened():
+    print("Error: open camera failed")
+    exit()
+
+print("OK: open camera successful")
+
+while True:
+    ret, frame = cap.read()
+    if ret:
+        print("OK: frame read successful")
+        # cv2.imshow('frame', frame)
+        # cv2.imwrite("captured_image.jpg", frame)
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+    else:
+        print("Error: frame read failed")
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+```
+To see discussions about this, follow:
+- https://github.com/raspberrypi/libcamera/issues/163
+- https://github.com/opencv/opencv/issues/25072
+
+
 ## ROS2 Camera Publisher.
 
 Here is the code I used for FPV camera before on the Desktop machine: [camera_publisher](https://github.com/slgrobotics/camera_publisher/blob/main/cv_basics/webcam_pub.py)
 
-It relies on OpenCV _V4L2_ bindings, which don't work for IMX219 sensor.
-There is some discussion about it [here](https://stackoverflow.com/questions/75463789/error-pipeline-have-not-been-created-in-python-opencv)
+It relies on OpenCV _V4L2_ bindings, which don't work for IMX219 sensor with ```cv2.VideoCapture(0)``` - see above chapter.
 
 Using OpenCV allows some image processing and publishing custom topics. 
 For example, I could detect color blobs and publish their offsets.
-But image processing in camera node makes sense in FPV scenario (NTSC receiver at the Desktop), where resources are plentiful, but not on the robot's RPi.
+Image processing in a camera node makes sense in FPV scenario (NTSC receiver connected to the Desktop, where resources are plentiful), but not on the robot's resource-limited RPi.
 
-Someday I might create a version of my *camera_publisher* to capture the image using *pycamera2*, not OpenCV - or find a way to feed OpenCV properly.
-The tricky part is "*CvBridge # Package to convert between ROS and OpenCV Images*" - whatever I capture in Pycamera2 must be converted to ROS2 format.
+Someday I might create a version of my *camera_publisher* to capture the image using *pycamera2*, not OpenCV - or use GStreamer to feed OpenCV properly.
+With Pycamera2, the tricky part is "*CvBridge # Package to convert between ROS and OpenCV Images*" - whatever I capture in Pycamera2 must be converted to ROS2 format.
+GStreamer, while relatively simple to use, is rumored to be CPU-hungry.
 
 Meanwhile, Marco recommended https://github.com/christianrauch/camera_ros.
 
