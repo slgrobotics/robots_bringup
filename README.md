@@ -1,4 +1,4 @@
-# Robots Bringup (Documentation)
+## Robots Bringup (Documentation)
 
 This repository contains instructions and other documents related to my "[*articubot_one*](https://github.com/slgrobotics/articubot_one)" project.
 
@@ -15,34 +15,38 @@ We assume:
 If you just want to run a simulation in Gazebo, or need to set up your Desktop with ROS Jazzy -
 see [ROS2 Jazzy Setup](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy) (no robot hardware required).
 
-# Here are the robots:
+## Here are the robots:
 
-## Dragger
+### Dragger
 
 The outdoorsy robot Dragger (Raspberry 5, GPS) is described here:
 [Docs/Dragger](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger)
 
-## Plucky
+### Plucky
 
 An indoors mapper robot Plucky is described here (Raspberry 5):
 [Docs/Plucky](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky)
 
-## The Venerable _Create 1_ Turtlebot, now Jazzified
+### The Venerable _Create 1_ Turtlebot, now Jazzified
 
-Classic Turtlebot, a visitor from the ancient times, running on Raspberry 3B:
+Classic Turtlebot, a visitor from the ancient times, running on Raspberry 3B under ROS2 Jazzy:
 [Docs/Create1](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1)
 
-# Note: Purpose and Limitations of this Project
+---------
+
+**Note:** Purpose and Limitations of this Project
 
 This software is not ready for production use. It has neither been developed nor tested for a specific use case. However, the license conditions of the applicable Open Source licenses allow you to adapt the software to your needs. Before using it in a safety relevant setting, make sure that the software fulfills your requirements and adjust it according to any applicable safety standards, e.g., ISO 26262.
 
-# How to use this repository
+---------
+
+## How to use this repository
 
 **Note:** you don't need to download or build anything from this repository, just browse the Docs folder.
 
 Here are the likely scenarios for your work.
 
-### 1. Just set up a "Clean Machine" for ROS2 Jazzy work
+### 1. Just set up a "Clean Machine" to work with ROS2 Jazzy
 
 - Desktop workstation: see [Docs/ROS-Jazzy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy) (no robot hardware required).
 
