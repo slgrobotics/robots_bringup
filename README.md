@@ -42,7 +42,8 @@ This software is not ready for production use. It has neither been developed nor
 
 ## How to use this repository
 
-**Note:** you don't need to download or build anything from this repository, just browse the Docs folder.
+**Note:** you don't need to download or build anything from this repository, just browse the [Docs](https://github.com/slgrobotics/robots_bringup/tree/main/Docs) folder.
+Actual robots' code is [here](https://github.com/slgrobotics/articubot_one).
 
 Here are the likely scenarios for your work.
 
@@ -50,13 +51,13 @@ Here are the likely scenarios for your work.
 
 - Desktop workstation: see [Docs/ROS-Jazzy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy) (no robot hardware required).
 
-- Set up Raspberry PI: see [Docs/Ubuntu-RPi](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi)
+- _Optional:_ Set up Raspberry *on-board* Raspberry Pi: see [Docs/Ubuntu-RPi](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi)
 
-### 2. Try my robots in Gazebo simulation, browse the code
+### 2. Try my robots in _Gazebo simulation_, browse the code (no robot hardware needed)
 
-- See the #1 above, just follow the build and run instructions there for Dragger, Plucky or Turtle sims.
+- See the #1 above, then follow the build and run instructions there for _simulated_ Dragger, Plucky or Turtle.
 
-- Bonus: ROS2 Jazzy comes with _Turtlebot3_ simulation, try that to see Nav2 working.
+- _Bonus:_ ROS2 Jazzy comes with _Turtlebot3_ simulation, try that to see _Nav2_ working.
 
 - To browse robot's code look under *~/robot_ws/src/articubot_one* - use VS Code or your favorite IDE.
 
