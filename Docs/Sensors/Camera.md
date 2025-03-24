@@ -200,9 +200,11 @@ A common way of capturing frames in Python scripts is as follows:
 ```
 import cv2
 cap = cv2.VideoCapture(0)
+...
+```
 It doesn't work with Raspberry Pi _native_ cameras and _libcamera_. 
 Fortunately, OpenCV can be built with [GStreamer](https://gstreamer.freedesktop.org/features/) support, and _libcamerasrc_ plugin feeds the pipeline, if _libcamera_ is working properly.
-```
+
 First, we need to install required components:
 ```
 sudo apt install gstreamer1.0-tools gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad
