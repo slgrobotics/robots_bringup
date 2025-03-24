@@ -165,28 +165,19 @@ ros@plucky:~/camera_ws/tests$ python3 test.py
                              - Selected sensor format: 640x480-SBGGR10_1X10 - Selected CFE format: 640x480-PC1B
 
 ros@plucky:~/camera_ws/tests$ ll
-total 1328
-drwxrwxr-x 2 ros ros    4096 Mar 21 14:03 ./
-drwxrwxr-x 7 ros ros    4096 Mar 20 19:55 ../
+...
 -rw-rw-r-- 1 ros ros   27835 Mar 21 14:14 image.jpg
--rw-rw-r-- 1 ros ros 1318903 Mar 21 14:03 test.jpg
--rw-rw-r-- 1 ros ros     335 Mar 21 10:51 test.py
-ros@plucky:~/camera_ws/tests$ 
 ```
 With a little help from OpenCV (and Marco ;-)) we can get more processing powers:
 ```
 from picamera2 import Picamera2, Preview
 import cv2
 import time
-
 # see https://datasheets.raspberrypi.com/camera/picamera2-manual.pdf
 #     https://docs.opencv.org/3.4/d8/d01/group__imgproc__color__conversions.html
-
 video_w = 640
 video_h = 480
-
 with Picamera2() as picam2:
-
     # Configure and start Picamera2.
     picam2.video_configuration.main.size = (video_w, video_h)
     #conf_main = {'size': (video_w, video_h), 'format': 'XBGR8888'}
@@ -194,7 +185,6 @@ with Picamera2() as picam2:
     #config = picam2.create_preview_configuration(conf_main)
     picam2.configure(config)
     picam2.start()
-
     while True:
         frame = picam2.capture_array('main')
         cv_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -212,7 +202,7 @@ import cv2
 cap = cv2.VideoCapture(0)
 It doesn't work with Raspberry Pi _native_ cameras and _libcamera_. 
 Fortunately, OpenCV can be built with [GStreamer](https://gstreamer.freedesktop.org/features/) support, and _libcamerasrc_ plugin feeds the pipeline, if _libcamera_ is working properly.
-
+```
 First, we need to install required components:
 ```
 sudo apt install gstreamer1.0-tools gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad
