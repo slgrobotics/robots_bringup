@@ -132,6 +132,8 @@ try [GNOME Snapshot](https://discourse.ubuntu.com/t/whats-happening-in-noble-rep
 
 ## Testing Python bindings
 
+The most direct way of acquiring images from _native_ cameras is using [Picamera2](https://datasheets.raspberrypi.com/camera/picamera2-manual.pdf).
+
 Make a file with the following content:
 ```
 ros@plucky:~/camera_ws/tests$ cat test.py
