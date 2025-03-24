@@ -173,15 +173,43 @@ drwxrwxr-x 7 ros ros    4096 Mar 20 19:55 ../
 -rw-rw-r-- 1 ros ros     335 Mar 21 10:51 test.py
 ros@plucky:~/camera_ws/tests$ 
 ```
+With a little help from OpenCV (and Marco ;-)) we can get more processing powers:
+```
+from picamera2 import Picamera2, Preview
+import cv2
+import time
+
+# see https://datasheets.raspberrypi.com/camera/picamera2-manual.pdf
+#     https://docs.opencv.org/3.4/d8/d01/group__imgproc__color__conversions.html
+
+video_w = 640
+video_h = 480
+
+with Picamera2() as picam2:
+
+    # Configure and start Picamera2.
+    picam2.video_configuration.main.size = (video_w, video_h)
+    #conf_main = {'size': (video_w, video_h), 'format': 'XBGR8888'}
+    config = picam2.create_preview_configuration()
+    #config = picam2.create_preview_configuration(conf_main)
+    picam2.configure(config)
+    picam2.start()
+
+    while True:
+        frame = picam2.capture_array('main')
+        cv_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        print("IP: saving frame...")
+        cv2.imwrite("image_picamera2_cv2.jpg", cv_rgb)
+        print("OK: frame saved")
+        exit()
+```
 
 ## Python, OpenCV and GStreamer
 
-A standard way of capturing frames in Python scripts is as follows:
+A common way of capturing frames in Python scripts is as follows:
 ```
 import cv2
 cap = cv2.VideoCapture(0)
-...
-```
 It doesn't work with Raspberry Pi _native_ cameras and _libcamera_. 
 Fortunately, OpenCV can be built with [GStreamer](https://gstreamer.freedesktop.org/features/) support, and _libcamerasrc_ plugin feeds the pipeline, if _libcamera_ is working properly.
 
