@@ -307,5 +307,6 @@ Here is a document from Ross Lunan with more detail (and coverage of other _nati
 
 https://github.com/ARLunan/Raspberry-Pi-Camera-ROS
 
+Note the following ROS2 package intended for image processing (including stereo, depth etc.):
 
-
+https://github.com/ros-perception/image_pipeline
