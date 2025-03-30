@@ -209,6 +209,7 @@ Once the parameters are adjusted, your robot will be able to map the area, and t
 source ~/robot_ws/install/setup.bash
 xacro ~/robot_ws/install/articubot_one/share/articubot_one/robots/turtle/description/robot.urdf.xacro sim_mode:=true > /tmp/robot.urdf
 ```
----------------------
+----------------
 
-Back to main page: https://github.com/slgrobotics/robots_bringup/tree/main
+Back to https://github.com/slgrobotics/robots_bringup
+
