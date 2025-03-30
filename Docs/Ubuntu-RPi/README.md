@@ -260,20 +260,20 @@ initstepslew 30 192.168.1.130
 #pool 1.ubuntu.pool.ntp.org iburst maxsources 1
 #pool 2.ubuntu.pool.ntp.org iburst maxsources 2
 ```
-A shell script to see how your time sync is performing:
+A shell script to see how your time sync is performing (and see CPU/GPU temperatures):
 ```
 #!/bin/bash
-
 set -x
 systemctl status chronyd
-timedatectl status
 chronyc sources
 chronyc sourcestats
 #timedatectl timesync-status
-#ifconfig -a |grep 192.168
-grep server /etc/chrony/chrony.conf
 ntpdate -q time.windows.com
+timedatectl status
+chronyc tracking
 set +x
+echo "CPU: " `gawk '{print $1/1000," C"}' /sys/class/thermal/thermal_zone0/temp`
+echo "GPU: " `vcgencmd measure_temp` | sed 's/temp=//'
 ```
 
 ### _Optional:_ Making compressed backups of an SD card
@@ -292,7 +292,9 @@ cat /dev/zero > zero.file
 rm zero.file
 ```
 
-Then make an img file - using, for example, Win32DiskImager, and zip it on a PC. To restore it to an SD card, use Balena Etcher (it accepts compressed images).
+Then make an img file:
+- Windows: using, for example, _Win32DiskImager_, and zip it on a PC. To restore it to an SD card, use _Balena Etcher_ (it accepts compressed images).
+- Ubuntu: _gnome-disks_ can be used to create image of SD card or write (restore) an image to SD card. _Balena Etcher_ is also available on Linux. You can compress image file using right-click menu in File Manager.
 
 Here is more info:
 
