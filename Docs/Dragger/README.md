@@ -176,6 +176,7 @@ With _Dragger_ ROS2 nodes tested, you can set up autostart on boot for hands-fre
 
 Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/LinuxService.md
 
--------------------------
+----------------
 
-**Back to main page:** https://github.com/slgrobotics/robots_bringup
+**Back to** [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
+
