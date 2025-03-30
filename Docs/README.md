@@ -12,3 +12,7 @@ If you want to browse robot's code look here:
 
 https://github.com/slgrobotics/articubot_one
 
+-------------------------
+
+**Back to main page:** https://github.com/slgrobotics/robots_bringup
+
