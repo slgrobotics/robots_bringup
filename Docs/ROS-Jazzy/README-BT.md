@@ -123,6 +123,4 @@ Refer to https://github.com/ros-navigation/docs.nav2.org/blob/master/configurati
 
 ----------------
 
-Back to https://github.com/slgrobotics/robots_bringup
-
-
+**Back to** [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
