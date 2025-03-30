@@ -106,5 +106,4 @@ btgattclient -v -d C4:BE:84:70:29:04
 ```
 ----------------
 
-Back to https://github.com/slgrobotics/robots_bringup
-
+**Back to** [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
