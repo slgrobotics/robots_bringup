@@ -63,4 +63,7 @@ Quick start guide: https://www.bosch-sensortec.com/media/boschsensortec/download
 
 Other docs: https://www.bosch-sensortec.com/products/smart-sensors/bno055/
 
+----------------
+
+**Back to** [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
 
