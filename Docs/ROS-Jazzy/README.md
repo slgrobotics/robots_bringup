@@ -2,7 +2,9 @@ _"It takes all the running you can do, to keep in the same place. If you want to
 
 # Set up Desktop ROS Jazzy "Clean Machine" from scratch
 
-Here we set up a new Desktop PC to become a ROS playground machine, and a Ground Station for our robots. 
+Here we set up a new **Desktop PC** to become a ROS playground machine, and a Ground Station for our robots.
+
+For **Raspberry Pi** setup see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi
 
 ## Install Ubuntu 24.04 LTS ("Noble")
 
