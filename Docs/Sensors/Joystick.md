@@ -1,6 +1,9 @@
 ## Joystick setup
 
 I am using _Microsoft Wireless Xbox 360 Controller_ as joystick, which is well supported in ROS2.
+
+_Logitech Wireless F710_ emulates the Xbox 360 Controller. Just move the switch to "X" position and make sure that "Mode" LED is off. No software adjustments needed.  
+
 If you use other types - it is relatively easy to adjust related files, but you are on your own.
 Finding a genuine one might save you some troubleshooting time.
 
@@ -12,7 +15,7 @@ ros2 run joy joy_enumerate_devices
 ros2 run joy joy_node      # <-- Run in first terminal
 ros2 topic echo /joy       # <-- Run in second terminal
 ```
-https://index.ros.org/p/teleop_twist_joy/github-ros2-teleop_twist_joy/#jazzy
+You can see buttons and thumbsticks response in the _echo_ output.
 
 See "Useful links" below.
 
@@ -62,6 +65,12 @@ ros2 launch articubot_one joystick.launch.py &
 Joystick teleop blog:
 
 https://articulatedrobotics.xyz/mobile-robot-14a-teleop/
+
+ROS2 Package:
+
+https://index.ros.org/p/teleop_twist_joy/#jazzy
+
+https://github.com/ros2/teleop_twist_joy
 
 ----------------
 
