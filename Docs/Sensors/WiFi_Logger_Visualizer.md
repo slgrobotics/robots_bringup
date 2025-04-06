@@ -4,7 +4,7 @@ There's a package created by Michael Wimble to log and visualize WiFi signal str
 
 The original is here: https://github.com/wimblerobotics/wifi_logger_visualizer
 
-The close copy I use for testing is here: https://github.com/slgrobotics/wifi_strength_logger
+The fork I use for testing is here: https://github.com/slgrobotics/wifi_logger_visualizer
 
 ----------------
 
