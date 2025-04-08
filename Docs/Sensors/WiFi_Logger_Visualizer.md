@@ -14,8 +14,10 @@ There are many useful commands to discover and measure performance of WiFi inter
 ```
 ip a
 ifconfig -a
-iwconfig wlan0
+sudo lshw -C network
+iwconfig wlan0   # use actual interface name here
 iw dev wlan0 info
+find /lib/modules/$(uname -r)/kernel/drivers/net/wireless
 ```
 For benchmarking, _iperf3_ can be used. It must be installed on both ends of the connection being tested:
 ```
