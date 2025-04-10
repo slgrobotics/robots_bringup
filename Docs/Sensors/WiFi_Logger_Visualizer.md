@@ -20,7 +20,8 @@ iw dev wlan0 info
 find /lib/modules/$(uname -r)/kernel/drivers/net/wireless
 nload wlan0
 ```
-When running my Dragger robot, with RViz2 monitoring it on my desktop machine, I've got the following metrics from `nload wlan0`:
+When running my [Dragger](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger) robot,
+with RViz2 monitoring it on my desktop machine, I've got the following metrics from `nload wlan0`:
 ```
 min: 19 Mbits/s
 avg: 43 Mbits/s
@@ -77,7 +78,8 @@ Its "_antenna_" can be easily obstructed by metal active cooler and hats.
 
 While Raspberry Pi WiFi might be marginally adequate for in-home use, an outdoor robot has to do better.
 
-My Dragger robot has a [WiFi 6 Travel Router](https://www.amazon.com/dp/B0D41G5N95) in Client mode, with a 9/12V USB C [power adapter](https://www.amazon.com/dp/B0C8TBM2QM).
+My [Dragger](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger) robot
+has a [WiFi 6 Travel Router](https://www.amazon.com/dp/B0D41G5N95) in Client mode, with a 9/12V USB C [power adapter](https://www.amazon.com/dp/B0C8TBM2QM).
 
 Raspberry Pi 5 is connected to the router via an Ethernet cable, so that the trafic goes through it. I keep the RPi's `wlan0` running, so that *wifi_logger* node could use it for signal strengh measurement. 
 
