@@ -189,6 +189,12 @@ iperf Done.
 ```
 The `ping` stays within 3..10 ms range. Connection becomes not reliable (for ROS2, at least) above the 35 meters range in my case.
 
+As the result, Dragger can travel within the 35 meter range from the garage router and measure the "heatmap":
+
+![Screenshot from 2025-04-09 20-14-39](https://github.com/user-attachments/assets/2394d7a5-2d2c-40e1-b79d-1ae8dd8c0083)
+
+**Note:** I started ROS when Dragger was far from the router, and then moved towards it. That's why `/odometry/local` meters are negative on the plot.
+
 ----------------
 
 **Back to** [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
