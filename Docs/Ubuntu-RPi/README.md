@@ -305,16 +305,16 @@ https://www.baeldung.com/linux/wipe-free-space
 I upgraded my RPi5 on Dragger, replacing the SD card with an SSD.
 
 Components used:
-- https://www.amazon.com/dp/B0CHNP7P89  - SSD to USB Adapter, used to omage the OS on the PC
+- https://www.amazon.com/dp/B0CHNP7P89  - SSD to USB Adapter, used to image the OS on the PC
 - https://www.amazon.com/dp/B0CPPGGDQT  - Geekworm X1001 PCIe to M.2 Hat
 - https://www.amazon.com/dp/B0C5D6C1YQ  - EN600 PRO SSD 256GB PCIe 3.0 Gen 3x4, NVMe M.2 drive
 
 Steps:
-- First I used SD Imager on a Windows 10 machine to backup my SD card.
-- Then ran Balena Etcher on the same machine to transfer that image to SSD, which was placed on the M2/USB adapter.
+- First I used _SD Imager_ on a Windows 10 machine to backup my SD card.
+- Then ran _Balena Etcher_ on the same machine to transfer that image to SSD, which was placed on the M2/USB adapter.
 - Then I moved SSD to the RPi Hat, and it booted right away, automatically extending the root partition to full ~256GB.
 
-I could've done imaging on the Ubuntu desktop using "_Disks_" app or "_dd_".
+I could've done imaging on the Ubuntu desktop using "_Disks_" app or "_dd_". Balena Etcher is available for Ubuntu, if that's your preference. Ubuntu _Disks_ app reads and writes images fine.
 
 _Pros_: The RPi feels a bit faster, and I hope for better reliability in the long run.
 
@@ -322,7 +322,9 @@ _Cons_: I won't be able to save the whole OS image anymore, as imaging whole 256
 
 **Note:**
 - The cable between M2 Hat and RPi5 is finicky, make sure it is oriented properly and is locked. Refer to Amazon pictures.
-- RPi5 has a "Power" jumper and Ubuntu 24.04 supports safe shutdown when a button is connected to it.
+- SD card should be removed for RPi to boot from SSD.
+- I've read that older RPi 5 firmware had problems booting from the SSD, but mine did not.
+- Bonus: RPi5 has a "Power" jumper and Ubuntu 24.04 supports safe shutdown when a button is connected to it.
 
 Here is how it looks:
 
