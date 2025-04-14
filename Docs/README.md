@@ -12,6 +12,8 @@ If you want to browse robot's code look here:
 
 https://github.com/slgrobotics/articubot_one
 
+Tips on [How to Use this Repository](https://github.com/slgrobotics/robots_bringup/blob/main/README.md#how-to-use-this-repository)
+
 -------------------------
 
 **Back to main page:** https://github.com/slgrobotics/robots_bringup
