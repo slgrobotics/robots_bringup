@@ -119,7 +119,7 @@ ros2 run demo_nodes_cpp talker
 ros2 run demo_nodes_py listener
 ```
 
-### 2. Install _control_ packages needed for our ROS nodes
+### 3. Install _control_ packages needed for our ROS nodes
 ```
 sudo apt install ros-${ROS_DISTRO}-ros2-control ros-${ROS_DISTRO}-ros2-controllers ros-${ROS_DISTRO}-xacro ros-${ROS_DISTRO}-twist-mux
 sudo apt install libi2c-dev
