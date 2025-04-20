@@ -6,7 +6,7 @@ Turtle (Create 1 robot) is a bit different, and could be replicated verbatim, if
 
 Building a robot "from scratch" (wheels, motors, electronics) might be too much for you - consider a Neato, Create 1/2/3 or any other proven base with available ROS2 driver. 
 
-Once you've put together all recommended hardware, my software should work without much change. 
+Once you've put together all recommended hardware, [my software](https://github.com/slgrobotics/articubot_one) should work without much change. 
 It should work with very little change on almost any hardware, once you figured out how to move the wheels with *cmd_vel* topic and deliver wheel encoder ticks to be published by joint broadcaster.
 
 ## General Considerations
