@@ -33,6 +33,8 @@ Your physical robot will likely have a Raspberry 5 SBC, preferrably with 8 Gb RA
 
 You will need a rock-solid WiFi - use [this guide](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/WiFi_Logger_Visualizer.md#wifi-testing-and-benchmarking) to test it.
 
+Note that VS Code IDE works very well with ROS2 code, and GitHub is a great tool and resource.
+
 ## Building Robot in "Layers"
 
 In ROS2 you can build your physical robot in phases, adding "layers" of hardware and software.
@@ -41,15 +43,15 @@ In ROS2 you can build your physical robot in phases, adding "layers" of hardware
 In ROS2 software it will be represented by motor driver and a *base_link* and other elements in *robot_description* (URDF, xacro) files.
 iRobot Create 1 is an example of such a "base".
 A _Differential drive_ base is easier to configure and handle in ROS2, in comparison with _Ackermann steering_ types.
-You will need to have your base move when controlled by joystick.
+- **Goal:** You will need to have your base move when controlled by joystick.
 
 **Second**, you need a collection of [sensors](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Sensors).
 A mere minimum is IMU and LIDAR - and for outdoors you need a GPS receiver. I'd recommend against cameras at this phase.
 In ROS2 software each sensor will be represented by a _Node_ and will publish its data for all other nodes to consume (subscribe to).
-At this point you will be looking at topics (using _rqt_ and *rqt_graph_) and understand how to launch and configure sensors.
+- **Goal:** look at topics (using _rqt_ and *rqt_graph_) and understand how to launch and configure sensors.
 
 **Third**, you need to configure and run Localization (SLAM Toolbox), Navigation (Nav2) packages which ultimately make your robot "alive".
-At this point you will need to learn configuration and launch files, as this is how ROS2 is really programmed. 
+- **Goal:** learn configuration and launch files, as this is how ROS2 is really programmed. 
 
 **Finally**, you can delve into programming robot behaviors (using Behavior Trees or Python scripts for example) to accomplish non-trivial tasks.
 You can play with cameras, sonars, point clouds, AI object detection and other cool technologies.
