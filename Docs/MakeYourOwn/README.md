@@ -23,6 +23,7 @@ Refer to [this guide](https://github.com/slgrobotics/robots_bringup?tab=readme-o
 In my experience, it is very important to have a robot work in simulated environment, with simulated hardware.
 ROS2 interfaces with Gazebo, and if your robot works in simulation, it will likely behave the same way in reality.
 Moreover, you can learn the ropes in sim before ever paying a penny for hardware.
+You can first "build" your robot in simulation (providing an URDF/.xacro _robot description_ file) and then implement it in hardware.
 
 When working with robots you need a _Workstation_ - usually a gaming-class desktop PC under Ubuntu 24.04 [Desktop](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy).
 You will need a [joystick](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Joystick.md) connected to it.
@@ -36,20 +37,21 @@ You will need a rock-solid WiFi - use [this guide](https://github.com/slgrobotic
 
 In ROS2 you can build your physical robot in phases, adding "layers" of hardware and software.
 
-First, you need to build a "base" - for example, a wheeled cart with motors and motor controller. 
+**First**, you need to build a "base" (Chassis) - for example, a wheeled cart with motors and motor controller.  
 In ROS2 software it will be represented by motor driver and a *base_link* and other elements in *robot_description* (URDF, xacro) files.
 iRobot Create 1 is an example of such a "base".
+A _Differential drive_ base is easier to configure and handle in ROS2, in comparison with _Ackermann steering_ types.
 You will need to have your base move when controlled by joystick.
 
-Second, you need a collection of [sensors](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Sensors).
+**Second**, you need a collection of [sensors](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Sensors).
 A mere minimum is IMU and LIDAR - and for outdoors you need a GPS receiver. I'd recommend against cameras at this phase.
 In ROS2 software each sensor will be represented by a _Node_ and will publish its data for all other nodes to consume (subscribe to).
 At this point you will be looking at topics (using _rqt_ and *rqt_graph_) and understand how to launch and configure sensors.
 
-Third, you need to configure and run Localization (SLAM Toolbox), Navigation (Nav2) packages which ultimately make your robot "alive".
+**Third**, you need to configure and run Localization (SLAM Toolbox), Navigation (Nav2) packages which ultimately make your robot "alive".
 At this point you will need to learn configuration and launch files, as this is how ROS2 is really programmed. 
 
-Finally, you can delve into programming robot behaviors (using Behavior Trees or Python scripts for example) to accomplish non-trivial tasks.
+**Finally**, you can delve into programming robot behaviors (using Behavior Trees or Python scripts for example) to accomplish non-trivial tasks.
 You can play with cameras, sonars, point clouds, AI object detection and other cool technologies.
 
 
