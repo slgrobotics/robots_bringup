@@ -108,6 +108,29 @@ Roughly, here is a BoM for it:
 Depending on your robot design, a [Shunt Regulator](https://www.pololu.com/category/249/shunt-regulators) or a large electrolytic capacitor (4700+ uF 50 V) is needed.
 Some motor controllers include spike protection—check your model.
 
+## Base Control - the Arduino way
+
+There are two components in my robots that require additional explanation: the Arduino-based wheel controller and its corresponding ROS 2 driver.
+This architecture is inspired by Articulated Robotics by Josh Newans, a mechatronics engineer from Newcastle, Australia.
+You can find his work [here](https://articulatedrobotics.xyz/category/getting-ready-to-build-a-ros-robot).
+
+ROS2 nodes control wheels rotation by publishing to the */diff_cont/cmd_vel* topic.
+In return, wheel positions must be reported by the driver via the */joint_states* topic.
+
+The ROS2 [driver](https://github.com/slgrobotics/diffdrive_arduino) operates under the Control Manager, and consists of _DiffDriveController_ and _JointStateBroadcaster_.
+
+To control the wheels the ROS2 driver opens a serial connection to an Arduino Mega 2560 microcontroller running custom firmware.
+
+The Arduino [firmware](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/DraggerROS) is responsible for:
+- Generating PWM signals for H-Bridges (DraggerMotors.ino)
+- Reading quadrature encoders (DraggerEncoders.ino)
+- Calculating PID control values (DraggerCalculate.ino)
+- Communicating with the ROS2 driver via serial (DraggerComm.ino)
+- Integrating a "*local override*" joystick (DraggerJoystick.ino)
+- Integrating a "[Parking Sensor](https://photos.app.goo.gl/WsqkA4XpYSLrVDX59)" (sonars) - code available [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/ParkingSensorI2C)
+
+While you may need to adapt the Arduino software to match your specific robot base, the ROS 2 driver can be used as-is.
+
 ----------------
 
 **Back to** [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
