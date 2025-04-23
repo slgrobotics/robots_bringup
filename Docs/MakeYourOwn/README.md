@@ -1,8 +1,9 @@
 ## Make Your Own Robot
 
-This section describes hardware components which can be used to make a robot very similar to my Plucky and Dragger.
+This section describes hardware components which can be used to make a robot very similar to my [Plucky](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky)
+and [Dragger](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger).
 
-Turtle (Create 1 robot) is a bit different, and could be replicated verbatim, if you have an iRobot Create 1 base.
+[Turtle](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1) (Create 1 robot) is a bit different, and could be replicated verbatim, if you have an iRobot Create 1 base.
 
 Building a robot "from scratch" (wheels, motors, electronics) might be too much for you - consider a Neato, Create 1/2/3 or any other proven base with available ROS2 driver. 
 
@@ -11,16 +12,16 @@ It should work with very little change on almost any hardware, once you figured 
 
 ## General Considerations
 
-In ROS2 ecosystem the process of building robots comes down to combining available components - both on the software side and in hardware. 
+In ROS2 ecosystem the process of **building robots comes down to combining available components** - both on the software side and in hardware. 
 The availability of software components (ROS2 _packages_, _Nodes_, _launch_ and _config_ files) takes priority. 
 Having, for example, a great sensor or motor controller which does not have a ROS2 driver makes it no more than an expensive paper weight.
 
-As the ROS2 robots are, in general, quite complex - it is important to start with and example source code, in which all configuration and tuning has been done. 
+As the ROS2 robots are, in general, quite complex - it is important to **start with and example source code**, in which all configuration and tuning has been done. 
 You can take that code base, expand and modify it, while preserving its integrity.
 Starting with a very simple "tutorial quality" code sample is not offering an easy path.
 Refer to [this guide](https://github.com/slgrobotics/robots_bringup?tab=readme-ov-file#how-to-use-this-repository) for an example of a good "starting point robot code".
 
-In my experience, it is very important to have a robot work in simulated environment, with simulated hardware.
+In my experience, it is very important to **have your robot work in simulated environment**, with simulated hardware.
 ROS2 interfaces with Gazebo, and if your robot works in simulation, it will likely behave the same way in reality.
 Moreover, you can learn the ropes in sim before ever paying a penny for hardware.
 You can first "build" your robot in simulation (providing an URDF/.xacro _robot description_ file) and then implement it in hardware.
@@ -33,7 +34,13 @@ Your physical robot will likely have a Raspberry 5 SBC, preferrably with 8 Gb RA
 
 You will need a rock-solid WiFi - use [this guide](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/WiFi_Logger_Visualizer.md#wifi-testing-and-benchmarking) to test it.
 
-Note that VS Code IDE works very well with ROS2 code, and GitHub is a great tool and resource.
+Note that _VS Code_ IDE works very well with ROS2 code, and _GitHub_ is a great tool and resource.
+
+**Warning:** ROS, ROS2 and Gazebo have long history and experienced a lot of breaking changes.
+As a result of this, most of your searches for information, documentation and code will lead to obsolete,
+wrong pieces of old documentation and code, and solutions won't work with current release (ROS2 Jazzy).
+Support is in general non-existent and some packages are not production quality at all.
+Your best friend is a working code example which you've tested yourself and your ability to find current docs.
 
 ## Building Robot in "Layers"
 
@@ -82,13 +89,19 @@ Roughly, here is a BoM for it:
 
 - Raspberry Pi 5 8GB, Ubuntu 24.04 Server, ROS2 Jazzy Base and [robot software](https://github.com/slgrobotics/articubot_one) - see [this guide](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi)
 
-**Option:** instead of Arduino and H-Bridges use RoboClaw and correspondent [ROS2 driver](https://github.com/wimblerobotics/ros2_roboclaw_driver)
+**Option:** instead of Arduino and H-Bridges use _RoboClaw_ and correspondent [ROS2 driver](https://github.com/wimblerobotics/ros2_roboclaw_driver)
 
-**Note:** Regular brushed motors generate a lot of voltage when robot decelerates/stops or is dragged by hand.
-When using a common lead-acid battery these spikes will be dampened by the battery, so you usually don't need any protective devices.
-But a charged Lithium battery with BMS will disconnect itself, rejecting the incoming current, and voltage spikes will damage anything connected to it.
-Depending on your robot design, a [Shunt Regulator](https://www.pololu.com/category/249/shunt-regulators) or a large electrolitic capacitor is needed.
-Some motor controllers might have protection built-in, some don't.
+**Note:**
+- Larger robots, when out of control, can be dangerous. An independent _[remote kill switch](https://www.amazon.com/DieseRC-Universal-Wireless-Receiver-Transmitter/dp/B098WGK35L)_ might be necessary.
+- When indoors, robot horizontal dimensions are dictated by standard door size. There should be some padding for a robot to pass through openings.
+- Round shaped robots navigate easier in tight spaces. Soft padding and side rollers protect walls.
+- For a two-wheeler with casters, weight distribution 2/3 on the wheels is preferrable. Two casters provide much better stability than one.
+- For larger robots ability to be transported in a vehicle is an important consideration.  
+- Regular brushed motors generate a lot of voltage when robot decelerates/stops or is dragged by hand.
+When using a common lead-acid battery these spikes are dampened by the battery, so you usually don't need any protective devices.
+But a charged Lithium battery _with BMS_ will disconnect itself, rejecting the incoming current, and voltage spikes will damage anything connected to it.
+Depending on your robot design, a [Shunt Regulator](https://www.pololu.com/category/249/shunt-regulators) or a large electrolitic capacitor (4700+ uF 50 V) is needed.
+Some motor controllers may have spike protection built-in, some don't.
 
 ----------------
 
