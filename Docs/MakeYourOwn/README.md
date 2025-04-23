@@ -80,7 +80,7 @@ Roughly, here is a BoM for it:
   - IMU - [MPU9250](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/MPU9250.md) or [BNO055](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/BNO055%20IMU.md)
   - [LIDAR](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/LD14.md) - LD14 for indoors, LD19P for outdoors
 
-- Raspberry Pi 5 8GB
+- Raspberry Pi 5 8GB, Ubuntu 24.04 Server, ROS2 Jazzy Base and [robot software](https://github.com/slgrobotics/articubot_one) - see [this guide](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi)
 
 **Option:** instead of Arduino and H-Bridges use RoboClaw and correspondent [ROS2 driver](https://github.com/wimblerobotics/ros2_roboclaw_driver)
 
