@@ -56,6 +56,39 @@ In ROS2 software each sensor will be represented by a _Node_ and will publish it
 **Finally**, you can delve into programming robot behaviors (using Behavior Trees or Python scripts for example) to accomplish non-trivial tasks.
 You can play with cameras, sonars, point clouds, AI object detection and other cool technologies.
 
+## Bill of Materials
+
+It is totally up to you how large and complex your robot will be.
+Here we would think of a Roomba-size to a wheelchair sized robot.
+We assume you want to build it _from scratch_, rather than use a Create 1/2/3 or Neato as a base.
+Basic soldering skills and familiarity with Arduino likes is a must.
+
+Roughly, here is a BoM for it:
+- Base
+  - Wheels
+  - Gearboxes
+  - Motors with Quadrature Encoders
+  - H-Bridges - I like [IBT-2/BTS7960](https://www.amazon.com/BTS7960-H-bridge-Double-Current-Diagnostic/dp/B09W8VV6RH) types. One per motor.
+  - Arduino Mega or similar _base controller_ with [software](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/DraggerROS)
+
+- Power
+  - A LiFePO4 12V 20-50 Ah battery
+  - DC-DC Buck converter for 5V
+  - Switches, Diodes, Capacitors for protection circuits 
+
+- [Sensors](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Sensors) - choose what's available:
+  - IMU - [MPU9250](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/MPU9250.md) or [BNO055](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/BNO055%20IMU.md)
+  - [LIDAR](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/LD14.md) - LD14 for indoors, LD19P for outdoors
+
+- Raspberry Pi 5 8GB
+
+**Option:** instead of Arduino and H-Bridges use RoboClaw and correspondent [ROS2 driver](https://github.com/wimblerobotics/ros2_roboclaw_driver)
+
+**Note:** Regular brushed motors generate a lot of voltage when robot decelerates/stops or is dragged by hand.
+When using a common lead-acid battery these spikes will be dampened by the battery, so you usually don't need any protective devices.
+But a charged Lithium battery with BMS will disconnect itself, rejecting the incoming current, and voltage spikes will damage anything connected to it.
+Depending on your robot design, a [Shunt Regulator](https://www.pololu.com/category/249/shunt-regulators) or a large electrolitic capacitor is needed.
+Some motor controllers might have protection built-in, some don't.
 
 ----------------
 
