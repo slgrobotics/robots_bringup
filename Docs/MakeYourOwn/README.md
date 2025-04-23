@@ -130,6 +130,7 @@ The Arduino [firmware](https://github.com/slgrobotics/Misc/tree/master/Arduino/S
 - Integrating a "[Parking Sensor](https://photos.app.goo.gl/WsqkA4XpYSLrVDX59)" (sonars) - code available [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/ParkingSensorI2C)
 
 While you may need to adapt the Arduino software to match your specific robot base, the ROS 2 driver can be used as-is.
+The firmware was written for and tested on Arduino Mega 2560, but should run fine with minimal modifications on any microcontroller which can be programmed using Arduino IDE (Raspberry Pi Pico, for example). 
 
 ----------------
 
