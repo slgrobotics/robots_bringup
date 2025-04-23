@@ -61,13 +61,13 @@ A _Differential drive_ base is easier to configure in ROS2 than an _Ackermann st
 **Second**, you need a collection of [sensors](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Sensors).
 You’ll need at least an IMU and LIDAR - and for outdoors you need a GPS receiver. Skip cameras for now - they add complexity.
 In ROS2, each sensor is a node that publishes data other nodes can subscribe to.
-- **Goal:** Learn sensor launch files. Use _rqt_ and *rqt_graph* to visualize topics and confirm your sensors are correctly publishing data. 
+- **Goal:** Learn sensor launch files. Use _rqt_ and *rqt_graph* to visualize topics and confirm your sensors are correctly publishing data. Make sure the *frame_id* part corresponds to your _.xacro_ definition of the sensor.
 
 **Third**, you need to configure and launch Localization (SLAM Toolbox) and Navigation (Nav2) packages.
 This makes your robot autonomous.
 - **Goal:** Learn how to modify config and launch files—this is core to ROS2 development. Make sure your robot works in Gazebo simulation too.
 
-**Finally**, Once basic systems are working, program behaviors using Behavior Trees or Python scripts.
+**Finally**, once basic systems are working, program behaviors using Behavior Trees or Python scripts.
 You can also experiment with cameras, sonars, point clouds, and AI-based object detection.
 
 ## Bill of Materials (BoM)
