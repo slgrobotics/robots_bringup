@@ -1,9 +1,10 @@
 ## Make Your Own Robot
 
-This section describes hardware components which can be used to make a robot very similar to my [Plucky](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky)
+This section describes hardware components which can be used to make a robot "_from scratch_" -
+very similar to my [Plucky](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky)
 and [Dragger](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger).
 
-[Turtle](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1) (Create 1 robot) is a bit different, and could be replicated verbatim, if you have an iRobot Create 1 base.
+[Turtle](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1) (Create 1 robot) is a bit different, and could be replicated verbatim, if you have an iRobot Create 1 or 2 base.
 
 Building a robot "from scratch" (wheels, motors, electronics) might be too much for you - consider a Neato, Create 1/2/3 or any other proven base with available ROS2 driver. 
 
@@ -36,9 +37,10 @@ You will need a rock-solid WiFi - use [this guide](https://github.com/slgrobotic
 
 Note that _VS Code_ IDE works very well with ROS2 code, and _GitHub_ is a great tool and resource.
 
-**Warning:** ROS, ROS2 and Gazebo have long history and experienced a lot of breaking changes.
+**Warning:** ROS, ROS2 and Gazebo have long [history](https://en.wikipedia.org/wiki/Robot_Operating_System) and experienced a lot of breaking changes.
 As a result of this, most of your searches for information, documentation and code will lead to obsolete,
 wrong pieces of old documentation and code, and solutions won't work with current release (ROS2 Jazzy).
+The ability of AI tools to hallucinate about ROS is legendary.
 Support is in general non-existent and some packages are not production quality at all.
 Your best friend is a working code example which you've tested yourself and your ability to find current docs.
 
