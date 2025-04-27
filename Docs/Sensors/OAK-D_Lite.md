@@ -107,7 +107,64 @@ Other examples produce topics which can be viewed in _rqt_:
 
 There are examples above that publish data from [_yolo_](https://encord.com/blog/yolo-object-detection-guide/) model. Note that camera resolution in the examples is downgraded to 300x300 or 480P, so the frame rate and CPU load becomes reasonable (I saw 10 FPS, 34 FPS).
 
-I didn't have much luck with the examples on my Intel I7 Desktop machine, some were freezing after a short while. Raspberry Pi 4 and 5 were even more problematic. 
+## Power and USB hub
+
+It seems that my OAK-D Lite was a bit unstable when connected to USB ports directly.
+
+I opted to buy a [USB Hub](https://www.amazon.com/dp/B0CJ95CR8X), fed it with 5.30 V (which happens to be Plucky's 5V bus voltage) - and didn't have any problems with it on Plucky.
+Make sure you use one of the two RPi's USB3 slots, as the other two are USB2.
+
+I also used quality [USB-C cable](https://www.amazon.com/dp/B0BWHTX1R7) (a USB-C to USB-C variety would be even better). 
+
+## Real life scenario
+
+I have OAK-D Lite camera on my Plucky robot, which runs Ubuntu 24.04 Server - a "headless" configuration, no way to run examples that require Desktop.
+
+So, to see the PointCloud (`ros2 launch depthai_examples stereo.launch.py`) I had to separate _RViz2_ from other nodes.
+
+#### On Plucky Raspberry Pi 5:
+```
+cd /opt/ros/jazzy/share/depthai_examples/launch
+sudo cp stereo.launch.py stereo.launch.node.py
+sudo vi stereo.launch.node.py
+```
+Comment out line 219, which runs RViz2 GUI:
+```
+#ld.add_action(rviz_node)
+```
+Launch all nodes except "rviz_node":
+```
+cd ~/
+ros2 launch depthai_examples stereo.launch.node.py
+```
+#### On the Desktop machine:
+```
+cd /opt/ros/jazzy/share/depthai_examples/launch
+sudo cp stereo.launch.py stereo.launch.rviz.py
+sudo vi stereo.launch.rviz.py
+```
+comment out lines 214...218, leaving "rviz_node" action:
+```
+    #ld.add_action(stereo_node)
+    #ld.add_action(urdf_launch)
+
+    #ld.add_action(metric_converter_node)
+    #ld.add_action(point_cloud_node)
+    ld.add_action(rviz_node)
+    return ld
+```
+Now you can launch *rviz_node* alone:
+```
+cd ~/
+ros2 launch depthai_examples stereo.launch.rviz.py
+```
+The _PointCloud2_ (_/stereo/points_ topic) runs at 28..30 FPS and puts about 200 Mbits/s on the WiFi link (run `nload wlan0` on RPi).
+
+A bonus */right/image_rect* topic shows the live stream from one of the OAK-D cameras. 
+
+![Screenshot from 2025-04-26 20-54-00](https://github.com/user-attachments/assets/f2c12651-7488-46ef-932a-3578fb49d225)
+
+![Screenshot from 2025-04-26 21-01-24](https://github.com/user-attachments/assets/50a04441-a0a0-4d45-acc5-02794227c632)
 
 ## Useful Links
 
