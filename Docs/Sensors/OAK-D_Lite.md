@@ -158,9 +158,11 @@ Now you can launch *rviz_node* alone:
 cd ~/
 ros2 launch depthai_examples stereo.launch.rviz.py
 ```
-The _PointCloud2_ (_/stereo/points_ topic) runs at 28..30 FPS and puts about 200 Mbits/s on the WiFi link (run `nload wlan0` on RPi).
+The _PointCloud2_ (_/stereo/points_ topic) is published at ~2 Hz.
 
-A bonus */right/image_rect* topic shows the live stream from one of the OAK-D cameras. 
+A bonus */right/image_rect* topic shows the live stream from one of the OAK-D cameras (at 28..30 FPS).
+
+Overall load on the WiFi link is around 200 Mbits/s (run `nload wlan0` on RPi).
 
 ![Screenshot from 2025-04-26 20-54-00](https://github.com/user-attachments/assets/f2c12651-7488-46ef-932a-3578fb49d225)
 
