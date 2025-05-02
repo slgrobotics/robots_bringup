@@ -165,6 +165,7 @@ vi ~/.asoundrc
 defaults.pcm.card 2
 defaults.ctl.card 2
 ```
+Alternatively you can create file _/etc/asound.conf_ with the same content for system-wide settings.
 
 ### _Optional:_ Create a Linux service for on-boot autostart
 
