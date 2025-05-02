@@ -135,8 +135,10 @@ Comment out line 219, which runs RViz2 GUI:
 Launch all nodes except "rviz_node":
 ```
 cd ~/
-ros2 launch depthai_examples stereo.launch.node.py
+ros2 launch depthai_examples stereo.launch.node.py monoResolution:=400p
 ```
+`monoResolution:=400p` or `monoResolution:=480p` works. If skipped, a warning will be shown and default 480p will be used.
+
 #### On the Desktop machine:
 ```
 cd /opt/ros/jazzy/share/depthai_examples/launch
