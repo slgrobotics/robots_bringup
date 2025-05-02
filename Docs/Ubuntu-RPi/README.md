@@ -137,6 +137,34 @@ Choose one of the robots here: https://github.com/slgrobotics/robots_bringup/tre
 -------------------------------
 
 *Or, review the following:*
+### _Optional:_ Playing sound with _aplay_
+
+You can usually play sound files if you have a _USB Audio Adapter_:
+```
+aplay ~/wav/cat_meow.wav
+```
+Here is how to see your audio devices (note _card 2_ in my case):
+```
+ros@plucky:~$ aplay --list-devices
+**** List of PLAYBACK Hardware Devices ****
+card 0: vc4hdmi0 [vc4-hdmi-0], device 0: MAI PCM i2s-hifi-0 [MAI PCM i2s-hifi-0]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 1: vc4hdmi1 [vc4-hdmi-1], device 0: MAI PCM i2s-hifi-0 [MAI PCM i2s-hifi-0]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 2: Set [C-Media USB Headphone Set], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+```
+For some reason, the _aplay_ works with HDMI display connected (even on a "headless" Server), but if not - you have to explicitly specify which "card" you want _aplay_ to use:
+```
+vi ~/.asoundrc
+
+# Puth the following in this file:
+defaults.pcm.card 2
+defaults.ctl.card 2
+```
 
 ### _Optional:_ Create a Linux service for on-boot autostart
 
