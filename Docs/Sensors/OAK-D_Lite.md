@@ -85,26 +85,31 @@ By default, the */oak/rgb/image_raw* has 1280x720 size, and can be consumed raw 
 ## ROS2 examples
 
 With *depthai-ros* installation you are getting the following packages (under */opt/ros/jazzy/share*):
-
-	depthai_bridge
-	depthai_descriptions
-	depthai_examples
-	depthai_filters
-	depthai-ros
-	depthai_ros_driver
-	depthai_ros_msgs
-
+```
+depthai_bridge
+depthai_descriptions
+depthai_examples
+depthai_filters
+depthai-ros
+depthai_ros_driver
+depthai_ros_msgs
+```
 If you are working on a Desktop, the following example will show *pointCloud* in RViz2:
+```
+ros2 launch depthai_examples stereo.launch.py
 
-    ros2 launch depthai_examples stereo.launch.py
+   or
+
+ros2 launch depthai_ros_driver pointcloud.launch.py use_rviz:=True
+```    
 
 Other examples produce topics which can be viewed in _rqt_:
-    
-    ros2 launch depthai_examples rgb_stereo_node.launch.py
-    ros2 launch depthai_examples tracker_yolov4_node.launch.py
-    ros2 launch depthai_examples tracker_yolov4_spatial_node.launch.py
-    ros2 launch depthai_examples mobile_publisher.launch.py
-
+```
+ros2 launch depthai_examples rgb_stereo_node.launch.py
+ros2 launch depthai_examples tracker_yolov4_node.launch.py
+ros2 launch depthai_examples tracker_yolov4_spatial_node.launch.py
+ros2 launch depthai_examples mobile_publisher.launch.py
+```
 There are examples above that publish data from [_yolo_](https://encord.com/blog/yolo-object-detection-guide/) model. Note that camera resolution in the examples is downgraded to 300x300 or 480P, so the frame rate and CPU load becomes reasonable (I saw 10 FPS, 34 FPS).
 
 ## Power and USB hub
@@ -169,6 +174,40 @@ Overall load on the WiFi link is around 200 Mbits/s (run `nload wlan0` on RPi).
 ![Screenshot from 2025-04-26 20-54-00](https://github.com/user-attachments/assets/f2c12651-7488-46ef-932a-3578fb49d225)
 
 ![Screenshot from 2025-04-26 21-01-24](https://github.com/user-attachments/assets/50a04441-a0a0-4d45-acc5-02794227c632)
+
+## The "*luxonis Device crashed, but no crash dump could be extracted*" bug
+
+At the time of this writing Luxonis ROS Jazzy code has a bug, which you will very likely experience.
+
+After a short time (between several seconds and several minutes) of opreation, the camera "driver" freezes and its pipelines stop delivering data.
+
+You can see that topics are not being published anymore.
+If you interrupt your launch with _Cntrl/C_, you can see an error message cited in this section's header, for example:
+```
+[component_container-2] [ERROR] [1746405049.622991459] [oak]: No data on logger queue!
+[component_container-2] [ERROR] [1746405049.623271624] [oak]: Camera diagnostics error: Communication exception - possible device error/misconfiguration. Original message 'Couldn't read data from stream: 'sys_logger_queue' (X_LINK_ERROR)'
+^C[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[component_container-2] [INFO] [1746405049.793764859] [rclcpp]: signal_handler(signum=2)
+[component_container-2] [INFO] [1746405049.793949623] [oak]: Stopping camera.
+[component_container-2] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[INFO] [rviz2-1]: process has finished cleanly [pid 12852]
+[rviz2-1] [INFO] [1746405049.793806129] [rclcpp]: signal_handler(signum=2)
+ ***** here it is *****
+[component_container-2] [184430102185711200] [7.1] [1746405051.508] [host] [warning] Device crashed, but no crash dump could be extracted.
+ **********************
+[component_container-2] [INFO] [1746405053.004532725] [oak]: Camera stopped!
+[component_container-2] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[INFO] [component_container-2]: process has finished cleanly [pid 12853]
+```
+This is a known bug, and it looks like Luxonis knows about it:
+
+https://discuss.luxonis.com/d/4835-oak-d-crashes-on-different-examples
+
+In my testing, I experience it a lot, while using quality USB 3.2 cables and external power through a USB 3.2 Hub. 
+It is random, sometimes the device "just works" with USB 2.0 connections and very simple cable, and it doesn't seem to be dependent on power.
+It can work on Raspberry Pi 5 better than on an Intel Desktop.
+
+To me it looks like the only way to deal with it now is to write a custom node with a monitoring thread, which will recreate whole set of pipelines once data stops coming. 
 
 ## Useful Links
 
