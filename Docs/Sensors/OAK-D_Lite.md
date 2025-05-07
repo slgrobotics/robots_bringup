@@ -112,6 +112,8 @@ ros2 launch depthai_examples mobile_publisher.launch.py
 ```
 There are examples above that publish data from [_yolo_](https://encord.com/blog/yolo-object-detection-guide/) model. Note that camera resolution in the examples is downgraded to 300x300 or 480P, so the frame rate and CPU load becomes reasonable (I saw 10 FPS, 34 FPS).
 
+Refer to [this guide](https://docs.luxonis.com/software/ros/depthai-ros/driver) for more.
+
 ## Power and USB hub
 
 It seems that my OAK-D Lite was a bit unstable when connected to USB ports directly.
