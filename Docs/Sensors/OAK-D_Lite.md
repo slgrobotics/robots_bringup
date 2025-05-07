@@ -177,9 +177,9 @@ Overall load on the WiFi link is around 200 Mbits/s (run `nload wlan0` on RPi).
 
 ## The "*luxonis Device crashed, but no crash dump could be extracted*" bug
 
-At the time of this writing Luxonis ROS Jazzy code has a bug, which you will very likely experience.
+At the time of this writing Luxonis ROS Jazzy code (or OAK_D LITE USB hardware) has a bug, which you will very likely experience.
 
-After a short time (between several seconds and several minutes) of opreation, the camera "driver" freezes and its pipelines stop delivering data.
+After a short time (between several seconds and several minutes) of opreation, the camera "driver" freezes and its pipelines would stop delivering data.
 
 You can see that topics are not being published anymore.
 If you interrupt your launch with _Cntrl/C_, you can see an error message cited in this section's header, for example:
@@ -207,7 +207,13 @@ In my testing, I experience it a lot, while using quality USB 3.2 cables and ext
 It is random, sometimes the device "just works" with USB 2.0 connections and very simple cable, and it doesn't seem to be dependent on power.
 It can work on Raspberry Pi 5 better than on an Intel Desktop.
 
-To me it looks like the only way to deal with it now is to write a custom node with a monitoring thread, which will recreate whole set of pipelines once data stops coming. 
+I am not equipped to debug it for real, but after trying a lot of combinations of machines, cables and USB connections,
+I am convinced that the bug disappears when there's no other USB devices connected to hubs all the way to the machine.
+For example, when I have all USB3 sockets unused, except for OAK-D LITE, the camera works fine forever.
+But if I connect a card reader to the USB3 socket next to it, random crashes start happening.
+
+To me it looks like the only way to deal with it now is to write a custom node with a monitoring thread, which will recreate whole set of pipelines once data stops coming.
+Here us my attempt to do just that: https://github.com/slgrobotics/depthai_rospi
 
 ## Useful Links
 
