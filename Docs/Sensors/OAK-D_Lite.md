@@ -29,6 +29,22 @@ echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="03e7", MODE="0666"' | sudo tee /etc/ud
 sudo udevadm control --reload-rules && sudo udevadm trigger
 ```
 
+## Power consumption and USB connection requirements
+
+In theory, OAK-D camera can adjust to available USB link speed and will report it (*"LOW", "FULL", "HIGH", "SUPER", "SUPER_PLUS"*).
+In practice, low quality or busy USB hubs cause device pipeline crashing.
+
+It seems that my OAK-D Lite was unstable when connected to some USB ports (see *The "luxonis Device crashed..." bug* below).
+Either on an Intel PC, or on Raspberry Pi 5, the best results (stability) is reached when there are no other devices connected to the same motherboard USB hub.
+
+On the Raspberry Pi 5 use lower USB3 (blue) slot, leaving the other empty.
+Use a [quality USB hub](https://www.amazon.com/dp/B0CJ95CR8X) to extend one of the USB2 (black) slots to connect other devices.
+
+I also used a quality [USB-C cable](https://www.amazon.com/dp/B0BWHTX1R7).
+
+My OAK-D LITE camera consumes 0.3 A when running stereo publishing tasks. It doesn't heat up at all.
+Power consumption goes up significantly when running AI models (YOLO etc.), and the camera can easily overheat if mounted in a tight space.
+
 ## Luxonis Software Installation
 
 There is a collection of python examples, which is not needed for ROS2, but is useful for testing. 
@@ -113,15 +129,6 @@ ros2 launch depthai_examples mobile_publisher.launch.py
 There are examples above that publish data from [_yolo_](https://encord.com/blog/yolo-object-detection-guide/) model. Note that camera resolution in the examples is downgraded to 300x300 or 480P, so the frame rate and CPU load becomes reasonable (I saw 10 FPS, 34 FPS).
 
 Refer to [this guide](https://docs.luxonis.com/software/ros/depthai-ros/driver) for more.
-
-## Power and USB hub
-
-It seems that my OAK-D Lite was a bit unstable when connected to USB ports directly.
-
-I opted to buy a [USB Hub](https://www.amazon.com/dp/B0CJ95CR8X), fed it with 5.30 V (which happens to be Plucky's 5V bus voltage) - and didn't have any problems with it on Plucky.
-Make sure you use one of the two RPi's USB3 slots, as the other two are USB2.
-
-I also used quality [USB-C cable](https://www.amazon.com/dp/B0BWHTX1R7) (a USB-C to USB-C variety would be even better). 
 
 ## Real life scenario
 
