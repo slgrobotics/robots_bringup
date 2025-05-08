@@ -16,9 +16,13 @@ Just connect your "Power" button to the jack between the HDMI and USB-C ports:
 
 Here is a way to shutdown the OS on earlier Pi's - by pressing a button, connected to a GPIO pin:
 
-https://github.com/zizumara/GPIOshutdown/tree/main (thanks to Michael Wimble for the find).
+https://www.dprg.org/category/tutorial/ (thanks to Michael Wimble for the find).
 
-I've been always doing it via pin 21 (hold 4 seconds) and /etc/crontab:
+https://github.com/zizumara/GPIOshutdown/tree/main
+
+## Alternative way
+
+I've been always doing it via pin 21 (hold 4 seconds) and `/etc/crontab`:
 
 (we assume you have GPIO components installed as described [here](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/README.md))
 
