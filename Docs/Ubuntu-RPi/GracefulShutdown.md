@@ -5,11 +5,22 @@ In this case the file system on the SD card can be corrupted, and the Pi will be
 
 To avoid this, ensure that your OS (Ubuntu 24.04 for example) is in a safe state - e.g. shut down.
 
-Here is a way to shutdown the OS by pressing a button, connected to a GPIO pin:
+**Note:** Raspberry Pi 5 has a built-in shutdown mechanism similar to what we are used on PCs.
+Just connect your "Power" button to the jack between the HDMI and USB-C ports:
+
+![Screenshot from 2025-05-08 13-11-05](https://github.com/user-attachments/assets/c1cc9e70-8a79-40f2-b484-72cc169da3ae)
+
+![Screenshot from 2025-05-08 13-08-08](https://github.com/user-attachments/assets/a42c95b2-904d-4b50-beab-b1249a9836e2)
+
+## For Raspberry Pi Zero to 4
+
+Here is a way to shutdown the OS on earlier Pi's - by pressing a button, connected to a GPIO pin:
 
 https://github.com/zizumara/GPIOshutdown/tree/main (thanks to Michael Wimble for the find).
 
 I've been always doing it via pin 21 (hold 4 seconds) and /etc/crontab:
+
+(we assume you have GPIO components installed as described [here](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/README.md))
 
 ```
 # /etc/crontab: system-wide crontab
@@ -50,3 +61,7 @@ while 1:
         btn_timer = 0
     sleep(0.5)
 ```
+
+----------------
+
+**Back to** [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
