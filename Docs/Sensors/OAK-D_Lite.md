@@ -32,18 +32,30 @@ sudo udevadm control --reload-rules && sudo udevadm trigger
 ## Power consumption and USB connection requirements
 
 In theory, OAK-D camera can adjust to available USB link speed and will report it (*"LOW", "FULL", "HIGH", "SUPER", "SUPER_PLUS"*).
-In practice, low quality or busy USB hubs cause device pipeline crashing.
+It should also negotiate available power from the USB jack.
 
-It seems that my OAK-D Lite was unstable when connected to some USB ports (see *The "luxonis Device crashed..." bug* below).
+In my experiments, 5V power drain for my OAK-D LITE is as follows:
+- 0.37A for stereo imaging, including PointCloud2 producing examples. The camera doesn't heat at all.
+- 0.64A when running mobilenet examples. Luke warm on touch.
+- 0.84A when running yolov4 example. Warm on touch.
+- variable 0.5A ... 0.84A when running yolov4 spatial example. Warm on touch.
+
+In practice, low quality or busy USB hubs wouldn't comply with OAK-D power requirements, which causes device pipeline crashing.
+
+My OAK-D Lite was unstable when connected to some USB ports (see *The "luxonis Device crashed..." bug* below).
 Either on an Intel PC, or on Raspberry Pi 5, the best results (stability) is reached when there are no other devices connected to the same motherboard USB hub.
 
-On the Raspberry Pi 5 use lower USB3 (blue) slot, leaving the other empty.
+On the Raspberry Pi 5 you may get lucky using lower USB3 (blue) slot, leaving the other empty.
 Use a [quality USB hub](https://www.amazon.com/dp/B0CJ95CR8X) to extend one of the USB2 (black) slots to connect other devices.
 
 I also used a quality [USB-C cable](https://www.amazon.com/dp/B0BWHTX1R7).
 
-My OAK-D LITE camera consumes 0.3 A when running stereo publishing tasks. It doesn't heat up at all.
-Power consumption goes up significantly when running AI models (YOLO etc.), and the camera can easily overheat if mounted in a tight space.
+At the end I made a simple "power T-tap" from two USB-C [connectors](https://www.amazon.com/Connector-Adapter-5PcsFemale-Breakout-Compatible/dp/B0D9W8B97B).
+It takes power from my robot's 5V bus, which can deliver many amperes. Once I pit it in service, the camera was rock stable.
+
+![Screenshot from 2025-05-10 12-10-56](https://github.com/user-attachments/assets/680aa6cb-4f37-452f-be52-8ab65cba5749)
+
+**Note:** the camera can easily overheat if mounted in a tight space.
 
 ## Luxonis Software Installation
 
@@ -187,6 +199,7 @@ Overall load on the WiFi link is around 200 Mbits/s (run `nload wlan0` on RPi).
 ## The "*luxonis Device crashed, but no crash dump could be extracted*" bug
 
 At the time of this writing Luxonis ROS Jazzy code (or OAK_D LITE USB hardware) has a bug, which you will very likely experience.
+It is related to camera's high power consumption and USB ports inability to deliver ~1A current to the device.
 
 After a short time (between several seconds and several minutes) of opreation, the camera "driver" freezes and its pipelines would stop delivering data.
 
@@ -211,9 +224,8 @@ If you interrupt your launch with _Cntrl/C_, you can see an error message cited 
 This is a known bug, and it looks like Luxonis knows about it:
 
 https://discuss.luxonis.com/d/4835-oak-d-crashes-on-different-examples
-
-In my testing, I experience it a lot, while using quality USB 3.2 cables and external power through a USB 3.2 Hub. 
-It is random, sometimes the device "just works" with USB 2.0 connections and very simple cable, and it doesn't seem to be dependent on power.
+my testing, I experience it a lot, even when using quality USB 3.2 cables and external power through a USB 3.2 Hub. 
+It is random, sometimes the device "just works" with USB 2.0 connections and very simple cable.
 It can work on Raspberry Pi 5 better than on an Intel Desktop.
 
 I am not equipped to debug it for real, but after trying a lot of combinations of machines, cables and USB connections,
@@ -221,7 +233,7 @@ I am convinced that the bug disappears when there's no other USB devices connect
 For example, when I have all USB3 sockets unused, except for OAK-D LITE, the camera works fine forever.
 But if I connect a card reader to the USB3 socket next to it, random crashes start happening.
 
-To me it looks like the only way to deal with it now is to write a custom node with a monitoring thread, which will recreate whole set of pipelines once data stops coming.
+To 111me it looks like the only way to deal with it now is to write a custom node with a monitoring thread, which will recreate whole set of pipelines once data stops coming.
 Here us my attempt to do just that: https://github.com/slgrobotics/depthai_rospi
 
 ## Useful Links
