@@ -36,14 +36,14 @@ It should also negotiate available power from the USB jack.
 
 In my experiments, 5V power drain for my OAK-D LITE is as follows:
 - 0.37A for stereo imaging, including PointCloud2 producing examples. The camera doesn't heat at all.
-- 0.64A when running mobilenet examples. Luke warm on touch.
-- 0.84A when running yolov4 example. Warm on touch.
-- variable 0.5A ... 0.84A when running yolov4 spatial example. Warm on touch.
+- 0.64A when running _mobilenet_ examples. Luke warm on touch.
+- 0.84A when running _yolov4_ example. Warm on touch.
+- variable 0.5A ... 0.84A when running _yolov4 spatial_ example. Warm on touch.
 
-In practice, low quality or busy USB hubs wouldn't comply with OAK-D power requirements, which causes device pipeline crashing.
+In practice, low quality or busy USB hubs wouldn't comply with OAK-D power requirements, which causes device pipelines crashing.
 
-My OAK-D Lite was unstable when connected to some USB ports (see *The "luxonis Device crashed..." bug* below).
-Either on an Intel PC, or on Raspberry Pi 5, the best results (stability) is reached when there are no other devices connected to the same motherboard USB hub.
+My OAK-D Lite was unstable when connected to most USB ports I tried (see *The "luxonis Device crashed..." bug* below).
+Either on an Intel PC, or on Raspberry Pi 5, the best results (relative stability) is reached when there are no other devices connected to the same motherboard USB hub.
 
 On the Raspberry Pi 5 you may get lucky using lower USB3 (blue) slot, leaving the other empty.
 Use a [quality USB hub](https://www.amazon.com/dp/B0CJ95CR8X) to extend one of the USB2 (black) slots to connect other devices.
@@ -51,9 +51,11 @@ Use a [quality USB hub](https://www.amazon.com/dp/B0CJ95CR8X) to extend one of t
 I also used a quality [USB-C cable](https://www.amazon.com/dp/B0BWHTX1R7).
 
 At the end I made a simple "power T-tap" from two USB-C [connectors](https://www.amazon.com/Connector-Adapter-5PcsFemale-Breakout-Compatible/dp/B0D9W8B97B).
-It takes power from my robot's 5V bus, which can deliver many amperes. Once I pit it in service, the camera was rock stable.
+It takes power from my robot's 5V bus, which can deliver many amperes. Once I pit it in service, the camera became rock stable.
 
 ![Screenshot from 2025-05-10 12-10-56](https://github.com/user-attachments/assets/680aa6cb-4f37-452f-be52-8ab65cba5749)
+
+Connectios: D+ to D+, D- to D-, GND to GND. 5V on the camera side and common GND go to 5V power source. Capacitors optional. 
 
 **Note:** the camera can easily overheat if mounted in a tight space.
 
@@ -131,7 +133,7 @@ ros2 launch depthai_examples stereo.launch.py
 ros2 launch depthai_ros_driver pointcloud.launch.py use_rviz:=True
 ```    
 
-Other examples produce topics which can be viewed in _rqt_:
+Other examples produce topics which can be viewed in _rqt_ (beware of ~1A power conumption and possible overheating):
 ```
 ros2 launch depthai_examples rgb_stereo_node.launch.py
 ros2 launch depthai_examples tracker_yolov4_node.launch.py
@@ -224,8 +226,9 @@ If you interrupt your launch with _Cntrl/C_, you can see an error message cited 
 This is a known bug, and it looks like Luxonis knows about it:
 
 https://discuss.luxonis.com/d/4835-oak-d-crashes-on-different-examples
+
 my testing, I experience it a lot, even when using quality USB 3.2 cables and external power through a USB 3.2 Hub. 
-It is random, sometimes the device "just works" with USB 2.0 connections and very simple cable.
+It is random, sometimes the device "just works" with USB 2.0 connections and a very basic cable.
 It can work on Raspberry Pi 5 better than on an Intel Desktop.
 
 I am not equipped to debug it for real, but after trying a lot of combinations of machines, cables and USB connections,
@@ -233,8 +236,10 @@ I am convinced that the bug disappears when there's no other USB devices connect
 For example, when I have all USB3 sockets unused, except for OAK-D LITE, the camera works fine forever.
 But if I connect a card reader to the USB3 socket next to it, random crashes start happening.
 
-To 111me it looks like the only way to deal with it now is to write a custom node with a monitoring thread, which will recreate whole set of pipelines once data stops coming.
-Here us my attempt to do just that: https://github.com/slgrobotics/depthai_rospi
+The bug also disappears **when the camera is fed with 5V via an improvised "USB-C power T-tap"** (see above).
+
+The other (software) way to deal with it is to write a custom node with a monitoring thread, which will recreate whole set of pipelines once data stops coming.
+Here is my attempt to do just that: https://github.com/slgrobotics/depthai_rospi
 
 ## Useful Links
 
