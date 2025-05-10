@@ -63,7 +63,11 @@ Connectios: D+ to D+, D- to D-, GND to GND. 5V on the camera side and common GND
 
 ## Luxonis Software Installation
 
-There is a collection of python examples, which is not needed for ROS2, but is useful for testing. 
+There's plenty of information on the [Luxonis Software](https://docs.luxonis.com/software/) site:
+- [Examples](https://docs.luxonis.com/software/depthai/examples/)
+- [Experiments](https://github.com/luxonis/depthai-experiments)
+
+For a quick test there is a collection of python examples, which is not needed for ROS2, but is useful for testing. 
 
 It can be only installed if you have a **Desktop** edition of Ubuntu 24.04
 
@@ -244,6 +248,8 @@ The other (software) way to deal with it is to write a custom node with a monito
 Here is my attempt to do just that: https://github.com/slgrobotics/depthai_rospi
 
 ## Useful Links
+
+Official Luxonis site: https://docs.luxonis.com/software
 
 Basic setup: https://robofoundry.medium.com/oak-d-lite-camera-basic-setup-38a563cd594f
 
