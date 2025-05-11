@@ -100,6 +100,26 @@ Device name: OAK-D-LITE  Product name: OAK-D-LITE
 ```
 Note the "_Usb speed_" value - it will be "_SUPER_" on USB3 and "_HIGH_" if plugged into an USB2 socket.
 
+## Spatial demos in Python
+
+Luxonis offers a good collection of examples which take advantage of stereoscopic vision and NNs.
+It is documented [here](https://docs.luxonis.com/software/depthai/examples/spatial_mobilenet/).
+```
+ros@machine:~$ source ~/depthai/depthai-python/.env/bin/activate
+(.env) ros@machine:~$ cd ~/depthai/depthai-python/examples
+
+ls
+spatial_calculator_multi_roi.py
+spatial_mobilenet_mono.py
+spatial_location_calculator.py
+spatial_mobilenet.py
+spatial_tiny_yolo.py
+spatial_tiny_yolo_tof.py
+
+# Run any of the above:
+./spatial_mobilenet_mono.py
+```
+
 ## Configuration and Troubleshooting
 
 There's a number of [environment variables](https://docs.oakchina.cn/projects/api/components/device.html#environment-variables), which can help reconfiguring camera system.
