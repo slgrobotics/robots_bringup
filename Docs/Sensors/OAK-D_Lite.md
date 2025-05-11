@@ -50,6 +50,9 @@ Use a [quality USB hub](https://www.amazon.com/dp/B0CJ95CR8X) to extend one of t
 
 I also used a quality [USB-C cable](https://www.amazon.com/dp/B0BWHTX1R7).
 
+To ensure proper feeding of the camera, Luxonis [sells](https://shop.luxonis.com/products/oak-y-adapter) an "OAK Y Adapter".
+In fact, it is a wonderful example of a company making some extra $$ when they discover that their main product wouldn't work without a crutch ;-)
+
 At the end I made a simple "power T-tap" from two USB-C [connectors](https://www.amazon.com/Connector-Adapter-5PcsFemale-Breakout-Compatible/dp/B0D9W8B97B).
 It takes power from my robot's 5V bus, which can deliver many amperes. Once I pit it in service, the camera became rock stable.
 
@@ -58,7 +61,8 @@ It takes power from my robot's 5V bus, which can deliver many amperes. Once I pi
 Connectios: *D+ to D+*, *D- to D-*, *GND to GND*. The 5V *on the camera side* and *common GND* go to the 5V power source. Capacitors optional.
 
 **Note:**
-- This simple wiring works at USB 2.0 speeds, for actual USB 3.1 wiring refer to [this article](https://www.pshinecable.com/article/usb-c-cable-wiring-diagram.html). 
+- This simple wiring works at USB 2.0 speeds ("HIGH"). For actual USB 3.1 wiring refer to [this article](https://www.pshinecable.com/article/usb-c-cable-wiring-diagram.html).
+- Another way to improvise the *power T-Tap* would be to open a quality USB-C cable in the middle, cut the 5V (red?) wire and tap into the ground wire. This should preserve the "SUPER" speed ability.
 - The camera can easily overheat if mounted in a tight space.
 
 ## Luxonis Software Installation
