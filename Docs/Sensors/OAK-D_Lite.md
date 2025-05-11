@@ -55,7 +55,7 @@ It takes power from my robot's 5V bus, which can deliver many amperes. Once I pi
 
 ![Screenshot from 2025-05-10 12-10-56](https://github.com/user-attachments/assets/680aa6cb-4f37-452f-be52-8ab65cba5749)
 
-Connectios: D+ to D+, D- to D-, GND to GND. 5V on the camera side and common GND go to 5V power source. Capacitors optional.
+Connectios: *D+ to D+*, *D- to D-*, *GND to GND*. The 5V *on the camera side* and *common GND* go to the 5V power source. Capacitors optional.
 
 **Note:**
 - This simple wiring works at USB 2.0 speeds, for actual USB 3.1 wiring refer to [this article](https://www.pshinecable.com/article/usb-c-cable-wiring-diagram.html). 
