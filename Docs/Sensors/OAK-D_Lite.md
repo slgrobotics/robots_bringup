@@ -40,6 +40,8 @@ In my experiments, 5V power drain for my OAK-D LITE is as follows:
 - 0.84A when running _yolov4_ example. Warm on touch.
 - variable 0.5A ... 0.84A when running _yolov4 spatial_ example. Warm on touch.
 
+**Note:** USB 2.0 ports can [deliver](https://en.wikipedia.org/wiki/USB_hardware#:~:text=Allowable%20current%20draw) 100 to 500 mA, while USB 3.1/3.2 ports - 900 mA. That's if you are lucky, of course.
+
 In practice, low quality or busy USB hubs wouldn't comply with OAK-D power requirements, which causes device pipelines crashing.
 
 My OAK-D Lite was unstable when connected to most USB ports I tried (see *The "luxonis Device crashed..." bug* below).
