@@ -1,6 +1,7 @@
-## OAK-D Lite setup
+# OAK-D Lite Stereo Depth Camera
 
-I have a "_Kickstarter Edition_" OAK-D Lite stereo camera. It doesn't have an IMU, but otherwise should be identical to units produced later.
+I have a "_Kickstarter Edition_" OAK-D Lite stereo [camera](https://shop.luxonis.com/products/oak-d-lite-1).
+It doesn't have an IMU, but otherwise should be identical to units produced later.
 
 This guide describes how to run it under Ubuntu 24.04 and ROS2 Jazzy - first on an Intel 5 Desktop, an then on Raspberry 4 or 5 under the Ubuntu 24.04 Server and ROS2 Jazzy Base.
 
@@ -29,10 +30,9 @@ echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="03e7", MODE="0666"' | sudo tee /etc/ud
 sudo udevadm control --reload-rules && sudo udevadm trigger
 ```
 
-## Power consumption and USB connection requirements
+## *Important:* Power consumption and USB connection requirements
 
-In theory, OAK-D camera can adjust to available USB link speed and will report it (*"LOW", "FULL", "HIGH", "SUPER", "SUPER_PLUS"*).
-It should also negotiate available power from the USB jack.
+In theory, OAK-D camera should negotiate available power from the USB port.
 
 In my experiments, 5V power drain for my OAK-D LITE is as follows:
 - 0.37A for stereo imaging, including PointCloud2 producing examples. The camera doesn't heat at all.
@@ -47,12 +47,10 @@ In practice, low quality or busy USB hubs wouldn't comply with OAK-D power requi
 My OAK-D Lite was unstable when connected to most USB ports I tried (see *The "luxonis Device crashed..." bug* below).
 Either on an Intel PC, or on Raspberry Pi 5, the best results (relative stability) is reached when there are no other devices connected to the same motherboard USB hub.
 
-On the Raspberry Pi 5 you may get lucky using lower USB3 (blue) slot, leaving the other empty.
+On the Raspberry Pi 5, when not running NNs, you may get lucky using lower USB3 (blue) slot, leaving the other empty.
 Use a [quality USB hub](https://www.amazon.com/dp/B0CJ95CR8X) to extend one of the USB2 (black) slots to connect other devices.
 
-I also used a quality [USB-C cable](https://www.amazon.com/dp/B0BWHTX1R7).
-
-To ensure proper feeding of the camera, Luxonis [sells](https://shop.luxonis.com/products/oak-y-adapter) an "OAK Y Adapter".
+To ensure proper feeding of the camera from a 5V power source, Luxonis [sells](https://shop.luxonis.com/products/oak-y-adapter) an "OAK Y Adapter".
 In fact, it is a wonderful example of a company making some extra $$ when they discover that their main product wouldn't work without a crutch ;-)
 
 At the end I made a simple "power T-tap" from two USB-C [connectors](https://www.amazon.com/Connector-Adapter-5PcsFemale-Breakout-Compatible/dp/B0D9W8B97B).
@@ -66,14 +64,17 @@ Connectios: *D+ to D+*, *D- to D-*, *GND to GND*. The 5V *on the camera side* an
 - This simple wiring works at USB 2.0 speeds ("HIGH"). For actual USB 3.1 wiring refer to [this article](https://www.pshinecable.com/article/usb-c-cable-wiring-diagram.html).
 - Another way to improvise the *power T-Tap* would be to open a quality USB-C cable in the middle, cut the 5V (red?) wire and tap into the ground wire. This should preserve the "SUPER" speed ability.
 - The camera can easily overheat if mounted in a tight space.
+- OAK-D camera can adjust to available USB link speed and most scripts and launch files will report it (*"LOW", "FULL", "HIGH", "SUPER", "SUPER_PLUS"*). For USB2 speed will be "HIGH", for USB3 - "SUPER".
+- Use a quality [USB-C "10Gbps" cable](https://www.amazon.com/dp/B0BWHTX1R7).
 
 ## Luxonis Software Installation
 
 There's plenty of information on the [Luxonis Software](https://docs.luxonis.com/software/) site:
 - [Examples](https://docs.luxonis.com/software/depthai/examples/)
 - [Experiments](https://github.com/luxonis/depthai-experiments)
+- [Spatial AI](https://docs.luxonis.com/software/perception/spatial-ai/)
 
-For a quick test there is a collection of python examples, which is not needed for ROS2, but is useful for testing. 
+For a quick test there is a collection of python [examples](https://github.com/luxonis/depthai-python), which is not needed for ROS2, but is useful for testing. 
 
 It can be only installed if you have a **Desktop** edition of Ubuntu 24.04
 
@@ -122,7 +123,7 @@ spatial_mobilenet.py
 spatial_tiny_yolo.py
 spatial_tiny_yolo_tof.py
 
-# Run any of the above:
+# Run any of the above, for example:
 ./spatial_mobilenet_mono.py
 ```
 
@@ -134,17 +135,19 @@ Use ```export DEPTHAI_LEVEL=info; export XLINK_LEVEL=info``` to display temperat
 
 Most operation parameters (frame size etc.) are convigured via arguments to launch files.
 
-## ROS2 operation
+# ROS2 operation
 
-ROS2 Jazzy has binary distribution:
+## Installation
+
+ROS2 Jazzy has binary distribution - a collection of [depthai_ros](https://github.com/luxonis/depthai-ros) packages.
+You may also want to install *[vision_msgs_rviz_plugins](https://github.com/ros-perception/vision_msgs/blob/ros2/vision_msgs_rviz_plugins/README.md)* package
+(*[vision_msgs](https://github.com/ros-perception/vision_msgs)* should be already installed)
 ```
-sudo apt install ros-${ROS_DISTRO}-depthai-ros
+sudo apt install ros-${ROS_DISTRO}-depthai-ros ros-${ROS_DISTRO}-vision-msgs-rviz-plugins
 
 ros2 launch depthai_ros_driver camera.launch.py
 ```
 By default, the */oak/rgb/image_raw* has 1280x720 size, and can be consumed raw or compressed. It is published at ~10 Hz, if run locally on Intel I7 Desktop.
-
-## ROS2 examples
 
 With *depthai-ros* installation you are getting the following packages (under */opt/ros/jazzy/share*):
 ```
@@ -156,6 +159,9 @@ depthai-ros
 depthai_ros_driver
 depthai_ros_msgs
 ```
+
+## ROS2 examples
+
 If you are working on a Desktop, the following example will show *pointCloud* in RViz2:
 ```
 ros2 launch depthai_examples stereo.launch.py
@@ -175,6 +181,37 @@ ros2 launch depthai_examples mobile_publisher.launch.py
 There are examples above that publish data from [_yolo_](https://encord.com/blog/yolo-object-detection-guide/) model. Note that camera resolution in the examples is downgraded to 300x300 or 480P, so the frame rate and CPU load becomes reasonable (I saw 10 FPS, 34 FPS).
 
 Refer to [this guide](https://docs.luxonis.com/software/ros/depthai-ros/driver) for more.
+
+## Spatial examples
+
+The main attraction of having a stereo camera with AI capabilities is to be able to consume:
+- RGB Image information (*sensor_msgs/msg/Image* topics)
+- PointCloud2 data (*sensor_msgs/msg/PointCloud2* topics)
+- Object tracking data (*vision_msgs/msg/Detection3DArray*, *visualization_msgs/msg/MarkerArray* topics)
+
+Here is how to run one of the examples:
+```
+# runs mobilenet.
+# launch RViz2, add panels to see:
+#     /overlay topic (image with detections)
+#     /oak/points (PointCloud2) - oak_rgb_camera_optical_frame
+ros2 launch depthai_filters spatial_bb.launch.py
+```
+![Screenshot from 2025-05-12 11-49-49](https://github.com/user-attachments/assets/532eee56-5039-489b-a492-63e9a2a626a8)
+
+Overall, it is worth spending time exploring *launch files* in these folders:
+```
+/opt/ros/jazzy/share/depthai_descriptions/launch
+/opt/ros/jazzy/share/depthai_examples/launch
+/opt/ros/jazzy/share/depthai_filters/launch
+/opt/ros/jazzy/share/depthai_ros_driver/launch
+```
+**Note:**
+- Luxonis uses custom messages (depthai_ros_msgs/msg/*) which don't seem to have corresponding RViz2 plugins.
+- at this time Luxonis code wrongly places 2D values _in millimeters_ into 3D boundary box topics ("bbox"). This makes proper 3D visualization using *vision_msgs_rviz_plugins* impossible:
+
+![Screenshot from 2025-05-12 12-00-28](https://github.com/user-attachments/assets/8925174a-0dc9-4c08-8502-8fa491b42561)
+
 
 ## Real life scenario
 
