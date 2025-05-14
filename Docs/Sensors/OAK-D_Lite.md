@@ -62,7 +62,7 @@ Connectios: *D+ to D+*, *D- to D-*, *GND to GND*. The 5V *on the camera side* an
 
 **Note:**
 - This simple wiring works at USB 2.0 speeds ("HIGH"). For actual USB 3.1 wiring refer to [this article](https://www.pshinecable.com/article/usb-c-cable-wiring-diagram.html).
-- Another way to improvise the *power T-Tap* would be to open a quality USB-C cable in the middle, cut the 5V (red?) wire and tap into the ground wire. This should preserve the "SUPER" speed ability.
+- Another way to improvise the *power T-Tap* is to open a quality USB-C cable in the middle, cut the 5V (red?) wire and tap into it (and, if present, the ground wire). This preserves the "SUPER" speed ability.
 - The camera can easily overheat if mounted in a tight space.
 - OAK-D camera can adjust to available USB link speed and most scripts and launch files will report it (*"LOW", "FULL", "HIGH", "SUPER", "SUPER_PLUS"*). For USB2 speed will be "HIGH", for USB3 - "SUPER".
 - Use a quality [USB-C "10Gbps" cable](https://www.amazon.com/dp/B0BWHTX1R7).
