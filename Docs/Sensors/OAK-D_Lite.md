@@ -127,6 +127,8 @@ spatial_tiny_yolo_tof.py
 ./spatial_mobilenet_mono.py
 ```
 
+There's also a collection of experimental code [here](https://github.com/luxonis/depthai-experiments)
+
 ## Configuration and Troubleshooting
 
 There's a number of [environment variables](https://docs.oakchina.cn/projects/api/components/device.html#environment-variables), which can help reconfiguring camera system.
@@ -212,6 +214,46 @@ Overall, it is worth spending time exploring *launch files* in these folders:
 
 ![Screenshot from 2025-05-12 12-00-28](https://github.com/user-attachments/assets/8925174a-0dc9-4c08-8502-8fa491b42561)
 
+- My fork [here](https://github.com/slgrobotics/depthai-ros) tries to fix that 3D visualization problem (it is work in progress).
+
+## Configuration files
+
+There's a lot of configuring that's going on behind the scenes when you run launch files.
+You can usually create a custom `.yaml` file and pass it as parameter, for example:
+
+1. Take an original file:
+```
+/opt/ros/jazzy/share/depthai_filters/config/spatial_bb.yaml
+```
+2. Copy it as `my_camera.yaml` and make some changes:
+```
+/oak:
+  ros__parameters:
+    pipeline_gen:
+      i_enable_imu: false
+    camera:
+      i_nn_type: spatial
+    rgb:
+      i_enable_preview: true
+      i_keep_preview_aspect_ratio: false
+      i_fps: 10.0
+      i_low_bandwidth: true
+    nn:
+      i_enable_passthrough: true
+      i_disable_resize: true
+    stereo:
+      i_subpixel: true
+      i_fps: 3.0
+      i_low_bandwidth: true
+/spatial_bb_node:
+  ros__parameters:
+    desqueeze: true
+```
+Run the example (if in doubt, provide fulll path):
+```
+ros2 launch depthai_filters spatial_bb.launch.py params_file:=my_camera.yaml
+```
+Find complete list of parameters [here](https://docs.luxonis.com/software/ros/depthai-ros/driver/#DepthAI%20ROS%20Driver-List%20of%20parameters).
 
 ## Real life scenario
 
@@ -323,6 +365,8 @@ https://docs.luxonis.com/software/ros/depthai-ros/
 https://docs.luxonis.com/software/ros/depthai-ros/driver/
 
 https://github.com/luxonis/depthai-ros
+
+Spatial AI docs: https://docs.luxonis.com/software/perception/spatial-ai/
 
 A collection of experimental code: https://github.com/luxonis/depthai-experiments
 
