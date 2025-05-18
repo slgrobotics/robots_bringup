@@ -199,7 +199,10 @@ Here is how to run one of the examples:
 #     /oak/points (PointCloud2) - oak_rgb_camera_optical_frame
 ros2 launch depthai_filters spatial_bb.launch.py
 ```
-![Screenshot from 2025-05-12 11-49-49](https://github.com/user-attachments/assets/532eee56-5039-489b-a492-63e9a2a626a8)
+Note the _MarkerArray_ for `spatial_bb` topic - that's Luxonis way of tagging 3D objects,
+different from standard _Detection3dArray_ [visualization](https://github.com/ros-perception/vision_msgs?tab=readme-ov-file#rviz-plugins).
+
+![Screenshot from 2025-05-18 13-04-33](https://github.com/user-attachments/assets/9d599bb9-1ff9-42e5-88dd-16a179cf082a)
 
 Overall, it is worth spending time exploring *launch files* in these folders:
 ```
