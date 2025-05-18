@@ -370,6 +370,8 @@ Spatial AI docs: https://docs.luxonis.com/software/perception/spatial-ai/
 
 A collection of experimental code: https://github.com/luxonis/depthai-experiments
 
+ROS DDS Tuning guide: https://docs.ros.org/en/rolling/How-To-Guides/DDS-tuning.html
+
 Alternative ROS2 Publisher: https://github.com/jmguerreroh/oak_d_camera  (works, but I had to edit out all IMU stuff in the C++ code)
 
 https://github.com/ARLunan/depthai_desktop
