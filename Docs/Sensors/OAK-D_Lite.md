@@ -209,6 +209,7 @@ Overall, it is worth spending time exploring *launch files* in these folders:
 /opt/ros/jazzy/share/depthai_ros_driver/launch
 ```
 **Note:**
+- Trying to view _PointCloud2_ in _RViz2_ causes **~800 MBits/sec load** on your network. If it goes between RPi and Desktop - try Ethernet cable, not WiFi first.
 - Luxonis uses custom messages (depthai_ros_msgs/msg/*) which don't seem to have corresponding RViz2 plugins.
 - at this time Luxonis code wrongly places 2D values _in millimeters_ into 3D boundary box topics ("bbox"). This makes proper 3D visualization using *vision_msgs_rviz_plugins* impossible:
 
