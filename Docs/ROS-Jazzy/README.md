@@ -273,6 +273,8 @@ _ros2_control documentation_ : https://control.ros.org/jazzy/index.html
 
 _IMU tools for Rviz_ : https://github.com/CCNYRoboticsLab/imu_tools/tree/humble
 
+_ROS DDS Tuning guide_: https://docs.ros.org/en/rolling/How-To-Guides/DDS-tuning.html
+
 **Articulated Robotics (Josh Newans):**
 
 https://articulatedrobotics.xyz/category/build-a-mobile-robot-with-ros
