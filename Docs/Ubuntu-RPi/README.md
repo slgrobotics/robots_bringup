@@ -125,6 +125,8 @@ ROS2 requires good connectivity, and you will have problems if you skip this ste
 
 Refer to [this guide](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/WiFi_Logger_Visualizer.md#wifi-testing-and-benchmarking) for tuning and benchmarking your WiFi.
 
+As your robot will be using WiFi, having ROS2 transport (DDS) optimized becomes a necessity. Use [this guide](https://docs.ros.org/en/rolling/How-To-Guides/DDS-tuning.html).
+
 ### 4. Install _control_ packages needed for our ROS nodes
 ```
 sudo apt install ros-${ROS_DISTRO}-ros2-control ros-${ROS_DISTRO}-ros2-controllers ros-${ROS_DISTRO}-xacro ros-${ROS_DISTRO}-twist-mux
