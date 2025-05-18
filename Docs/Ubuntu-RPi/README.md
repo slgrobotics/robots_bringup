@@ -139,6 +139,13 @@ Choose one of the robots here: https://github.com/slgrobotics/robots_bringup/tre
 -------------------------------
 
 *Or, review the following:*
+
+### _Optional:_ VS Code Remote Development
+
+You can work on the Desktop machine with repositories/folders on Raspberry Pi.
+
+Follow [this guide](https://code.visualstudio.com/docs/remote/ssh-tutorial).
+
 ### _Optional:_ Playing sound with _aplay_
 
 You can usually play sound files if you have a _USB Audio Adapter_:
