@@ -277,6 +277,28 @@ and [here](https://docs.luxonis.com/software/depthai-components/nodes/color_came
 - NN video source is defined by `stereo.i_spatial_nn_source` (right or left B/W cameras)
 as described [here](https://docs.luxonis.com/software/ros/depthai-ros/driver#DepthAI%20ROS%20Driver-Neural%20networks).
 
+## Converting *PointCloud2* to *LaserScan*
+
+It could be not practical to consume */oak/points* *PointCloud2* data due to high bandwidth required to pass it around and high CPU requirements for processing it.
+
+There's a `pointcloud_to_laserscan` [package](https://github.com/ros-perception/pointcloud_to_laserscan) which can be used to produce a less voluminous *sensor_msgs/msg/LaserScan* message.
+
+This is how to use it:
+- Install *pointcloud_to_laserscan* package:
+```
+sudo apt install ros-${ROS_DISTRO}-pointcloud-to-laserscan
+```
+- Use this [launch file](https://github.com/slgrobotics/depthai-ros/blob/jazzy/depthai_filters/launch/spatial_bb_laser.launch.py)
+
+It will work with binary *dephai_ros*, if the launch file is placed properly, or with [my fork](https://github.com/slgrobotics/depthai-ros).
+```
+ros2 launch depthai_filters spatial_bb_laser.launch.py
+```
+You should see depth information presented as a LIDAR scan in RViz2, with only several Kbits/sec bandwidth consumption: 
+
+![Screenshot from 2025-05-20 16-59-50](https://github.com/user-attachments/assets/7f32cb67-8774-4444-85f0-c79f39000972)
+
+
 ## Real life scenario
 
 I have OAK-D Lite camera on my Plucky robot, which runs Ubuntu 24.04 Server - a "headless" configuration, no way to run examples that require Desktop.
