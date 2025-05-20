@@ -229,7 +229,7 @@ You can usually create a custom `.yaml` file and pass it as parameter, for examp
 ```
 /opt/ros/jazzy/share/depthai_filters/config/spatial_bb.yaml
 ```
-2. Copy it as `my_camera.yaml` and make some changes:
+2. Copy it as `my_camera.yaml` and make some changes, for example:
 ```
 /oak:
   ros__parameters:
@@ -247,7 +247,6 @@ You can usually create a custom `.yaml` file and pass it as parameter, for examp
       i_disable_resize: true
     stereo:
       i_subpixel: true
-      i_fps: 3.0
       i_low_bandwidth: true
 /spatial_bb_node:
   ros__parameters:
@@ -257,6 +256,18 @@ Run the example (if in doubt, provide fulll path):
 ```
 ros2 launch depthai_filters spatial_bb.launch.py params_file:=my_camera.yaml
 ```
+Explore nodes and their parameters using `rqt`, `rqt_graph` and the following commands:
+```
+ros2 node list
+ros2 param list /spatial_bb_node
+ros2 param list /oak
+ros2 param list /oak_container
+ros2 param list /oak_state_publisher
+ros2 param list /point_cloud_xyzrgb_node
+ros2 param list /rectify_color_node
+```
+You can find another sample file [here](https://github.com/slgrobotics/depthai-ros/blob/jazzy/depthai_filters/config/spatial_bb.yaml).
+
 Find complete list of parameters [here](https://docs.luxonis.com/software/ros/depthai-ros/driver/#DepthAI%20ROS%20Driver-List%20of%20parameters).
 
 ## Real life scenario
