@@ -270,6 +270,13 @@ You can find another sample file [here](https://github.com/slgrobotics/depthai-r
 
 Find complete list of parameters [here](https://docs.luxonis.com/software/ros/depthai-ros/driver/#DepthAI%20ROS%20Driver-List%20of%20parameters).
 
+**Note:** 
+- RGB Camera output normally goes through ISP (image signal processor)
+as described [here](https://docs.luxonis.com/software/ros/depthai-ros/driver#DepthAI%20ROS%20Driver-Setting%20RGB%20parameters)
+and [here](https://docs.luxonis.com/software/depthai-components/nodes/color_camera).
+- NN video source is defined by `stereo.i_spatial_nn_source` (right or left B/W cameras)
+as described [here](https://docs.luxonis.com/software/ros/depthai-ros/driver#DepthAI%20ROS%20Driver-Neural%20networks).
+
 ## Real life scenario
 
 I have OAK-D Lite camera on my Plucky robot, which runs Ubuntu 24.04 Server - a "headless" configuration, no way to run examples that require Desktop.
