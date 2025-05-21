@@ -4,7 +4,7 @@ Ubuntu 24.04 introduced breaking changes in the way the video stream is handled 
 So, [CSI-connected Cameras](https://www.raspberrypi.com/documentation/accessories/camera.html) on Raspberry Pi 5 don't work anymore under Ubuntu 24.04. 
 See our Club discussion [here](https://groups.google.com/g/hbrobotics/c/4VITfijo2cM/m/80LidlKAAgAJ).
 
-Fortinately, Marco Walther did the research and all the hard work of porting the latest changes in [_RPi OS libcamera_ code](https://github.com/raspberrypi/libcamera) to Ubuntu 24.04.
+Fortunately, Marco Walther did the research and all the hard work of porting the latest changes in [_RPi OS libcamera_ code](https://github.com/raspberrypi/libcamera) to Ubuntu 24.04.
 He created a set of binaries, which can be easily installed on a Raspberry Pi under Ubuntu 24.04.
 
 His work is here: https://launchpad.net/~marco-sonic/+archive/ubuntu/rasppios
@@ -74,7 +74,7 @@ Marco's note: "imx" works for the Sony sensors, but ov<num> potentially for othe
               If that does not show anything (with a couple different/relevant string
               fragments) or shows errors, chances are, nothing afterwards will work.
 
-LIBCAMERA_LOG_LEVELS=*:DEBUG cam -l"
+LIBCAMERA_LOG_LEVELS=*:DEBUG cam -l
     # shows the camera:
     Available cameras:
     1: 'imx219' (/base/axi/pcie@120000/rp1/i2c@80000/imx219@10)
