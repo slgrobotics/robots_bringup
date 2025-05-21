@@ -323,6 +323,12 @@ ros-jazzy-libcamera/noble,now 0.4.0-1noble.20250102.132330 arm64 [installed] <- 
 ros@plucky:~/cam_ws$ sudo apt remove libcamera0.2 ros-jazzy-libcamera
 ```
 
+## Global Shutter Camera
+
+There's a [Global Shutter Camera](https://www.raspberrypi.com/products/raspberry-pi-global-shutter-camera/) available for Raspberry Pi.
+It is intended for applications where standard cameras "*rolling shutter*" [distortion](https://en.wikipedia.org/wiki/Rolling_shutter) is undesirable.
+I have no personal experience with these and don't know if they will work with the setup described here.
+
 ## Useful links
 
 Here is a document from Ross Lunan with more detail (and coverage of other _native_ cameras):
