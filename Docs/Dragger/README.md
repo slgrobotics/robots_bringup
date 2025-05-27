@@ -50,7 +50,7 @@ Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/
 
 Dragger has three USB-to-Serial devices: Arduino "wheels/base", GPS and LIDAR.
 
-Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/USB.md
+Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/PersistentUSB.md
 
 ### MPU9250 Driver
 
