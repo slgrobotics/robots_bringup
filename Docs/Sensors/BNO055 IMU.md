@@ -28,6 +28,14 @@ ROS2 driver code is here:
 
 https://github.com/flynneva/bno055
 
+### Position on the robot
+
+Here is how Adafruit BNO055 carrier board is oriented on Create 1 [Turtlebot](https://photos.app.goo.gl/ED3YbmNRm4kKt3V5A) (view from the rear):
+
+![Screenshot from 2025-05-27 21-48-13](https://github.com/user-attachments/assets/861db7a1-cb60-4215-b6bc-52361d92a453)
+
+If you are using a [generic carrier board](https://www.amazon.com/dp/B0D47G672B), X axis should point backwards, and Y - to the right of the robot.
+
 ### Installation
 ```
 mkdir -p ~/robot_ws/src
