@@ -32,6 +32,10 @@ An indoors mapper robot Plucky is described here (Raspberry 5):
 Classic Turtlebot, a visitor from the ancient times, running on Raspberry 3B under ROS2 Jazzy:
 [Docs/Create1](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1)
 
+### "Make Your Own" robot
+
+This section describes how to make a differential drive [robot](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/MakeYourOwn) "from scratch" - out of widely available parts.
+
 ---------
 
 **Note:** Purpose and Limitations of this Project
