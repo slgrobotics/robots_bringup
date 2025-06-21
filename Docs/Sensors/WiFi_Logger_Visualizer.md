@@ -74,6 +74,16 @@ The realistic range of WiFi could be 50 meters indoors and about 100 meters outd
 Its "_antenna_" can be easily obstructed by metal active cooler and hats.
 [Here](https://community.element14.com/products/raspberry-pi/f/forum/53868/how-good-is-wifi-in-raspberry-pi-5) is more info on this topic.
 
+## WiFi 6 Mesh Networks and Travel Routers
+
+A "_seamless whole-home coverage_" feature of contemporary WiFi 6 (802.11ax) Mesh routers allows client devices to select the router node with the strongest signal.
+
+This works well, if the client device also supports that feature, but might cause poor performance otherwise.
+Older client devices often connect to a far-away router node and keep that connection.
+Mesh networks can be configured to assign router nodes to client devices ("preferred connection" setting), but that works only for stationary devices.
+
+This issue can be solved by using a good WiFi 6 capable travel router in client mode.
+
 ## Improving your WiFi
 
 While Raspberry Pi WiFi might be marginally adequate for in-home use, an outdoor robot has to do better.
