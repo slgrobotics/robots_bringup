@@ -221,6 +221,7 @@ You must do _"colcon build"_ in _~/robot_ws_ every time you change anything. The
 - Dragger: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger
 - Plucky: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky
 - Turtle:https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1
+- A _"Make Your Own"_ DIY robot: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/MakeYourOwn
 
 You are unlikely to have an exact clone of _Dragger_ or _Plucky_, although and old _Create 1 Turtlebot_ might be still alive in your collection. Or you could've created files for your own robot in the _robots/_ directory.
 
