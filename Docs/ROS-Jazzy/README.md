@@ -2,9 +2,9 @@ _"It takes all the running you can do, to keep in the same place. If you want to
 
 # Set up Desktop ROS Jazzy "Clean Machine" from scratch
 
-Here we set up a new **Desktop PC** to become a ROS playground machine, and a Ground Station for our robots.
+Here we set up a clean **Desktop PC** to become a ROS playground machine and a Ground Station for our robots.
 
-For **Raspberry Pi** setup see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi
+For the robot's on-board **Raspberry Pi** setup see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi
 
 ![magic_word](https://github.com/user-attachments/assets/3fe68730-c8a9-4779-809f-ecea9ec824e2)
 
