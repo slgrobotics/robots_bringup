@@ -1,4 +1,8 @@
+_"To invent, you need a good imagination and a pile of junk."_ - Thomas A. Edison
+
 ## Make Your Own Robot
+
+![Screenshot from 2025-06-21 12-29-39](https://github.com/user-attachments/assets/db7a0a7f-5169-44a8-9174-d327695497b9)
 
 This section describes hardware components you can use to build a robot "_from scratch_" -
 similar to my [Plucky](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky)
@@ -40,7 +44,7 @@ Reliable WiFi is essential - test it using [this guide](https://github.com/slgro
 
 Note that _VS Code_ IDE works very well with ROS2 code, and _GitHub_ is an excellent tool for collaboration and version control.
 
-**Warning:** ROS, ROS2 and Gazebo have a long [history](https://en.wikipedia.org/wiki/Robot_Operating_System) and many breaking changes.
+**Warning:** ROS, ROS2 and Gazebo have a long [history](https://en.wikipedia.org/wiki/Robot_Operating_System) and had many breaking changes.
 As a result of this, most of your searches for information, documentation and code will lead to obsolete,
 wrong pieces of old documentation and code, and suggested solutions won't work with current release (ROS2 Jazzy).
 The ability of AI tools to hallucinate and lie about ROS is legendary.
@@ -113,6 +117,8 @@ Some motor controllers include spike protection—check your model.
 There are two components in my robots that require additional explanation: the Arduino-based wheel controller and its corresponding ROS 2 driver.
 This architecture is inspired by Articulated Robotics by Josh Newans, a mechatronics engineer from Newcastle, Australia.
 You can find his work [here](https://articulatedrobotics.xyz/category/getting-ready-to-build-a-ros-robot).
+The _ros2_control_ architecture is described [here](https://articulatedrobotics.xyz/tutorials/mobile-robot/applications/ros2_control-concepts),
+official documentation is [here](https://control.ros.org/jazzy/doc/ros2_control/doc/index.html).
 
 ROS2 nodes control wheels rotation by publishing to the */diff_cont/cmd_vel* topic.
 In return, wheel positions must be reported by the driver via the */joint_states* topic.
