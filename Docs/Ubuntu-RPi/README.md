@@ -146,6 +146,17 @@ You can work on the Desktop machine with repositories/folders on Raspberry Pi.
 
 Follow [this guide](https://code.visualstudio.com/docs/remote/ssh-tutorial).
 
+### _Optional:_ Using UARTs on the Raspberry Pi 5
+
+I don't have a need to use Raspberry Pi UARTs,
+so for useful information please refer to the source - Michael Wimble's repository.
+
+To use Raspberry Pi UARTs refer to the following section.
+
+**Warning:** I will not accept any resposibility for damage to any device as a result of you following these instructions. Neither will Michael Wimble, the original author.
+
+https://github.com/wimblerobotics/ros2_roboclaw_driver?tab=readme-ov-file#using-uarts-on-the-raspberry-pi-5
+
 ### _Optional:_ Playing sound with _aplay_
 
 You can usually play sound files if you have a _USB Audio Adapter_:
