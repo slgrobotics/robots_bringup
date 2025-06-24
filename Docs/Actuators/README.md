@@ -1,12 +1,11 @@
 # Actuators Folder
 
-This section describes ROS2 actuators and motor controllers setup.
+This section describes ROS2 _actuators_ and _motor controllers_ setup.
 
-Please keep in mind that in Articubot architecture wheels are controlled by Arduino.
+Please keep in mind that in Articubot architecture wheels are controlled by Arduino
+as described [here](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/MakeYourOwn/README.md#base-control---the-arduino-way).
 
-But if you want to use a different controller type (e.g. RoboClaw) - this section might help.
-
-If you want to browse robot's code look here: https://github.com/slgrobotics/articubot_one
+But if you want to use a different controller type (e.g. [RoboClaw](https://www.pololu.com/category/124/roboclaw-motor-controllers)) - this section might help.
 
 ----------------
 
