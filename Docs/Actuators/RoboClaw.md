@@ -7,7 +7,7 @@ https://github.com/wimblerobotics/ros2_roboclaw_driver
 
 To use Raspberry Pi UARTs refer to the following section.
 
-**Warning:** I will not accept any resposibility for damage to any device as a result of you following these instructions. Neither will Michael Wimble, the original author.
+**Warning:** I will not accept any resposibility for damage to any device, person or property as a result of you following these instructions. Neither will Michael Wimble, the original author.
 
 https://github.com/wimblerobotics/ros2_roboclaw_driver?tab=readme-ov-file#using-uarts-on-the-raspberry-pi-5
 
