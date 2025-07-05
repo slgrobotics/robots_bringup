@@ -1,3 +1,5 @@
+![Screenshot from 2025-07-05 17-55-44](https://github.com/user-attachments/assets/c6746dc2-1af0-4046-aaf6-c68273ef6fa1)
+
 # Lawnmower Notes
 
 Lawnmower (a.k.a. *Crazed Rhino*) is an actual [Husqvarna Z254F](https://www.husqvarna.com/us/zero-turn-mowers/z254f-special-edition) zero-turn riding mower, robotized for, well, mowing my lawn.
