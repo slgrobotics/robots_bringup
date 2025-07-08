@@ -11,7 +11,7 @@ Code is [here](https://github.com/slgrobotics/PX4-Autopilot/tree/dev)
 Lawnmower photos are here: https://photos.app.goo.gl/jwYZRtTi1LVshQoW8
 
 **Note:** 
-1. This is **not** a ROS2 project, PX4 is a completely different system.
+1. This is **not** a ROS2 project, PX4 (https://px4.io/) is a completely different system.
 2. Once you set up your machine for [PX4 development](https://docs.px4.io/main/en/dev_setup/getting_started.html), you can just run Lawnmower robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
 use the following command: `make px4_sitl gz_lawnmower`
 3. While a lawnmower model is included in standard PX4 codebase, my fork contains customizations needed for tighter control of vehicle speed and additional functions.
