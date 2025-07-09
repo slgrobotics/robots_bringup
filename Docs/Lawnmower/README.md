@@ -21,16 +21,18 @@ use the following command: `make px4_sitl gz_lawnmower`
 
 Onboard, Lawnmower has a Raspberry Pi 4 8GB ("pipx4") - an upgrade from RPi 3B which I've been using for a while.
 
-There's:
-- an MPU9250 on SPI,
-- two SparkFun u-blox ZED-9P boards on USB-serial,
-- a Teensy for interfacing R/C receiver on I2C - code here,
-- Pixhawk color LED (I2C)
-- a Teensy emulating a PCA9685 with optocouplers (I2C) - code here.
+There's also:
+- an [MPU9250](https://www.amazon.com/HiLetgo-Gyroscope-Acceleration-Accelerator-Magnetometer/dp/B01I1J0Z7Y) on SPI,
+- two SparkFun u-blox ZED-9P [boards](https://www.sparkfun.com/sparkfun-gps-rtk-sma-breakout-zed-f9p-qwiic.html) on USB-serial,
+- a Teensy 3.2 for interfacing R/C receiver on I2C - code [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/RC_PPM_Receiver),
+- Pixhawk color [LED](https://www.amazon.com/TYXTTGY-Pixhawk-PX4-External-Extension-Module/dp/B0F29BV7WC) (I2C)
+- a Teensy 4.0, emulating a PCA9685 with optocouplers (I2C) - code [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/Teensy_PCA9685).
+
+My [photo blog](https://photos.app.goo.gl/jwYZRtTi1LVshQoW8) contains some schematics and pictures of the components.
 
 ## Build and Run Instructions
 
-Set up your machine for [PX4 development](https://docs.px4.io/main/en/dev_setup/getting_started.html)
+Set up your Ubuntu 24.04 Desktop machine for [PX4 development](https://docs.px4.io/main/en/dev_setup/getting_started.html)
 
 Clone the [repository](https://github.com/slgrobotics/PX4-Autopilot/tree/dev) - use *dev* branch:
 ```
@@ -50,9 +52,16 @@ There are many other vehicle models available for simulation, for example:
 ```
 make px4_sitl gz_rover_differential_lawn
 make px4_sitl gz_r1_rover
+make px4_sitl gz_x500
 ```
 
-### Build it for Raspberry Pi:
+### Build it on the Desktop for upload to Raspberry Pi:
+
+Install support for arm64:
+```
+sudo apt install g++-aarch64-linux-gnu
+```
+Now you can build the Lawnmower executable tree (see _~/lawnmow/PX4-Autopilot/build/*_):
 ```
 make emlid_navio2_arm64
   or, with upload:
@@ -63,16 +72,23 @@ make emlid_navio2_arm64 upload
 
 The upload creates directory *~/px4* on the RPi, which serves as a "read-only" code storage.
 
-You need to copy some help scripts from it once for creating and maintaining a "work storage" - *px4wrk* folder.
+You need to copy some helper scripts from it once for creating and maintaining a "work storage" - *px4wrk* folder.
 ```
 ssh pi@pipx4.local
-
-# do it once:
---- TBD
-
+```
+Do it once:
+```
+cd ~/px4/etc/scripts
+bash deploy_scripts.sh
+cd ~
+bash create_px4wrk.sh
+```
+Now you can run the PX4 code:
+```
 sudo ./run.sh
 ```
-While running, PX4 creates another "work storage" - */fs* and puts *.ulg* files in */fs/log* folder
+While running, PX4 creates another "work storage" - `/fs` and puts *.ulg* files in the `/fs/log` folder.
+These files can be viewed with [PlotJuggler](https://plotjuggler.io/) app or analyzed with https://review.px4.io/ - for example, [this plot](https://review.px4.io/plot_app?log=f2393d38-2560-4423-b948-ec367bcb7f20).
 
 **Note:**
 If you modify any of the C++ source files, make sure that *astyle* formatting checkups are enforced:
