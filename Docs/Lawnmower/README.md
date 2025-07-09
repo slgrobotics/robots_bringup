@@ -19,20 +19,75 @@ use the following command: `make px4_sitl gz_lawnmower`
 
 ## Hardware
 
-Onboard, Lawnmower has a Raspberry Pi 4 8GB ("pipx4"). 
+Onboard, Lawnmower has a Raspberry Pi 4 8GB ("pipx4") - an upgrade from RPi 3B which I've been using for a while.
 
-## Build and Run Instructions (on the robot's Raspberry Pi 5):
+There's:
+- an MPU9250 on SPI,
+- two SparkFun u-blox ZED-9P boards on USB-serial,
+- a Teensy for interfacing R/C receiver on I2C - code here,
+- Pixhawk color LED (I2C)
+- a Teensy emulating a PCA9685 with optocouplers (I2C) - code here.
 
-TBD
+## Build and Run Instructions
 
-## Running the robot
+Set up your machine for [PX4 development](https://docs.px4.io/main/en/dev_setup/getting_started.html)
 
-Robot can be started with: TBD
+Clone the [repository](https://github.com/slgrobotics/PX4-Autopilot/tree/dev) - use *dev* branch:
+```
+mkdir ~/lawnmow
+cd ~/lawnmow
+git clone https://github.com/slgrobotics/PX4-Autopilot.git --recursive --single_branch -b dev
+```
 
-For diagnostics, run TBD
+### Run simulation in Gazebo:
+```
+cd ~/lawnmow/PX4-Autopilot
+make px4_sitl gz_lawnmower
+```
+In *QGroundControl* use one of the mission plans from the *~/lawnmow/PX4-Autopilot/plans* folder.
 
+There are many other vehicle models available for simulation, for example:
+```
+make px4_sitl gz_rover_differential_lawn
+make px4_sitl gz_r1_rover
+```
 
+### Build it for Raspberry Pi:
+```
+make emlid_navio2_arm64
+  or, with upload:
+make emlid_navio2_arm64 upload
+```
 
+### On the robot's Raspberry Pi:
+
+The upload creates directory *~/px4* on the RPi, which serves as a "read-only" code storage.
+
+You need to copy some help scripts from it once for creating and maintaining a "work storage" - *px4wrk* folder.
+```
+ssh pi@pipx4.local
+
+# do it once:
+--- TBD
+
+sudo ./run.sh
+```
+While running, PX4 creates another "work storage" - */fs* and puts *.ulg* files in */fs/log* folder
+
+**Note:**
+If you modify any of the C++ source files, make sure that *astyle* formatting checkups are enforced:
+```
+cd ~/lawnmow/PX4-Autopilot
+make check_format
+  or
+make format
+```
+
+There are other RPi-based target *boards* and corresponding builds:
+```
+make scumaker_pilotpi_arm64
+make px4_raspberrypi_arm64
+```
 ----------------
 
 **Back to** [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
