@@ -16,6 +16,7 @@ Lawnmower photos are here: https://photos.app.goo.gl/jwYZRtTi1LVshQoW8
 use the following command: `make px4_sitl gz_lawnmower`
 3. While a lawnmower model is included in standard PX4 codebase, my fork contains customizations needed for tighter control of vehicle speed and additional functions.
 4. PX4 plays nice with ROS2, coexists with Jazzy and shares Gazebo Harmonic installation. I use the same machine for ROS2 and PX4 development without any issues.
+5. PX4 has a very active [Discord](https://discord.com/channels/1022170275984457759) community.
 
 ## Hardware
 
@@ -38,10 +39,10 @@ Clone the [repository](https://github.com/slgrobotics/PX4-Autopilot/tree/dev) - 
 ```
 mkdir ~/lawnmow
 cd ~/lawnmow
-git clone https://github.com/slgrobotics/PX4-Autopilot.git --recursive --single_branch -b dev
+git clone https://github.com/slgrobotics/PX4-Autopilot.git --recursive --single-branch -b dev
 ```
 
-### Run simulation in Gazebo:
+#### Run simulation in Gazebo:
 ```
 cd ~/lawnmow/PX4-Autopilot
 make px4_sitl gz_lawnmower
@@ -52,10 +53,13 @@ There are many other vehicle models available for simulation, for example:
 ```
 make px4_sitl gz_rover_differential_lawn
 make px4_sitl gz_r1_rover
-make px4_sitl gz_x500
+make px4_sitl gz_x500_forest
 ```
+**Note:** the `_lawn`, `_forest` postfixes define Gazebo Worlds and can be omitted for default behavior.
 
-### Build it on the Desktop for upload to Raspberry Pi:
+See `~/lawnmow/PX4-Autopilot/Tools/simulation/gz/worlds` for options.
+
+#### Build it on the Desktop for upload to Raspberry Pi:
 
 Install support for arm64:
 ```
@@ -68,7 +72,7 @@ make emlid_navio2_arm64
 make emlid_navio2_arm64 upload
 ```
 
-### On the robot's Raspberry Pi:
+#### On the robot's Raspberry Pi:
 
 The upload creates directory *~/px4* on the RPi, which serves as a "read-only" code storage.
 
@@ -99,7 +103,7 @@ make check_format
 make format
 ```
 
-There are other RPi-based target *boards* and corresponding builds:
+There are other RPi-based target *boards* and corresponding builds - something to keep in mind:
 ```
 make scumaker_pilotpi_arm64
 make px4_raspberrypi_arm64
