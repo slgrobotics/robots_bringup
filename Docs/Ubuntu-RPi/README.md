@@ -2,7 +2,7 @@
 
 We need to copy a _Ubuntu 24.04 Server 64 bit_ image to an SD card, install _ROS2 Jazzy Base_ and add necessary ROS packages.
 
-**Note:** Alternatively you can use real-time OS image with ROS2 Jazzy preinstalled - described [here](https://github.com/ros-realtime/ros-realtime-rpi4-image).
+**Note: (Advanced)** Alternatively you can use real-time OS image with ROS2 Jazzy preinstalled - described [here](https://github.com/ros-realtime/ros-realtime-rpi4-image).
 
 ### 1. Set up a Ubuntu 24.04 Server 64 bit
 
