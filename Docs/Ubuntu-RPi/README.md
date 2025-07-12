@@ -51,14 +51,14 @@ sudo adduser ros i2c
 sudo i2cdetect -y 1
 # Note: you need to re-login to enable group privileges, so that you can skip "sudo" for i2cdetect
 ```
-_Optional:_ Set up Python GPIO: https://ubuntu.com/tutorials/gpio-on-raspberry-pi#1-overview
+_Optional:_ Set up commonly used Python GPIO packages: https://ubuntu.com/tutorials/gpio-on-raspberry-pi#1-overview
 
 **Note:** traditional _pip3_ installation method doesn't work on Ubuntu 24.04, as its Python enforces _virtual environment_ use.
+The "*python3-*" prefix relates to packages that can be installed globally, avoiding the *venv* inconvenience.
 ```
-sudo apt install python3-lgpio
-sudo apt install python3-RPi.GPIO
+sudo apt install python3-lgpio python3-gpiozero python3-RPi.GPIO
 ```
-_Optional:_ Set up WiringPi GPIO: https://projects.drogon.net/raspberry-pi/wiringpi/download-and-install/
+_Optional:_ Set up [WiringPi GPIO](https://projects.drogon.net/raspberry-pi/wiringpi/download-and-install/).
 ```
 sudo apt install build-essential
 mkdir tmp
