@@ -47,7 +47,9 @@ You should be able to ping your _turtle.local_ machine and ssh into it (```ssh r
 Have the I2C support installed and tested:
 ```
 sudo apt install i2c-tools
+sudo adduser ros i2c
 sudo i2cdetect -y 1
+# Note: you need to re-login to enable group privileges, so that you can skip "sudo" for i2cdetect
 ```
 _Optional:_ Set up Python GPIO: https://ubuntu.com/tutorials/gpio-on-raspberry-pi#1-overview
 
