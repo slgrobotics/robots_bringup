@@ -386,7 +386,30 @@ _Cons_: I won't be able to save the whole OS image anymore, as imaging whole 256
 - I've read that older RPi 5 firmware had problems booting from the SSD, but mine did not.
 - Bonus: RPi5 has a "Power" jumper and Ubuntu 24.04 supports safe shutdown when a button is connected to it.
 
-Here is how it looks:
+#### Booting from an SD card with NVM drive present
+
+You might have another Ubuntu 24.04 image on an SD card (in my case, [Real Time OS](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/UbuntuRealTime.md)).
+
+Inserting such SD card and booting the RPi5 can be done safely, with the following caveat: the boot sequence will use the NVM's `/boot/firmware` partition.
+As a result, some essentual configuration will be inherited from the NVM resident OS - for example, SD card's machine name is "*urt*", and the system booted under the name "*plucky*":
+```
+ros@plucky:~$ df -k
+Filesystem     1K-blocks     Used Available Use% Mounted on
+tmpfs             812728     7328    805400   1% /run
+/dev/mmcblk0p2  14805116 11399128   2748160  81% /
+tmpfs            4063628        4   4063624   1% /dev/shm
+tmpfs               5120        0      5120   0% /run/lock
+/dev/mmcblk0p1    516204   176165    340040  35% /boot/firmware
+tmpfs             812724       16    812708   1% /run/user/1001
+
+ros@plucky:~$ uname -a
+Linux plucky 6.8.4-rt11-raspi #1 SMP PREEMPT_RT Mon May  5 16:51:52 UTC 2025 aarch64 aarch64 aarch64 GNU/Linux
+
+```
+There might be other less obvious consequences. To find out, ask your AI-enabled browser: 
+- *"Raspberry pi 5 ubuntu 24.04 /boot/firmware configuration - what is possible to configure?"*
+
+#### Here is how NVM hardware looks:
 
 ![Screenshot from 2025-04-14 09-20-49](https://github.com/user-attachments/assets/2a3e53d0-b723-4924-9498-3f4653a00e9b)
 
