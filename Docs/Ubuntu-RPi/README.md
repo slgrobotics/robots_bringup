@@ -391,8 +391,9 @@ _Cons_: I won't be able to save the whole OS image anymore, as imaging whole 256
 You might have another Ubuntu 24.04 image on an SD card (in my case, [Real Time OS](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/UbuntuRealTime.md)).
 
 Inserting such SD card and booting the RPi5 can be done safely, with the following caveat: the boot sequence **might** use the NVM's `/boot/firmware` partition.
-"Cold" boot and rebooting could behave differently.
-As a result, some essentual configuration will be inherited from the NVM resident OS - for example, SD card's machine name is "*urt*", and the system booted under the name "*plucky*":
+"*Cold*" boot and rebooting seem to behave differently.
+
+As a result, some essentual configuration could be inherited from the NVM resident OS - for example, SD card's machine name is "*urt*", and the system booted under the name "*plucky*":
 ```
 ros@plucky:~$ df -k
 Filesystem     1K-blocks     Used Available Use% Mounted on
