@@ -416,6 +416,14 @@ There might be other less obvious consequences. To find out, ask your AI-enabled
 
 I didn't see any damage to the original OS after removing SD card and booting from NVM as usual.
 
+Useful commands:
+- rpi-eeprom-config
+- sudo rpi-eeprom-update
+
+There's some additional info about boot order here:
+- https://youtu.be/nJlTxIwRkRw
+- https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#nvme-ssd-boot
+
 #### Here is how NVM hardware looks:
 
 ![Screenshot from 2025-04-14 09-20-49](https://github.com/user-attachments/assets/2a3e53d0-b723-4924-9498-3f4653a00e9b)
