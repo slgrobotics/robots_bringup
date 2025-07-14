@@ -56,6 +56,10 @@ Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/
 
 See https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/MPU9250.md
 
+### Battery monitoring package
+
+Install as described [here](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/BatteryStateBroadcaster.md)
+
 ## Installing additional navigation components
 
 To allow GPS operation in sim install localization package:
