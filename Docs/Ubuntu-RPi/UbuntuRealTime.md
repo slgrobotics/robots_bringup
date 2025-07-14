@@ -61,6 +61,10 @@ Linux plucky 6.8.0-1028-raspi #32-Ubuntu SMP PREEMPT_DYNAMIC Sat Apr 26 10:05:11
 ```
 I have 56% of 16GB SD card used.
 
+**Note:**
+- I initially configured the the SD card on a RPi 4, and then plugged in RPi 5 on Plucky robot. I haven't seen any adverse effects.
+- Beware of [boot sequence](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi#booting-from-an-sd-card-with-nvm-drive-present) when you have NVM (SSD) and boot from an SD.
+
 ### Compressing the SD card for backup:
 
 I followed the process [here](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/README.md#optional-making-compressed-backups-of-an-sd-card)
