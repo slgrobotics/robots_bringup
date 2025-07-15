@@ -39,6 +39,23 @@ Logged in as "ros" and added two lines to the end of .bashrc:
 source /opt/ros/jazzy/setup.bash
 export ROS_DOMAIN_ID=0
 ```
+**Important:** ROS2 *Control Manager* discovers RT kernel and will adjust its scheduling to run at higher priority.
+It will fail in subtle ways if not allowed to do so.
+
+To enable that, follow [this guide](https://control.ros.org/jazzy/doc/ros2_control/controller_manager/doc/userdoc.html) - create *realtime* group
+and add the following limits to the realtime group in `/etc/security/limits.conf`:
+```
+@realtime soft rtprio 99
+@realtime soft priority 99
+@realtime soft memlock unlimited
+@realtime hard rtprio 99
+@realtime hard priority 99
+@realtime hard memlock unlimited
+```
+The limits will be applied after you log out and in again.
+
+#### Next steps 
+
 Loosely followed my notes here: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi
 
 The "*rosdep*" installed a huge bunch of packages, hard to say what was actually needed. Took very long time.
@@ -69,6 +86,10 @@ I have 56% of 16GB SD card used.
 
 I followed the process [here](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/README.md#optional-making-compressed-backups-of-an-sd-card)
 and got a zipped image of 3.5 GB (from the original 16 GB SD card). That's with all extras I installed in the process. I'm wondering why the original .zst image was 4.3 GB - wasn't washed well? ;-) 
+
+### Real-time Ubuntu from Canonical
+
+There is an official release of Real-time Ubuntu, including a version for Raspberry Pi 4 and 5: https://ubuntu.com/real-time
 
 ----------------
 
