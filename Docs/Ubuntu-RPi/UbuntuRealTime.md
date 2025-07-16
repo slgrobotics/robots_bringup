@@ -64,7 +64,7 @@ sudo apt install colcon
 ```
 Compiled and ran Plucky "articubot" code, starts OK, but my RPi4 isn't on a robot - I see lots of missing hardware run-time messages from the nodes.
 
-**P.S.** I moved the SD card to the RPi5 on Plucky, and it worked well. NVM SSD is still in place, the OS [boots](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/README.md#booting-from-an-sd-card-with-nvm-drive-present) off the SD card.
+**P.S.** I moved the SD card to the RPi5 on Plucky, and it worked well. NVM SSD is still in place, the OS [boots](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/NVM-SSD.md#booting-from-an-sd-card-with-nvm-drive-present) off the SD card.
 
 So, the RT image is usable for my robots - with some elbow grease applied.
 
@@ -82,7 +82,7 @@ I have 56% of 16GB SD card used.
 
 **Note:**
 - I initially configured the the SD card on a RPi 4, and then plugged in RPi 5 on Plucky robot. I haven't seen any adverse effects.
-- Beware of [boot sequence](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi#booting-from-an-sd-card-with-nvm-drive-present) when you have NVM (SSD) and boot from an SD.
+- Beware of [boot sequence](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/NVM-SSD.md#booting-from-an-sd-card-with-nvm-drive-present) when you have NVM (SSD) and boot from an SD.
 
 ### Compressing the SD card for backup:
 
