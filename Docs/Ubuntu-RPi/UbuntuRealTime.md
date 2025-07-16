@@ -78,7 +78,7 @@ Opposed to standard installation:
 ros@plucky:~$ uname -a
 Linux plucky 6.8.0-1028-raspi #32-Ubuntu SMP PREEMPT_DYNAMIC Sat Apr 26 10:05:11 UTC 2025 aarch64 aarch64 aarch64 GNU/Linux
 ```
-I have 56% of 16GB SD card used.
+I have 56% of 16GB SD card used (81% after additional packages were installed for Plucky robot).
 
 **Note:**
 - I initially configured the the SD card on a RPi 4, and then plugged in RPi 5 on Plucky robot. I haven't seen any adverse effects.
