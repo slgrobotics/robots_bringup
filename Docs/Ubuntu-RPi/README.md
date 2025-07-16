@@ -393,7 +393,7 @@ You might have another Ubuntu 24.04 image on an SD card (in my case, [Real Time 
 Inserting such SD card and booting the RPi5 can be done safely, with the following caveat: the boot sequence **might** use the NVM's `/boot/firmware` partition.
 "*Cold*" boot and rebooting seem to behave the same.
 
-As a result, some essentual configuration could be inherited from the NVM resident OS - for example, SD card's machine name is "*urt*", and the system booted under the name "*plucky*":
+As a result, some essential configuration could be inherited from the NVM resident OS - for example, SD card's machine name is "*urt*", and the system booted under the name "*plucky*":
 ```
 ros@plucky:~$ df -k
 Filesystem     1K-blocks     Used Available Use% Mounted on
@@ -415,6 +415,24 @@ There might be other less obvious consequences. To find out, ask your AI-enabled
 - *"Raspberry pi 5 ubuntu 24.04 /boot/firmware configuration - what is possible to configure?"*
 
 I didn't see any damage to the original OS after removing SD card and booting from NVM as usual.
+
+To have the *boot* partition from the SD card mounted, you can specify its UUID in `/etc/fstab`, for example:
+```
+ros@plucky:~$ cat /etc/fstab
+LABEL=writable	/	ext4	defaults	0	1
+UUID=D595-E956	/boot/firmware	vfat	defaults	0	1
+/swapfile swap swap defaults 0 0
+```
+To see UUIDs of all partitions:
+```
+ros@plucky:~/sys/nvm$ sudo blkid
+/dev/mmcblk0p1: LABEL_FATBOOT="system-boot" LABEL="system-boot" UUID="D595-E956" BLOCK_SIZE="512" TYPE="vfat" PARTUUID="2943a0cf-01"
+/dev/mmcblk0p2: LABEL="writable" UUID="5624f709-7cae-4bfd-81cd-3c8faf147752" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="2943a0cf-02"
+
+/dev/nvme0n1p1: LABEL_FATBOOT="system-boot" LABEL="system-boot" UUID="F526-0340" BLOCK_SIZE="512" TYPE="vfat" PARTUUID="0529037a-01"
+/dev/nvme0n1p2: LABEL="writable" UUID="1305c13b-200a-49e8-8083-80cd01552617" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="0529037a-02"
+```
+It is also possible to specify UUID of the root system in `/boot/firmware/cmdline.txt`, if NVM's *ext4* partition is wrongly mounted as "/" when booting from the SD card.
 
 Useful commands:
 - rpi-eeprom-config
