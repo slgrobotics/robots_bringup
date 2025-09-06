@@ -84,6 +84,12 @@ Mesh networks can be configured to assign router nodes to client devices ("prefe
 
 This issue can be solved by using a good WiFi 6 capable travel router in client mode.
 
+## Direct WiFi between your laptop and the robot
+
+For many use scenarios, especially outdoors, you can avoid using routers and establish direct WiFi connection between your workstation (laptop) and the robot's Raspberry Pi 5.
+
+Refer to an excellent instructional by Nathan Lewis [here](https://nrlewis.dev/blog/rpi-hotspot/).
+
 ## Improving your WiFi
 
 While Raspberry Pi WiFi might be marginally adequate for in-home use, an outdoor robot has to do better.
