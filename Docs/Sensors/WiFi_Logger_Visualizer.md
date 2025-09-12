@@ -99,6 +99,10 @@ has a [WiFi 6 Travel Router](https://www.amazon.com/dp/B0D41G5N95) in Client mod
 
 Raspberry Pi 5 is connected to the router via an Ethernet cable, so that the trafic goes through it. I keep the RPi's `wlan0` running, so that *wifi_logger* node could use it for signal strengh measurement. 
 
+**Note:**
+- After disabling network config, you need to `sudo apt install avahi-daemon` to restore Multicast DNS (mDNS) service required for local hostname discovery. 
+- It is very important to have the "routes:" section below, or your ping delay could be very random
+
 Here is how I configure Dragger's network, with `eth0` operating at fixed address (put your network real addresses there):
 ```
 ros@dragger:~$ sudo cat /etc/netplan/50-cloud-init.yaml 
