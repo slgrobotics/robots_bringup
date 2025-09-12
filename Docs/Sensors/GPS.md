@@ -1,4 +1,4 @@
-# GPS setup
+## GPS setup
 
 **Note:** this guide can be used for other NMEA capable GPS (in fact, almost any GPS)
 
@@ -66,6 +66,37 @@ GPS Node will be run as part of the _dragger.launch.py_ process.
 >> Code is here: https://github.com/KumarRobotics/ublox/blob/ros2/README.md
 >>
 >>  There's a lot of chatter on the Internet about this problem.
+
+## GPS on Raspberry Pi UART (GPIO 14,15)
+
+If you want to connect a BE-880 or similar GPS Receiver directly to Raspberry Pi UART, you have to make sure that:
+- UART is enabled in
+- Console login prompt is disabled in
+- Related TTY services are stopped and disabled
+- Your GPS is connfigured using, for example, Windows u-Center utility (GPS+GLONASS+SBAS, 10Hz, NMEA, 115200)
+- The GPS is connected: 5V, GND, TX->GPIO015/Pin10  RX->GPIO014/Pin08
+
+**Note:** Devices without flash memory don't preserve their configuration an rely on software initialization every time they are being used. Avoid such devices.
+
+You can install and use [raspi-config](https://linuxconfig.org/raspberry-pi-4-enable-uart), or edit files in `/boot/firmware/`
+
+Here are some commands:
+```
+cd /boot/firmware/
+
+sudo vi config.txt
+   make sure that the "enable_uart=1" line appears there
+
+sudo vi cmdline.txt
+   it should look like this, remove other "console" mentions:
+      dwc_otg.lpm_enable=0 console=tty1 root=LABEL=writable rootfstype=ext4 rootwait fixrtc quiet splash
+
+sudo systemctl stop serial-getty@ttyS0.service
+sudo systemctl disable serial-getty@ttyS0.service
+
+reboot
+```
+
 
 ----------------
 
