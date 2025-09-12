@@ -10,7 +10,7 @@ Follow [this guide](https://code.visualstudio.com/docs/remote/ssh-tutorial).
 
 ### _Optional:_ Using UARTs on the Raspberry Pi 5
 
-I don't have a need to use Raspberry Pi UARTs,
+I rarely have a need to use Raspberry Pi UARTs,
 so for useful information please refer to the source - Michael Wimble's repository.
 
 To use Raspberry Pi UARTs refer to the following section.
@@ -18,6 +18,8 @@ To use Raspberry Pi UARTs refer to the following section.
 **Warning:** I will not accept any resposibility for damage to any device as a result of you following these instructions. Neither will Michael Wimble, the original author.
 
 https://github.com/wimblerobotics/ros2_roboclaw_driver?tab=readme-ov-file#using-uarts-on-the-raspberry-pi-5
+
+You may also review this [section](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/GPS.md#gps-on-raspberry-pi-uart-gpio-1415) of my notes.
 
 ### _Optional:_ Playing sound with _aplay_
 
