@@ -45,6 +45,8 @@ sudo apt install python3-pip
 ```
 You should be able to ping your _turtle.local_ machine and ssh into it (```ssh ros@turtle.local``` from your Desktop machine).
 
+**Note:** if you choose to rely on _/etc/netplan_ and disable network config, you need to `sudo apt install avahi-daemon` to restore Multicast DNS (mDNS) service required for local hostname discovery.
+
 Have the I2C support installed and tested:
 ```
 sudo apt install i2c-tools
