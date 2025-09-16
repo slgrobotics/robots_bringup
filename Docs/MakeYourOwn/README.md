@@ -91,7 +91,7 @@ Roughly, here is a BoM for it:
 
 - Power
   - 12V LiFePO4 battery (20–50 Ah)
-  - DC-DC buck converter (for 5V output)
+  - DC-DC buck [converter](https://www.amazon.com/dp/B078Q1624B) (for 5V output)
   - Switches, diodes, capacitors (for circuit protection) 
 
 - [Sensors](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Sensors) - choose what's available:
