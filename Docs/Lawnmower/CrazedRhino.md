@@ -2,11 +2,13 @@
 
 # Lawnmower Notes (Legacy, now retired Husqvarna Z254F)
 
-Lawnmower (a.k.a. *Crazed Rhino*) is an actual [Husqvarna Z254F](https://www.husqvarna.com/us/zero-turn-mowers/z254f-special-edition) zero-turn riding mower, robotized for, well, mowing my lawn.
+For my current lawnmower project see https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Lawnmower/README.md
+
+Lawnmower (a.k.a. *Crazed Rhino*) was an actual [Husqvarna Z254F](https://www.husqvarna.com/us/zero-turn-mowers/z254f-special-edition) zero-turn riding mower, robotized for, well, mowing my lawn.
 
 It was running my version (fork) of [PX4 Autopilot](https://docs.px4.io/) code. I controled it using [QGroundControl app](https://qgroundcontrol.com/) on a desktop machine.
 
-(old) Code is [here](https://github.com/slgrobotics/PX4-Autopilot/tree/rhino_legacy)  - see "dev" branch for current code.
+(old) Code is [here](https://github.com/slgrobotics/PX4-Autopilot/tree/rhino_legacy)  **Note:** see "dev" branch for my new lawnmower code.
 
 Lawnmower photos are here: https://photos.app.goo.gl/jwYZRtTi1LVshQoW8
 
@@ -17,8 +19,6 @@ use the following command: `make px4_sitl gz_lawnmower`
 3. While a lawnmower model is included in standard PX4 codebase, my fork contains customizations needed for tighter control of vehicle speed and additional functions.
 4. PX4 plays nice with ROS2, coexists with Jazzy and shares Gazebo Harmonic installation. I use the same machine for ROS2 and PX4 development without any issues.
 5. PX4 has a very active [Discord](https://discord.com/channels/1022170275984457759) community.
-
-For my current lawnmower project see https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Lawnmower/README.md
 
 ## Hardware
 
