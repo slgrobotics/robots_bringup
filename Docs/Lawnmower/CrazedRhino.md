@@ -44,6 +44,7 @@ There's also:
 - a Teensy 3.2 for interfacing R/C receiver on I2C - code [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/RC_PPM_Receiver),
 - Pixhawk color [LED](https://www.amazon.com/TYXTTGY-Pixhawk-PX4-External-Extension-Module/dp/B0F29BV7WC) (I2C)
 - a Teensy 4.0, emulating a PCA9685 with optocouplers (I2C) - code [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/Teensy_PCA9685).
+- a point-to-point [Ethernet link](https://www.amazon.com/dp/B09WMBD1S7).
 
 My [photo blog](https://photos.app.goo.gl/jwYZRtTi1LVshQoW8) contains some schematics and pictures of the components.
 
