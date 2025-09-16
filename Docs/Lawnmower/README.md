@@ -35,6 +35,7 @@ There's also:
 - Pixhawk color [LED](https://www.amazon.com/TYXTTGY-Pixhawk-PX4-External-Extension-Module/dp/B0F29BV7WC) (I2C)
 - PCA9685 [board](https://www.amazon.com/dp/B0CRV3MK14) (I2C) (you can use a Teensy emulator instead - code is [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/Teensy_PCA9685)).
 - a RoboteQ [AX2850](https://www.bipom.com/documents/roboteq/ax2550quickstart19b-060107.pdf) motor controller.
+- a point-to-point [Ethernet link](https://www.amazon.com/dp/B09WMBD1S7).
 
 My [photo blog](https://photos.app.goo.gl/jwYZRtTi1LVshQoW8) contains some schematics and pictures of the components.
 
