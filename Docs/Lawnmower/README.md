@@ -1,22 +1,28 @@
-![Screenshot from 2025-07-05 17-55-44](https://github.com/user-attachments/assets/c6746dc2-1af0-4046-aaf6-c68273ef6fa1)
 
-# Lawnmower Notes
+### A perfect summer day is when the sun is shining, the breeze is blowing, the birds are singing, and the lawn mower is broken.
 
-Lawnmower (a.k.a. *Crazed Rhino*) is an actual [Husqvarna Z254F](https://www.husqvarna.com/us/zero-turn-mowers/z254f-special-edition) zero-turn riding mower, robotized for, well, mowing my lawn.
+<img width="1536" height="1024" alt="ChatGPT Image Sep 8, 2025, 12_23_28 PM" src="https://github.com/user-attachments/assets/afbfa7ed-81ef-4a9e-b931-8bec7c6ddef3" />
+
+# Grassroamer Notes
+
+*Grassroamer* is an actual
+[Walmart](https://www.walmart.com/ip/PowerSmart-Gas-Lawn-Mower-21-inches-144cc-2-in-1-Walk-Behind-Side-Discharge-Push-Lawn-Mower/475461862) 
+PowerSmart Gas Lawn Mower, 21 inches 144cc, robotized for, well, mowing my lawn.
 
 It is running my version (fork) of [PX4 Autopilot](https://docs.px4.io/) code. I control it using [QGroundControl app](https://qgroundcontrol.com/) on a desktop machine.
 
 Code is [here](https://github.com/slgrobotics/PX4-Autopilot/tree/dev)
 
-Lawnmower photos are here: https://photos.app.goo.gl/jwYZRtTi1LVshQoW8
+Lawnmower photos are here: https://photos.app.goo.gl/3sNqAYzAbU29Zv7r7
 
 **Note:** 
 1. This is **not** a ROS2 project, PX4 (https://px4.io/) is a completely different system.
-2. Once you set up your machine for [PX4 development](https://docs.px4.io/main/en/dev_setup/getting_started.html), you can just run Lawnmower robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
+2. My now retired legacy lawnmower (a.k.a. Crazed Rhino) is described [here](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Lawnmower/CrazedRhino.md).
+3. Once you set up your machine for [PX4 development](https://docs.px4.io/main/en/dev_setup/getting_started.html), you can just run Lawnmower robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
 use the following command: `make px4_sitl gz_lawnmower`
-3. While a lawnmower model is included in standard PX4 codebase, my fork contains customizations needed for tighter control of vehicle speed and additional functions.
-4. PX4 plays nice with ROS2, coexists with Jazzy and shares Gazebo Harmonic installation. I use the same machine for ROS2 and PX4 development without any issues.
-5. PX4 has a very active [Discord](https://discord.com/channels/1022170275984457759) community.
+4. While a lawnmower model is included in standard PX4 codebase, my fork contains customizations needed for tighter control of vehicle speed and additional functions.
+5. PX4 plays nice with ROS2, coexists with Jazzy and shares Gazebo Harmonic installation. I use the same machine for ROS2 and PX4 development without any issues.
+6. PX4 has a very active [Discord](https://discord.com/channels/1022170275984457759) community.
 
 ## Hardware
 
@@ -27,7 +33,8 @@ There's also:
 - two SparkFun u-blox ZED-9P [boards](https://www.sparkfun.com/sparkfun-gps-rtk-sma-breakout-zed-f9p-qwiic.html) on USB-serial,
 - a Teensy 3.2 for interfacing R/C receiver on I2C - code [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/RC_PPM_Receiver),
 - Pixhawk color [LED](https://www.amazon.com/TYXTTGY-Pixhawk-PX4-External-Extension-Module/dp/B0F29BV7WC) (I2C)
-- a Teensy 4.0, emulating a PCA9685 with optocouplers (I2C) - code [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/Teensy_PCA9685).
+- PCA9685 [board](https://www.amazon.com/dp/B0CRV3MK14) (I2C) (you can use a Teensy emulator instead - code is [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/Teensy_PCA9685)).
+- a RoboteQ [AX2850](https://www.bipom.com/documents/roboteq/ax2550quickstart19b-060107.pdf) motor controller.
 
 My [photo blog](https://photos.app.goo.gl/jwYZRtTi1LVshQoW8) contains some schematics and pictures of the components.
 
@@ -48,6 +55,9 @@ cd ~/lawnmow/PX4-Autopilot
 make px4_sitl gz_lawnmower
 ```
 In *QGroundControl* use one of the mission plans from the *~/lawnmow/PX4-Autopilot/plans* folder.
+
+**Note:** the model used in simulation describes my (now retired) [Crazed Rhino](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Lawnmower/CrazedRhino.md) mower.
+There is no model for current project yet.
 
 There are many other vehicle models available for simulation, for example:
 ```
