@@ -18,6 +18,8 @@ use the following command: `make px4_sitl gz_lawnmower`
 4. PX4 plays nice with ROS2, coexists with Jazzy and shares Gazebo Harmonic installation. I use the same machine for ROS2 and PX4 development without any issues.
 5. PX4 has a very active [Discord](https://discord.com/channels/1022170275984457759) community.
 
+For my current lawnmower project see https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Lawnmower/README.md
+
 ## Hardware
 
 Onboard, Lawnmower has a Raspberry Pi 4 8GB ("pipx4") - an upgrade from RPi 3B which I've been using for a while.
