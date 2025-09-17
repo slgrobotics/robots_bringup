@@ -39,6 +39,16 @@ There's also:
 
 My [photo blog](https://photos.app.goo.gl/jwYZRtTi1LVshQoW8) contains some schematics and pictures of the components.
 
+## Power source
+
+Grassroamer is powered by a 100AH LiFrPO4 13.4 V (4 cell) [battery](https://www.amazon.com/dp/B09L89LW3P).
+
+If using a "_self-propelled_" lawnmower, it is possible to power wheels and electronics with an alternator, driven by the belt:
+
+<img width="2117" height="960" alt="Screenshot from 2025-09-17 09-59-44" src="https://github.com/user-attachments/assets/12ce69de-cb28-46ce-9242-91d7ff73a370" />
+
+In this case a much smaller battery would suffice.
+
 ## Build and Run Instructions
 
 Set up your Ubuntu 24.04 Desktop machine for [PX4 development](https://docs.px4.io/main/en/dev_setup/getting_started.html)
