@@ -49,6 +49,11 @@ If using a "_self-propelled_" lawnmower, it is possible to power wheels and elec
 
 In this case a much smaller battery would suffice.
 
+**Note:** Larger engines use an integrated _magneto+generator+regulator_ "stator" hardware with varying power output.
+The "rotor" part is a set of magnets on a rotating cup. This is unlikely to be part of a small lawnmower.
+
+<img width="937" height="878" alt="Screenshot from 2025-09-18 11-29-16" src="https://github.com/user-attachments/assets/524fcd95-fa11-490c-b414-430b436e8f0f" />
+
 ## Build and Run Instructions
 
 Set up your Ubuntu 24.04 Desktop machine for [PX4 development](https://docs.px4.io/main/en/dev_setup/getting_started.html)
