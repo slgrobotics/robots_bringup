@@ -23,14 +23,15 @@ use the following command: `make px4_sitl gz_lawnmower`
 ## Lessons Learned
 
 There are some lessons learned from this project, spanning April 2020 - August 2025.
-1. It is possible to "robotize" a large machine, using DIY servos and common hobby robotics components
+1. It is possible to "robotize" a large machine, using DIY servos and common hobby robotics components.
 2. Reliability of these servos and components turned out to be very high, under vibrations and outdoors environment.
-3. PX4 Autopilot software is excellent for the task
-4. RTK GPS is a must for precision tasks on the ground, "moving base" configuration helps a lot
-5. Obstacle avoidance is not necessary for the job
+3. PX4 Autopilot software is excellent for the task.
+4. RTK GPS is a must for precision tasks on the ground, "moving base" configuration helps a lot.
+5. Obstacle avoidance is not necessary for the job.
 6. Vehicles with gas driven (hydraulics driven) wheels are hard to control with ~20 cm precision.
 7. Electric drive is preferable, as wheel encoders allow tight control over the drive.
-8. WiFi doesn't work well, but PX4/Mavlink does well over point-to-point Ethernet links
+8. The 22 Hp engine's battery charging system supplies adequate power for servos and electronics.
+9. WiFi doesn't work well, but PX4/Mavlink does well over point-to-point Ethernet links.
 
 Overall, the project was a success, but my [smaller](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Lawnmower/README.md) lawnmower does better job (and is lower maintenance) mowing my lawns.
 
