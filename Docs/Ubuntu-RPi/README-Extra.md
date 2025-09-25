@@ -4,9 +4,9 @@
 
 ### Properly feeding your Raspberry Pi 5
 
-Here is a [video](https://youtu.be/PddIeZP-wgw) explaining why our Pi5's on the robots (off the batteries) don't perform properly:
+Here is a [video](https://youtu.be/PddIeZP-wgw) explaining why our Pi5's on the robots (off the batteries) don't perform properly.
 
-The video describes settings that fix the problem (use caution).
+The video describes settings that help to fix the problem (use caution).
 
 Here is a $30 "*easy solution*":
 - https://52pi.com/collections/hat-addons/products/52pi-pd-power-extension-adapter-board-for-raspberry-pi-5
