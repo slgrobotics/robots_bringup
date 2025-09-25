@@ -6,6 +6,10 @@ It is intended to run navigation on my Turtlebot-like robots - in Gazebo simulat
 
 Some of the [docs](https://github.com/slgrobotics/robots_bringup/tree/main/Docs) here deal with Desktop ("*Ground Station*") setup and operation, while others describe setup of on-board Raspberry Pi computers.
 
+The [Sensors](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Sensors) section describes setup of GPS, Cameras, IMU and other devices.
+
+Don't forget to properly setup your [WiFi](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/WiFi_Logger_Visualizer.md#wifi-testing-and-benchmarking) or [Global VPN](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README-Husarnet.md).
+
 We assume:
 
 - On the Desktop machine (Intel, AMD) - Ubuntu 24.04 64-bit *desktop*, ROS Jazzy _desktop_
