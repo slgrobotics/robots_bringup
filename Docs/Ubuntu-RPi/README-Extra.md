@@ -4,7 +4,7 @@
 
 ### Properly feeding your Raspberry Pi 5
 
-Here is a [video](https://youtu.be/PddIeZP-wgw) explaining why our Pi5's on the robots (off batteries) don't perform properly:
+Here is a [video](https://youtu.be/PddIeZP-wgw) explaining why our Pi5's on the robots (off the batteries) don't perform properly:
 
 The video describes settings that fix the problem (use caution).
 
