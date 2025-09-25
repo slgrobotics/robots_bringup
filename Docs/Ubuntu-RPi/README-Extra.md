@@ -2,6 +2,16 @@
 
 *for fine-tuning your Raspberry Pi Ubuntu installation, review the following:*
 
+### Properly feeding your Raspberry Pi 5
+
+Here is a [video](https://youtu.be/PddIeZP-wgw) explaining why our Pi5's on the robots (off batteries) don't perform properly:
+
+There are settings that fix the problem (use caution).
+
+Here is a $30 "*easy solution*":
+- https://52pi.com/collections/hat-addons/products/52pi-pd-power-extension-adapter-board-for-raspberry-pi-5
+- https://www.amazon.com/GeeekPi-Expansion-Raspberry-Automatic-Function/dp/B0CYPRDY9Q
+
 ### _Optional:_ VS Code Remote Development
 
 You can work on the Desktop machine with repositories/folders on Raspberry Pi.
