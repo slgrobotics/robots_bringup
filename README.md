@@ -8,7 +8,9 @@ Some of the [docs](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
 
 The [Sensors](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Sensors) section describes setup of GPS, Cameras, IMU and other devices.
 
-Don't forget to properly setup your [WiFi](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/WiFi_Logger_Visualizer.md#wifi-testing-and-benchmarking) or [Global VPN](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README-Husarnet.md).
+Don't forget to properly setup your [WiFi](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/WiFi_Logger_Visualizer.md#wifi-testing-and-benchmarking) 
+or [Global VPN](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README-Husarnet.md) 
+and feed your RPi5 [properly](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/README-Extra.md#properly-feeding-your-raspberry-pi-5).
 
 We assume:
 
