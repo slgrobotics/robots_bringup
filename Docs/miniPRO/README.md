@@ -10,7 +10,20 @@ So, it's time to quit - i.e. to turn it into a robot.
 
 My Ninebot miniPRO photos are here: https://photos.app.goo.gl/yHXs7fP7u7ae8fa78
 
-**Note:** the _add-on platform_ is just an experiment, and would be only useful if there's a way to
+### Brute-force approach
+
+Discouraged with Bluetooth hacking (described in detail below) I decided to implement the "_brute force_" control of my Ninebot miniPRO.
+
+As I recently retired my zero-turn lawn mower, I had a couple of strong servos and all the components around them, so the transition was easy.
+
+The servos are used to deflect the "_knee bar_" and to tilt the base relative to the _add-on platform_. Photos and videos at the link above explain it all.
+Its operation can also be seen in the video [here](https://youtu.be/0wBh5IX6nko).
+
+It can be easily "robotized" now - except for wheels odometry isn't accessible. Visual odometry is an option for ROS2 though. Makes a perfect tablebot, as it can carry a lot of beer and goes through 30" standard doors with a margin (22" outer dimensions).
+
+### The Bluetooth hacking approach
+
+**Note:** the _add-on platform_ started as just an experiment, and would be only useful if there's a way to
 precisely and directly control miniPRO's wheels, not its balance (as Bluetooth link currently allows).
 Without such control, the platform makes the miniPRO very difficult to drive.
 MiniPRO has that option - "_Mecha mode_" is mentioned [here](https://forum.electricunicycle.org/topic/32214-ninebot-mecha-kit-ble-protocol%EF%BC%9F/) 
