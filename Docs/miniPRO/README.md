@@ -14,7 +14,8 @@ My Ninebot miniPRO photos are here: https://photos.app.goo.gl/yHXs7fP7u7ae8fa78
 
 Discouraged with Bluetooth hacking (described in detail below) I decided to implement the "_brute force_" control of my Ninebot miniPRO.
 
-As I recently retired my zero-turn lawn mower, I had a couple of strong servos and all the components around them, so the transition was easy.
+As I recently retired my [zero-turn lawn mower](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Lawnmower/CrazedRhino.md),
+I had a couple of strong servos and all the components around them, so the transition was easy.
 
 The servos are used to deflect the "_knee bar_" and to tilt the base relative to the _add-on platform_. Photos and videos at the link above explain it all.
 Its operation can also be seen in the video [here](https://youtu.be/0wBh5IX6nko).
