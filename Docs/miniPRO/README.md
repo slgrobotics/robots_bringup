@@ -22,6 +22,11 @@ Its operation can also be seen in the video [here](https://youtu.be/0wBh5IX6nko)
 
 It can be easily "robotized" now - except for wheels odometry isn't accessible. Visual odometry is an option for ROS2 though. Makes a perfect tablebot, as it can carry a lot of beer and goes through 30" standard doors with a margin (22" outer dimensions).
 
+**Note:** there are two small buttons under the rubber foot pads. When a person stands on miniPRO, these buttons are depressed and balance control logic
+becomes more aggressive in keeping the robot in horizontal alignment. I added a couple of small servos to press these buttons at the R/C switch command (to enable "God mode").
+When activated, robot can roll up slopes and drive over grass lawn. It needs very close supervision and quick action on the R/C, as it may become unruly with wrong inputs.
+In "normal" mode it can only drive on flat relatively smooth surfaces (i.e. indoors).
+
 ### The Bluetooth approach
 
 **Note:** the _add-on platform_ started as just an experiment, and would be only useful if there's a way to
