@@ -12,6 +12,22 @@ Here is a $30 "*easy solution*":
 - https://52pi.com/collections/hat-addons/products/52pi-pd-power-extension-adapter-board-for-raspberry-pi-5
 - https://www.amazon.com/GeeekPi-Expansion-Raspberry-Automatic-Function/dp/B0CYPRDY9Q
 
+Useful commands:
+```
+Display power available on USB devices:
+    lsusb -v 2>&- | grep -E 'Bus 00|MaxPower'
+
+See if maximum (5A) current is available from the power supply:
+    vcgencmd get_config usb_max_current_enable
+
+See if CPU has been throttled:
+    vcgencmd get_throttled
+
+See internal currents and voltages:
+    vcgencmd pmic_read_adc 
+    vcgencmd pmic_read_adc EXT5V_V
+```
+
 ### _Optional:_ VS Code Remote Development
 
 You can work on the Desktop machine with repositories/folders on Raspberry Pi.
