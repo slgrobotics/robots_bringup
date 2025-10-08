@@ -10,6 +10,8 @@ The fork I use for testing is here: https://github.com/slgrobotics/wifi_logger_v
 
 ## WiFi testing and benchmarking
 
+Please review tips [here](https://articulatedrobotics.xyz/tutorials/ready-for-ros/networking).
+
 There are many useful commands to discover and measure performance of WiFi interfaces:
 ```
 ip a
