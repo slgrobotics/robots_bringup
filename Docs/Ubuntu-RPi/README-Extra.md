@@ -87,6 +87,8 @@ https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README-Hu
 
 ### _Optional:_ better network control using _/etc/netplan/_ directly
 
+Please review tips [here](https://articulatedrobotics.xyz/tutorials/ready-for-ros/networking).
+
 It is possible, that after the initial boot your network won't be set up properly.
 
 On top of that, your mobile robot will work much better, if it is assigned static network address and it doesn't have to query DHCP service on your router.
