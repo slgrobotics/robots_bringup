@@ -54,7 +54,7 @@ To ensure proper feeding of the camera from a 5V power source, Luxonis [sells](h
 In fact, it is a wonderful example of a company making some extra $$ when they discover that their main product wouldn't work without a crutch ;-)
 
 At the end I made a simple "power T-tap" from two USB-C [connectors](https://www.amazon.com/Connector-Adapter-5PcsFemale-Breakout-Compatible/dp/B0D9W8B97B).
-It takes power from my robot's 5V bus, which can deliver many amperes. Once I pit it in service, the camera became rock stable.
+It takes power from my robot's 5V bus, which can deliver many amperes. Once I put it in service, the camera became rock stable.
 
 ![Screenshot from 2025-05-10 12-10-56](https://github.com/user-attachments/assets/680aa6cb-4f37-452f-be52-8ab65cba5749)
 
