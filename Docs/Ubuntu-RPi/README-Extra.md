@@ -13,7 +13,7 @@ Here is a "distilled transcript" of the video, made by Ross Lunan (full credits 
 Remove USB Current Restriction 600 to 1600 ma:
      /boot/firmware/config.txt usb_max_current_enable=1
 
-If have 5A Supply manually edit eeprom on a booted up RPi:
+If have a custom 5A Supply manually edit eeprom on a booted up RPi:
      sudo rpi-eeprom-config --edit > Add PSU_MAX_CURRENT=5000
 
 To determine Current Restriction Enable Status:
