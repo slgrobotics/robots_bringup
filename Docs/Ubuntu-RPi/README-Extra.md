@@ -8,7 +8,29 @@ Here is a [video](https://youtu.be/PddIeZP-wgw) explaining why our Pi5's on the 
 
 The video describes settings that help to fix the problem (use caution).
 
-Here is a $30 "*easy solution*":
+Here is a "distilled transcript" of the video, made by Ross Lunan (full credits to him and Josh Newans, autor of the video):
+```
+Remove USB Current Restriction 600 to 1600 ma:
+     /boot/firmware/config.txt usb_max_current_enable=1
+
+If have 5A Supply manually edit eeprom on a booted up RPi:
+     sudo rpi-eeprom-config --edit > Add PSU_MAX_CURRENT=5000
+
+To determine Current Restriction Enable Status:
+     vcgencnd get_config usb_max_current_enable
+
+Boot without an SD Card which Displays a Diagnostic Screen.
+Observe the 5th line down,
+for regular USB-A to USB-C power supply:
+     power: supply: USB-C 900 ma CC PMIC: reset normal 0x0 usb_over_current=0
+for Official USB-C power supply:
+     power: supply: RPI USB-PD 5000 ma CC1 PMIC: reset normal 0x0 usb_over_current=0
+```
+**Note:** The added line `PSU_MAX_CURRENT=5000` is telling the RPi5 firmware that when you use a
+NON-PD (non-power-delivery) power supply and that it should not
+attempt USB-PD negotiation. The Pi should assume that your power supply is 5A capable.
+
+Here is a $30 "*easy solution*" - a power expansion board from _52pi_:
 - https://52pi.com/collections/hat-addons/products/52pi-pd-power-extension-adapter-board-for-raspberry-pi-5
 - https://www.amazon.com/GeeekPi-Expansion-Raspberry-Automatic-Function/dp/B0CYPRDY9Q
 
