@@ -10,6 +10,13 @@ So, it's time to quit - i.e. to turn it into a robot.
 
 My Ninebot miniPRO photos are here: https://photos.app.goo.gl/yHXs7fP7u7ae8fa78
 
+### simpleFOC approach
+
+Discouraged with brute-force approach, I am in the process of implementing direct control over wheels using [_simpleFOC_](https://github.com/simplefoc) library and compatible driver boards.
+Photos link above.
+
+Yes, trying all wrong solutions before taking the most logical path is my _modus vivendi_ - and sometimes a lot of learning fun.
+
 ### Brute-force approach
 
 Discouraged with Bluetooth approach (described in detail below) I decided to implement the "_brute force_" control of my Ninebot miniPRO.
