@@ -12,10 +12,13 @@ My Ninebot miniPRO photos are here: https://photos.app.goo.gl/yHXs7fP7u7ae8fa78
 
 ### simpleFOC approach
 
-Discouraged with brute-force approach, I am in the process of implementing direct control over wheels using [_simpleFOC_](https://github.com/simplefoc) library and compatible driver boards.
-Photos link above.
+Discouraged with brute-force approach, I implemented direct control over wheels using [_simpleFOC_](https://github.com/simplefoc) library and compatible driver boards.
+
+Photos link above. Teensy code [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/WheelsROS_Seggy).
 
 Yes, trying all wrong solutions before taking the most logical path is my _modus vivendi_ - and sometimes a lot of learning fun.
+
+I will be interesting to see how that same Teensy code would work with a random hoverboard (stripped to motors or to motors+mosfets).
 
 ### Brute-force approach
 
