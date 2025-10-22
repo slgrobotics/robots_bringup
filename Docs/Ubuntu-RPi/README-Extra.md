@@ -173,6 +173,8 @@ ip a
 
 ROS nodes rely on tight time synchronization between participating machines. Default setup might not work well for you.
 
+There's a ROS2 specific [test](https://github.com/Boston-Robot-Hackers/handy) to see if your Workstation and on-board Pi are synchronized.
+
 Time sync info:
 
 https://ubuntu.com/server/docs/network-ntp
