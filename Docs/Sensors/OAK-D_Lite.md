@@ -34,6 +34,8 @@ sudo udevadm control --reload-rules && sudo udevadm trigger
 
 In theory, OAK-D camera should negotiate available power from the USB port.
 
+See [this note](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/README-Extra.md#properly-feeding-your-raspberry-pi-5) to make it happen (or override it).
+
 In my experiments, 5V power drain for my OAK-D LITE is as follows:
 - 0.37A for stereo imaging, including PointCloud2 producing examples. The camera doesn't heat at all.
 - 0.64A when running _mobilenet_ examples. Luke warm on touch.
