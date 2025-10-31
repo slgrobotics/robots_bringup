@@ -82,12 +82,17 @@ This list assumes you're building it from scratch (not using Create/Neato bases)
 Basic soldering and Arduino-like microcontroller experience is assumed.
 
 Roughly, here is a BoM for it:
-- Base
+- Base (traditional)
   - Wheels
   - Gearboxes
   - Motors with Quadrature Encoders
   - H-Bridges - (e.g. [IBT-2/BTS7960](https://www.amazon.com/BTS7960-H-bridge-Double-Current-Diagnostic/dp/B09W8VV6RH) - one per motor)
   - Arduino Mega or similar _base controller_ with [software](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/DraggerROS)
+
+- or, Hoverboard Base (BLDC Wheel motors)
+  - Motor Wheels - most used hoverboards will do
+  - SimpleFOC driver board(s) - dual motor board, for example, here: https://www.amazon.com/gp/product/B0FTX8PN2M
+  - Teensy 4.0 or 4.1 _base controller_ with [software](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/WheelsROS_Seggy)
 
 - Power
   - 12V LiFePO4 battery (20–50 Ah)
@@ -96,7 +101,7 @@ Roughly, here is a BoM for it:
 
 - [Sensors](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Sensors) - choose what's available:
   - IMU - [MPU9250](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/MPU9250.md) or [BNO055](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/BNO055%20IMU.md)
-  - [LIDAR](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/LD14.md) - LD14 for indoors, LD19P for outdoors
+  - [LIDAR](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/LD14.md) - LD14 or LD19 for indoors, LD19P for outdoors
 
 - Raspberry Pi 5 (8GB) running Ubuntu 24.04 Server, ROS2 Jazzy Base and [robot software](https://github.com/slgrobotics/articubot_one) - see [this guide](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi)
 
