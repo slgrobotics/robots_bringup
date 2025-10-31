@@ -2,10 +2,10 @@ _"To invent, you need a good imagination and a pile of junk."_ - Thomas A. Ediso
 
 ## Make Your Own Robot
 
-![Screenshot from 2025-06-21 12-29-39](https://github.com/user-attachments/assets/db7a0a7f-5169-44a8-9174-d327695497b9)
+<img width="512" height="768" alt="robot_punk" src="https://github.com/user-attachments/assets/db7a0a7f-5169-44a8-9174-d327695497b9" />
 
 This section describes hardware components you can use to build a robot "_from scratch_" -
-similar to my [Plucky](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky)
+similar to my [Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy)
 and [Dragger](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger).
 
 The [Turtle](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1) (based on the iRobot Create 1) is a bit different, and can be replicated almost exactly if you have an iRobot Create 1 or 2 base.
@@ -36,7 +36,7 @@ Start by “building” your robot virtually using a URDF/.xacro robot descripti
 
 When working with robots you need a _Workstation_ - typically a gaming-class desktop PC running Ubuntu 24.04 [Desktop](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy).
 You will need a [joystick](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Joystick.md) connected to it for control.
-Confirm your setup by running Plucky, Dragger or Turtle in Gazebo [simulation](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#bringing-up-robot-simulation-in-gazebo).
+Confirm your setup by running Seggy, Plucky, Dragger or Turtle in Gazebo [simulation](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#bringing-up-robot-simulation-in-gazebo).
 
 Your physical robot will likely have a Raspberry 5 SBC, preferrably with 8 Gb RAM. Install the OS using [this guide](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi).
 
@@ -91,19 +91,23 @@ Roughly, here is a BoM for it:
 
 - or, Hoverboard Base (BLDC Wheel motors)
   - Motor Wheels - most used hoverboards will do
-  - SimpleFOC driver board(s) - dual motor board, for example, here: https://www.amazon.com/gp/product/B0FTX8PN2M
+  - SimpleFOC driver board(s) - for example, a dual motor board here: https://www.amazon.com/gp/product/B0FTX8PN2M
   - Teensy 4.0 or 4.1 _base controller_ with [software](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/WheelsROS_Seggy)
+  - Note:
+    - most motor wheels will produce plenty of torque with 12 V batteries, no need to use higher (36 V) voltage.
+    - Built-in Hall sensors serve as encoders, with typical 60 ticks/revolution
 
 - Power
   - 12V LiFePO4 battery (20–50 Ah)
   - DC-DC buck [converter](https://www.amazon.com/dp/B078Q1624B) (for 5V output)
   - Switches, diodes, capacitors (for circuit protection) 
 
-- [Sensors](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Sensors) - choose what's available:
+- Sensors - choose what's available:
   - IMU - [MPU9250](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/MPU9250.md) or [BNO055](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/BNO055%20IMU.md)
   - [LIDAR](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/LD14.md) - LD14 or LD19 for indoors, LD19P for outdoors
+  - Review other [sensors](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Sensors) which may fit your project
 
-- Raspberry Pi 5 (8GB) running Ubuntu 24.04 Server, ROS2 Jazzy Base and [robot software](https://github.com/slgrobotics/articubot_one) - see [this guide](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi)
+- A Raspberry Pi 5 (8GB) running Ubuntu 24.04 Server, ROS2 Jazzy Base and [robot software](https://github.com/slgrobotics/articubot_one) - see [this guide](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi)
 
 **Option:** Use a _RoboClaw_ controller instead of Arduino + H-Bridges along with the appropriate [ROS2 driver](https://github.com/wimblerobotics/ros2_roboclaw_driver)
 
@@ -119,20 +123,20 @@ Some motor controllers include spike protection—check your model.
 
 ## Base Control - the Arduino way
 
-There are two components in my robots that require additional explanation: the Arduino-based wheel controller and its corresponding ROS 2 driver.
+There are two components in my robots that require additional explanation: the Arduino-based wheels controller and its corresponding ROS 2 driver.
 This architecture is inspired by Articulated Robotics by Josh Newans, a mechatronics engineer from Newcastle, Australia.
 You can find his work [here](https://articulatedrobotics.xyz/category/getting-ready-to-build-a-ros-robot).
 The _ros2_control_ architecture is described [here](https://articulatedrobotics.xyz/tutorials/mobile-robot/applications/ros2_control-concepts),
 official documentation is [here](https://control.ros.org/jazzy/doc/ros2_control/doc/index.html).
 
 ROS2 nodes control wheels rotation by publishing to the */diff_cont/cmd_vel* topic.
-In return, wheel positions must be reported by the driver via the */joint_states* topic.
+In return, wheel positions must be reported by the driver via the */joint_states* (and */diff_cont/odom*) topics.
 
-The ROS2 [driver](https://github.com/slgrobotics/diffdrive_arduino) operates under the Control Manager, and consists of _DiffDriveController_ and _JointStateBroadcaster_.
+The **ROS2 [driver](https://github.com/slgrobotics/diffdrive_arduino)** operates under the Control Manager, and consists of _DiffDriveController_ and _JointStateBroadcaster_.
 
-To control the wheels the ROS2 driver opens a serial connection to an Arduino Mega 2560 microcontroller running custom firmware.
+To control the wheels the ROS2 driver opens a serial connection to an Arduino Mega 2560 or Teensy 4.0 microcontroller running custom firmware.
 
-The Arduino [firmware](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/DraggerROS) is responsible for:
+The **Arduino [firmware](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/DraggerROS)** is responsible for:
 - Generating PWM signals for H-Bridges (DraggerMotors.ino)
 - Reading quadrature encoders (DraggerEncoders.ino)
 - Calculating PID control values (DraggerCalculate.ino)
@@ -140,8 +144,12 @@ The Arduino [firmware](https://github.com/slgrobotics/Misc/tree/master/Arduino/S
 - Integrating a "*local override*" joystick (DraggerJoystick.ino)
 - Integrating a "[Parking Sensor](https://photos.app.goo.gl/WsqkA4XpYSLrVDX59)" (sonars) - code available [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/ParkingSensorI2C)
 
-While you may need to adapt the Arduino software to match your specific robot base, the ROS 2 driver can be used as-is.
-The firmware was written for and tested on Arduino Mega 2560, but should run fine with minimal modifications on any microcontroller which can be programmed using Arduino IDE (Raspberry Pi Pico, for example). 
+A similar **Teensy 4.x [firmware](https://github.com/slgrobotics/Misc/blob/master/Arduino/Sketchbook/WheelsROS_Seggy/WheelsROS_Seggy.ino) for BLDC Wheel Motors** is "plug-in compatible" with the above, when it comes to serial communication to the ROS2 driver.
+
+While you may need to adapt the Arduino software to match your specific robot base, the ROS 2 "*diffdrive_arduino*" driver can be used as-is.
+The firmware was written for and tested on Arduino Mega 2560, but should run fine with minimal modifications on any microcontroller which can be programmed using Arduino IDE (Raspberry Pi Pico, for example).
+
+The Teensy 4.x BLDC driver is proven on [Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy) robot.
 
 ----------------
 
