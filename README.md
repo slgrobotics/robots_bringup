@@ -27,7 +27,7 @@ see [ROS2 Jazzy Setup](https://github.com/slgrobotics/robots_bringup/tree/main/D
 
 ### Seggy
 
-An indoors "tablebot" Seggy is described here (Raspberry 5):
+An indoors "*tablebot*" Seggy is described here:
 [Docs/Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy)
 
 ### Dragger
@@ -37,7 +37,7 @@ The outdoorsy robot Dragger (Raspberry 5, GPS) is described here:
 
 ### Plucky (retired)
 
-An indoors mapper robot Plucky is described here (Raspberry 5):
+An indoors mapper robot Plucky is described here:
 [Docs/Plucky](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky)
 
 ### The Venerable _Create 1_ Turtlebot, now Jazzified
@@ -84,11 +84,13 @@ Here are the likely scenarios for your work.
 
 - Fork my *articubot_one* repository and make your own robot in ~/robot_ws/src/articubot_one/robots folder
 
-### Found a bug? Want to contribute a fix?
+### Found a bug? Want to contribute a fix? Have a question?
 
 - Report here: https://github.com/slgrobotics/articubot_one/issues
 
 - Create a _Pull Request_: https://github.com/slgrobotics/articubot_one/pulls
+
+- Join the Mailing list at https://www.hbrobotics.org/ - participate in club technical discussions
 
 ---------------------------------
 
