@@ -1,5 +1,8 @@
 **Seggy robot** is built from a 2016 Segway Ninebot miniPRO - that's why the name. And no, it has nothing to do with "*Crabbed, cantankerous*" or "*exaggerated, stylized movement*" ;-).
 
+**Note:** As of *October 2025* Seggy is in active development. Stable, working code is on the *[main](https://github.com/slgrobotics/articubot_one)* branch.
+For the latest code see the *[dev](https://github.com/slgrobotics/articubot_one/tree/dev)* branch.
+
 # Seggy Notes
 
 Seggy is a *"larger Turtlebot"* - running [my *articubot_one* code](https://github.com/slgrobotics/articubot_one). Desktop only needs to run RViz for robot control.
@@ -22,9 +25,9 @@ and [Differential Drive Control](https://github.com/slgrobotics/diffdrive_arduin
 Seggy has a Teensy 4.0 microcontroller, which drives the BLDC wheel motors (using [simpleFOC library](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/WheelsROS_Seggy))
 and combines odometry and health data into a single serial stream for the Raspberry Pi.
 
-The Raspberry Pi 5 on Seggy have Ubuntu 24.04 Server 64 bit and ROS2 Jazzy Base [installed](https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html).
+The *Raspberry Pi 5 8GB* on Seggy has Ubuntu 24.04 Server 64 bit and ROS2 Jazzy Base [installed](https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html).
 
-**Note:** Seggy Teensy 4.0 should be on */dev/ttyACM0*
+**Note:** Seggy Teensy 4.0 serial should appear on */dev/ttyACM0*
 
 ## Build and Run Instructions (on the robot's Raspberry Pi 5):
 
