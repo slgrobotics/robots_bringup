@@ -28,7 +28,7 @@ see [ROS2 Jazzy Setup](https://github.com/slgrobotics/robots_bringup/tree/main/D
 ### Seggy
 
 An indoors "tablebot" Seggy is described here (Raspberry 5):
-[Docs/Plucky](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy)
+[Docs/Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy)
 
 ### Dragger
 
