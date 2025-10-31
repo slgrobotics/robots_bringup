@@ -25,12 +25,17 @@ see [ROS2 Jazzy Setup](https://github.com/slgrobotics/robots_bringup/tree/main/D
 
 ## Here are the robots:
 
+### Seggy
+
+An indoors "tablebot" Seggy is described here (Raspberry 5):
+[Docs/Plucky](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy)
+
 ### Dragger
 
 The outdoorsy robot Dragger (Raspberry 5, GPS) is described here:
 [Docs/Dragger](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger)
 
-### Plucky
+### Plucky (retired)
 
 An indoors mapper robot Plucky is described here (Raspberry 5):
 [Docs/Plucky](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky)
@@ -67,7 +72,7 @@ Here are the likely scenarios for your work.
 
 ### 2. Try my robots in _Gazebo simulation_, browse the code (no robot hardware needed)
 
-- See the #1 above, then follow the build and run instructions there for _simulated_ Dragger, Plucky or Turtle.
+- See the #1 above, then follow the build and run instructions there for _simulated_ Seggy, Dragger, Plucky or Turtle.
 
 - _Bonus:_ ROS2 Jazzy comes with _Turtlebot3_ simulation, try that to see _Nav2_ working.
 
