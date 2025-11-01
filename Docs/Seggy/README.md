@@ -31,6 +31,11 @@ The *Raspberry Pi 5 8GB* on Seggy has Ubuntu 24.04 Server 64 bit and ROS2 Jazzy 
 
 ## Build and Run Instructions (on the robot's Raspberry Pi 5):
 
+The build and run procedures are similar for all my robots.
+While each robot uses different sensors, the main difference lies in the specific packages you need to clone into the `~/robot_ws/src` directory.
+
+All robot-specific files (*configuration*, *description*, and *launch*) are placed under the `~/robot_ws/install` directory — you simply need to choose the appropriate *launch file* for your robot to run.
+
 Follow "Dragger" robot guide starting with "_Raspberry Pi 5 ("dragger") Build and Run Instructions_":
 
 https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger
