@@ -169,7 +169,7 @@ Running the sim as described below brings Rviz2 with a map view.
 
 **Note:** If you want to browse robot's code look here: https://github.com/slgrobotics/articubot_one
 
-Here we build a ROS2 package we need to run *Dragger*, *Plucky* or *Turtle* in Gazebo sim - or use RViz to control physical robots.
+Here we build a ROS2 package we need to run *Seggy* *Dragger*, *Plucky* or *Turtle* in Gazebo sim - or use RViz to control physical robots.
 
 So, on the Desktop machine:
 
@@ -187,6 +187,9 @@ rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y
 colcon build
 ```
 
+The `colcon build` command will place all necessary files in the `~/robot_ws/install` directory, and all robots
+will be ready to run - in sim or [for real](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger#run-the-robot-on-board-raspberry-5-8gb).
+
 If all goes well, we can now:
 1. Use joystick to control the robots - simulated or physical.
 2. Run any robot in Gazebo with RViz to monitor simulated robot.
@@ -201,6 +204,9 @@ source /opt/ros/${ROS_DISTRO}/setup.bash
 cd ~/robot_ws
 colcon build
 source ~/robot_ws/install/setup.bash
+ros2 launch articubot_one seggy_sim.launch.py
+
+or
 ros2 launch articubot_one dragger_sim.launch.py
 
 or
@@ -218,12 +224,13 @@ You must do _"colcon build"_ in _~/robot_ws_ every time you change anything. The
 ## Running a physical robot
 
 **Note:** Consult physical robot pages:
+- Seggy: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy
 - Dragger: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger
 - Plucky: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky
 - Turtle:https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1
 - A _"Make Your Own"_ DIY robot: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/MakeYourOwn
 
-You are unlikely to have an exact clone of _Dragger_ or _Plucky_, although and old _Create 1 Turtlebot_ might be still alive in your collection. Or you could've created files for your own robot in the _robots/_ directory.
+You are unlikely to have an exact clone of _Seggy_, _Dragger_ or _Plucky_, although and old _Create 1 Turtlebot_ might be still alive in your collection. Or you could've created files for your own robot in the _robots/_ directory.
 
 There are launch files in _robots/_ directories for real robots, intended to *run on their Raspbery Pi's*. So, once the Pi is up and is running robot's nodes, this is how to launch RViz alone on the Desktop computer:
 ```
@@ -231,7 +238,7 @@ cd ~/robot_ws
 source ~/robot_ws/install/setup.bash
 ros2 launch articubot_one launch_rviz.launch.py use_sim_time:=false  # also runs joystick node
 ```
-While Raspberry Pi 5 on Dragger and Plucky run all robots' Nodes (including Nav2), the Turtle's Raspberry Pi 3B only runs Create 1 _base_ and sensors Nodes.
+While Raspberry Pi 5 on *Seggy*, *Dragger* and *Plucky* run all robots' Nodes (including Nav2), the *Turtle*'s Raspberry Pi 3B only runs Create 1 _base_ and sensors Nodes.
 So, the turtle launch file must run all the remaining robot's nodes on the Desktop. It is still started the same way (and brings up RViz):
 ```
 cd ~/robot_ws
