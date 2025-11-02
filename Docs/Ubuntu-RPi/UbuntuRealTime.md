@@ -1,5 +1,60 @@
 ## Ubuntu Server 24.04 Real Time Kernel and ROS2 for Raspberry Pi 3B/4/5
 
+**Why bother?** Real Time [kernel](https://ubuntu.com/blog/enable-real-time-ubuntu) offers better scheduling
+to [ros2_control](https://control.ros.org/jazzy/doc/ros2_control/controller_manager/doc/userdoc.html), and therefore is a good choice for us.
+
+### Real-time Ubuntu community kernel from Canonical (did not work for me on Nov 1, 2025)
+
+There is an official release of [Real-time Ubuntu](https://ubuntu.com/real-time), including a version for Raspberry Pi: https://ubuntu.com/blog/enable-real-time-ubuntu
+
+There's also a pre-configured image, which I tried - it worked fine **on a Raspberry Pi 4**  for me, but beware of security risk. See the section at the end.
+
+If you already have a configured Ubuntu 24.04 Server **on a Raspberry Pi 5** - just use the following command:
+```
+sudo apt update
+sudo apt upgrade
+sudo apt install ubuntu-realtime
+(installation fails:
+    /usr/sbin/grub-mkconfig: 279: cannot create /boot/grub/grub.cfg.new: Directory nonexistent
+    Using DTB: bcm2712-rpi-5-b.dtb
+    Couldn't find DTB bcm2712-rpi-5-b.dtb on the following paths: /etc/flash-kernel/dtbs /usr/lib/linux-image-6.8.1-1015-realtime /lib/firmware/6.8.1-1015-realtime/device-tree/)
+```
+**Important:** ROS2 *Control Manager* discovers RT kernel and will adjust its scheduling to run at higher priority.
+It will fail in subtle ways if not allowed to do so.
+
+To enable scheduling adjustment, follow [this guide](https://control.ros.org/jazzy/doc/ros2_control/controller_manager/doc/userdoc.html) - create *realtime* group:
+```
+sudo addgroup realtime
+sudo usermod -a -G realtime $(whoami)
+```
+and add the following limits to the realtime group in `/etc/security/limits.conf`:
+```
+@realtime soft rtprio 99
+@realtime soft priority 99
+@realtime soft memlock unlimited
+@realtime hard rtprio 99
+@realtime hard priority 99
+@realtime hard memlock unlimited
+```
+The limits will be applied after you log out and in again.
+
+So, here is *PREEMPT_RT* OS:
+```
+ros@urt:~$ uname -a
+Linux urt 6.8.4-rt11-raspi #1 SMP PREEMPT_RT Mon May  5 16:51:52 UTC 2025 aarch64 aarch64 aarch64 GNU/Linux
+```
+Opposed to standard *PREEMPT_DYNAMIC* installation:
+```
+ros@seggy:~$ uname -a
+Linux seggy 6.8.0-1040-raspi #44-Ubuntu SMP PREEMPT_DYNAMIC Wed Sep 24 18:30:35 UTC 2025 aarch64 aarch64 aarch64 GNU/Linux
+```
+
+So, the RT image is usable for my robots - with very little effort.
+
+----------------
+
+### A third-party image installation - works for **Raspberry Pi 4**  (use at your own risk)
+
 Repository and instructions [here](https://github.com/ros-realtime/ros-realtime-rpi4-image).
 
 To decompress:
@@ -39,59 +94,31 @@ Logged in as "ros" and added two lines to the end of .bashrc:
 source /opt/ros/jazzy/setup.bash
 export ROS_DOMAIN_ID=0
 ```
-**Important:** ROS2 *Control Manager* discovers RT kernel and will adjust its scheduling to run at higher priority.
-It will fail in subtle ways if not allowed to do so.
-
-To enable that, follow [this guide](https://control.ros.org/jazzy/doc/ros2_control/controller_manager/doc/userdoc.html) - create *realtime* group
-and add the following limits to the realtime group in `/etc/security/limits.conf`:
-```
-@realtime soft rtprio 99
-@realtime soft priority 99
-@realtime soft memlock unlimited
-@realtime hard rtprio 99
-@realtime hard priority 99
-@realtime hard memlock unlimited
-```
-The limits will be applied after you log out and in again.
 
 #### Next steps 
 
-Loosely followed my notes here: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi
+I loosely followed my notes here: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi
 
 The "*rosdep*" installed a huge bunch of packages, hard to say what was actually needed. Took very long time.
 ```
 sudo apt install colcon
 ```
-Compiled and ran Plucky "articubot" code, starts OK, but my RPi4 isn't on a robot - I see lots of missing hardware run-time messages from the nodes.
+Compiled and ran Plucky "articubot_one" code, starts OK, but my RPi4 isn't on a robot - I see lots of missing hardware run-time messages from the nodes.
 
 **P.S.** I moved the SD card to the RPi5 on Plucky, and it worked well. NVM SSD is still in place, the OS [boots](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/NVM-SSD.md#booting-from-an-sd-card-with-nvm-drive-present) off the SD card.
 
 So, the RT image is usable for my robots - with some elbow grease applied.
 
-BTW, here is RT OS:
-```
-ros@urt:~$ uname -a
-Linux urt 6.8.4-rt11-raspi #1 SMP PREEMPT_RT Mon May  5 16:51:52 UTC 2025 aarch64 aarch64 aarch64 GNU/Linux
-```
-Opposed to standard installation:
-```
-ros@plucky:~$ uname -a
-Linux plucky 6.8.0-1028-raspi #32-Ubuntu SMP PREEMPT_DYNAMIC Sat Apr 26 10:05:11 UTC 2025 aarch64 aarch64 aarch64 GNU/Linux
-```
 I have 56% of 16GB SD card used (81% after additional packages were installed for Plucky robot).
 
 **Note:**
 - I initially configured the the SD card on a RPi 4, and then plugged in RPi 5 on Plucky robot. I haven't seen any adverse effects.
 - Beware of [boot sequence](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/NVM-SSD.md#booting-from-an-sd-card-with-nvm-drive-present) when you have NVM (SSD) and boot from an SD.
 
-### Compressing the SD card for backup:
+#### Compressing the SD card for backup:
 
 I followed the process [here](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/README.md#optional-making-compressed-backups-of-an-sd-card)
 and got a zipped image of 3.5 GB (from the original 16 GB SD card). That's with all extras I installed in the process. I'm wondering why the original .zst image was 4.3 GB - wasn't washed well? ;-) 
-
-### Real-time Ubuntu from Canonical
-
-There is an official release of Real-time Ubuntu, including a version for Raspberry Pi 4 and 5: https://ubuntu.com/real-time
 
 ----------------
 
