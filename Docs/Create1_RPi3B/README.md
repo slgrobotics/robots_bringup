@@ -1,4 +1,9 @@
-# Turtlebot Create 1 Notes (Jazzy version)
+**Note:**
+- this is a legacy document, related to my previous version of Turtle (*Create 1* with Raspberry Pi 3B).
+For related code refer to any snapshot dated before November 1, 2025 (for example, Commit [34c7d2c](https://github.com/slgrobotics/articubot_one/commit/34c7d2ca4b689123a60aec02c53af94c93cc77d3)).
+- Currently my Turtle robot has *Raspberry Pi 4/8GB* and related notes are [here](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1).
+
+# Turtlebot Create 1 with Raspberry Pi 3B Notes (Jazzy version)
 
 This is an updated and streamlined version of the prior document ( [RPi_Setup](https://github.com/slgrobotics/turtlebot_create/tree/main/RPi_Setup) ) - adjusted for ROS Jazzy.
 
