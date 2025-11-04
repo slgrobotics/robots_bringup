@@ -13,6 +13,48 @@ On the Desktop just run RViz2 as described below.
 **Note:** You can just run Turtle robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
 refer to [this section](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README.md#build-articubot_one-robot-codebase)
 
+#### Optional: Use REAL-TIME kernel on Raspberry Pi 4
+
+Refer to [this guide](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/UbuntuRealTime.md).
+
+#### Optional: Overclocking Raspberry Pi 4 to 2 GHz
+
+Here is a script to see clock-related status of RPi 4 (you need to `sudo usermod -a -G video $(whoami)`)
+```
+#!/bin/bash
+echo "CPU: " `gawk '{print $1/1000," C"}' /sys/class/thermal/thermal_zone0/temp`
+echo "GPU: " `vcgencmd measure_temp` | sed 's/temp=//'
+lscpu|grep Hz
+cpu_khz=`cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq`
+result=$(echo "scale=2; $cpu_khz / 1000000" | bc -l)
+echo "Current CPU Clock:                    $result GHz"
+#result=$((cpu_khz / 1000))
+#echo "Current CPU Clock: $result MHz"
+vcgencmd get_throttled
+vcgencmd measure_volts
+free -h
+#
+# Note: for ongoing clock monitoring
+#        watch -n 1 "vcgencmd measure_clock arm"
+```
+Most RPi 4's can run at 2 GHz with a minimal heat sink.
+
+See https://forums.raspberrypi.com/viewtopic.php?t=313280 for detailed info.
+
+To enable overclocking, edit (sudo) */boot/firmware/config.txt* - the "[pi4]" section should look like this:
+```
+[pi4]
+max_framebuffers=2
+arm_boost=1
+initial_turbo=60
+#hdmi_enable_4kp60=1
+over_voltage=6
+arm_freq_min=100
+arm_freq=2000
+#gpu_freq=750
+#gpu_mem=256
+```
+
 ### Turtle Raspberry Pi 4/8Gb Build and Run Instructions:
 
 Turtle has _Ubuntu 24.04 Server (64 bit)_ and _ROS2 Jazzy Base_ installed - see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi for instructions.
