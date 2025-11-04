@@ -227,7 +227,7 @@ You must do _"colcon build"_ in _~/robot_ws_ every time you change anything. The
 - Seggy: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy
 - Dragger: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger
 - Plucky: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky
-- Turtle:https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1
+- Turtle: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1
 - A _"Make Your Own"_ DIY robot: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/MakeYourOwn
 
 You are unlikely to have an exact clone of _Seggy_, _Dragger_ or _Plucky_, although and old _Create 1 Turtlebot_ might be still alive in your collection. Or you could've created files for your own robot in the _robots/_ directory.
@@ -238,9 +238,11 @@ cd ~/robot_ws
 source ~/robot_ws/install/setup.bash
 ros2 launch articubot_one launch_rviz.launch.py use_sim_time:=false  # also runs joystick node
 ```
-While Raspberry Pi 5 on *Seggy*, *Dragger* and *Plucky* run all robots' Nodes (including Nav2), the *Turtle*'s Raspberry Pi 3B only runs Create 1 _base_ and sensors Nodes.
+**Note:** While Raspberry Pi 5 on *[Turtle](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1)*, *Seggy*, *Dragger* and *Plucky* run all robots' Nodes (including Slam Toolbox and Nav2),
+the *[Legacy Turtle](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1_RPi3B)*'s Raspberry Pi 3B only runs Create 1 _base_ and sensors Nodes.
 So, the turtle launch file must run all the remaining robot's nodes on the Desktop. It is still started the same way (and brings up RViz):
 ```
+# Important: using a snapshot of "main" branch dated before November 1, 2025
 cd ~/robot_ws
 source ~/robot_ws/install/setup.bash
 ros2 launch articubot_one turtle.launch.py
