@@ -53,7 +53,7 @@ So, the RT image is usable for my robots - with very little effort.
 
 ----------------
 
-### A third-party image installation - works for **Raspberry Pi 4**  (use at your own risk)
+### A third-party image installation - worked for me on **Raspberry Pi 4 and 5**  (use at your own risk)
 
 Repository and instructions [here](https://github.com/ros-realtime/ros-realtime-rpi4-image).
 
@@ -107,7 +107,7 @@ Compiled and ran Plucky "articubot_one" code, starts OK, but my RPi4 isn't on a 
 
 **P.S.** I moved the SD card to the RPi5 on Plucky, and it worked well. NVM SSD is still in place, the OS [boots](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/NVM-SSD.md#booting-from-an-sd-card-with-nvm-drive-present) off the SD card.
 
-So, the RT image is usable for my robots - with some elbow grease applied.
+So, the RT image is usable for all my robots - with some elbow grease applied.
 
 I have 56% of 16GB SD card used (81% after additional packages were installed for Plucky robot).
 
