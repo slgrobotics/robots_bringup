@@ -1,6 +1,8 @@
-## Turtlebot Create 1 with Raspberry Pi 4/8Gb (ROS2 Jazzy)
+**Note:**
+- Familiarity with (now outdated) [Old README](https://github.com/slgrobotics/turtlebot_create/blob/main/README.md) is highly recommended.
+- For the legacy RPi 3B version refer to [this guide](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1_RPi3B).
 
-Familiarity with (now outdated) [Old README](https://github.com/slgrobotics/turtlebot_create/blob/main/README.md) is highly recommended.
+## Turtlebot Create 1 with Raspberry Pi 4/8Gb (ROS2 Jazzy)
 
 My Create 1 now has a Raspberry Pi 4/8Gb ("turtle").
 The RPi runs sensors drivers (XV11 LIDAR and BNO055 IMU), [Autonomy Lab _base_ code](https://github.com/slgrobotics/create_robot), and the usual localization and Nav2 nodes. 
@@ -92,34 +94,38 @@ ros2 launch create_bringup create_2.launch
 This is how the robot comes up on my screen:
 ```
 ros@turtle:~/robot_ws$ ros2 launch create_bringup create_1.launch
-[INFO] [launch]: All log files can be found below /home/ros/.ros/log/2024-07-23-09-11-31-032285-turtle-26928
+[INFO] [launch]: All log files can be found below /home/ros/.ros/log/2025-11-03-06-58-11-525224-turtle-80979
 [INFO] [launch]: Default logging verbosity is set to INFO
-[INFO] [create_driver-1]: process started with pid [26934]
-[INFO] [robot_state_publisher-2]: process started with pid [26935]
-[robot_state_publisher-2] [INFO] [1721743897.733288931] [robot_state_publisher]: Robot initialized
-[create_driver-1] [INFO] [1721743897.817175928] [create_driver]: [CREATE] gyro_offset: 0    gyro_scale: 1
-[create_driver-1] [INFO] [1721743897.818827061] [create_driver]: [CREATE] "CREATE_1" selected
-[create_driver-1] [INFO] [1721743898.881177255] [create_driver]: [CREATE] Connection established.
-[create_driver-1] [INFO] [1721743898.881650532] [create_driver]: [CREATE] Battery level 100.00 %
-[create_driver-1] [INFO] [1721743899.054224697] [create_driver]: [CREATE] Ready.
+[INFO] [create_driver-1]: process started with pid [80983]
+[INFO] [robot_state_publisher-2]: process started with pid [80984]
+[robot_state_publisher-2] [INFO] [1762174692.789162930] [robot_state_publisher]: Robot initialized
+[create_driver-1] [INFO] [1762174692.795454666] [create_driver]: [CREATE] gyro_offset: 0    gyro_scale: 1    distance_scale: 1
+[create_driver-1] [INFO] [1762174692.796039697] [create_driver]: [CREATE] "CREATE_1" base model selected
+[create_driver-1] [INFO] [1762174693.814961240] [create_driver]: [CREATE] Connection established.
+[create_driver-1] [INFO] [1762174693.815369771] [create_driver]: [CREATE] Battery level 47.52 %
+[create_driver-1] [INFO] [1762174693.882721650] [create_driver]: [CREATE] Ready.
 ```
+You can see appropriate ROS2 topics appear in _rqt_, among them:
+- */battery/battery_state*
+- */joint_states*
+- */odom*
+
 #### Populate _launch_ folder: _/home/ros/launch_
 ```
 mkdir ~/launch
 cd ~/launch
-# place myturtle.py and bootup_launch.sh here:
-cp ~/robot_ws/src/create_robot/create_bringup/launch/bootup_launch.sh .
-cp ~/robot_ws/src/create_robot/create_bringup/launch/myturtle.py .
-# You might need a helper program to adjust "gyro_offset":
-cp ~/robot_ws/src/create_robot/create_bringup/launch/roomba.py .
-chmod +x ~/launch/bootup_launch.sh    
+# place bootup_launch.sh here:
+cp ~/robot_ws/src/articubot_one/robots/turtle/launch/bootup_launch.sh .
+chmod +x bootup_launch.sh
+# You might need a helper program to adjust "*gyro_offset*":
+cp ~/robot_ws/src/articubot_one/robots/turtle/launch/roomba.py .
 ```
 Now, when you need to run the on-board nodes on the robot using SSH, just type:
 ```
 cd ~/launch
 ./bootup_launch.sh
 ```
-### Test-driving Create 1 Turtlebot with _teleop_
+### Optional: Test-driving Create 1 Turtlebot with _teleop_
 
 Check out https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Joystick.md
 
@@ -135,7 +141,13 @@ See https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/Linu
 
 ### On the Desktop:
 
-Once you have Turtlebot on-board nodes (hardware "drivers") running, it is time to run the rest of the nodes and RViz on the Desktop.
+Once you have Turtlebot nodes running, it is time to run _RViz_ **on the Desktop**:
+```
+cd ~/robot_ws
+colcon build
+ros2 launch articubot_one launch_rviz.launch.py use_sim_time:=false
+```
+The command above also runs _joystick_ node, so that you can drive the robot using _Xbox 360 Controller_ or _Logitech Gamepad F710_.
 
 Consult [running-a-physical-robot](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#running-a-physical-robot)
 
