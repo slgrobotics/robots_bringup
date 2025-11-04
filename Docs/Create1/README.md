@@ -41,6 +41,9 @@ Most RPi 4's can run at 2 GHz with a minimal heat sink.
 
 See https://forums.raspberrypi.com/viewtopic.php?t=313280 for detailed info.
 
+**Warning:** When I had "*arm_freq_min=100*" my overclocked RPi 4's were showing wrong "*date*" - system clock has slowed to a crawl.
+Chrony was running, but not synching. So - keep *arm_freq_min* at 600. See [this](https://github.com/MichaIng/DietPi/issues/4455).
+
 To enable overclocking, edit (sudo) */boot/firmware/config.txt* - the "[pi4]" section should look like this:
 ```
 [pi4]
@@ -49,7 +52,7 @@ arm_boost=1
 initial_turbo=60
 #hdmi_enable_4kp60=1
 over_voltage=6
-arm_freq_min=100
+arm_freq_min=600
 arm_freq=2000
 #gpu_freq=750
 #gpu_mem=256
