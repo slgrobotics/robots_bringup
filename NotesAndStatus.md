@@ -20,4 +20,4 @@ This is a list of my status reports and notes related to recent observations, pr
 
 ----------------
 
-**Back to** [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
+**Back to** [Main page](https://github.com/slgrobotics/robots_bringup)
