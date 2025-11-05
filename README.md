@@ -1,5 +1,7 @@
 ## Robots Bringup (Documentation)
 
+**Note:** please take a moment to review [current Notes and Project status](https://github.com/slgrobotics/robots_bringup/blob/main/NotesAndStatus.md)
+
 This repository contains instructions and other [documents](https://github.com/slgrobotics/robots_bringup/tree/main/Docs) related to my "[*articubot_one*](https://github.com/slgrobotics/articubot_one)" project.
 
 It is intended to run navigation on my Turtlebot-like robots - in Gazebo simulation or with physical robots, indoors or outdoors.
