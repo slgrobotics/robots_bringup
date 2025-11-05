@@ -8,6 +8,7 @@ This document lists my recent status reports, observations, problems, and fixes.
 - Create 1 "_Turtle_" now runs on a Raspberry Pi 4, overclocked to 2 GHz. [Documentation](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1) has been updated..
 - *articubot_one* code has been cleaned, the _dev_ branch was merged into _main_, and both were tested - everything works.
 Use [_dev_](https://github.com/slgrobotics/articubot_one/tree/dev), as it usually includes a few potentially useful tweaks.
+- Enabling *composition* and *use_intra_process_comms* in Nav2 launch file seems to work fine.
 - [Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy) is a new reference platform (a.k.a. "guinea pig"). Plucky has been retired (and gratiously donated some of his parts to Seggy).
 - Seggy's BLDC *[Motor wheels](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/MakeYourOwn#bill-of-materials-bom)* are awesome; even with only 60 ticks per revolution from the Hall sensors, control is stable.
 - Both of my [52Pi Power Expansion Boards](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/README-Extra.md#properly-feeding-your-raspberry-pi-5) are working well (one on Seggy and one on a spare RPi 5).
