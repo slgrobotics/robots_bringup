@@ -276,7 +276,10 @@ The turn rate scale, as reported by gyro, usually needs adjustment. Drive the ro
 The *distance_scale* can be adjusted so that *diff_cont/odom* **pose** reports proper distance when robot is driven forward or backward.
 
 As a **final test**, you need to drive the robot forward a couple meters and watch the odom point in Rviz to stay at the launch point.
-Then turn the robot and watch the *odom* point move. You should strive for minimal odom displacement during straight runs and rotations.
+Adjust the RViz as shown in the screenshot below - showing *odom* and *map* frames.
+Then turn the robot and watch the *odom* point move. You should strive for minimal *odom* displacement from *map* during straight runs and rotations:
+
+<img width="2133" height="1176" alt="Screenshot from 2025-11-06 13-57-44" src="https://github.com/user-attachments/assets/bd486e40-1d16-418b-b4e1-9bee1a1084b3" />
 
 Once the parameters are adjusted, your robot will be able to map the area, and the _odom_ point will not move drastically when the robot drives and turns in any direction.
 
