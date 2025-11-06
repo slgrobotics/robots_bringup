@@ -227,25 +227,41 @@ angleF = angleF * 0.25 * getGyroScale(); // gyro calibration factor
 deltaYaw = angleF * (util::PI / 180.0); // D2R
 ```
 
-Create driver needs *angle* to correctly publish *diff_cont/odom* topic, which is important for robot localization as it moves. Correct wheel joints rotation is the best indication of normal operation of odometry calculations.
+Create driver needs *angle* to correctly publish *diff_cont/odom* topic, which is important for robot localization as it moves.
+Correct wheel joints rotation is the best indication of normal operation of odometry calculations.
 
 You will need to calibrate your gyro, and adjust related parameters in Turtle [launch file](https://github.com/slgrobotics/articubot_one/blob/dev/robots/turtle/launch/turtle.launch.py).
 
 **Tuning gyro_offset, gyro_scale and distance_scale**
 
 There are three parameters in Turtle [launch file](https://github.com/slgrobotics/articubot_one/blob/dev/robots/turtle/launch/turtle.launch.py).
-By adjusting them you make odometry (reported by *Create base driver*) work properly.
+By adjusting them you make odometry (reported by *Create base [driver](https://github.com/slgrobotics/create_robot/blob/jazzy/create_driver/src/create_driver.cpp)*) work properly.
 ```
 'gyro_offset': 0.0,     - compensates for gyro drift
 'gyro_scale': 1.19,     - adjusts gyro sensitivity in turns
 'distance_scale': 1.02  - adjusts for wheel encoders discrepancy
 ```
-First, compensate for *gyro dift* - make sure that the gyro reads zero when Turtle is stationary.
+First, compensate for *gyro dift* - make sure that the ROS2 gyro driver can adjust it to zero when Turtle is stationary.
 
-The "*Cargo Bay Analog Signal*", as read by *Create 1 base* on DB25 pin 4, is connected in our case to gyro output.
-It is expected to be 512 when the robot is stationary.
+The "*Cargo Bay Analog Signal*", as read by *Create 1 base* on DB25 pin 4, is connected (in our case) to gyro output.
+
+The ROS2 [driver](https://github.com/slgrobotics/create_robot) expects it to be 512 when the robot is stationary.
 If it differs (say, reads 202 when robot doesn't move) - the `'gyro_offset'` must compensate for that (say, 512-202=310 - the 310 is your `'gyro_offset'`).
-Read it using an autonomous helper program: ```cd ~/launch; python3 roomba.py```.
+
+Read it using an autonomous helper program:
+```
+ros@turtle:~$ cd ~/launch; python3 roomba.py
+
+Sending Reset
+bl-start
+Sending Start
+Flushing serial
+b'2006-09-12-1137-L   \r\nRDK by iRobot!\r\nMC9S12E128\r\n2006-11-20-1731-L   \r\nbattery-current-quiescent-raw 530  battery-current-zero 516\r\n'
+Reading DB25 pin 4:
+202
+201
+202
+```.
 Adjust it accordingly in the launch file.
 
 With *gyro drift* compensated, proceed to calibrating gyro sensitivity (a.k.a. *gyro turn rate*).
