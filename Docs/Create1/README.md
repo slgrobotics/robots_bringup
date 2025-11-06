@@ -241,7 +241,7 @@ By adjusting them you make odometry (reported by *Create base [driver](https://g
 'gyro_scale': 1.19,     - adjusts gyro sensitivity in turns
 'distance_scale': 1.02  - adjusts for wheel encoders discrepancy
 ```
-First, compensate for *gyro dift* - make sure that the ROS2 gyro driver can adjust it to zero when Turtle is stationary.
+First, **compensate for _gyro dift_** - make sure that the ROS2 gyro driver can adjust it to zero when Turtle is stationary.
 
 The "*Cargo Bay Analog Signal*", as read by *Create 1 base* on DB25 pin 4, is connected (in our case) to gyro output.
 
@@ -261,10 +261,13 @@ Reading DB25 pin 4:
 202
 201
 202
-```.
+```
+
 Adjust it accordingly in the launch file.
 
-With *gyro drift* compensated, proceed to calibrating gyro sensitivity (a.k.a. *gyro turn rate*).
+**Note:** as I am using a [gyro emulator](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/MPU9250GyroTurtlebot), my reading is actually quite stable at "512". Yours may be different.
+
+With *gyro drift* compensated, proceed to **calibrating gyro sensitivity** (a.k.a. *gyro turn rate*).
 
 Start Turtle in ROS2. You need to bring up Rviz2 to see odometry vector. The best way is to follow "On the Desktop" section above.
 
@@ -272,7 +275,7 @@ The turn rate scale, as reported by gyro, usually needs adjustment. Drive the ro
 
 The *distance_scale* can be adjusted so that *diff_cont/odom* **pose** reports proper distance when robot is driven forward or backward.
 
-As a final test, you need to drive the robot forward a couple meters and watch the odom point in Rviz to stay at the launch point.
+As a **final test**, you need to drive the robot forward a couple meters and watch the odom point in Rviz to stay at the launch point.
 Then turn the robot and watch the *odom* point move. You should strive for minimal odom displacement during straight runs and rotations.
 
 Once the parameters are adjusted, your robot will be able to map the area, and the _odom_ point will not move drastically when the robot drives and turns in any direction.
