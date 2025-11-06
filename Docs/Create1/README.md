@@ -103,7 +103,8 @@ git clone https://github.com/slgrobotics/libcreate.git
 # Using "dev" or "main" branch:
 git clone https://github.com/slgrobotics/articubot_one.git -b dev
 
-# you may edit Create Base port here - */dev/ttyS0* if on desktop, */dev/ttyUSB0* on turtle (it will be set as a parameter in the launch file anyway):
+# you may edit Create Base default port here - */dev/ttyS0* if on desktop, */dev/ttyUSB0* on turtle
+#              (it will be set as a parameter in the launch file anyway):
 vi ~/robot_ws/src/create_robot/create_bringup/config/default.yaml
 ```
 Your *src* folder should look like this:
@@ -155,6 +156,12 @@ You can see appropriate ROS2 topics appear in _rqt_, among them:
 - */joint_states*
 - */odom*
 
+**Tip:** Any time you need to produce a robot URDF from ```.xacro``` files, use "_xacro_" command, for example:
+```
+source ~/robot_ws/install/setup.bash
+xacro ~/robot_ws/install/articubot_one/share/articubot_one/robots/turtle/description/robot.urdf.xacro sim_mode:=true > /tmp/robot.urdf
+```
+
 #### Populate _launch_ folder: _/home/ros/launch_
 ```
 mkdir ~/launch
@@ -178,13 +185,13 @@ Keep in mind, that Create 1 base expects */diff_cont/cmd_vel* - while joystick w
 
 You may want to temporarily modify *joystick.launch.py* for this test.
 
-## _Optional:_ Create a Linux service for on-boot autostart
+### _Optional:_ Create a Linux service for on-boot autostart
 
 With _Create base_, _XV11 Laser Scanner_ and _BNO055 IMU_ ROS2 nodes tested, it is time to set up autostart on boot for hands-free operation.
 
 See https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/LinuxService.md
 
-### On the Desktop:
+## On the Desktop:
 
 Once you have Turtlebot nodes running, it is time to run _RViz_ **on the Desktop**:
 ```
@@ -196,9 +203,9 @@ The command above also runs _joystick_ node, so that you can drive the robot usi
 
 Consult [running-a-physical-robot](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#running-a-physical-robot)
 
-### Tuning your Gyro (only for Create 1)
+## Tuning your Gyro (only for Create 1)
 
-If you have Create 1 base - it needs a gyro to compensate for a firmware bug (see https://github.com/AutonomyLab/create_robot/issues/28).
+If you have an original *Create 1* base - it needs a gyro to compensate for a firmware bug (see https://github.com/AutonomyLab/create_robot/issues/28).
 
 Any analog gyro will do. The original accessory interface board which plugs into the Cargo Bay DB25 connector has an analog gyro, ADXR613. 
 
@@ -222,33 +229,38 @@ deltaYaw = angleF * (util::PI / 180.0); // D2R
 
 Create driver needs *angle* to correctly publish *diff_cont/odom* topic, which is important for robot localization as it moves. Correct wheel joints rotation is the best indication of normal operation of odometry calculations.
 
-You will need to calibrate your gyro, by tweaking parameters (see launch file at https://github.com/slgrobotics/turtlebot_create/tree/main/RPi_Setup/launch ).
+You will need to calibrate your gyro, and adjust related parameters in Turtle [launch file](https://github.com/slgrobotics/articubot_one/blob/dev/robots/turtle/launch/turtle.launch.py).
 
 **Tuning gyro_offset, gyro_scale and distance_scale**
 
-There are three parameters in *~/launch/myturtle.py* (which you copied above). By adjusting them you make odometry (reported by *Create base driver*) work properly.
+There are three parameters in Turtle [launch file](https://github.com/slgrobotics/articubot_one/blob/dev/robots/turtle/launch/turtle.launch.py).
+By adjusting them you make odometry (reported by *Create base driver*) work properly.
 ```
-'gyro_offset': 0.0,
-'gyro_scale': 1.19,
-'distance_scale': 1.02
+'gyro_offset': 0.0,     - compensates for gyro drift
+'gyro_scale': 1.19,     - adjusts gyro sensitivity in turns
+'distance_scale': 1.02  - adjusts for wheel encoders discrepancy
 ```
-"Cargo Bay Analog Signal", as read by *Create 1 base* on DB25 pin 4, connected in our case to gyro, is expected to be 512 when the robot is stationary. If it differs (say, 202 when robot doesn't move) - gyro_offset compensates for that (say, 512-202=310). Adjust it accordingly using a helper program: ```cd ~/launch; python3 roomba.py```.
+First, compensate for *gyro dift* - make sure that the gyro reads zero when Turtle is stationary.
 
-Now you need to bring up Rviz2 to see odometry vector. The best way is to follow "On the Desktop" section above.
+The "*Cargo Bay Analog Signal*", as read by *Create 1 base* on DB25 pin 4, is connected in our case to gyro output.
+It is expected to be 512 when the robot is stationary.
+If it differs (say, reads 202 when robot doesn't move) - the `'gyro_offset'` must compensate for that (say, 512-202=310 - the 310 is your `'gyro_offset'`).
+Read it using an autonomous helper program: ```cd ~/launch; python3 roomba.py```.
+Adjust it accordingly in the launch file.
 
-The turn rate scale, as reported by gyro, usually needs adjustment. Drive the robot using joystick - turn it 360 degrees and see if the Odometry vector (showing *diff_cont/odom*) is lagging behind or gaining over the robot's orientation. Adjust 'gyro_scale' to have them match.
+With *gyro drift* compensated, proceed to calibrating gyro sensitivity (a.k.a. *gyro turn rate*).
+
+Start Turtle in ROS2. You need to bring up Rviz2 to see odometry vector. The best way is to follow "On the Desktop" section above.
+
+The turn rate scale, as reported by gyro, usually needs adjustment. Drive the robot using joystick - turn it 360 degrees and see if the Odometry vector (showing *diff_cont/odom*) is lagging behind or gaining over the robot's orientation. Adjust `'gyro_scale'` to have them match.
 
 The *distance_scale* can be adjusted so that *diff_cont/odom* **pose** reports proper distance when robot is driven forward or backward.
 
-As a final test, you need to drive the robot forward a couple meters and watch the odom point in Rviz to stay at the launch point. Then turn the robot and watch the *odom* point move. You should strive for minimal odom displacement during straight runs and rotations.
+As a final test, you need to drive the robot forward a couple meters and watch the odom point in Rviz to stay at the launch point.
+Then turn the robot and watch the *odom* point move. You should strive for minimal odom displacement during straight runs and rotations.
 
-Once the parameters are adjusted, your robot will be able to map the area, and the _odom_ point will not move dramatically when the robot drives and turns in any direction.
+Once the parameters are adjusted, your robot will be able to map the area, and the _odom_ point will not move drastically when the robot drives and turns in any direction.
 
-**Tip:** Any time you need to produce a robot URDF from ```.xacro``` files, use "_xacro_" command, for example:
-```
-source ~/robot_ws/install/setup.bash
-xacro ~/robot_ws/install/articubot_one/share/articubot_one/robots/turtle/description/robot.urdf.xacro sim_mode:=true > /tmp/robot.urdf
-```
 ----------------
 
 **Back to** [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
