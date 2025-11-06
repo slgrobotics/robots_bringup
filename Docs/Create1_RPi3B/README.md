@@ -163,57 +163,8 @@ Consult [running-a-physical-robot](https://github.com/slgrobotics/robots_bringup
 
 ## Tuning your Gyro (only for Create 1)
 
-If you have Create 1 base - it needs a gyro to compensate for a firmware bug (see https://github.com/AutonomyLab/create_robot/issues/28).
+refer to this [guide](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1#tuning-your-gyro-only-for-create-1).
 
-Any analog gyro will do. The original accessory interface board which plugs into the Cargo Bay DB25 connector has an analog gyro, ADXR613. 
-
-I had to create an _"analog gyro emulator"_ by connecting arduino mini to MPU9250 - and producing the same analog signal via PWM (https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/MPU9250GyroTurtlebot).
-
-*Create base* does not read the gyro (or gyro emulator) directly - it just passes it through from the analog input (DB25 pin 4 of Cargo Bay) to the serial stream (which sends all sensor data every 15ms).
-
-When stationary, the gyro output will produce an ADC value between 0 and 1024, hopefully around 512, and that value will vary with rotation (reflecting, naturally, robot's turn rate).
-
-Autonomy Lab *Create driver* [with my modifications](https://github.com/slgrobotics/create_robot) reads this value, adds gyro_offset and multiplies it by gyro_scale - and then integrates it (by dt) to produce turn angle.
-
-https://github.com/slgrobotics/libcreate/blob/master/src/create.cpp : 148
-```
-// This is a fix involving analog gyro connected to pin 4 of Cargo Bay:
-uint16_t angleRaw = GET_DATA(ID_CARGO_BAY_ANALOG_SIGNAL);
-float angleF = -((float)angleRaw - 512.0 + getGyroOffset()) * dt;
-angleF = angleF * 0.25 * getGyroScale(); // gyro calibration factor
-//std::cout<< "dt: " << dt << " distanceRaw: " << distanceRaw << " angleRaw: " << angleRaw << " angleF: " << angleF << std::endl;
-deltaYaw = angleF * (util::PI / 180.0); // D2R
-```
-
-Create driver needs *angle* to correctly publish *diff_cont/odom* topic, which is important for robot localization as it moves. Correct wheel joints rotation is the best indication of normal operation of odometry calculations.
-
-You will need to calibrate your gyro, by tweaking parameters (see launch file at https://github.com/slgrobotics/turtlebot_create/tree/main/RPi_Setup/launch ).
-
-**Tuning gyro_offset, gyro_scale and distance_scale**
-
-There are three parameters in *~/launch/myturtle.py* (which you copied above). By adjusting them you make odometry (reported by *Create base driver*) work properly.
-```
-'gyro_offset': 0.0,
-'gyro_scale': 1.19,
-'distance_scale': 1.02
-```
-"Cargo Bay Analog Signal", as read by *Create 1 base* on DB25 pin 4, connected in our case to gyro, is expected to be 512 when the robot is stationary. If it differs (say, 202 when robot doesn't move) - gyro_offset compensates for that (say, 512-202=310). Adjust it accordingly using a helper program: ```cd ~/launch; python3 roomba.py```.
-
-Now you need to bring up Rviz2 to see odometry vector. The best way is to follow "On the Desktop" section above.
-
-The turn rate scale, as reported by gyro, usually needs adjustment. Drive the robot using joystick - turn it 360 degrees and see if the Odometry vector (showing *diff_cont/odom*) is lagging behind or gaining over the robot's orientation. Adjust 'gyro_scale' to have them match.
-
-The *distance_scale* can be adjusted so that *diff_cont/odom* **pose** reports proper distance when robot is driven forward or backward.
-
-As a final test, you need to drive the robot forward a couple meters and watch the odom point in Rviz to stay at the launch point. Then turn the robot and watch the *odom* point move. You should strive for minimal odom displacement during straight runs and rotations.
-
-Once the parameters are adjusted, your robot will be able to map the area, and the _odom_ point will not move dramatically when the robot drives and turns in any direction.
-
-**Tip:** Any time you need to produce a robot URDF from ```.xacro``` files, use "_xacro_" command, for example:
-```
-source ~/robot_ws/install/setup.bash
-xacro ~/robot_ws/install/articubot_one/share/articubot_one/robots/turtle/description/robot.urdf.xacro sim_mode:=true > /tmp/robot.urdf
-```
 ----------------
 
 **Back to** [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
