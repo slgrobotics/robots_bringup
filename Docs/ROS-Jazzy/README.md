@@ -40,9 +40,15 @@ https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/README.m
 
 Follow  https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html
 
-### Install rqt and rqt_graph with all plugins:
+### Install [RQqt](https://docs.ros.org/en/jazzy/Concepts/Intermediate/About-RQt.html) with all plugins and [PlotJuggler](https://plotjuggler.io):
 ```
-sudo apt install ros-${ROS_DISTRO}-rqt*
+sudo apt install ros-${ROS_DISTRO}-rqt* ros-${ROS_DISTRO}-plotjuggler-ros
+```
+*rqt* and *rqt_graph* can be directly run from a command prompt. They show nodes and topics in the most friendly way.
+
+Run *PlotJugger* as a ROS2 process. It subscribes to topic's values (i.e. "*imu_data*" *yaw*) and shows them in real time:
+```
+ros2 run plotjuggler plotjuggler
 ```
 
 ### for joystick operation - make sure your "ros" account has access to ports:
