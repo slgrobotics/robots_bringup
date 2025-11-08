@@ -39,7 +39,7 @@ offers improved integration with Linux and better overall reliability.
 3. When monitoring */imu/data/orientation/yaw* using [PlotJuggler](https://www.plotjuggler.io), I noticed frequent (~1..3 seconds) spikes or jumps in the data.
 It appears that neither I²C communication nor the code’s exception handling are responsible for this.
 
-I created a fork of the driver, switched to *smbus2* and implemented a “sanity check” for incoming data — this fully resolved the issue.
+I created a [fork](https://github.com/slgrobotics/bno055) of the driver, switched to *smbus2* and implemented a “sanity check” for incoming data — this fully resolved the issue.
 
 ### Position on the robot
 
