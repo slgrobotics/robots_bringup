@@ -41,6 +41,8 @@ It appears that neither I²C communication nor the code’s exception handling a
 
 I created a [fork](https://github.com/slgrobotics/bno055) of the driver, switched to *smbus2* and implemented a “sanity check” for incoming data — this fully resolved the issue.
 
+I submitted a [report](https://github.com/flynneva/bno055/issues/80) to the original author in the hope of fixing the issue for all.
+
 ### Positioning sensor on the robot
 
 Here is how Adafruit BNO055 carrier board is oriented on Create 1 [Turtlebot](https://photos.app.goo.gl/ED3YbmNRm4kKt3V5A) (view from the rear):
