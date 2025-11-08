@@ -87,6 +87,7 @@ Run *PlotJugger* as a ROS2 process. It subscribes to topic's values (i.e. "*imu_
 ```
 ros2 run plotjuggler plotjuggler
 ```
+**Tip:** drag the desired value ("yaw") from the left panel to the main (plot) panel. Right-click on the plot to adjust *Min*, *Max* etc.
 
 ### Useful Links
 
