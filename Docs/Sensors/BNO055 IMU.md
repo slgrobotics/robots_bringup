@@ -20,6 +20,8 @@ https://learn.adafruit.com/adafruit-bno055-absolute-orientation-sensor
 
 https://learn.adafruit.com/adafruit-bno055-absolute-orientation-sensor/webserial-visualizer
 
+https://www.bosch-sensortec.com/media/boschsensortec/downloads/application_notes_1/bst-bno055-an007.pdf
+
 https://www.bosch-sensortec.com/products/smart-sensor-systems/bno055/
 
 BNO055 IMU (via UART or I2C - Python) - seems well supported, active development, ROS2 node
