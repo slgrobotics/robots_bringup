@@ -49,7 +49,14 @@ Here is how Adafruit BNO055 carrier board is oriented on Create 1 [Turtlebot](ht
 
 ![Screenshot from 2025-05-27 21-48-13](https://github.com/user-attachments/assets/861db7a1-cb60-4215-b6bc-52361d92a453)
 
-If you are using a [generic carrier board](https://www.amazon.com/dp/B0D47G672B), X axis should point backwards, and Y - to the right of the robot.
+If you are using a [generic carrier board](https://www.amazon.com/dp/B0D47G672B), X axis (as printed on the PCB) should point backwards, and Y - to the right of the robot.
+Note that the sensor's chip is oriented identically in both cases. 
+
+The seemingly "backwards" orientation of either sensors is due to the launch parameter setting, and works specifically with this ROS2 driver:
+```
+'placement_axis_remap': 'P1', # P1 - default, ENU. See Bosch BNO055 datasheet section "Axis Remap"
+```
+<img width="1290" height="1609" alt="Screenshot from 2025-11-08 10-22-55" src="https://github.com/user-attachments/assets/0f5e411c-28d9-4dff-ad1a-65bbfa70b104" />
 
 ### Installation
 ```
