@@ -24,9 +24,22 @@ https://www.bosch-sensortec.com/products/smart-sensor-systems/bno055/
 
 BNO055 IMU (via UART or I2C - Python) - seems well supported, active development, ROS2 node
 
-ROS2 driver code is here:
+The "standard" ROS2 driver code is here:
 
 https://github.com/flynneva/bno055
+
+### Issues When Using the “Standard” ROS 2 Driver
+
+Here are my observations while using the "*standard*" ROS 2 driver on Turtle:
+
+1. I have three *BNO055* sensors — one from Adafruit with the original Bosch chip, and two “generic carrier boards” using the GY-BNO055 chip.
+Apart from the I²C address, there’s no practical difference in how they behave — same data, same issues.
+2. The "standard" ROS 2 driver relies on *smbus*, while a more advanced Python package, *[smbus2](https://pypi.org/project/smbus2/)*,
+offers improved integration with Linux and better overall reliability.
+3. When monitoring */imu/data/orientation/yaw* using [PlotJuggler](https://www.plotjuggler.io), I noticed frequent (~1..3 seconds) spikes or jumps in the data.
+It appears that neither I²C communication nor the code’s exception handling are responsible for this.
+
+I created a fork of the driver, switched to *smbus2* and implemented a “sanity check” for incoming data — this fully resolved the issue.
 
 ### Position on the robot
 
@@ -40,12 +53,12 @@ If you are using a [generic carrier board](https://www.amazon.com/dp/B0D47G672B)
 ```
 mkdir -p ~/robot_ws/src
 cd ~/robot_ws/src/
-git clone https://github.com/flynneva/bno055.git
+git clone https://github.com/slgrobotics/bno055.git  # using my fork of the driver
 cd ~/robot_ws
-vi ~/robot_ws/src/bno055/bno055/params/bno055_params_i2c.yaml   - *** Here you change i2c_bus to 1
+vi ~/robot_ws/src/bno055/bno055/params/bno055_params_i2c.yaml   # *** Here you may change default i2c_bus to 1 and check the address
 rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y
-sudo pip3 install smbus
-(sudo apt install python3-smbus   -- this might work instead)
+sudo pip3 install smbus2
+(sudo apt install python3-smbus2   # this might work instead)
 colcon build
 ``` 
 Try running it, see IMU messages in rqt:
