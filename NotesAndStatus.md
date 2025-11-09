@@ -2,6 +2,36 @@
 
 This document lists my recent status reports, observations, problems, and fixes. (Updated frequently.)
 
+### 2025-11-09
+
+#### Status:
+
+- installed ROS2 [Kilted](https://docs.ros.org/en/kilted/Installation/Ubuntu-Install-Debs.html) Desktop on a spare machine (I5, Ubuntu 24.04) next to Jazzy.
+- installed Kilted Base on Turtle (RPi4 overclocked to 2GHz, Ubuntu 24.04) next to Jazzy
+- ~/bashrc (option to switch between releases):
+```
+source /opt/ros/kilted/setup.bash
+#source /opt/ros/jazzy/setup.bash
+```
+
+#### Problems and fixes
+
+On the Desktop side:
+- nav2_params.yaml - one parameter renamed:
+```
+      -    error_code_names:
+      +    error_code_name_prefixes:
+```
+- Changed *ros_battery_monitoring* to make Jazzy code also Kilted-compatible - details [here](https://github.com/slgrobotics/ros_battery_monitoring/commit/635043eec933e5e9169ab7d871b9397979a27e05)
+- `ros2 launch articubot_one seggy_sim.launch.py` works fine (same for plucky, dragger, turtle)
+
+On the on-board RPi side (Turtle):
+
+
+#### Plans
+
+--------------------
+
 ### 2025-11-04
 
 #### Status:
@@ -28,3 +58,8 @@ Use [_dev_](https://github.com/slgrobotics/articubot_one/tree/dev), as it usuall
 ----------------
 
 **Back to** [Main page](https://github.com/slgrobotics/robots_bringup)
+
+#### Status:
+#### Problems and fixes
+#### Plans
+
