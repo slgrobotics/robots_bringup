@@ -36,7 +36,7 @@ Interoperability:
 - Turtle running under Kilted successfully appeared in RViz2 on a Jazzy desktop and was controllable via its joystick.
 
 #### Plans
-- Resolve the remaining build warnings.
+- Resolve the remaining build warnings (UPD: done - [here](https://github.com/slgrobotics/xv_11_driver/commit/a92dd1c91fdbcae7ce79b05e6181f89473943884) and [here](https://github.com/slgrobotics/create_robot/commit/01d3fbadfa4f10977eb4b0846dcb0fd1611e1113)).
 - Continue using Jazzy as the main environment, while keeping Kilted installed for compatibility testing and future-proofing.
 
 --------------------
