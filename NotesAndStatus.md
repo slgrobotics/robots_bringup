@@ -6,9 +6,9 @@ This document lists my recent status reports, observations, problems, and fixes.
 
 #### Status:
 
-- installed ROS2 [Kilted](https://docs.ros.org/en/kilted/Installation/Ubuntu-Install-Debs.html) Desktop on a spare machine (I5, Ubuntu 24.04) next to Jazzy.
-- installed Kilted Base on Turtle (RPi4 overclocked to 2GHz, Ubuntu 24.04) next to Jazzy
-- ~/bashrc (option to switch between releases):
+- installed ROS2 [Kilted](https://docs.ros.org/en/kilted/Installation/Ubuntu-Install-Debs.html) Desktop on a spare machine (I5, Ubuntu 24.04) alongside Jazzy.
+- installed Kilted Base on Turtle (RPi4 overclocked to 2GHz, Ubuntu 24.04) also alongside Jazzy
+- Updated `~/bashrc` to allow switching between distributions:
 ```
 source /opt/ros/kilted/setup.bash
 #source /opt/ros/jazzy/setup.bash
@@ -17,18 +17,27 @@ source /opt/ros/kilted/setup.bash
 #### Problems and fixes
 
 On the Desktop side:
-- nav2_params.yaml - one parameter renamed:
-```
-      -    error_code_names:
-      +    error_code_name_prefixes:
-```
-- Changed *ros_battery_monitoring* to make Jazzy code also Kilted-compatible - details [here](https://github.com/slgrobotics/ros_battery_monitoring/commit/635043eec933e5e9169ab7d871b9397979a27e05)
-- `ros2 launch articubot_one seggy_sim.launch.py` works fine (same for plucky, dragger, turtle)
+- Updated *ros_battery_monitoring* to make Jazzy code also Kilted-compatible - details [here](https://github.com/slgrobotics/ros_battery_monitoring/commit/635043eec933e5e9169ab7d871b9397979a27e05)
+- Verified that:
+  - `ros2 launch articubot_one seggy_sim.launch.py` runs successfully (same for *plucky, dragger, turtle*)
+  - `ros2 launch articubot_one launch_rviz.launch.py use_sim_time:=false` works as expected
 
-On the on-board RPi side (Turtle):
+On-board RPi side (Turtle):
+- Received warnings when running: `rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y` (related to *xv_11_driver, create_driver*)
+- One parameter in *nav2_params.yaml* was renamed:
+```
+    error_code_names: # works for Jazzy, must be removed for Kilted
+    #error_code_name_prefixes: # works for Kilted
+```
+- rosdep installed a number of likely unnecessary packages.
+- *Turtle* works, navigates, and appears stable and happy.
 
+Interoperability:
+- Turtle running under Kilted successfully appeared in RViz2 on a Jazzy desktop and was controllable via its joystick.
 
 #### Plans
+- Resolve the remaining build warnings.
+- Continue using Jazzy as the main environment, while keeping Kilted installed for compatibility testing and future-proofing.
 
 --------------------
 
