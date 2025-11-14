@@ -1,3 +1,8 @@
+
+- for better viewing experience visit [Project Wiki](https://github.com/slgrobotics/articubot_one/wiki)
+
+------------
+
 # Robots Folder
 
 Besides several robot-specific folders, here are instructions on common topics:
