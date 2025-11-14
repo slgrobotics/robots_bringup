@@ -1,7 +1,7 @@
 ## Robots Bringup (Documentation)
 
 - for better viewing experience visit [Project Wiki](https://github.com/slgrobotics/articubot_one/wiki)
-- please take a moment to review [Current Notes and Project Status](https://github.com/slgrobotics/robots_bringup/blob/main/NotesAndStatus.md) page
+- please take a moment to review [Current Notes and Project Status](https://github.com/slgrobotics/articubot_one/wiki/Notes-and-Status) page
 
 --------------------------
 
