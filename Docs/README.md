@@ -21,5 +21,5 @@ Tips on [How to Use this Repository](https://github.com/slgrobotics/robots_bring
 
 -------------------------
 
-**Back to main page:** https://github.com/slgrobotics/robots_bringup
+**Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki) or [Main Page](https://github.com/slgrobotics/robots_bringup)
 
