@@ -123,4 +123,4 @@ Refer to https://github.com/ros-navigation/docs.nav2.org/blob/master/configurati
 
 ----------------
 
-**Back to** [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
+**Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki) or [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)

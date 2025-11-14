@@ -9,7 +9,7 @@ But if you want to use a different controller type (e.g. [RoboClaw](https://www.
 
 ----------------
 
-**Back to** [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
+**Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki) or [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
 
 **Back to** [Main Page](https://github.com/slgrobotics/robots_bringup)
 

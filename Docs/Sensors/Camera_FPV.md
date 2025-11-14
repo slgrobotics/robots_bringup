@@ -41,4 +41,4 @@ Cameras on Raspberry Pi 5 don't work anymore (at least, without extra [setup eff
 
 ----------------
 
-**Back to** [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
+**Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki) or [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)

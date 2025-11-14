@@ -122,4 +122,4 @@ and got a zipped image of 3.5 GB (from the original 16 GB SD card). That's with 
 
 ----------------
 
-**Back to** [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
+**Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki) or [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
