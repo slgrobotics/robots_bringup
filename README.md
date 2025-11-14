@@ -101,6 +101,8 @@ Here are the likely scenarios for your work.
 
 ## Useful links
 
+- [Project Wiki](https://github.com/slgrobotics/articubot_one/wiki) or [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
+
 **Articulated Robotics (Josh Newans):**
 
 https://articulatedrobotics.xyz/category/build-a-mobile-robot-with-ros
