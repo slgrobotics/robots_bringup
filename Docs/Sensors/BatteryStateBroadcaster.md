@@ -44,7 +44,7 @@ The modified code is, naturally, here: https://github.com/slgrobotics/ros_batter
 
 The repository must be cloned to Raspberry Pi machine, residing next to other packages:
 ```
-ros@plucky:~$ ls ~/robot_ws/src/
+ros@seggy:~$ ls ~/robot_ws/src/
 articubot_one  diffdrive_arduino  ldlidar_sl_ros2  mpu9250  *ros_battery_monitoring*  serial
 ```
 Here are the steps:
@@ -62,9 +62,9 @@ Here are the files that configure and work with BatteryStateBroadcaster:
 - https://github.com/slgrobotics/diffdrive_arduino/blob/main/src/battery.cpp
 
 - https://github.com/slgrobotics/articubot_one/blob/main/description/battery.xacro
-- https://github.com/slgrobotics/articubot_one/blob/main/robots/plucky/config/controllers.yaml
-- https://github.com/slgrobotics/articubot_one/blob/main/robots/plucky/description/robot.urdf.xacro : line 41
-- https://github.com/slgrobotics/articubot_one/blob/main/robots/plucky/launch/plucky.launch.py : line 113, 156, 257
+- https://github.com/slgrobotics/articubot_one/blob/main/robots/seggy/config/controllers.yaml
+- https://github.com/slgrobotics/articubot_one/blob/main/robots/seggy/description/robot.urdf.xacro : line 30
+- https://github.com/slgrobotics/articubot_one/blob/main/launch/drive.launch.py : line 75
 
 ### Displaying battery state data in RViz2
 
