@@ -48,7 +48,13 @@ Run the sensor node:
 ```
 ros2 launch bno08x_driver bno085_i2c.launch.py
 ```
-You should see the `/imu` topic in *rqt*. To see it in RViz2, you need to:
+You should see the `/imu` topic in *rqt* and can display publishing rate:
+```
+ros2 topic hz /imu
+average rate: 101.149
+	min: 0.000s max: 0.019s std dev: 0.00167s window: 102
+```
+To see IMU orientation in RViz2, you need to:
 - bring up RViz2 (IMU is already setup in my RViz config):
 ```
 ros2 launch articubot_one launch_rviz.launch.py use_sim_time:=false
@@ -57,6 +63,8 @@ ros2 launch articubot_one launch_rviz.launch.py use_sim_time:=false
 ```
 ros2 run tf2_ros static_transform_publisher 0 0 1 0 0 0 map bno085
 ```
+Enable the *IMU checkbox* and adjust topic to show `/imu`:
+
 <img width="1593" height="1088" alt="Screenshot from 2025-11-16 11-15-49" src="https://github.com/user-attachments/assets/405656a8-ca31-4bec-8351-71ad57412543" />
 
 ### Positioning sensor on the robot
