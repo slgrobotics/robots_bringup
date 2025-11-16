@@ -16,6 +16,8 @@ Use ```i2cdetect -y 1``` to see **address 0x4b**
 
 Information: https://www.adafruit.com/product/4754
 
+Datasheet: https://github.com/bnbhat/bno08x_ros2_driver/blob/master/docs/BNO080_085-Datasheet.pdf
+
 The ROS2 driver code is here: https://github.com/bnbhat/bno08x_ros2_driver
 
 ### Trying it
