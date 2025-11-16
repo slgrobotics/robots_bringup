@@ -79,6 +79,10 @@ ros2 run plotjuggler plotjuggler
 ```
 **Tip:** drag the desired value ("yaw") from the left panel to the main (plot) panel. Right-click on the plot to adjust *Min*, *Max* etc.
 
+### Useful Links
+
+Sensor available here: https://www.amazon.com/dp/B0CL26J81F
+
 ----------------
 
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki) or [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
