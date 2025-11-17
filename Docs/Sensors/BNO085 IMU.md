@@ -1,6 +1,10 @@
 ## ROS2 driver for BNO085 IMU
 
-BNO085 is a 9-DOF Absolute Orientation IMU Fusion sensor module combining accelerometer, gyroscope, and magnetometer data for precise 9 degrees of freedom measurements.
+[BNO085](https://www.ceva-ip.com/wp-content/uploads/BNO080_085-Datasheet.pdf) "...integrates a triaxial accelerometer,
+triaxial gyroscope, magnetometer and a 32-bit ARM® Cortex™-M0+ microcontroller running CEVA's SH-2
+firmware. The SH-2 includes the *MotionEngine™* software, which provides sophisticated signal processing
+algorithms to process sensor data and provide precise real-time 3D orientation, heading, calibrated acceleration
+and calibrated angular velocity..."
 
 ### Connections:
 
@@ -16,7 +20,7 @@ Use ```i2cdetect -y 1``` to see **address 0x4b**
 
 Information: https://www.adafruit.com/product/4754
 
-Datasheet: https://github.com/bnbhat/bno08x_ros2_driver/blob/master/docs/BNO080_085-Datasheet.pdf
+Datasheet: https://www.ceva-ip.com/wp-content/uploads/BNO080_085-Datasheet.pdf
 
 The ROS2 driver code is here: https://github.com/bnbhat/bno08x_ros2_driver
 
