@@ -22,7 +22,13 @@ Information: https://www.adafruit.com/product/4754
 
 Datasheet: https://www.ceva-ip.com/wp-content/uploads/BNO080_085-Datasheet.pdf
 
-The ROS2 driver code is here: https://github.com/bnbhat/bno08x_ros2_driver
+My fork of ROS2 driver code is here: https://github.com/slgrobotics/bno08x_ros2_driver
+(original [here](https://github.com/bnbhat/bno08x_ros2_driver))
+
+**Note:** the original driver does not publish orientation covariences (or any other),
+which causes extreme confusion of the EKF filter, which fuses wheels odometry and UMU.
+What happens and why it matters is explained [here](https://chatgpt.com/s/t_691b60f38e1c8191a0a309cbcf99e478).
+I created an issue [here](https://github.com/bnbhat/bno08x_ros2_driver/issues/16).
 
 ### Trying it
 
@@ -30,7 +36,7 @@ First, clone the repository:
 ```
 mkdir -p ~/tmp_ws/src
 cd ~/tmp_ws/src
-git clone https://github.com/bnbhat/bno08x_ros2_driver.git
+git clone https://github.com/slgrobotics/bno08x_ros2_driver.git
 ```
 install dependencies:
 ```
@@ -91,7 +97,9 @@ Run *PlotJugger* as a ROS2 process. It subscribes to topic's values (i.e. "*imu_
 ```
 ros2 run plotjuggler plotjuggler
 ```
-**Tip:** drag the desired value ("yaw") from the left panel to the main (plot) panel. Right-click on the plot to adjust *Min*, *Max* etc.
+**Tips:**
+- drag the desired value ("yaw") from the left panel to the main (plot) panel. Right-click on the plot to adjust *Min*, *Max* etc.
+- make sure that the EKF output *yaw* follows IMU *yaw* without spiles or jumps. IMU in RViz should smoothly follow the robot. 
 
 ### Useful Links
 
