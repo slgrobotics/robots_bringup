@@ -71,11 +71,11 @@ Enable the *IMU checkbox* and adjust topic to show `/imu`:
 
 ### Positioning sensor on the robot
 
-Here is how Adafruit BNO085 carrier board is oriented on Seggy robot:
-
-
-
 Refer to [this file](https://github.com/slgrobotics/articubot_one/blob/dev/robots/seggy/launch/seggy.sensors.launch.py) for real-life parameters for running BNO085 node.
+
+This is the orientation of the *Teyleten Robot GY-BNO085* carrier board on my Seggy robot: the chip faces upward and the VCC pin toward the front.
+
+<img width="1285" height="1533" alt="Screenshot from 2025-11-16 18-53-23" src="https://github.com/user-attachments/assets/ae3ba654-4029-458f-ad4b-39567f0236bb" />
 
 ### Real-time monitoring IMU orientation data
 
