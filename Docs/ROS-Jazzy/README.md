@@ -186,6 +186,7 @@ mkdir -p ~/robot_ws/src
 cd ~/robot_ws/src
 git clone https://github.com/slgrobotics/articubot_one.git
 git clone https://github.com/slgrobotics/ros_battery_monitoring.git
+git clone https://github.com/slgrobotics/scan_to_range.git
 cd ~/robot_ws
 
 sudo rosdep init    # do it once, if you haven't done it before
