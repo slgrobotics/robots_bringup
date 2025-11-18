@@ -81,15 +81,24 @@ Enable the *IMU checkbox* and adjust topic to show `/imu`:
 
 <img width="1593" height="1088" alt="Screenshot from 2025-11-16 11-15-49" src="https://github.com/user-attachments/assets/405656a8-ca31-4bec-8351-71ad57412543" />
 
-### Positioning sensor on the robot
+### Running BNO085 node on the robot and tuning EKF filter
 
 Refer to [this file](https://github.com/slgrobotics/articubot_one/blob/dev/robots/seggy/launch/seggy.sensors.launch.py) for real-life parameters for running BNO085 node.
+
+EKF [filter](https://github.com/slgrobotics/articubot_one/blob/dev/launch/ekf_odom.launch.py) fuses wheels odometry with IMU orientation data,
+deriving reliable orientation quaternion in turns and straight runs (topic *"odometry/local"*).
+
+It is very important to have EKF filter tuned properly, as shown [here](https://github.com/slgrobotics/articubot_one/blob/dev/robots/seggy/config/ekf_odom_params.yaml), for example.
+
+More EKF tuning tips [here](https://chatgpt.com/s/t_691b80a57e588191b1528a238588b87a).
+
+### Positioning sensor on the robot
 
 This is the orientation of the *Teyleten Robot GY-BNO085* carrier board on my Seggy robot: the chip faces upward and the VCC pin toward the front.
 
 <img width="1285" height="1533" alt="Screenshot from 2025-11-16 18-53-23" src="https://github.com/user-attachments/assets/ae3ba654-4029-458f-ad4b-39567f0236bb" />
 
-### Real-time monitoring IMU orientation data
+### Real-time monitoring of IMU orientation data
 
 Install [PlotJuggler](https://plotjuggler.io) to monitor IMU data:
 ```
