@@ -1,3 +1,5 @@
+**Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
+
 _"It takes all the running you can do, to keep in the same place. If you want to get somewhere else, you must run at least twice as fast as that!"_ - Alice in Wonderland
 
 # Set up Desktop ROS Jazzy "Clean Machine" from scratch
@@ -197,7 +199,9 @@ The `colcon build` command will place all necessary files in the `~/robot_ws/ins
 will be ready to run - in sim or [for real](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger#run-the-robot-on-board-raspberry-5-8gb).
 
 If all goes well, we can now:
-1. Use joystick to control the robots - simulated or physical.
+1. Use**Note:** as of *October 2025* Plucky is retired. The code works, but will not be updated. Use [Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy) as a template from now on.
+
+ joystick to control the robots - simulated or physical.
 2. Run any robot in Gazebo with RViz to monitor simulated robot.
 3. Run RViz alone to monitor a physical robot.
 

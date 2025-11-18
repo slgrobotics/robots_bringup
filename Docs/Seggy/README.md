@@ -1,3 +1,5 @@
+**Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
+
 **Seggy robot** is built from a 2016 Segway Ninebot miniPRO - that's why the name. And no, it has nothing to do with "*Crabbed, cantankerous*" or "*exaggerated, stylized movement*" ;-).
 
 **Note:** As of *October 2025* Seggy is in active development. Stable, working code is on the *[main](https://github.com/slgrobotics/articubot_one)* branch.

@@ -1,3 +1,5 @@
+**Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
+
 ## _Native_ Raspberry Pi Camera (_Arducam_) Setup
 
 Ubuntu 24.04 introduced breaking changes in the way the video stream is handled ("libcamera" vs. "V4L2"). 

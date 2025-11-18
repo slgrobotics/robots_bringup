@@ -1,3 +1,7 @@
+**Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
+
+**Note:** as of *October 2025* Plucky is retired. The code works, but will not be updated. Use [Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy) as a template from now on.
+
 # Plucky Notes
 
 ```
@@ -5,8 +9,6 @@ pluck·y /'pl?ke/ adjective
 having or showing determined courage in the face of difficulties.
 Synonyms of plucky: SPIRITED, BRAVE
 ```
-**Note:** as of *October 2025* Plucky is retired. The code works, but will not be updated. Use [Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy) as a template from now on.
-
 Plucky photos are here: https://photos.app.goo.gl/YdYQ8kQrNmLkVXTM7
 
 Plucky is a *"larger Turtlebot"* - running [my *articubot_one* code](https://github.com/slgrobotics/articubot_one). Desktop only needs to run RViz for robot control.
