@@ -12,6 +12,8 @@ So, it's time to quit - i.e. to turn it into a robot.
 
 My Ninebot miniPRO photos are here: https://photos.app.goo.gl/yHXs7fP7u7ae8fa78
 
+It ultimately became a base for my [Seggy robot](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy).
+
 ### simpleFOC approach
 
 Discouraged with brute-force approach, I implemented direct control over wheels using [_simpleFOC_](https://github.com/simplefoc) library and compatible driver boards.
