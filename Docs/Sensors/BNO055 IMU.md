@@ -79,7 +79,7 @@ Try running it, see IMU messages in rqt:
 source ~/robot_ws/install/setup.bash
 ros2 run bno055 bno055  --ros-args --params-file ~/robot_ws/src/bno055/bno055/params/bno055_params_i2c.yaml
 ```
-Refer to [this file](https://github.com/slgrobotics/articubot_one/blob/dev/robots/turtle/launch/turtle.launch.py) for real-life parameters for running BNO055 node.
+Refer to [this file](https://github.com/slgrobotics/articubot_one/blob/main/robots/turtle/launch/turtle.launch.py) for real-life parameters for running BNO055 node.
 
 Install [PlotJuggler](https://plotjuggler.io) to monitor IMU data:
 ```

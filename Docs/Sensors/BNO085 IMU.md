@@ -83,12 +83,12 @@ Enable the *IMU checkbox* and adjust topic to show `/imu`:
 
 ### Running BNO085 node on the robot and tuning EKF filter
 
-Refer to [this file](https://github.com/slgrobotics/articubot_one/blob/dev/robots/seggy/launch/seggy.sensors.launch.py) for real-life parameters for running BNO085 node.
+Refer to [this file](https://github.com/slgrobotics/articubot_one/blob/main/robots/seggy/launch/seggy.sensors.launch.py) for real-life parameters for running BNO085 node.
 
-EKF [filter](https://github.com/slgrobotics/articubot_one/blob/dev/launch/ekf_odom.launch.py) fuses wheels odometry with IMU orientation data,
+EKF [filter](https://github.com/slgrobotics/articubot_one/blob/main/launch/ekf_odom.launch.py) fuses wheels odometry with IMU orientation data,
 deriving reliable orientation quaternion in turns and straight runs (topic *"odometry/local"*).
 
-It is very important to have EKF filter tuned properly, as shown [here](https://github.com/slgrobotics/articubot_one/blob/dev/robots/seggy/config/ekf_odom_params.yaml), for example.
+It is very important to have EKF filter tuned properly, as shown [here](https://github.com/slgrobotics/articubot_one/blob/main/robots/seggy/config/ekf_odom_params.yaml), for example.
 
 More EKF tuning tips [here](https://chatgpt.com/s/t_691b80a57e588191b1528a238588b87a).
 

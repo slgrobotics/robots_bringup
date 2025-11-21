@@ -99,7 +99,7 @@ The overlay should appear on top-left side of the display by default.
 
 Here is how parameters look in a launch file:
 
-https://github.com/slgrobotics/articubot_one/blob/dev/launch/launch_rviz.launch.py
+https://github.com/slgrobotics/articubot_one/blob/main/launch/launch_rviz.launch.py
 ```
     rviz_overlay = Node(
         package='battery_state_rviz_overlay',

@@ -232,11 +232,11 @@ deltaYaw = angleF * (util::PI / 180.0); // D2R
 Create driver needs *angle* to correctly publish *diff_cont/odom* topic, which is important for robot localization as it moves.
 Correct wheel joints rotation is the best indication of normal operation of odometry calculations.
 
-You will need to calibrate your gyro, and adjust related parameters in Turtle [launch file](https://github.com/slgrobotics/articubot_one/blob/dev/robots/turtle/launch/turtle.launch.py).
+You will need to calibrate your gyro, and adjust related parameters in Turtle [launch file](https://github.com/slgrobotics/articubot_one/blob/main/robots/turtle/launch/turtle.launch.py).
 
 **Tuning gyro_offset, gyro_scale and distance_scale**
 
-There are three parameters in Turtle [launch file](https://github.com/slgrobotics/articubot_one/blob/dev/robots/turtle/launch/turtle.launch.py).
+There are three parameters in Turtle [launch file](https://github.com/slgrobotics/articubot_one/blob/main/robots/turtle/launch/turtle.launch.py).
 By adjusting them you make odometry (reported by *Create base [driver](https://github.com/slgrobotics/create_robot/blob/jazzy/create_driver/src/create_driver.cpp)*) work properly.
 ```
 'gyro_offset': 0.0,     - compensates for gyro drift
