@@ -111,7 +111,9 @@ ros2 run plotjuggler plotjuggler
 **Tips:**
 - drag the desired value ("yaw") from the left panel to the main (plot) panel. Right-click on the plot to adjust *Min*, *Max* etc.
 - make sure that the EKF output *yaw* follows IMU *yaw* without spikes or jumps.
-- IMU *frame* in RViz should smoothly follow the robot, red axis looking forward, green -left and blue - up. 
+- IMU *frame* in RViz should smoothly follow the robot, red axis looking forward, green - left and blue - up:
+
+<img width="907" height="881" alt="Screenshot from 2025-11-21 11-42-32" src="https://github.com/user-attachments/assets/422fb7be-42c8-46bc-a3c3-850f0cb7a479" />
 
 ### Useful Links
 
