@@ -2,7 +2,9 @@
 
 ## GPS setup
 
-**Note:** this guide can be used for other NMEA capable GPS (in fact, almost any GPS)
+**Note:**
+- this guide can be used for other NMEA capable GPS (in fact, almost any GPS)
+- review an add-on [Outdoors Localization](https://github.com/slgrobotics/outdoors_loc_nav) package used for Dragger robot
 
 Dragger has a _"BE-880 GPS Receiver Module with Flash HMC5883L Compass 10th Chip GPS Antenna"_, available on Amazon. A u-blox NEO-M10N module is part of it.
 
@@ -99,6 +101,10 @@ sudo systemctl disable serial-getty@ttyS0.service
 reboot
 ```
 ## Useful Links
+
+**An add-on Outdoors Localization package:**
+
+https://github.com/slgrobotics/outdoors_loc_nav
 
 **GPS - localization and navigation:**
 
