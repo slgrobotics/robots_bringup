@@ -184,9 +184,10 @@ So, on the Desktop machine:
 ```
 mkdir -p ~/robot_ws/src
 cd ~/robot_ws/src
-git clone https://github.com/slgrobotics/articubot_one.git
+git clone https://github.com/slgrobotics/articubot_one.git # optionally: -b dev
 git clone https://github.com/slgrobotics/ros_battery_monitoring.git
 git clone https://github.com/slgrobotics/scan_to_range.git
+git clone https://github.com/slgrobotics/outdoors_loc_nav.git
 cd ~/robot_ws
 
 sudo rosdep init    # do it once, if you haven't done it before
@@ -195,21 +196,17 @@ rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y
 
 colcon build
 ```
-
 The `colcon build` command will place all necessary files in the `~/robot_ws/install` directory, and all robots
 will be ready to run - in sim or [for real](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger#run-the-robot-on-board-raspberry-5-8gb).
 
 If all goes well, we can now:
-1. Use**Note:** as of *October 2025* Plucky is retired. The code works, but will not be updated. Use [Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy) as a template from now on.
-
- joystick to control the robots - simulated or physical.
+1. Use joystick to control the robots - simulated or physical.
 2. Run any robot in Gazebo with RViz to monitor simulated robot.
 3. Run RViz alone to monitor a physical robot.
 
 ## Bringing up robot simulation in Gazebo
 
 Once the *articubot_one* package is built on the Desktop machine, we can run simulation in Gazebo.
-
 ```
 source /opt/ros/${ROS_DISTRO}/setup.bash
 cd ~/robot_ws
@@ -226,11 +223,15 @@ ros2 launch articubot_one plucky_sim.launch.py
 or
 ros2 launch articubot_one turtle_sim.launch.py
 ```
-You should see Gazebo and RViz GUI coming up. You may see a white 150m x 150m square ("empty_map" from *map_server*) or SLAM Toolbox or Cartographer should be building map as you move the robot around with joystick. If you zoom a bit out in RViz, for an outdoor robot you will see aerial map. 
+You should see Gazebo and RViz GUI coming up. You may see a white 150m x 150m square ("empty_map" from *map_server*)
+or SLAM Toolbox or Cartographer should be building map as you move the robot around with joystick. If you zoom a bit out in RViz, for an outdoor robot you will see aerial map. 
+(The Aerial Map plugin in RViz needs a push - flip the topic's *Reliability Policy* to see the map). 
 
 The simulated robot should respond to Joystick via teleop. Make sure that your "enable" and "turbo" buttons are assigned correctly in _~/robot_ws/src/articubot_one/launch/joystick.launch.py_
 
 You must do _"colcon build"_ in _~/robot_ws_ every time you change anything. The "_source ..._" statements above should be put in your _.bashrc_ for convenience.
+
+**Note:** as of *October 2025* Plucky is retired. The code works, but will not be updated. Use [Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy) as a template from now on.
 
 ## Running a physical robot
 
