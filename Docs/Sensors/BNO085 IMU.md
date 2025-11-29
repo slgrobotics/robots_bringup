@@ -98,6 +98,11 @@ This is the orientation of the *Teyleten Robot GY-BNO085* carrier board on my Se
 
 <img width="1285" height="1533" alt="Screenshot from 2025-11-16 18-53-23" src="https://github.com/user-attachments/assets/ae3ba654-4029-458f-ad4b-39567f0236bb" />
 
+This is the orientation of the *Teyleten Robot GY-BNO085* carrier board on my Dragger robot: the chip faces upward and the VCC pin toward the front.
+
+<img width="1319" height="1654" alt="Screenshot from 2025-11-28 19-28-48" src="https://github.com/user-attachments/assets/de29ac72-b68f-481a-919f-650343a7b77b" />
+
+
 ### Real-time monitoring of IMU orientation data
 
 Install [PlotJuggler](https://plotjuggler.io) to monitor IMU data:
