@@ -2,26 +2,9 @@
 
 ## Ubuntu Server 24.04 Real Time Kernel and ROS2 for Raspberry Pi 3B/4/5
 
-**Why bother?** Real Time [kernel](https://ubuntu.com/blog/enable-real-time-ubuntu) offers better scheduling
-to [ros2_control](https://control.ros.org/jazzy/doc/ros2_control/controller_manager/doc/userdoc.html), and therefore is a good choice for us.
+---------------------------------
 
-### Real-time Ubuntu community kernel from Canonical (did not work for me on Nov 1, 2025)
-
-There is an official release of [Real-time Ubuntu](https://ubuntu.com/real-time), including a version for Raspberry Pi: https://ubuntu.com/blog/enable-real-time-ubuntu
-
-There's also a pre-configured image, which I tried - it worked fine **on a Raspberry Pi 4**  for me, but beware of security risk. See the section at the end.
-
-If you already have a configured Ubuntu 24.04 Server **on a Raspberry Pi 5** - just use the following command:
-```
-sudo apt update
-sudo apt upgrade
-sudo apt install ubuntu-realtime
-(installation fails:
-    /usr/sbin/grub-mkconfig: 279: cannot create /boot/grub/grub.cfg.new: Directory nonexistent
-    Using DTB: bcm2712-rpi-5-b.dtb
-    Couldn't find DTB bcm2712-rpi-5-b.dtb on the following paths: /etc/flash-kernel/dtbs /usr/lib/linux-image-6.8.1-1015-realtime /lib/firmware/6.8.1-1015-realtime/device-tree/)
-```
-**Important:** ROS2 *Control Manager* discovers RT kernel and will adjust its scheduling to run at higher priority.
+**VERY Important:** ROS2 *Control Manager* discovers RT kernel and will adjust its scheduling to run at higher priority.
 It will fail in subtle ways if not allowed to do so.
 
 To enable scheduling adjustment, follow [this guide](https://control.ros.org/jazzy/doc/ros2_control/controller_manager/doc/userdoc.html) - create *realtime* group:
@@ -40,6 +23,27 @@ and add the following limits to the realtime group in `/etc/security/limits.conf
 ```
 The limits will be applied after you log out and in again.
 
+----------------------------------
+
+**So - Why bother?** Real Time [kernel](https://ubuntu.com/blog/enable-real-time-ubuntu) offers better scheduling
+to [ros2_control](https://control.ros.org/jazzy/doc/ros2_control/controller_manager/doc/userdoc.html), and therefore is a good choice for us.
+
+### Real-time Ubuntu community kernel from Canonical (did not work for me on Nov 1, 2025)
+
+There is an official release of [Real-time Ubuntu](https://ubuntu.com/real-time), including a version for Raspberry Pi: https://ubuntu.com/blog/enable-real-time-ubuntu
+
+There's also a pre-configured image, which I tried - it worked fine **on a Raspberry Pi 4**  for me, but beware of security risk. See the section at the end.
+
+If you already have a configured Ubuntu 24.04 Server **on a Raspberry Pi 5** - just use the following command:
+```
+sudo apt update
+sudo apt upgrade
+sudo apt install ubuntu-realtime
+(installation fails:
+    /usr/sbin/grub-mkconfig: 279: cannot create /boot/grub/grub.cfg.new: Directory nonexistent
+    Using DTB: bcm2712-rpi-5-b.dtb
+    Couldn't find DTB bcm2712-rpi-5-b.dtb on the following paths: /etc/flash-kernel/dtbs /usr/lib/linux-image-6.8.1-1015-realtime /lib/firmware/6.8.1-1015-realtime/device-tree/)
+```
 So, here is *PREEMPT_RT* OS:
 ```
 ros@urt:~$ uname -a
