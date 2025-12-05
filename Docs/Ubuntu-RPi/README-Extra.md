@@ -11,6 +11,9 @@ Here is a [video](https://youtu.be/PddIeZP-wgw) explaining why our Pi5's on the 
 The video describes settings that help to fix the problem (use caution).
 
 Here is a "distilled transcript" of the video, made by Ross Lunan (full credits to him and Josh Newans, autor of the video):
+
+**Note:** you need to `sudo usermod -a -G video $(whoami)` to be added to the `video` group, or the `vcgencmd` command would require 'sudo'.
+
 ```
 Remove USB Current Restriction 600 to 1600 ma:
      /boot/firmware/config.txt usb_max_current_enable=1
