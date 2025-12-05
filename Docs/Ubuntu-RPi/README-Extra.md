@@ -234,6 +234,8 @@ initstepslew 30 192.168.1.130
 #pool 2.ubuntu.pool.ntp.org iburst maxsources 2
 ```
 A shell script to see how your time sync is performing (and see CPU/GPU temperatures):
+
+**Note:** you need to `sudo usermod -a -G video $(whoami)` for GPU access
 ```
 #!/bin/bash
 set -x
