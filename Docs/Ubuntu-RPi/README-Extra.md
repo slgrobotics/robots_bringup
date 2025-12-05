@@ -45,7 +45,7 @@ Display power available on USB devices:
     lsusb -v 2>&- | grep -E 'Bus 00|MaxPower'
 
 See if maximum (5A) current is available from the power supply:
-    vcgencmd get_config usb_max_current_enable
+    sudo vcgencmd get_config usb_max_current_enable
 
 See if CPU has been throttled:
     vcgencmd get_throttled
