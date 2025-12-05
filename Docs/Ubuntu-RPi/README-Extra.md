@@ -19,7 +19,7 @@ If have a custom 5A Supply manually edit eeprom on a booted up RPi:
      sudo rpi-eeprom-config --edit > Add PSU_MAX_CURRENT=5000
 
 To determine Current Restriction Enable Status:
-     vcgencnd get_config usb_max_current_enable
+     sudo vcgencnd get_config usb_max_current_enable
 
 Boot without an SD Card which Displays a Diagnostic Screen.
 Observe the 5th line down,
