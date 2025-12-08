@@ -233,6 +233,42 @@ You must do _"colcon build"_ in _~/robot_ws_ every time you change anything. The
 
 **Note:** as of *October 2025* Plucky is retired. The code works, but will not be updated. Use [Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy) as a template from now on.
 
+## Test worlds
+
+By default, robots are spawned in the *test_robot_world*. Several additional worlds are available in the *assets/worlds* directory:
+- empty_world
+- sonoma_racetrack
+- warehouse
+- baylands
+
+(credits: [gazebosim.org](http://models.gazebosim.org/))
+
+To select a different world for a robot, use the *robot_world* launch argument. For example, uncomment and edit the corresponding line in:
+```
+    drive_sim_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(drive_sim_launch_path),
+        launch_arguments={
+            'namespace': namespace,
+            'use_sim_time': use_sim_time,
+            'robot_model': robot_model,
+            # 'robot_world': 'baylands', # see assets/worlds/*.sdf Default: 'test_robot_world'
+            # 'initial_x': '1.0',   # Default: 0
+            # 'initial_y': '1.0',   # Default: 0
+            # 'initial_z': '20.0',  # make sure robot starts above the ground, falls down gently
+            # 'initial_yaw': '1.57' # related to 0=East. Default: 0.333 radians - 30 degrees towards North
+        }.items(),
+        condition=IfCondition(use_sim_time)
+    )
+```
+The two outdoor worlds, *sonoma_racetrack* and *baylands*, are properly configured with georeferenced coordinates.
+This allows the RViz Aerial map to be correctly overlaid when NavSat-related nodes are active
+(for example, when running the Dragger robot with the [outdoors_loc_nav](https://github.com/slgrobotics/outdoors_loc_nav) package).
+
+Below is an example of how the Dragger robot appears in the *baylands* world.
+Note that *baylands* world model is massive, and its rendering in Gazebo may take ~1 minute or more.
+
+<img width="1377" height="1005" alt="Screenshot from 2025-12-07 13-00-46" src="https://github.com/user-attachments/assets/c5b32e76-2f6b-483c-a242-6c2e6dc2730c" />
+
 ## Running a physical robot
 
 **Note:** Consult physical robot pages:
