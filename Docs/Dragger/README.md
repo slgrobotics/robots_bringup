@@ -38,7 +38,7 @@ https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/ParkingSensor
 
 MPU9250 and GPS Drivers come standard with ROS
 
-### LD14 LIDAR setup
+### STL-19P or LD14 LIDAR setup
 
 Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/LD14.md
 
@@ -54,9 +54,12 @@ Dragger has three USB-to-Serial devices: Arduino "wheels/base", GPS and LIDAR.
 
 Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/PersistentUSB.md
 
-### MPU9250 Driver
+### IMU Driver
 
-See https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/MPU9250.md
+See one of:
+- BNO085 - https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/BNO085%20IMU.md
+- BNO055 - https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/BNO055%20IMU.md
+- MPU9250 - https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/MPU9250.md
 
 ### Battery monitoring package
 
@@ -67,15 +70,17 @@ Install as described [here](https://github.com/slgrobotics/robots_bringup/blob/m
 To allow GPS operation in sim install localization package:
 ```
 sudo apt install ros-${ROS_DISTRO}-robot-localization ros-${ROS_DISTRO}-imu-tools ros-${ROS_DISTRO}-slam-toolbox
-sudo apt install ros-${ROS_DISTRO}-navigation2 ros-${ROS_DISTRO}-nav2-bringup ros-${ROS_DISTRO}-rmw-cyclonedds-cpp
+sudo apt install ros-${ROS_DISTRO}-navigation2 ros-${ROS_DISTRO}-nav2-bringup
+```
+optionally, install Cyclone DDS:
+```
+sudo apt install  ros-${ROS_DISTRO}-rmw-cyclonedds-cpp
 ```
 More info - see "Useful Links" below.
 
 ### Differential Drive Control setup
 
 See https://github.com/slgrobotics/diffdrive_arduino (inspired by Articulated Robotics)
-
-See https://github.com/hiwad-aziz/ros2_mpu9250_driver
 
 #### Note: Arduino Mega 2560 should be on /dev/ttyACM0
 
@@ -93,6 +98,7 @@ cd ~/robot_ws/src
 git clone https://github.com/slgrobotics/diffdrive_arduino.git
 git clone https://github.com/joshnewans/serial.git
 git clone https://github.com/slgrobotics/articubot_one.git
+git clone https://github.com/slgrobotics/outdoors_loc_nav.git
 ```
 Dragger, Plucky and any other robot using _[diffdive_arduino](https://github.com/slgrobotics/diffdrive_arduino)_ package need a _BatteryStateBroadcaster_ component.
 In my code it is configured to use all 9 available State interfaces, not only "voltage" available in official distribution at this time.
