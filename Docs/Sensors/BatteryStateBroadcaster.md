@@ -54,7 +54,7 @@ Here are the steps:
 cd ~/robot_ws/src
 git clone https://github.com/slgrobotics/ros_battery_monitoring.git
 cd ~/robot_ws
-rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y
+rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y --skip-keys ament_python
 colcon build
 ```
 After this installation, the package compiled from sources will override the standard binary installation, after ```install/setup.bash``` is sourced.
