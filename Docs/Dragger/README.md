@@ -138,7 +138,7 @@ export ROS_DOMAIN_ID=0
 cd ~/robot_ws
 sudo rosdep init    # do it once, if you haven't done it before
 rosdep update
-rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y
+rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y --skip-keys ament_python
 colcon build
 ```
 **Note:** For _rosdep_ see https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Rosdep.html
