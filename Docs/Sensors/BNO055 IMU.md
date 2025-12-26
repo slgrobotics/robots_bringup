@@ -69,7 +69,7 @@ cd ~/robot_ws/src/
 git clone https://github.com/slgrobotics/bno055.git  # using my fork of the driver
 cd ~/robot_ws
 vi ~/robot_ws/src/bno055/bno055/params/bno055_params_i2c.yaml   # *** Here you may change default i2c_bus to 1 and check the address
-rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y
+rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y --skip-keys ament_python
 sudo pip3 install smbus2
 (sudo apt install python3-smbus2   # this might work instead)
 colcon build
