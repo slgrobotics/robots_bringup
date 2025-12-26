@@ -42,7 +42,7 @@ git clone https://github.com/slgrobotics/bno08x_ros2_driver.git
 ```
 install dependencies:
 ```
-cd ~/tmp_ws; rosdep install --from-paths src --ignore-src -r -y
+cd ~/tmp_ws; rosdep install --from-paths src --ignore-src -r -y --skip-keys ament_python
 ```
 adjust parameters:
 ```
