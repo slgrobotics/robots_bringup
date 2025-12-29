@@ -32,6 +32,10 @@ Here are some original docs to help understanding Nav2 architecture and operatio
 
 Nav2 source code resides on GitHub: https://github.com/ros-navigation/navigation2
 
+### Behavior Tree for Gesture and Face Detection Sensor
+
+See [this guide](https://github.com/slgrobotics/articubot_one/wiki/Behavior-Tree-for-Gesture-and-Face-Detection-Sensor).
+
 ### Using Groot2
 
 _Groot2_ is a visualization tool for Behavior Trees.
@@ -49,6 +53,11 @@ Groot2 GUI will come up and can be used now. Try opening the following file (or 
 /opt/ros/jazzy/share/nav2_bt_navigator/behavior_trees/navigate_through_poses_w_replanning_and_recovery.xml
 ```
 Refer to https://docs.nav2.org/tutorials/docs/using_groot.html for instructions
+
+### Using bt2img.py imaging tool
+
+Nav2 [source](https://github.com/ros-navigation/navigation2) on Github contains [bt2img.py](https://github.com/ros-navigation/navigation2/blob/main/tools/bt2img.py) imaging tool.
+See [this topic](https://github.com/ros-navigation/navigation2/issues/5811) for usage example.
 
 ### Behavior Trees and RViz2
 
