@@ -2,15 +2,13 @@
 
 ## ROS2 driver for ICM20948 IMU
 
-[ICM20948](https://www.ceva-ip.com/wp-content/uploads/BNO080_085-Datasheet.pdf) "...integrates a triaxial accelerometer,
-triaxial gyroscope, magnetometer and a 32-bit ARM® Cortex™-M0+ microcontroller running CEVA's SH-2
-firmware. The SH-2 includes the *MotionEngine™* software, which provides sophisticated signal processing
-algorithms to process sensor data and provide precise real-time 3D orientation, heading, calibrated acceleration
-and calibrated angular velocity..."
+SparkFun: "...The [ICM-20948](https://www.sparkfun.com/sparkfun-9dof-imu-breakout-icm-20948-qwiic.html) is an extremely low-powered, I2C and SPI-enabled 9-axis motion tracking device..."
+
+Also, GY-ICM20948 is available from [Amazon](https://www.amazon.com/5pcs-GY-ICM20948V2-ICM20948-9-DOF-Sensor/dp/B0G4MN81T4).
 
 ### Connections:
 
-Connect to Raspberry Pi  **I2C**: **SCL** - pin 05, **SDA** - pin 03
+Connect to Raspberry Pi  **I2C**: **SCL** - pin 05, **SDA** - pin 03 **VCC** - pin 01 (3.3V) **GND** - pin 06 or 09
 
 RPi GPIO header pinout: https://www.raspberrypi.com/documentation/computers/images/GPIO-Pinout-Diagram-2.png
 
@@ -20,38 +18,38 @@ Use ```i2cdetect -y 1``` to see **address 0x68** or **0x69**
 
 ### Info and tests
 
-Information: https://www.adafruit.com/product/4754
+Sensor information: https://www.sparkfun.com/sparkfun-9dof-imu-breakout-icm-20948-qwiic.html
 
-Datasheet: https://www.ceva-ip.com/wp-content/uploads/BNO080_085-Datasheet.pdf
+My fork of ROS2 driver code is here: https://github.com/slgrobotics/ros2_icm20948
 
-My fork of ROS2 driver code is here: https://github.com/slgrobotics/bno08x_ros2_driver
-(original [here](https://github.com/bnbhat/bno08x_ros2_driver))
-
-**Note:** the original driver does not publish orientation covariences (or any other),
-which causes extreme confusion of the EKF filter, which fuses wheels odometry and UMU.
-What happens and why it matters is explained [here](https://chatgpt.com/s/t_691b60f38e1c8191a0a309cbcf99e478).
-I created an issue [here](https://github.com/bnbhat/bno08x_ros2_driver/issues/16).
-
-### Trying it
+### Trying it (on Raspberry Pi)
 
 First, clone the repository:
 ```
 mkdir -p ~/tmp_ws/src
 cd ~/tmp_ws/src
-git clone https://github.com/slgrobotics/bno08x_ros2_driver.git
+git clone https://github.com/slgrobotics/ros2_icm20948
 ```
 install dependencies:
 ```
-cd ~/tmp_ws; rosdep install --from-paths src --ignore-src -r -y --skip-keys ament_python
+cd ~/tmp_ws; rosdep install --from-paths src --ignore-src -r -y
 ```
-adjust parameters:
+Make sure your device responds on address 0x68 or 0x69:
 ```
-vi ~/tmp_ws/src/bno08x_ros2_driver/config/bno085_i2c.yaml
-# Modify the following:
-#    i2c:
-#      enabled: true
-#      bus: "/dev/i2c-1"   <- bus "1" here
-#      address: "0x4B"     <- actual I2C address
+$ i2cdetect -y 1
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:                         -- -- -- -- -- -- -- -- 
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+60: -- -- -- -- -- -- -- -- 68 -- -- -- -- -- -- -- 
+70: -- -- -- -- -- -- -- --                         
+```
+adjust parameters, if needed:
+```
+vi ~/tmp_ws/src/ros2_icm20948/launch/icm20948_node_launch.py
 ```
 build it:
 ```
@@ -60,13 +58,23 @@ colcon build
 ```
 Run the sensor node:
 ```
-ros2 launch bno08x_driver bno085_i2c.launch.py
+$ colcon build; ros2 launch ros2_icm20948 icm20948_node_launch.py
+...
+[INFO] [icm20948_node-1]: process started with pid [26690]
+[icm20948_node-1] [INFO] [1767203297.007680023] [icm20948_node]: IP: ICM20948 IMU Sensor node has been started
+[icm20948_node-1] [INFO] [1767203297.008591936] [icm20948_node]:    i2c_addr: 0x68
+[icm20948_node-1] [INFO] [1767203297.009334793] [icm20948_node]:    frame_id: imu_link
+[icm20948_node-1] [INFO] [1767203297.010039020] [icm20948_node]:    pub_rate: 200 Hz
+[icm20948_node-1] [INFO] [1767203297.010877303] [icm20948_node]:    madgwick_beta: 0.08
+[icm20948_node-1] [INFO] [1767203297.011447215] [icm20948_node]:    madgwick_use_mag: True
+[icm20948_node-1] [INFO] [1767203300.978213904] [icm20948_node]:    accel_fsr=3 mul=0.0047884 m/s^2 per LSB, gyro_fsr=3 mul=0.00106423 rad/s per LSB
+[icm20948_node-1] [INFO] [1767203301.088602318] [icm20948_node]: OK: ICM20948 Node: init successful
 ```
-You should see the `/imu` topic in *rqt* and can display publishing rate:
+You should see the `/imu/data` topic in *rqt* and can display publishing rate:
 ```
-ros2 topic hz /imu
-average rate: 101.149
-	min: 0.000s max: 0.019s std dev: 0.00167s window: 102
+ros2 topic hz /imu/data
+average rate: 200.040
+	min: 0.005s max: 0.005s std dev: 0.00004s window: 202
 ```
 To see IMU orientation in RViz2, you need to:
 - bring up RViz2 (IMU is already setup in my RViz config):
@@ -75,15 +83,13 @@ ros2 launch articubot_one launch_rviz.launch.py use_sim_time:=false
 ```
 - run static transformer node to relate frames, raising *IMU frame* 1 meter up on the *map*:
 ```
-ros2 run tf2_ros static_transform_publisher 0 0 1 0 0 0 map bno085
+ros2 run tf2_ros static_transform_publisher 0 0 1 0 0 0 map imu_link
 ```
-Enable the *IMU checkbox* and adjust topic to show `/imu`:
+Enable the *IMU checkbox* and adjust topic to show `/imu_data`:
 
-<img width="1593" height="1088" alt="Screenshot from 2025-11-16 11-15-49" src="https://github.com/user-attachments/assets/405656a8-ca31-4bec-8351-71ad57412543" />
+<img width="1387" height="625" alt="Screenshot from 2025-12-31 12-46-55" src="https://github.com/user-attachments/assets/c2657cb1-19fb-4ea2-bad1-7b7a42067470" />
 
 ### Running ICM20948 node on the robot and tuning EKF filter
-
-Refer to [this file](https://github.com/slgrobotics/articubot_one/blob/main/robots/seggy/launch/seggy.sensors.launch.py) for real-life parameters for running ICM20948 node.
 
 EKF [filter](https://github.com/slgrobotics/articubot_one/blob/main/launch/ekf_odom.launch.py) fuses wheels odometry with IMU orientation data,
 deriving reliable orientation quaternion in turns and straight runs (topic *"odometry/local"*).
@@ -91,17 +97,6 @@ deriving reliable orientation quaternion in turns and straight runs (topic *"odo
 It is very important to have EKF filter tuned properly, as shown [here](https://github.com/slgrobotics/articubot_one/blob/main/robots/seggy/config/ekf_odom_params.yaml), for example.
 
 More EKF tuning tips [here](https://chatgpt.com/s/t_691b80a57e588191b1528a238588b87a).
-
-### Positioning sensor on the robot
-
-This is the orientation of the *Teyleten Robot GY-ICM20948* carrier board on my Seggy robot: the chip faces upward and the VCC pin toward the front.
-
-<img width="1285" height="1533" alt="Screenshot from 2025-11-16 18-53-23" src="https://github.com/user-attachments/assets/ae3ba654-4029-458f-ad4b-39567f0236bb" />
-
-This is the orientation of the *Teyleten Robot GY-ICM20948* carrier board on my Dragger robot: the chip faces upward and the VCC pin toward the front.
-
-<img width="1319" height="1654" alt="Screenshot from 2025-11-28 19-28-48" src="https://github.com/user-attachments/assets/de29ac72-b68f-481a-919f-650343a7b77b" />
-
 
 ### Real-time monitoring of IMU orientation data
 
@@ -122,7 +117,9 @@ ros2 run plotjuggler plotjuggler
 
 ### Useful Links
 
-Sensor available here: https://www.amazon.com/dp/B0CL26J81F
+Sensor available here: https://www.amazon.com/5pcs-GY-ICM20948V2-ICM20948-9-DOF-Sensor/dp/B0G4MN81T4 
+
+or from SparkFun: https://www.sparkfun.com/sparkfun-9dof-imu-breakout-icm-20948-qwiic.html
 
 ----------------
 
