@@ -58,7 +58,7 @@ colcon build
 ```
 Run the sensor node:
 ```
-$ colcon build; ros2 launch ros2_icm20948 icm20948_node_launch.py
+$ colcon build; source install/setup.bash; ros2 launch ros2_icm20948 icm20948_node_launch.py
 ...
 [INFO] [icm20948_node-1]: process started with pid [26690]
 [icm20948_node-1] [INFO] [1767203297.007680023] [icm20948_node]: IP: ICM20948 IMU Sensor node has been started
