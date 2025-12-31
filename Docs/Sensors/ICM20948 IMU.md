@@ -34,7 +34,7 @@ install dependencies:
 ```
 cd ~/tmp_ws; rosdep install --from-paths src --ignore-src -r -y
 ```
-Make sure your device responds on address 0x68 or 0x69:
+Make sure your device responds on address 0x69 (SparkFun) or 0x68 (generic GY-ICM20948):
 ```
 $ i2cdetect -y 1
      0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
