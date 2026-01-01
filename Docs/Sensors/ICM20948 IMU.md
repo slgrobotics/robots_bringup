@@ -20,6 +20,8 @@ Use ```i2cdetect -y 1``` to see **address 0x68** or **0x69**
 
 Sensor information: https://www.sparkfun.com/sparkfun-9dof-imu-breakout-icm-20948-qwiic.html
 
+Datasheet: https://invensense.tdk.com/wp-content/uploads/2016/06/DS-000189-ICM-20948-v1.3.pdf
+
 My fork of ROS2 driver code is here: https://github.com/slgrobotics/ros2_icm20948
 
 ### Trying it (on Raspberry Pi)
