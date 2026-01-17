@@ -1,6 +1,8 @@
 
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
+For my (now retired) zero-turn lawnmower project see [this guide](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Lawnmower/CrazedRhino.md)
+
 ### A perfect summer day is when the sun is shining, the breeze is blowing, the birds are singing, and the lawn mower is broken.
 
 <img width="1536" height="1024" alt="ChatGPT Image Sep 8, 2025, 12_23_28 PM" src="https://github.com/user-attachments/assets/afbfa7ed-81ef-4a9e-b931-8bec7c6ddef3" />
