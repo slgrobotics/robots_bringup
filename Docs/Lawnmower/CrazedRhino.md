@@ -1,10 +1,10 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
+For my current lawnmower project see [this guide](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Lawnmower/README.md)
+
 ![Screenshot from 2025-07-05 17-55-44](https://github.com/user-attachments/assets/c6746dc2-1af0-4046-aaf6-c68273ef6fa1)
 
 # Lawnmower Notes (Legacy, now retired Husqvarna Z254F)
-
-For my current lawnmower project see https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Lawnmower/README.md
 
 Lawnmower (a.k.a. *Crazed Rhino*) was an actual [Husqvarna Z254F](https://www.husqvarna.com/us/zero-turn-mowers/z254f-special-edition) zero-turn riding mower, robotized for, well, mowing my lawn.
 
