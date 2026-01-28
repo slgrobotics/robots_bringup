@@ -6,6 +6,11 @@ Ubuntu 24.04 introduced breaking changes in the way the video stream is handled 
 So, [CSI-connected Cameras](https://www.raspberrypi.com/documentation/accessories/camera.html) on Raspberry Pi 5 don't work anymore under Ubuntu 24.04. 
 See our Club discussion [here](https://groups.google.com/g/hbrobotics/c/4VITfijo2cM/m/80LidlKAAgAJ).
 
+Here is some AI-generated wisdom:
+- https://chatgpt.com/s/t_697a4d585e788191ab4052aff273c2f4 - a cleaned-up final version suitable for docs
+- https://chatgpt.com/s/t_697a4e7dcfb881918a3758fc7c945524 - a diagram-style explanation (pipeline view)
+- https://chatgpt.com/s/t_697a530ef6488191a25bf54696619309 - a ROS-focused version
+
 Fortunately, Marco Walther did the research and all the hard work of porting the latest changes in [_RPi OS libcamera_ code](https://github.com/raspberrypi/libcamera) to Ubuntu 24.04.
 He created a set of binaries, which can be easily installed on a Raspberry Pi under Ubuntu 24.04.
 
