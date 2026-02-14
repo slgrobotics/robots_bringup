@@ -81,7 +81,7 @@ colcon build; source install/setup.bash; ros2 launch bno055 bno055.launch.py
 ```
 Refer to [this file](https://github.com/slgrobotics/articubot_one/blob/main/robots/turtle/launch/turtle.sensors.launch.py) for real-life parameters for running BNO055 node.
 
-**Tip:** look at `imu/calib_status` topic. BNO085 self-calibrates ("FMC feature") - but if calibration status is not "3" (good), you may want to rotate it a bit to let it tune up.
+**Tip:** look at `imu/calib_status` topic. BNO055 self-calibrates ("FMC feature") - but if calibration status is not "3" (good), you may want to rotate it a bit to let it tune up.
 
 ### PlotJuggler for monitoring data
 
