@@ -14,7 +14,7 @@ _Optional:_ Consider 3 KOhm to 6.8 KOhm pull-up resistors from SDA and SCL to 3.
 
 Use ```i2cdetect -y 1``` to see **address 0x28**
 
-**Note:** Adafruit sensor will show 0x28, [GY-BNO055 clone](https://www.amazon.com/dp/B0D47G672B) - 0x29 (with both jumpers closed). Match that in Node startup code.
+**Note:** Adafruit sensor will show 0x28, [GY-BNO055 clone](https://www.amazon.com/dp/B0D47G672B) - 0x29 (with both jumpers closed). These addresses are used in launch files.
 
 ### Info and tests:
 
@@ -51,16 +51,16 @@ I submitted a [report](https://github.com/flynneva/bno055/issues/80) to the orig
 
 Here is how Adafruit BNO055 carrier board is oriented on Create 1 [Turtlebot](https://photos.app.goo.gl/ED3YbmNRm4kKt3V5A) (view from the rear):
 
-![Screenshot from 2025-05-27 21-48-13](https://github.com/user-attachments/assets/861db7a1-cb60-4215-b6bc-52361d92a453)
+![BNO055_Adafruit_turtle](https://github.com/user-attachments/assets/70359a73-bc3f-421e-9e63-e41263150449)
 
-If you are using a [generic carrier board](https://www.amazon.com/dp/B0D47G672B), X axis (as printed on the PCB) should point backwards, and Y - to the right of the robot.
+If you are using a [generic carrier board](https://www.amazon.com/dp/B0D47G672B), X axis (as printed on the PCB) should point forward, and Y - to the left of the robot.
 Note that the sensor's chip is oriented identically in both cases. 
 
-The seemingly "backwards" orientation of either sensors is due to the launch parameter setting, and works specifically with this ROS2 driver:
+The proper orientation of either sensors is due to the launch parameter setting, and works specifically with this ROS2 driver:
 ```
 'placement_axis_remap': 'P1', # P1 - default, ENU. See Bosch BNO055 datasheet section "Axis Remap"
 ```
-<img width="1290" height="1609" alt="Screenshot from 2025-11-08 10-22-55" src="https://github.com/user-attachments/assets/0f5e411c-28d9-4dff-ad1a-65bbfa70b104" />
+![BNO055_generic_turtle](https://github.com/user-attachments/assets/1b200a3c-f9cd-4b62-b2b8-e1b7a68ff450)
 
 ### Installation
 ```
@@ -68,18 +68,22 @@ mkdir -p ~/robot_ws/src
 cd ~/robot_ws/src/
 git clone https://github.com/slgrobotics/bno055.git  # using my fork of the driver
 cd ~/robot_ws
-vi ~/robot_ws/src/bno055/bno055/params/bno055_params_i2c.yaml   # *** Here you may change default i2c_bus to 1 and check the address
+# *** Look into ~/robot_ws/src/bno055/launch ~/robot_ws/src/bno055/bno055/params folders
+# *** here you may change default i2c_bus to 1 and check the addresses and other parameters
 rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y --skip-keys ament_python
-sudo pip3 install smbus2
-(sudo apt install python3-smbus2   # this might work instead)
+sudo apt install python3-smbus2
 colcon build
 ``` 
 Try running it, see IMU messages in rqt:
 ``` 
-source ~/robot_ws/install/setup.bash
-ros2 run bno055 bno055  --ros-args --params-file ~/robot_ws/src/bno055/bno055/params/bno055_params_i2c.yaml
+cd ~/robot_ws
+colcon build; source install/setup.bash; ros2 launch bno055 bno055.launch.py
 ```
-Refer to [this file](https://github.com/slgrobotics/articubot_one/blob/main/robots/turtle/launch/turtle.launch.py) for real-life parameters for running BNO055 node.
+Refer to [this file](https://github.com/slgrobotics/articubot_one/blob/main/robots/turtle/launch/turtle.sensors.launch.py) for real-life parameters for running BNO055 node.
+
+**Tip:** look at `imu/calib_status` topic. BNO085 self-calibrates ("FMC feature") - but if calibration status is not "3" (good), you may want to rotate it a bit to let it tune up.
+
+### PlotJuggler for monitoring data
 
 Install [PlotJuggler](https://plotjuggler.io) to monitor IMU data:
 ```
