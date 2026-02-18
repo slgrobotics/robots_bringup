@@ -1,5 +1,7 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
+**Note:** please review [Tips and Lessons](https://github.com/slgrobotics/articubot_one/wiki/IMUs-%E2%80%90-Tips-and-Lessons) for IMU use in ROS2
+
 ## ROS2 driver for ICM20948 IMU
 
 SparkFun: "...The [ICM-20948](https://www.sparkfun.com/sparkfun-9dof-imu-breakout-icm-20948-qwiic.html) is an extremely low-powered, I2C and SPI-enabled 9-axis motion tracking device..."
@@ -23,6 +25,9 @@ Sensor information: https://www.sparkfun.com/sparkfun-9dof-imu-breakout-icm-2094
 Datasheet: https://invensense.tdk.com/wp-content/uploads/2016/06/DS-000189-ICM-20948-v1.3.pdf
 
 My fork of ROS2 driver code is here: https://github.com/slgrobotics/ros2_icm20948
+
+**Note:** as the ROS2 driver cannot use DMP, calibration is neither automatic nor optional.
+Use calibration [script](https://github.com/slgrobotics/ros2_icm20948/blob/master/tests/calibrate_mag.py) and set related parameters in the launch file.
 
 ### Trying it (on Raspberry Pi)
 
