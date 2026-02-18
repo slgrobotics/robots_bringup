@@ -1,5 +1,7 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
+**Note:** please review [Tips and Lessons](https://github.com/slgrobotics/articubot_one/wiki/IMUs-%E2%80%90-Tips-and-Lessons) for IMU use in ROS2
+
 ## ROS2 driver for BNO085 IMU
 
 [BNO085](https://www.ceva-ip.com/wp-content/uploads/BNO080_085-Datasheet.pdf) "...integrates a triaxial accelerometer,
