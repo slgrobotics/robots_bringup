@@ -1,5 +1,7 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
+**Note:** please review [Tips and Lessons](https://github.com/slgrobotics/articubot_one/wiki/IMUs-%E2%80%90-Tips-and-Lessons) for IMU use in ROS2
+
 ## ROS2 driver for BNO055 IMU
 
 "Bosch BNO055 is a 9-DOF Absolute Orientation IMU Fusion sensor module combining accelerometer, gyroscope, and magnetometer data for precise 9 degrees of freedom measurements."
