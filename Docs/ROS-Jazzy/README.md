@@ -8,7 +8,7 @@ Here we set up a clean **Desktop PC** to become a ROS playground machine and a G
 
 For the robot's on-board **Raspberry Pi** setup see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi
 
-![magic_word](https://github.com/user-attachments/assets/3fe68730-c8a9-4779-809f-ecea9ec824e2)
+<img src="https://github.com/user-attachments/assets/3fe68730-c8a9-4779-809f-ecea9ec824e2" width="320">
 
 ## Install Ubuntu 24.04 LTS ("Noble")
 
