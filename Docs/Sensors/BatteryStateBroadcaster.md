@@ -2,6 +2,8 @@
 
 ## BatteryStateBroadcaster setup
 
+A [video](https://youtu.be/iWyUaSFRExg) by Josh Newans explains the basics of battery monitoring.
+
 There are two ways of publishing _BatteryState_ message:
 1. Have a node (ROS or, usually, MicroROS) communicate to robot hardware and publish [_BatteryState_ message](https://docs.ros.org/en/jazzy/p/sensor_msgs/msg/BatteryState.html) directly
 
