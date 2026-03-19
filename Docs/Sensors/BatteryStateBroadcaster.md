@@ -93,7 +93,9 @@ rviz_overlay = Node(
 ```
 Then you can just run RViz2 and "Add" a panel "By Topic" (*/battery_display_text->TextOverlay*) or "By Type" (*rviz_2d_overlay_plugins->TextOverlay*)
 
-The overlay should appear on top-left side of the display by default.
+The overlay should appear on top-left side of the display by default:
+
+<img width="1138" height="428" alt="Screenshot from 2026-01-14 10-01-47" src="https://github.com/user-attachments/assets/9a29d14e-11be-4d28-a5b7-2840f7a7908b" />
 
 **Note:** Text font, size and other parameters are configurable if you install my version.
 
