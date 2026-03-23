@@ -19,13 +19,16 @@ His work is here: https://launchpad.net/~marco-sonic/+archive/ubuntu/rasppios
 I followed Marco's directions (and his [personal advice](https://groups.google.com/g/hbrobotics/c/d2Ir8ifMFhA), thanks!) to get my camera working.
 
 Here is my setup:
--  "8Mp Camera V5": https://www.amazon.com/dp/B0DLGMT7XN  (originally "[Arducam](https://www.arducam.com/product/8mp-imx219-camera-module-for-raspberry-pi-b0394/)", has a Sony IMX219 sensor)
+-  Mono: "8Mp Camera V5": https://www.amazon.com/dp/B0DLGMT7XN  (originally "[Arducam](https://www.arducam.com/product/8mp-imx219-camera-module-for-raspberry-pi-b0394/)", has a Sony IMX219 sensor)
+-  For [Stereo](https://github.com/slgrobotics/ros2_jetson_nano_inference/blob/main/README_STEREO.md) vision: dual [Arducam](https://www.amazon.com/dp/B09VSRH14M) cameras, 8MP IMX219, 105° FOV.
 -  Raspberry Pi 5 8GB
 -  Ubuntu 24.04 _Server_, ROS2 Jazzy _Base_ ("headless" configuration, no GUI)
+-  Waveshare binocular camera [modules](https://www.amazon.com/IMX219-83-Stereo-Camera-Compatible-Applications/dp/B088RFT412) do not come with RPi5 cables, and there are no such cables on the market. Research before buying.
 
 **Note:**
 - I plugged the cable in "CAM/DISP 1" port - you might use port 0 instead. I haven't tried.
-- [Amazon](https://www.amazon.com/dp/B0DLGMT7XN) has good image showing proper orientation of cable.
+- Dual cameras use both ports.
+- [Amazon](https://www.amazon.com/dp/B0DLGMT7XN) has good image showing proper orientation of cable (contacts toward Ethernet connector).
 - Make sure you use cable "locks" properly and secure the cable 
 
 ![arducam-rpi](https://github.com/user-attachments/assets/e03df469-85ec-4ac9-98a2-d751ef0daf2f)
@@ -47,6 +50,13 @@ The last line can explicitly specify port - _cam0_ or _cam1_ ("CAM/DISP 1" port 
 ```
 dtoverlay=imx219,cam0
 ```
+For dual [Arducam cameras](https://www.amazon.com/dp/B09VSRH14M), for example:
+```
+[all]
+camera_auto_detect=0
+dtoverlay=imx219,cam0
+dtoverlay=imx219,cam1
+```
 
 **Important Warning:** 
 - The contents of [Marco's Personal Package Archives](https://launchpad.net/~marco-sonic/+archive/ubuntu/rasppios) are _not checked or monitored_. You install software from them **at your own risk**. 
@@ -66,6 +76,10 @@ info: The user `ros' is already a member of `video'.
 Reboot
 
 ## Basic testing
+
+**Note:**
+- Some commands from *libcamera-tools* package (`cam`, `libcamera-hello`, `libcamera-jpeg` etc.) will not be installed on Ubuntu 24.04 *Server* edition. They work on *Desktop* only.
+- To see which edition you have, run `dpkg -l ubuntu-server && dpkg -l ubuntu-desktop`
 
 After installation you should see _/dev/video*_ and _/dev/media*_ descriptors: ```v4l2-ctl --list-devices```
 
@@ -132,7 +146,7 @@ Available cameras
     SyncMode : [0..2]
 ```
 
-If you have a Ubuntu with GUI ("Desktop" edition) - 
+If you have a Ubuntu with GUI ("*Desktop*" edition) - 
 try [GNOME Snapshot](https://discourse.ubuntu.com/t/whats-happening-in-noble-repositories/43729/40) or _Cheese_.
 
 **Note:** _Cheese_ has been removed in Ubuntu 24.04 - replaced by _gnome-snapshot_. It can be still installed via _snap_.
@@ -216,9 +230,12 @@ Fortunately, OpenCV can be built with [GStreamer](https://gstreamer.freedesktop.
 
 First, we need to install required components:
 ```
-sudo apt install gstreamer1.0-tools gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad
+sudo apt install gstreamer1.0-tools gstreamer1.0-plugins-base \
+ gstreamer1.0-plugins-good gstreamer1.0-plugins-base-apps \
+ gstreamer1.0-libcamera
+
+# gstreamer1.0-plugins-bad
 # I am not sure that "gstreamer1.0-plugins-bad" is needed here
-sudo apt install gstreamer1.0-libcamera
 ```
 Now you can see if your camera shows up properly in GStreamer queries:
 ```
@@ -335,6 +352,183 @@ ros@plucky:~/cam_ws$ sudo apt remove libcamera0.2 ros-jazzy-libcamera
 There's a [Global Shutter Camera](https://www.raspberrypi.com/products/raspberry-pi-global-shutter-camera/) available for Raspberry Pi.
 It is intended for applications where standard cameras "*rolling shutter*" [distortion](https://en.wikipedia.org/wiki/Rolling_shutter) is undesirable.
 I have no personal experience with these and don't know if they will work with the setup described here.
+
+## Additional Python tests - *libcamera*, *Picamera2*, dual cameras
+
+**ros@turtle:~/rpicam$ vi test_detect_cam.py**
+```
+import libcamera
+
+# 1. Access the singleton instance (do not use CameraManager())
+cm = libcamera.CameraManager.singleton()
+
+# 2. Check for cameras
+cameras = cm.cameras
+print(f"Detected {len(cameras)} camera(s):")
+
+if not cameras:
+    print("No cameras found. Verify your overlays in config.txt.")
+else:
+    for i, cam in enumerate(cameras):
+        # Access properties like the Model name
+        # model = cam.properties.get(libcamera.properties.Model)
+        print(f"  [{i}]: ID: {cam.id}")
+
+# Note: In the singleton version, cm.start() and cm.stop() 
+# are typically handled automatically by the library.
+```
+
+**ros@turtle:~/rpicam$ python3 test_detect_cam.py**
+```
+[0:06:39.697667641] [1474]  INFO Camera camera_manager.cpp:340 libcamera v0.6.0+rpt20251202
+[0:06:39.740094012] [1477]  INFO RPI pisp.cpp:720 libpisp version 1.3.0
+[0:06:39.756280645] [1477]  INFO IPAProxy ipa_proxy.cpp:180 Using tuning file /usr/share/libcamera/ipa/rpi/pisp/imx219.json
+[0:06:39.768815909] [1477]  INFO Camera camera_manager.cpp:223 Adding camera '/base/axi/pcie@120000/rp1/i2c@88000/imx219@10' for pipeline handler rpi/pisp
+[0:06:39.768849187] [1477]  INFO RPI pisp.cpp:1181 Registered camera /base/axi/pcie@120000/rp1/i2c@88000/imx219@10 to CFE device /dev/media2 and ISP device /dev/media0 using PiSP variant BCM2712_D0
+[0:06:39.768916984] [1477]  INFO RPI pisp.cpp:720 libpisp version 1.3.0
+[0:06:39.770886456] [1477]  INFO IPAProxy ipa_proxy.cpp:180 Using tuning file /usr/share/libcamera/ipa/rpi/pisp/imx219.json
+[0:06:39.779156274] [1477]  INFO Camera camera_manager.cpp:223 Adding camera '/base/axi/pcie@120000/rp1/i2c@80000/imx219@10' for pipeline handler rpi/pisp
+[0:06:39.779186848] [1477]  INFO RPI pisp.cpp:1181 Registered camera /base/axi/pcie@120000/rp1/i2c@80000/imx219@10 to CFE device /dev/media3 and ISP device /dev/media1 using PiSP variant BCM2712_D0
+Detected 2 camera(s):
+  [0]: ID: /base/axi/pcie@120000/rp1/i2c@88000/imx219@10
+  [1]: ID: /base/axi/pcie@120000/rp1/i2c@80000/imx219@10
+```
+
+**ros@turtle:~/rpicam$ vi test_cam.py** 
+```
+import time
+from picamera2 import Picamera2
+
+# 1. Initialize using plain integer indices
+# On Pi 5, these correspond to the two CSI ports
+try:
+    print("Initializing Camera 0...")
+    picam0 = Picamera2(0) 
+    
+    print("Initializing Camera 1...")
+    picam1 = Picamera2(1)
+
+    # 2. Configure for still capture
+    picam0.configure("main")
+    picam1.configure("main")
+
+    # 3. Start the cameras
+    print("Starting cameras...")
+    picam0.start()
+    picam1.start()
+
+    # Wait for exposure to stabilize
+    time.sleep(2)
+
+    # 4. Capture images
+    print("Capturing stereo pair...")
+    picam0.capture_file("stereo_left.jpg")
+    picam1.capture_file("stereo_right.jpg")
+
+    # 5. Clean up
+    picam0.stop()
+    picam1.stop()
+    picam0.close()
+    picam1.close()
+    print("Success! Check stereo_left.jpg and stereo_right.jpg")
+
+except Exception as e:
+    print(f"Failed to initialize cameras: {e}")
+```
+
+**ros@turtle:~/rpicam$ python3 test_cam.py** 
+```
+Initializing Camera 0...
+[0:12:03.813358758] [1553]  INFO Camera camera_manager.cpp:340 libcamera v0.6.0+rpt20251202
+[0:12:03.839876445] [1556]  INFO RPI pisp.cpp:720 libpisp version 1.3.0
+[0:12:03.842412743] [1556]  INFO IPAProxy ipa_proxy.cpp:180 Using tuning file /usr/share/libcamera/ipa/rpi/pisp/imx219.json
+[0:12:03.851975243] [1556]  INFO Camera camera_manager.cpp:223 Adding camera '/base/axi/pcie@120000/rp1/i2c@88000/imx219@10' for pipeline handler rpi/pisp
+[0:12:03.852019262] [1556]  INFO RPI pisp.cpp:1181 Registered camera /base/axi/pcie@120000/rp1/i2c@88000/imx219@10 to CFE device /dev/media2 and ISP device /dev/media0 using PiSP variant BCM2712_D0
+[0:12:03.852109263] [1556]  INFO RPI pisp.cpp:720 libpisp version 1.3.0
+[0:12:03.854038463] [1556]  INFO IPAProxy ipa_proxy.cpp:180 Using tuning file /usr/share/libcamera/ipa/rpi/pisp/imx219.json
+[0:12:03.861998932] [1556]  INFO Camera camera_manager.cpp:223 Adding camera '/base/axi/pcie@120000/rp1/i2c@80000/imx219@10' for pipeline handler rpi/pisp
+[0:12:03.862052581] [1556]  INFO RPI pisp.cpp:1181 Registered camera /base/axi/pcie@120000/rp1/i2c@80000/imx219@10 to CFE device /dev/media3 and ISP device /dev/media1 using PiSP variant BCM2712_D0
+Initializing Camera 1...
+Invalid name for `camera_config` given, assuming default 'preview' configuration
+[0:12:03.867261695] [1556]  WARN V4L2 v4l2_pixelformat.cpp:346 Unsupported V4L2 pixel format RPBP
+[0:12:03.867798662] [1553]  INFO Camera camera.cpp:1215 configuring streams: (0) 640x480-XBGR8888/sRGB (1) 640x480-BGGR_PISP_COMP1/RAW
+[0:12:03.867924978] [1556]  INFO RPI pisp.cpp:1485 Sensor: /base/axi/pcie@120000/rp1/i2c@88000/imx219@10 - Selected sensor format: 640x480-SBGGR10_1X10/RAW - Selected CFE format: 640x480-PC1B/RAW
+Invalid name for `camera_config` given, assuming default 'preview' configuration
+[0:12:03.967217547] [1556]  WARN V4L2 v4l2_pixelformat.cpp:346 Unsupported V4L2 pixel format RPBP
+[0:12:03.967961441] [1553]  INFO Camera camera.cpp:1215 configuring streams: (0) 640x480-XBGR8888/sRGB (1) 640x480-BGGR_PISP_COMP1/RAW
+[0:12:03.968144073] [1556]  INFO RPI pisp.cpp:1485 Sensor: /base/axi/pcie@120000/rp1/i2c@80000/imx219@10 - Selected sensor format: 640x480-SBGGR10_1X10/RAW - Selected CFE format: 640x480-PC1B/RAW
+Starting cameras...
+Capturing stereo pair...
+Success! Check stereo_left.jpg and stereo_right.jpg
+```
+
+**ros@turtle:~/rpicam$ vi test_two_cam.py**
+```
+import time
+from picamera2 import Picamera2
+
+# 1. Initialize using plain integer indices
+# On Pi 5, these correspond to the two CSI ports
+try:
+    print("Initializing Camera 0...")
+    picam0 = Picamera2(0) 
+    
+    print("Initializing Camera 1...")
+    picam1 = Picamera2(1)
+
+    # 2. Configure for still capture
+    picam0.configure("main")
+    picam1.configure("main")
+
+    # 3. Start the cameras
+    print("Starting cameras...")
+    picam0.start()
+    picam1.start()
+
+    # Wait for exposure to stabilize
+    time.sleep(2)
+
+    # 4. Capture images
+    print("Capturing stereo pair...")
+    picam0.capture_file("stereo_left.jpg")
+    picam1.capture_file("stereo_right.jpg")
+
+    # 5. Clean up
+    picam0.stop()
+    picam1.stop()
+    picam0.close()
+    picam1.close()
+    print("Success! Check stereo_left.jpg and stereo_right.jpg")
+
+except Exception as e:
+    print(f"Failed to initialize cameras: {e}")
+```
+
+**ros@turtle:~/rpicam$ python3 test_two_cam.py**
+```
+Initializing Camera 0...
+[13:24:17.619565588] [9753]  INFO Camera camera_manager.cpp:340 libcamera v0.6.0+rpt20251202
+[13:24:17.647434553] [9756]  INFO RPI pisp.cpp:720 libpisp version 1.3.0
+[13:24:17.649974924] [9756]  INFO IPAProxy ipa_proxy.cpp:180 Using tuning file /usr/share/libcamera/ipa/rpi/pisp/imx219.json
+[13:24:17.659574273] [9756]  INFO Camera camera_manager.cpp:223 Adding camera '/base/axi/pcie@120000/rp1/i2c@88000/imx219@10' for pipeline handler rpi/pisp
+[13:24:17.659607940] [9756]  INFO RPI pisp.cpp:1181 Registered camera /base/axi/pcie@120000/rp1/i2c@88000/imx219@10 to CFE device /dev/media2 and ISP device /dev/media0 using PiSP variant BCM2712_D0
+[13:24:17.659684940] [9756]  INFO RPI pisp.cpp:720 libpisp version 1.3.0
+[13:24:17.661440064] [9756]  INFO IPAProxy ipa_proxy.cpp:180 Using tuning file /usr/share/libcamera/ipa/rpi/pisp/imx219.json
+[13:24:17.669401104] [9756]  INFO Camera camera_manager.cpp:223 Adding camera '/base/axi/pcie@120000/rp1/i2c@80000/imx219@10' for pipeline handler rpi/pisp
+[13:24:17.669431901] [9756]  INFO RPI pisp.cpp:1181 Registered camera /base/axi/pcie@120000/rp1/i2c@80000/imx219@10 to CFE device /dev/media3 and ISP device /dev/media1 using PiSP variant BCM2712_D0
+Initializing Camera 1...
+Invalid name for `camera_config` given, assuming default 'preview' configuration
+[13:24:17.674696829] [9756]  WARN V4L2 v4l2_pixelformat.cpp:346 Unsupported V4L2 pixel format RPBP
+[13:24:17.675241277] [9753]  INFO Camera camera.cpp:1215 configuring streams: (0) 640x480-XBGR8888/sRGB (1) 640x480-BGGR_PISP_COMP1/RAW
+[13:24:17.675372537] [9756]  INFO RPI pisp.cpp:1485 Sensor: /base/axi/pcie@120000/rp1/i2c@88000/imx219@10 - Selected sensor format: 640x480-SBGGR10_1X10/RAW - Selected CFE format: 640x480-PC1B/RAW
+Invalid name for `camera_config` given, assuming default 'preview' configuration
+[13:24:17.763204334] [9756]  WARN V4L2 v4l2_pixelformat.cpp:346 Unsupported V4L2 pixel format RPBP
+[13:24:17.763951469] [9753]  INFO Camera camera.cpp:1215 configuring streams: (0) 640x480-XBGR8888/sRGB (1) 640x480-BGGR_PISP_COMP1/RAW
+[13:24:17.764136137] [9756]  INFO RPI pisp.cpp:1485 Sensor: /base/axi/pcie@120000/rp1/i2c@80000/imx219@10 - Selected sensor format: 640x480-SBGGR10_1X10/RAW - Selected CFE format: 640x480-PC1B/RAW
+Starting cameras...
+Capturing stereo pair...
+Success! Check stereo_left.jpg and stereo_right.jpg
+```
 
 ## Useful links
 
