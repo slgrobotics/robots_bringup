@@ -62,12 +62,43 @@ The "rotor" part is a set of magnets on a rotating cup. This is unlikely to be p
 
 Set up your Ubuntu 24.04 Desktop machine for [PX4 development](https://docs.px4.io/main/en/dev_setup/getting_started.html)
 
-Clone the [repository](https://github.com/slgrobotics/PX4-Autopilot/tree/dev) - use *dev* branch:
+Clone the [repository](https://github.com/slgrobotics/PX4-Autopilot/tree/dev) - *dev* branch is default:
 ```
 mkdir ~/lawnmow
 cd ~/lawnmow
-git clone https://github.com/slgrobotics/PX4-Autopilot.git --recursive --single-branch -b dev
+git clone https://github.com/slgrobotics/PX4-Autopilot.git --recursive
+# Adding and fetching upstream adds tags:
+git remote add upstream https://github.com/PX4/PX4-Autopilot.git
+git fetch upstream
 ```
+Install prerequisites:
+```
+sudo apt install install python3-kconfiglib
+pip3 install pyros-genmsg  --break-system-packages
+```
+**Note:** the `make ...` command depends on GIT tags bein available. Here are some helpful commands:
+```
+git describe
+v1.17.0-alpha1-1860-gdfd6718986
+
+# list all tags:
+git tag -n
+v1.0.0-rc1      PX4 Flight Stack Release v1.0.0 RC1
+v1.0.0-rc2      Second release candidate for 1.0.0 release
+v1.0.0-rc3      Third release candidate for 1.0.0 release
+v1.0.0-rc4      Travis CI: Fix YML format
+v1.0.0beta1     Merge pull request #2439 from PX4/idle_fw
+
+# Git only can see "non-lightweight" tags:
+git ls-remote --tags --sort='-v:refname' https://github.com/PX4/PX4-Autopilot.git | head -n 1
+0b6e4687defb353a34201951809efd3f0040a9ba	refs/tags/v1.17.0-rc2^{}
+
+git fetch --tags
+
+# Set a "lightweight" tag:
+git tag v1.17.0-alpha1
+```
+If `git describe` does not print a tag, you need to set one for the `make` to succeed.
 
 #### Run simulation in Gazebo:
 ```
@@ -100,6 +131,34 @@ Now you can build the Lawnmower executable tree (see _~/lawnmow/PX4-Autopilot/bu
 make emlid_navio2_arm64
   or, with upload:
 make emlid_navio2_arm64 upload
+```
+
+**Note:** the `upload` command needs to resolve network name `navio`. Add it to your `/etc/hosts` file:
+```
+# your lawnmower's Raspberry Pi IP address:
+192.168.1.123 navio
+```
+Then:
+```
+...:~/lawnmow/PX4-Autopilot$ make emlid_navio2_arm64 upload
+[  0%] Built target events_header
+...
+[100%] Built target px4
+[100%] uploading px4
+The authenticity of host 'navio (...)' can't be established.
+ED25519 key fingerprint is SHA256:...
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'navio' (ED25519) to the list of known hosts.
+pi@navio's password: ...
+sending incremental file list
+pilotpi_fw.config
+          1.33K 100%  612.30kB/s    0:00:00 (xfr#1, to-chk=214/215)
+pilotpi_mc.config
+          1.30K 100%    1.24MB/s    0:00:00 (xfr#2, to-chk=213/215)
+...
+etc/scripts/update_wrk.sh
+          1.02K 100%    1.80kB/s    0:00:00 (xfr#105, to-chk=0/215)
+[100%] Built target upload
 ```
 
 #### On the robot's Raspberry Pi:
