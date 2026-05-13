@@ -5,7 +5,7 @@ For my (now retired) zero-turn lawnmower project see [this guide](https://github
 
 ### A perfect summer day is when the sun is shining, the breeze is blowing, the birds are singing, and the lawn mower is broken.
 
-<img width="1536" height="1024" alt="ChatGPT Image Sep 8, 2025, 12_23_28 PM" src="https://github.com/user-attachments/assets/afbfa7ed-81ef-4a9e-b931-8bec7c6ddef3" />
+<img width="768" alt="ChatGPT Image Sep 8, 2025, 12_23_28 PM" src="https://github.com/user-attachments/assets/afbfa7ed-81ef-4a9e-b931-8bec7c6ddef3" />
 
 # Grassroamer Notes
 
@@ -13,7 +13,9 @@ For my (now retired) zero-turn lawnmower project see [this guide](https://github
 [Walmart](https://www.walmart.com/ip/PowerSmart-Gas-Lawn-Mower-21-inches-144cc-2-in-1-Walk-Behind-Side-Discharge-Push-Lawn-Mower/475461862) 
 PowerSmart Gas Lawn Mower, 21 inches 144cc, robotized for, well, mowing my lawn.
 
-It is running my version (fork) of [PX4 Autopilot](https://docs.px4.io/) code. I control it using [QGroundControl app](https://qgroundcontrol.com/) on a desktop machine.
+It is running my version (fork) of [PX4 Autopilot](https://docs.px4.io/) code.
+I control it using [QGroundControl app](https://qgroundcontrol.com/) on a desktop machine.
+I use [Path Planner](https://github.com/slgrobotics/path_planner) and related utilities for creating QGC missions.
 
 Code is [here](https://github.com/slgrobotics/PX4-Autopilot/tree/dev)
 
@@ -49,33 +51,46 @@ Grassroamer is powered by a 100AH LiFrPO4 13.4 V (4 cell) [battery](https://www.
 
 If using a "_self-propelled_" lawnmower, it is possible to power wheels and electronics with an alternator, driven by the belt:
 
-<img width="2117" height="960" alt="Screenshot from 2025-09-17 09-59-44" src="https://github.com/user-attachments/assets/12ce69de-cb28-46ce-9242-91d7ff73a370" />
+<img width="1058" alt="Screenshot from 2025-09-17 09-59-44" src="https://github.com/user-attachments/assets/12ce69de-cb28-46ce-9242-91d7ff73a370" />
 
 In this case a much smaller battery would suffice.
 
 **Note:** Larger engines use an integrated _magneto+generator+regulator_ "stator" hardware with varying power output.
 The "rotor" part is a set of magnets on a rotating cup. This is unlikely to be part of a small lawnmower.
 
-<img width="937" height="878" alt="Screenshot from 2025-09-18 11-29-16" src="https://github.com/user-attachments/assets/524fcd95-fa11-490c-b414-430b436e8f0f" />
+<img width="468" alt="Screenshot from 2025-09-18 11-29-16" src="https://github.com/user-attachments/assets/524fcd95-fa11-490c-b414-430b436e8f0f" />
 
 ## Build and Run Instructions
 
-Set up your Ubuntu 24.04 Desktop machine for [PX4 development](https://docs.px4.io/main/en/dev_setup/getting_started.html)
+Set up your Ubuntu 24.04 or 26.04 Desktop machine for [PX4 development](https://docs.px4.io/main/en/dev_setup/getting_started.html)
+
+> **Tip:** For QGroundControl on Ubuntu 26.04
+> ```
+> sudo usermod -aG dialout "$(id -un)"
+> sudo apt install libopengl0    # required for stable builds, not daily
+> ```
 
 Clone the [repository](https://github.com/slgrobotics/PX4-Autopilot/tree/dev) - *dev* branch is default:
 ```
 mkdir ~/lawnmow
 cd ~/lawnmow
 git clone https://github.com/slgrobotics/PX4-Autopilot.git --recursive
+cd ~/lawnmow/PX4-Autopilot
 # Adding and fetching upstream adds tags:
 git remote add upstream https://github.com/PX4/PX4-Autopilot.git
 git fetch upstream
 ```
 Install prerequisites:
 ```
+sudo apt install build-essential gdb -y   # likely already installed on Ubuntu Desktop
+sudo apt install cmake -y
 sudo apt install install python3-kconfiglib
 pip3 install pyros-genmsg  --break-system-packages
+# Ubuntu 24.04 - Empy 3.x: Uses em.RAW_OPT, Ubuntu 26.04 - Empy 4.x: Uses em.RawOpt
+#pip3 install --user empy  --break-system-packages        # installs 3.x on Ubuntu 24.04
+pip3 install --user empy==3.3.4  --break-system-packages  # Ubuntu 26.04
 ```
+
 **Note:** the `make ...` command depends on GIT tags bein available. Here are some helpful commands:
 ```
 git describe
@@ -197,6 +212,13 @@ There are other RPi-based target *boards* and corresponding builds - something t
 make scumaker_pilotpi_arm64
 make px4_raspberrypi_arm64
 ```
+
+## Path planning and execution
+
+I control the robot using [QGroundControl app](https://qgroundcontrol.com/) from a desktop machine running Ubuntu 26.04.
+
+I use [Path Planner](https://github.com/slgrobotics/path_planner) and related utilities for creating QGC missions.
+
 ----------------
 
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki) or [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
