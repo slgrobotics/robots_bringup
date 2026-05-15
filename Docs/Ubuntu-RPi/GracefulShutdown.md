@@ -26,8 +26,12 @@ https://github.com/zizumara/GPIOshutdown/tree/main
 
 I've been always doing it via pin 21 (hold 4 seconds) and `/etc/crontab`:
 
-(we assume you have GPIO components installed as described [here](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/README.md))
+Install Python GPIO component:
+```
+sudo apt install python3-RPi.GPIO
+```
 
+Edit the "root" `/etc/crontab`:
 ```
 # /etc/crontab: system-wide crontab
 ...
@@ -37,7 +41,10 @@ I've been always doing it via pin 21 (hold 4 seconds) and `/etc/crontab`:
 # Run off button:
 * * * * * root /bin/bash /home/pi/Projects/runOffButton.sh
 ```
-/home/pi/Projects/runOffButton.sh
+
+Create scripts:
+
+- /home/pi/Projects/runOffButton.sh
 ```
 value=$( ps -ef | grep -ic off-switch.py )
 echo $value
@@ -49,7 +56,8 @@ then
    /usr/bin/python3 ./off-switch.py &
 fi
 ```
-/home/pi/Projects/off-switch.py
+
+- /home/pi/Projects/off-switch.py
 ```
 from time import sleep
 import os
