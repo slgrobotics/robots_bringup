@@ -4,6 +4,30 @@
 
 *for fine-tuning your Raspberry Pi Ubuntu installation, review the following:*
 
+### Disabling optional services:
+```
+sudo systemctl disable --now ubuntu-advantage
+sudo systemctl disable --now canonical-livepatchd.service 2>/dev/null || true
+sudo systemctl disable --now unattended-upgrades.service unattended-upgrades.timer
+sudo systemctl disable --now apt-daily.timer apt-daily-upgrade.timer
+sudo systemctl mask unattended-upgrades
+sudo vi /etc/apt/apt.conf.d/20auto-upgrades   # (replace "1" -> "0")
+
+sudo vi /etc/default/motd-news                # (ENABLED=0)
+sudo chmod -x /etc/update-motd.d/10-help-text
+sudo chmod -x /etc/update-motd.d/50-motd-news
+sudo chmod -x /etc/update-motd.d/91-contract-ua-esm-status 2>/dev/null || true
+sudo chmod -x /etc/update-motd.d/88-esm-announce 2>/dev/null || true
+```
+
+### Monitoring temperature
+```
+sudo apt install libraspberrypi-bin -y
+sudo vcgencmd measure_temp
+sudo vcgencmd get_throttled
+```
+**Tip:** `sudo usermod -aG video,gpio,i2c,spi,input pi`
+
 ### Properly feeding your Raspberry Pi 5
 
 Please review [this guide](https://github.com/slgrobotics/articubot_one/wiki/Properly-feeding-your-Raspberry-Pi-5).
