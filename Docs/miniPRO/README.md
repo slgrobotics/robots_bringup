@@ -5,7 +5,7 @@
 I have an original _2016 Ninebot miniPRO N3M320_. That was the first model to be sold in the US.
 
 I bought it then to turn into a robot, bit once I tried riding it - I got hooked. 
-I somehow avoided the nasty "_safety firmware upgrade_", and avoided broken bones.
+I somehow missed the nasty "_safety firmware upgrade_", and avoided broken bones.
 It helped me to get around when traveling in an RV, and then here - getting to my mailbox 😉.
 Its battery is still very healthy in 2025, but I am not using it that often anymore, and riding those is a perishable skill.
 So, it's time to quit - i.e. to turn it into a robot.
@@ -14,15 +14,23 @@ My Ninebot miniPRO photos are here: https://photos.app.goo.gl/yHXs7fP7u7ae8fa78
 
 It ultimately became a base for my [Seggy robot](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy).
 
-### simpleFOC approach
+### Success: simpleFOC approach
 
-Discouraged with brute-force approach, I implemented direct control over wheels using [_simpleFOC_](https://github.com/simplefoc) library and compatible driver boards.
+Discouraged with brute-force approach (described in detail below), I implemented direct control over wheels using [_simpleFOC_](https://github.com/simplefoc) library and compatible driver boards.
 
-Photos link above. Teensy code [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/WheelsROS_Seggy).
-
-Yes, trying all wrong solutions before taking the most logical path is my _modus vivendi_ - and sometimes a lot of learning fun.
+Photos link above. Teensy code [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/WheelsROS_Seggy),
+ROS2 code - [here](https://github.com/slgrobotics/diffdrive_arduino).
+It works like a charm.
 
 I will be interesting to see how that same Teensy code would work with a random hoverboard (stripped to motors or to motors+mosfets).
+
+You may want to review related information [here](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/MakeYourOwn).
+
+------------
+
+## Having fun: The "all wrong solutions"
+
+Yes, trying all wrong solutions before taking the most logical path is my _modus vivendi_ - and sometimes a lot of learning fun.
 
 ### Brute-force approach
 
