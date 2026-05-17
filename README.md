@@ -103,6 +103,10 @@ Here are the likely scenarios for your work.
 
 - [Project Wiki](https://github.com/slgrobotics/articubot_one/wiki) or [Docs Folder](https://github.com/slgrobotics/robots_bringup/tree/main/Docs)
 
+**HB Robotics Knowledge Base (Michael Wimble):**
+
+https://wimblerobotics.github.io/
+
 **Articulated Robotics (Josh Newans):**
 
 https://articulatedrobotics.xyz/category/build-a-mobile-robot-with-ros
