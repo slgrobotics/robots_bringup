@@ -82,9 +82,7 @@ git fetch upstream
 ```
 Install prerequisites:
 ```
-sudo apt install build-essential gdb -y   # likely already installed on Ubuntu Desktop
-sudo apt install cmake -y
-sudo apt install install python3-kconfiglib
+sudo apt install build-essential gdb cmake python3-kconfiglib -y
 pip3 install pyros-genmsg  --break-system-packages
 # Ubuntu 24.04 - Empy 3.x: Uses em.RAW_OPT, Ubuntu 26.04 - Empy 4.x: Uses em.RawOpt
 #pip3 install --user empy  --break-system-packages        # installs 3.x on Ubuntu 24.04
