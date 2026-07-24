@@ -125,7 +125,7 @@ network:
     ethernets:
       eth0:
         optional: true
-        dhcp6: true
+        dhcp6: false
         dhcp4: true
         macaddress: "xx:cc:yy:ff:4f:02"
         routes:
@@ -141,17 +141,21 @@ network:
         access-points:
           "aaaaaa":
               password: "xxxxxxx"
-        dhcp6: true
+        dhcp6: false
         dhcp4: true
         macaddress: "xx:cc:yy:ff:4f:03"
         nameservers:
           addresses:
             - XXX.XX.X.XXX
+        dhcp4-overrides:
+          route-metric: 600
+          use-routes: false
 ```
 **Note:**
 - Write a file `/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg` with the following: `network: {config: disabled}` to disable *NetworkManager* and use *netplan/networkd* instead.
 - the `macaddress:` part is important - many routers want to see real, not *private* MAC address.
 Your Raspberry Pi network devices have factory-assigned physical MAC addresses, print them with `ip link show` command.
+- the `dhcp4-overrides:` section ensures that WiFi interface remains secondary/backup, with all traffic normally going through *eth0*
 - Check your kernel messages periodically with `sudo dmesg|tail -20` - it shouldn't show any recent messages, especially related to network connections.
 
 Near the garage router _iperf3_ shows 700+ Mbits/sec one-way data throughput, and about half bidirectional.
