@@ -118,13 +118,13 @@ ros@dragger:~$ sudo cat /etc/netplan/50-cloud-init.yaml
 # network: {config: disabled}
 network:
     version: 2
+    renderer: networkd
     ethernets:
       eth0:
         optional: true
         dhcp6: true
-        dhcp4: false
-        addresses:
-          - XXX.XX.X.152/24
+        dhcp4: true
+        macaddress: "xx:cc:yy:ff:4f:02"
         routes:
           - to: default
             via: XXX.XX.X.XXX
@@ -140,10 +140,17 @@ network:
               password: "xxxxxxx"
         dhcp6: true
         dhcp4: true
+        macaddress: "xx:cc:yy:ff:4f:03"
         nameservers:
           addresses:
             - XXX.XX.X.XXX
 ```
+**Note:**
+- Write a file `/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg` with the following: `network: {config: disabled}` to disable *NetworkManager* and use *netplan/networkd* instead.
+- the `macaddress:` part is important - many routers want to see real, not *private* MAC address.
+Your Raspberry Pi network devices have factory-assigned physical MAC addresses, print them with `ip link show` command.
+- Check your kernel messages periodically with `sudo dmesg|tail -20` - it shouldn't show any recent messages, especially related to network connections.
+
 Near the garage router _iperf3_ shows 700+ Mbits/sec one-way data throughput, and about half bidirectional.
 
 At about 35 meters from the garage router, here are the metrics:
