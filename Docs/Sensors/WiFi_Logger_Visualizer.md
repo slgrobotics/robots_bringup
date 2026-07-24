@@ -86,7 +86,10 @@ This works well, if the client device also supports that feature, but might caus
 Older client devices often connect to a far-away router node and keep that connection.
 Mesh networks can be configured to assign router nodes to client devices ("preferred connection" setting), but that works only for stationary devices.
 
-This issue can be solved by using a good WiFi 6 capable travel router in client mode.
+This issue can be solved by using a good WiFi 6 capable [travel router](https://www.amazon.com/dp/B0D41G5N95) in client mode, and using Ethernet cable between the router and RPi.
+
+The *mesh* feature can be either a blessing or a curse, depending on your use case. You may want to pin your robot's router or Raspberry Pi
+to a specific access point in the mesh network if you want to prevent it from roaming and renegotiating connections with other APs.
 
 ## Direct WiFi between your laptop and the robot
 
