@@ -157,6 +157,12 @@ network:
 Your Raspberry Pi network devices have factory-assigned physical MAC addresses, print them with `ip link show` command.
 - the `dhcp4-overrides:` section ensures that WiFi interface remains secondary/backup, with all traffic normally going through *eth0*
 - Check your kernel messages periodically with `sudo dmesg|tail -20` - it shouldn't show any recent messages, especially related to network connections.
+- Useful network commands:
+  - `resolvectl status`
+  - `ip route`
+  - `ip a`
+  - `sudo iw dev wlan0 info`
+  - `ip link show eth0`
 
 Near the garage router _iperf3_ shows 700+ Mbits/sec one-way data throughput, and about half bidirectional.
 
