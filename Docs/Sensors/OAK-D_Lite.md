@@ -281,6 +281,70 @@ and [here](https://docs.luxonis.com/software/depthai-components/nodes/color_came
 - NN video source is defined by `stereo.i_spatial_nn_source` (right or left B/W cameras)
 as described [here](https://docs.luxonis.com/software/ros/depthai-ros/driver#DepthAI%20ROS%20Driver-Neural%20networks).
 
+## Simulation in Gazebo
+
+To my best knowledge, DepthAI ROS Jazzy binary distribution does not contain simulation files for Gazebo Harmonic.
+
+Files under `/opt/ros/jazzy/share/depthai*` only contain code supporting real cameras.
+
+My *articubot_one* repository (`dev` branch) contains an URDF and other files to simulate OAK-D Lite for my Seggy robot. 
+It is intended to be used with RTAB-Map [package](https://github.com/slgrobotics/articubot_one/wiki/Visual-SLAM-with-RTAB%E2%80%90Map).
+
+The files are:
+- [description/camera_oakd.xacro](https://github.com/slgrobotics/articubot_one/blob/dev/description/camera_oakd.xacro) - defines joints and links for real robot and gazebo `rgbd` sensor
+- [config/gz_ros_bridge.yaml](https://github.com/slgrobotics/articubot_one/blob/dev/config/gz_ros_bridge.yaml) - maps gazebo `gz_camera_oakd*` topics to ROS topics
+- [robots/seggy/description/robot.urdf.xacro](https://github.com/slgrobotics/articubot_one/blob/dev/robots/seggy/description/robot.urdf.xacro) - has a section calling the camera URDF
+
+To see simulation in action, run Seggy in sim mode:
+```
+cd robot_ws
+colcon build;
+source install/setup.bash;
+ros2 launch articubot_one seggy_sim.launch.py
+```
+
+Check the topics:
+```
+ros2 topic list|grep oak
+/oak/pointcloud2d
+/oak/rgb/camera_info
+/oak/rgb/image_rect
+/oak/stereo/image_raw
+```
+**Note:** the cloud appears rotated due to "camera_stereo_link_optical" rotation. This is normal.
+Downstream nodes (like RTAB-Map) will interpret Depth and RGB properly.
+
+In a fresh terminal run RTAB-Map:
+```
+ros2 launch articubot_one rtabmap.launch.py use_sim_time:=true
+```
+
+And in anoter terminal - RTAB-Map viewer:
+```
+ros2 launch articubot_one rtabmap_viz.launch.py
+```
+
+**Important:**
+*The Optical Coordinate System (For Cameras and Sensors)*
+
+Cameras view the world from a pixel grid perspective rather than a driving perspective.
+Because of this, REP-103 defines a completely different axis standard for optical frames:
+
+When looking out through the camera lens:
+- Z-Axis: Points Forward (into the scene, acting as the Depth axis)
+- X-Axis: Points Right   (horizontal pixel axis)
+- Y-Axis: Points Down    (vertical pixel axis)
+
+It is different from robot's REP-103 Right-Handed, Z-Up coordinate system:
+- X-Axis (Red in RViz):   Points Forward (the direction the robot drives)
+- Y-Axis (Green in RViz): Points Left
+- Z-Axis (Blue in RViz):  Points Up (against gravity)
+
+So, the camera *body* lives in robot's frame, while the messages `frame_id` contains *optical frame* rotated as follows:
+```
+<origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+```
+
 ## Converting *PointCloud2* to *LaserScan*
 
 It could be not practical to consume */oak/points* *PointCloud2* data due to high bandwidth required to pass it around and high CPU requirements for processing it.
