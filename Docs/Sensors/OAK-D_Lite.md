@@ -316,13 +316,15 @@ Downstream nodes (like RTAB-Map) will interpret Depth and RGB properly.
 
 In a fresh terminal run RTAB-Map:
 ```
-ros2 launch articubot_one rtabmap.launch.py use_sim_time:=true
+ros2 launch articubot_one rtabmap.launch.py use_sim_time:=true \
+   publish_tf_map:=false delete_db_on_start:=true
 ```
 
 And in anoter terminal - RTAB-Map viewer:
 ```
 ros2 launch articubot_one rtabmap_viz.launch.py
 ```
+Note that by default `database_path:=$HOME/.ros/rtabmap.db`, and `publish_tf_map:=false` ensures that RTAB-Map output does not interfere with your normal localization services.
 
 **Important:**
 *The Optical Coordinate System (For Cameras and Sensors)*
