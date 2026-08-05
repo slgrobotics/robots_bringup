@@ -14,6 +14,8 @@ The fork I use for testing is here: https://github.com/slgrobotics/wifi_logger_v
 
 Please review tips [here](https://articulatedrobotics.xyz/tutorials/ready-for-ros/networking).
 
+For in-depth analysis refer to this [paper](https://arxiv.org/html/2508.11366v1).
+
 There are many useful commands to discover and measure performance of WiFi interfaces:
 ```
 ip a
