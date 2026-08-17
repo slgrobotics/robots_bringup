@@ -100,6 +100,7 @@ Roughly, here is a BoM for it:
   - Note:
     - most motor wheels will produce plenty of torque with 12 V batteries, no need to use higher (36 V) voltage.
     - Built-in Hall sensors serve as encoders, with typical 60 ticks/revolution
+    - want to use Mecanum wheels? Check out this [guide](https://github.com/slgrobotics/articubot_one/wiki/Mecanum-and-Omni-wheels).
 
 - Power
   - 12V LiFePO4 battery (20–50 Ah)
