@@ -11,7 +11,7 @@ Seggy is a *"larger Turtlebot"* - running [my *articubot_one* code](https://gith
 
 Seggy pretends to be a helpful Tablebot, but in his heart he is a knight in shiny armor.
 
-<img width="512" height="768" alt="seggy_steampunk" src="https://github.com/user-attachments/assets/5aac9913-4dd9-45f3-a8b0-9b140d9093d7" />
+<img alt="seggy_robot" src="https://github.com/user-attachments/assets/eb79dae3-d573-4854-9cb2-10e07c480db9" />
 
 Seggy photos are here: https://photos.app.goo.gl/yHXs7fP7u7ae8fa78 - and a story of trying to "robotize" it - [here](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/miniPRO).
 
