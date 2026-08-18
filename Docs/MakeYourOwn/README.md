@@ -6,7 +6,7 @@ _"To invent, you need a good imagination and a pile of junk."_ - Thomas A. Ediso
 
 **Important:** This guide provides educational information for DIY robotics projects, which carry inherent risks, including electrical, battery, and mechanical hazards. The author assumes no liability for damages or injuries resulting from the use or misuse of this information. Users proceed entirely at their own risk.
 
-<img width="512" height="768" alt="robot_punk" src="https://github.com/user-attachments/assets/db7a0a7f-5169-44a8-9174-d327695497b9" />
+<img alt="Make_your_own_robot" src="https://github.com/user-attachments/assets/0dff2109-56e8-4ca0-ab8d-b81329ec0deb" />
 
 This section describes hardware components you can use to build a robot "_from scratch_" -
 similar to my [Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy)
