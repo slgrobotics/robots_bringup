@@ -7,9 +7,9 @@ For the latest code see the *[dev](https://github.com/slgrobotics/articubot_one/
 
 # Seggy Notes
 
-Seggy is a *"larger Turtlebot"* - running [my *articubot_one* code](https://github.com/slgrobotics/articubot_one). Desktop only needs to run RViz for robot control.
+Seggy is a *"larger Turtlebot"* - running [my *articubot_one* code](https://github.com/slgrobotics/articubot_one). Desktop only needs to run RViz and joystick node for robot control.
 
-Seggy pretends to be a helpful Tablebot, but in his heart he is a knight in shiny armor.
+Seggy pretends to be a helpful Tablebot, it can carry a tray. Its body is made of painted plywood, it is designed for easy access to all components.
 
 <img alt="seggy_robot" src="https://github.com/user-attachments/assets/eb79dae3-d573-4854-9cb2-10e07c480db9" />
 
