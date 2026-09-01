@@ -10,7 +10,7 @@ firmware. The SH-2 includes the *MotionEngine™* software, which provides sophi
 algorithms to process sensor data and provide precise real-time 3D orientation, heading, calibrated acceleration
 and calibrated angular velocity..."
 
-### Connections:
+### Connections
 
 Connect to Raspberry Pi  **I2C**: **SCL** - pin 05, **SDA** - pin 03
 
@@ -33,6 +33,26 @@ My fork of ROS2 driver code is here: https://github.com/slgrobotics/bno08x_ros2_
 which causes extreme confusion of the EKF filter, which fuses wheels odometry and UMU.
 What happens and why it matters is explained [here](https://chatgpt.com/s/t_691b60f38e1c8191a0a309cbcf99e478).
 I created an issue [here](https://github.com/bnbhat/bno08x_ros2_driver/issues/16).
+
+### Note: 9DOF vs 6DOF operation (ROS2)
+
+It takes some time for the sensor to fully self-calibrate at startup.
+While accelerometer and gyroscope calibrations are usually fast and problem-free,
+the magnetometer can be more temperamental. Moving and rotating the device may help, but it does not guarantee success.
+
+The SH-2 firmware on the *BNO085/BNO086* does not emit `SH2_ROTATION_VECTOR`
+packets until the magnetometer accuracy reaches at least `LOW`. When the
+magnetometer is unusable (indoor operation, ferrous chassis, magnetic
+interference) that condition never becomes true, and 9DOF operation becomes unavailable (`/imu/data` stream cannot be published).
+
+A runtime parameter `enable_6dof_mode` (bool, default *false*) selects the orientation source:
+
+- *false* (default): SH2_ROTATION_VECTOR      (9-DOF, accel+gyro+mag)
+- *true*:            SH2_GAME_ROTATION_VECTOR (6-DOF, accel+gyro)
+
+Default preserves upstream 9-DOF behavior and matches the sensor's advertised capability.
+Users on setups where the magnetometer cannot calibrate can force 6-DOF orientation, giving up absolute
+(magnetic-north) yaw in exchange for a working `/imu/data` stream.
 
 ### Trying it
 
