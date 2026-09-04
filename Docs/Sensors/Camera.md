@@ -424,7 +424,9 @@ ros2 run image_proc rectify_node --ros-args -r image:=/image_raw -r image_rect:=
 ```
 Your downstream packages can now subscribe to `/image_rectified` to receive a flattened feed where straight lines in the real world appear as straight lines in your code.
 
-**Note:** all nodes above can run on a Workstation/Desktop, while *camera_node* runs on a "headless" Raspberry Pi.
+**Note:**
+- all nodes above can run on a Workstation/Desktop, while *camera_node* runs on a "headless" Raspberry Pi.
+- refer to this [guide](https://github.com/slgrobotics/ros2_inference_stereo#important-calibration-is-not-optional) for info on making a checkerboard
 
 ## Global Shutter Camera
 
