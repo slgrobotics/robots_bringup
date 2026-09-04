@@ -58,8 +58,8 @@ dtoverlay=imx219,cam0
 dtoverlay=imx219,cam1
 ```
 
-**Important Warning:** 
-- The contents of [Marco's Personal Package Archives](https://launchpad.net/~marco-sonic/+archive/ubuntu/rasppios) are _not checked or monitored_. You install software from them **at your own risk**. 
+> **Important Warning:** 
+> The contents of [Marco's Personal Package Archives](https://launchpad.net/~marco-sonic/+archive/ubuntu/rasppios) are _not checked or monitored_. You install software from them **at your own risk**. 
 ```
 sudo add-apt-repository ppa:marco-sonic/rasppios
 sudo apt update
@@ -74,6 +74,43 @@ ros@plucky:~$ sudo adduser ros video
 info: The user `ros' is already a member of `video'.
 ```
 Reboot
+
+**Note:** Marco's packages provide specific version of *libcamera* libraries (0.7 for example).
+ROS binaries could be compiled against a more recent version, in which case you'll have to contact Marco or compile them yourself. 
+
+If you need to update Marco's libcamera, purging helps:
+```
+sudo apt update
+sudo apt upgrade
+sudo apt purge libcamera-dev libcamera-ipa libcamera-tools libcamera-v4l2 librpicam-app1 python3-libcamera rpicam-apps-core -y
+sudo apt autoremove -y
+sudo apt install libcamera-dev libcamera-ipa libcamera-tools libcamera-v4l2 librpicam-app1 python3-libcamera rpicam-apps-core
+ll /usr/lib/aarch64-linux-gnu/libcamera*
+lrwxrwxrwx 1 root root      21 Sep  2 17:10 /usr/lib/aarch64-linux-gnu/libcamera-base.so -> libcamera-base.so.0.7
+lrwxrwxrwx 1 root root      23 Sep  2 17:10 /usr/lib/aarch64-linux-gnu/libcamera-base.so.0.7 -> libcamera-base.so.0.7.2
+-rw-r--r-- 1 root root  198840 Sep  2 17:10 /usr/lib/aarch64-linux-gnu/libcamera-base.so.0.7.2
+lrwxrwxrwx 1 root root      16 Sep  2 17:10 /usr/lib/aarch64-linux-gnu/libcamera.so -> libcamera.so.0.7
+lrwxrwxrwx 1 root root      18 Sep  2 17:10 /usr/lib/aarch64-linux-gnu/libcamera.so.0.7 -> libcamera.so.0.7.2
+-rw-r--r-- 1 root root 1579248 Sep  2 17:10 /usr/lib/aarch64-linux-gnu/libcamera.so.0.7.2
+
+sudo apt install ros-jazzy-camera-ros
+# setting FPS=5 for WiFi:
+ros2 run camera_ros camera_node --ros-args -p width:=640 -p height:=480  -p FrameDurationLimits:="[200000,200000]"
+```
+
+If during a system update or after running rosdep Marco's packages are replaced, you can fix that easily, for example:
+```
+ros@plucky:~/cam_ws$ apt list --installed |grep libcamera
+libcamera-dev/noble,now 0.4.0+rpt20250213-1ubuntu1~marco1 arm64 [installed]
+libcamera-ipa/noble,now 0.4.0+rpt20250213-1ubuntu1~marco1 arm64 [installed,automatic]
+libcamera-tools/noble,now 0.4.0+rpt20250213-1ubuntu1~marco1 arm64 [installed]
+libcamera0.2/noble,now 0.2.0-3fakesync1build6 arm64 [installed,auto-removable] <- this is bad
+libcamera0.4/noble,now 0.4.0+rpt20250213-1ubuntu1~marco1 arm64 [installed,automatic]
+python3-libcamera/noble,now 0.4.0+rpt20250213-1ubuntu1~marco1 arm64 [installed]
+ros-jazzy-libcamera/noble,now 0.4.0-1noble.20250102.132330 arm64 [installed] <- *** this might be bad ***
+
+ros@plucky:~/cam_ws$ sudo apt remove libcamera0.2 ros-jazzy-libcamera
+```
 
 ## Basic testing
 
@@ -295,6 +332,14 @@ To see discussions about this, follow to these links:
 
 ## ROS2 Camera Publisher.
 
+A standard ROS2 camera publisher should work:
+```
+sudo apt install ros-jazzy-camera-ros
+# setting FPS=5 for WiFi:
+ros2 run camera_ros camera_node --ros-args -p width:=640 -p height:=480  -p FrameDurationLimits:="[200000,200000]"
+```
+
+There are other options though.
 Here is the code I used for FPV camera before on the Desktop machine: [camera_publisher](https://github.com/slgrobotics/camera_publisher/blob/main/cv_basics/webcam_pub.py)
 
 It relies on OpenCV _V4L2_ bindings, which don't work for IMX219 sensor with ```cv2.VideoCapture(0)``` - see above chapter.
@@ -303,7 +348,7 @@ Using OpenCV allows some image processing and publishing custom topics.
 For example, I could detect color blobs and publish their offsets.
 Image processing in a camera node makes sense in FPV scenario (NTSC receiver connected to the Desktop, where resources are plentiful), but not on the robot's resource-limited RPi.
 
-Someday I might create a version of my *camera_publisher* to capture the image using *pycamera2*, not OpenCV - or use GStreamer to feed OpenCV properly.
+It is possible to create a version of my *camera_publisher* to capture the image using *pycamera2*, not OpenCV - or use GStreamer to feed OpenCV properly.
 With Pycamera2, the tricky part is "*CvBridge # Package to convert between ROS and OpenCV Images*" - whatever I capture in Pycamera2 must be converted to ROS2 format.
 GStreamer, while relatively simple to use, is rumored to be CPU-hungry.
 
@@ -331,21 +376,55 @@ ros@plucky:~$ ros2 topic hz /camera/image_raw
 average rate: 14.990
 min: 0.065s max: 0.069s std dev: 0.00118s window: 16
 ```
-**Note:**
 
-If during a system update or after running rosdep Marco's packages are replaced, you can fix that easily, for example:
-```
-ros@plucky:~/cam_ws$ apt list --installed |grep libcamera
-libcamera-dev/noble,now 0.4.0+rpt20250213-1ubuntu1~marco1 arm64 [installed]
-libcamera-ipa/noble,now 0.4.0+rpt20250213-1ubuntu1~marco1 arm64 [installed,automatic]
-libcamera-tools/noble,now 0.4.0+rpt20250213-1ubuntu1~marco1 arm64 [installed]
-libcamera0.2/noble,now 0.2.0-3fakesync1build6 arm64 [installed,auto-removable] <- this is bad
-libcamera0.4/noble,now 0.4.0+rpt20250213-1ubuntu1~marco1 arm64 [installed,automatic]
-python3-libcamera/noble,now 0.4.0+rpt20250213-1ubuntu1~marco1 arm64 [installed]
-ros-jazzy-libcamera/noble,now 0.4.0-1noble.20250102.132330 arm64 [installed] <- this might be bad
+## Using *Compressed transport*
 
-ros@plucky:~/cam_ws$ sudo apt remove libcamera0.2 ros-jazzy-libcamera
+Camera publisher normally provides both *raw* and *compressed* topics. 
+You want to transfer compressed data over WiFi (and even the Ethernet wire) while most consumers require raw stream.
+To deal with it you need to:
+-  install Compressed Transport support
+-  run a Decompressor node
 ```
+sudo apt install ros-jazzy-image-transport-plugins
+
+ros2 run image_transport republish --ros-args \
+  -p in_transport:=compressed \
+  -p out_transport:=raw \
+  --remap in/compressed:=/image_raw/compressed \
+  --remap out:=/image_decompressed
+```
+
+## Camera calibration
+
+Camera optics may distort image, especially when FOV is wide ("fisheye" 160 degree lenses, for example).
+
+To compensate for a 160° fisheye lens in ROS2, we need to provide intrinsic parameters and distortion coefficients to downstream nodes.
+ROS2 uses a standardized, two-step [pipeline](https://docs.ros.org/en/rolling/p/camera_calibration/doc/index.html) to handle this automatically:
+- The Driver (*camera_ros*) reads a YAML calibration file containing the math profile of your specific lens and publishes it on the `/camera_info` topic.
+- The Processing Node (*image_proc*) subscribes to the raw images and the `/camera_info` matrix, then applies a correction algorithm to output a perfectly rectified ("flattened") image stream.
+
+Because the FOV is ultra-wide (160°), standard pinhole distortion models (*plumb_bob*) will fail or heavily distort the corners. We must explicitly utilize the equidistant (Fisheye) distortion model.
+
+Here is a standard ROS2 calibration routine with a checkerboard:
+```
+sudo apt install ros-jazzy-camera-calibration
+
+ros2 run camera_calibration cameracalibrator --size 8x6 --square 0.02 --fisheye --ros-args -r image:=/image_raw -p camera:=/camera
+```
+This outputs a *.tar.gz* archive containing an *ost.yaml* file inside */tmp/*.
+
+Extract your generated *ost.yaml*, rename it to the exact file path expected by your system, and ensure its *distortion_model: field* says *equidistant*
+```
+mkdir -p ~/.ros/camera_info/
+cp /tmp/calibrationdata/ost.yaml ~/.ros/camera_info/imx219__base_axi_pcie_120000_rp1_i2c_80000_imx219_10_800x600.yaml
+```
+Run the Rectification Node
+```
+ros2 run image_proc rectify_node --ros-args -r image:=/image_raw -r image_rect:=/image_rectified
+```
+Your downstream packages can now subscribe to `/image_rectified` to receive a flattened feed where straight lines in the real world appear as straight lines in your code.
+
+**Note:** all nodes above can run on a Workstation/Desktop, while *camera_node* runs on a "headless" Raspberry Pi.
 
 ## Global Shutter Camera
 
