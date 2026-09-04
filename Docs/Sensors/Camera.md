@@ -112,6 +112,8 @@ ros-jazzy-libcamera/noble,now 0.4.0-1noble.20250102.132330 arm64 [installed] <- 
 ros@plucky:~/cam_ws$ sudo apt remove libcamera0.2 ros-jazzy-libcamera
 ```
 
+Go straight to [ROS2 Camera Publisher](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#ros2-camera-publisher) to skip testing and Python bindings sections.
+
 ## Basic testing
 
 **Note:**
@@ -409,7 +411,13 @@ Here is a standard ROS2 calibration routine with a checkerboard:
 ```
 sudo apt install ros-jazzy-camera-calibration
 
-ros2 run camera_calibration cameracalibrator --size 8x6 --square 0.02 --fisheye --ros-args -r image:=/image_raw -p camera:=/camera
+ros2 run camera_calibration cameracalibrator --size 8x6 --square 0.02 --fisheye \
+   --ros-args -r image:=/image_raw -p camera:=/camera
+
+or, using compressed transport:
+
+ros2 run camera_calibration cameracalibrator --size 8x6 --square 0.02 --fisheye \
+   --ros-args -p image_transport:=compressed -r image:=/image_raw -r camera:=/camera
 ```
 This outputs a *.tar.gz* archive containing an *ost.yaml* file inside */tmp/*.
 
