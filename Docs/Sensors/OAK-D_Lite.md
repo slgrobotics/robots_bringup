@@ -7,6 +7,25 @@ It doesn't have an IMU, but otherwise should be identical to units produced late
 
 This guide describes how to run it under Ubuntu 24.04 and ROS2 Jazzy - first on an Intel 5 Desktop, an then on Raspberry 4 or 5 under the Ubuntu 24.04 Server and ROS2 Jazzy Base.
 
+Contents:
+- [Basic hardware test](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md#basic-hardware-test)
+- [*Important:* Power consumption and USB connection requirements](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md#important-power-consumption-and-usb-connection-requirements)
+- [Luxonis Software Installation](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md#luxonis-software-installation)
+- [Spatial demos in Python](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md#spatial-demos-in-python)
+- [Configuration and Troubleshooting](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md#configuration-and-troubleshooting)
+- [ROS2 operation](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md#ros2-operation)
+  - [Installation](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md#installation)
+  - [ROS2 examples](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md#ros2-examples)
+  - [Spatial examples](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md#spatial-examples)
+  - [Configuration files](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md#configuration-files)
+  - [Simulation in Gazebo](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md#simulation-in-gazebo)
+  - [Converting PointCloud2 to LaserScan](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md#converting-pointcloud2-to-laserscan)
+  - [Real life scenario](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md#real-life-scenario)
+  - [The *"luxonis Device crashed, but no crash dump could be extracted"* bug](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md#the-luxonis-device-crashed-but-no-crash-dump-could-be-extracted-bug)
+- [Useful Links](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md#useful-links)
+
+---------------------------
+
 ## Basic hardware test
 
 The camera requires a quality USB3 cable and _prefers_ a USB3 socket, but will work if plugged into USB2 socket. 
