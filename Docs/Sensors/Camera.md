@@ -11,7 +11,7 @@ Contents:
 - [ROS2 Camera Publisher](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#ros2-camera-publisher)
 - [Using Compressed transport](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#using-compressed-transport)
 - [Camera calibration](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#camera-calibration)
-- [Global Shutter Camera](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#camera-calibration)
+- [Global Shutter Camera](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#global-shutter-camera)
 - [Additional Python tests - libcamera, Picamera2, dual cameras](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#additional-python-tests---libcamera-picamera2-dual-cameras)
 - [Useful links](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#useful-links)
 
