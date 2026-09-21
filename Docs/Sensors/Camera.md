@@ -434,6 +434,23 @@ ros2 run image_view image_view --ros-args -r image:=/camera/image_raw -p image_t
 
 Camera optics may distort image, especially when FOV is wide ("fisheye" 160 degree lenses, for example).
 
+Here are images from *Arducam* fish-eye (sensor **1640x1232** *SBGGR10_1X10/RAW*) in different streaming modes - default (800x600) and cropped (640x480):
+
+<details>
+<summary>Click <b>here</b> to expand images</summary>
+
+```
+ros2 run camera_ros camera_node --ros-args -p FrameDurationLimits:="[200000,200000]"
+```
+<img alt="Arducam fish-eye 800x600" src="https://github.com/user-attachments/assets/b3c472c0-ad8d-4692-91c8-450ac806ed88" />
+
+```
+ros2 run camera_ros camera_node --ros-args -p width:=640 -p height:=480 -p FrameDurationLimits:="[200000,200000]"
+```
+<img alt="Arducam fish-eye 640x480" src="https://github.com/user-attachments/assets/f2d8d494-102b-4ca3-ae1d-88060684a6b8" />
+
+</details>
+
 To compensate for a 160° fisheye lens in ROS2, we need to provide intrinsic parameters and distortion coefficients to downstream nodes.
 ROS2 uses a standardized, two-step [pipeline](https://docs.ros.org/en/rolling/p/camera_calibration/doc/index.html) to handle this automatically:
 - The Driver (*camera_ros*) reads a YAML calibration file containing the math profile of your specific lens and publishes it on the `/camera_info` topic.
