@@ -1,5 +1,22 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
+# Camera Sensors
+
+Contents:
+- [Native_ Raspberry Pi Camera (_Arducam_) Setup](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#native-raspberry-pi-camera-arducam-setup)
+- [Installation](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#installation)
+- [Basic testing](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#basic-testing)
+- [Testing Python bindings](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#testing-python-bindings)
+- [Python, OpenCV and GStreamer](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#python-opencv-and-gstreamer)
+- [ROS2 Camera Publisher](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#ros2-camera-publisher)
+- [Using Compressed transport](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#using-compressed-transport)
+- [Camera calibration](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#camera-calibration)
+- [Global Shutter Camera](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#camera-calibration)
+- [Additional Python tests - libcamera, Picamera2, dual cameras](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#additional-python-tests---libcamera-picamera2-dual-cameras)
+- [Useful links](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#useful-links)
+
+-------------------------------
+
 ## _Native_ Raspberry Pi Camera (_Arducam_) Setup
 
 Ubuntu 24.04 introduced breaking changes in the way the video stream is handled ("libcamera" vs. "V4L2"). 
@@ -382,18 +399,35 @@ min: 0.065s max: 0.069s std dev: 0.00118s window: 16
 ## Using *Compressed transport*
 
 Camera publisher normally provides both *raw* and *compressed* topics. 
-You want to transfer compressed data over WiFi (and even the Ethernet wire) while most consumers require raw stream.
+You want to transfer compressed data over WiFi (and even the Ethernet wire) while some consumers may require a raw stream.
 To deal with it you need to:
 -  install Compressed Transport support
 -  run a Decompressor node
 ```
 sudo apt install ros-jazzy-image-transport-plugins
 
+#  /image_raw/compressed  -->  /image_decompressed
 ros2 run image_transport republish --ros-args \
-  -p in_transport:=compressed \
-  -p out_transport:=raw \
-  --remap in/compressed:=/image_raw/compressed \
-  --remap out:=/image_decompressed
+    -p in_transport:=compressed \
+    -p out_transport:=raw \
+    --remap in/compressed:=/image_raw/compressed \
+    --remap out:=/image_decompressed
+```
+
+Here is how to convert *raw* stream to *compressed*
+```
+#  /camera0/image_raw  -->   /camera/image_raw/compressed 
+ros2 run image_transport republish \
+    --ros-args \
+    -p in_transport:=raw \
+    -p out_transport:=compressed \
+    -r in:=/camera0/image_raw \
+    -r out/compressed:=/camera/image_raw/compressed
+```
+
+You can use `image_view` node while specifying transport:
+```
+ros2 run image_view image_view --ros-args -r image:=/camera/image_raw -p image_transport:=compressed
 ```
 
 ## Camera calibration
