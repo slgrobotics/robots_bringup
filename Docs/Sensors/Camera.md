@@ -36,9 +36,13 @@ His work is here: https://launchpad.net/~marco-sonic/+archive/ubuntu/rasppios
 I followed Marco's directions (and his [personal advice](https://groups.google.com/g/hbrobotics/c/d2Ir8ifMFhA), thanks!) to get my camera working.
 
 Here is my setup:
--  Mono: "8Mp Camera V5": https://www.amazon.com/dp/B0DLGMT7XN  (originally "[Arducam](https://www.arducam.com/product/8mp-imx219-camera-module-for-raspberry-pi-b0394/)", has a Sony IMX219 sensor)
+- Any camera with a Sony IMX219 8MP sensor (3280x2464 matrix):
+  - [Arducam 8MP IMX219 Camera Module for Raspberry Pi](https://www.amazon.com/dp/B0DLGMT7XN), 105°FOV
+  - [IMX219-160 8-Megapixels Camera Module](https://www.amazon.com/dp/B07T43K7LC), 160°FOV
+  - [8Mp Camera V5](https://www.amazon.com/dp/B0DLGMT7XN), 62.2° x 48.8°FOV (originally
+"[Arducam](https://www.arducam.com/embedded-camera-module/cameras-for-raspberrypi/raspberry-pi-camera-raspistill-raspvivid/raspberry-pi-camera-v2-imx219-8mp.html)" 74°FOV)
 -  For [Stereo](https://github.com/slgrobotics/ros2_jetson_nano_inference/blob/main/README_STEREO.md) vision: dual [Arducam](https://www.amazon.com/dp/B09VSRH14M) cameras, 8MP IMX219, 105° FOV.
--  Raspberry Pi 5 8GB
+-  Raspberry Pi 5 / 8GB
 -  Ubuntu 24.04 _Server_, ROS2 Jazzy _Base_ ("headless" configuration, no GUI)
 -  Waveshare binocular camera [modules](https://www.amazon.com/IMX219-83-Stereo-Camera-Compatible-Applications/dp/B088RFT412) do not come with RPi5 cables, and there are no such cables on the market. Research before buying.
 
