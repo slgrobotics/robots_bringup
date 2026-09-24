@@ -1,5 +1,7 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
+> Check out what your $10 monocular camera [can do](https://github.com/slgrobotics/image_to_3d).
+
 # Camera Sensors
 
 Contents:
