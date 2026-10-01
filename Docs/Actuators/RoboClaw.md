@@ -13,10 +13,14 @@ There are also some alternative repositories:
 - [alwinsdon](https://github.com/alwinsdon/ros2-roboclaw-encoder-system/tree/main/src/ros2_roboclaw_driver) - derived from Michael Wimble's work
 - [sheaffej](https://github.com/sheaffej/roboclaw_driver2)
 
+A good active repository using RoboClaw driver is maintained by *JHPHELAN*:
+- [stingray.drive.launch.py](https://github.com/JHPHELAN/articubot_one/blob/exploration/robots/stingray/launch/stingray.drive.launch.py#L46) - a launch file
+- https://github.com/JHPHELAN/stingray - Stingray / Stormy robot description
+
+----------------
+
 **Warning:** I will not accept any resposibility for damage to any device, person or property as a result of you following these instructions.
-Neither will Michael Wimble, the original author. Use at your own risk.
-
-
+Neither will Michael Wimble, the original author, or *JHPHELAN*. Use at your own risk.
 
 ----------------
 
