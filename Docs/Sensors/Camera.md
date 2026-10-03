@@ -21,7 +21,27 @@ Contents:
 
 ## _Native_ Raspberry Pi Camera (_Arducam_) Setup
 
+Ubuntu 26.04.1 has the _libcamera_ figured out, it just works:
+```
+sudo apt install libcamera-tools python3-picamera2 rpicam-apps
+
+# I have two cameras, default "camera_auto_detect=1" didn't work, had to edit /boot/firmware/config.txt
+[all]
+camera_auto_detect=0
+dtoverlay=imx219,cam0
+dtoverlay=imx219,cam1
+
+--- reboot ---
+
+rpicam-hello --list -v
+rpicam-jpeg -o test.jpg
+```
+
 Ubuntu 24.04 introduced breaking changes in the way the video stream is handled ("libcamera" vs. "V4L2"). 
+
+<details>
+<summary>Click <b>here</b> to expand instructions for 24.04</summary>
+
 So, [CSI-connected Cameras](https://www.raspberrypi.com/documentation/accessories/camera.html) on Raspberry Pi 5 don't work anymore under Ubuntu 24.04. 
 See our Club discussion [here](https://groups.google.com/g/hbrobotics/c/4VITfijo2cM/m/80LidlKAAgAJ).
 
@@ -36,6 +56,8 @@ He created a set of binaries, which can be easily installed on a Raspberry Pi un
 His work is here: https://launchpad.net/~marco-sonic/+archive/ubuntu/rasppios
 
 I followed Marco's directions (and his [personal advice](https://groups.google.com/g/hbrobotics/c/d2Ir8ifMFhA), thanks!) to get my camera working.
+
+</details>
 
 Here is my setup:
 - Any camera with a Sony IMX219 8MP sensor (3280x2464 matrix):
@@ -57,6 +79,9 @@ Here is my setup:
 ![arducam-rpi](https://github.com/user-attachments/assets/e03df469-85ec-4ac9-98a2-d751ef0daf2f)
 
 ## Installation
+
+<details>
+<summary>Click <b>here</b> to expand instructions for 24.04</summary>
 
 Following Marco's recommendations, review Arducam guide:
 
@@ -134,6 +159,7 @@ ros-jazzy-libcamera/noble,now 0.4.0-1noble.20250102.132330 arm64 [installed] <- 
 
 ros@plucky:~/cam_ws$ sudo apt remove libcamera0.2 ros-jazzy-libcamera
 ```
+</details>
 
 Go straight to [ROS2 Camera Publisher](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#ros2-camera-publisher) to skip testing and Python bindings sections.
 
