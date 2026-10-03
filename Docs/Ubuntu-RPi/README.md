@@ -2,18 +2,18 @@
 
 # Set up your Raspberry Pi 3B/4/5 with Ubuntu Server and ROS Base
 
-We need to copy a _Ubuntu 24.04 Server 64 bit_ image to an SD card, install _ROS2 Jazzy Base_ and add necessary ROS packages.
+We need to copy a _Ubuntu 26.04.1 Server 64 bit_ image to an SD card, install _ROS2 Lyrical Base_ and add necessary ROS packages.
 
 **Note: (Advanced)** Alternatively you can use real-time OS image with ROS2 Jazzy preinstalled - 
 described [here](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/UbuntuRealTime.md).
 
-### 1. Set up a Ubuntu 24.04 Server 64 bit
+### 1. Set up a Ubuntu 26.04.1 or 24.04 Server 64 bit
 
 Download _Raspberry Pi Imager_ from official Raspberry OS site: https://www.raspberrypi.com/software/
 
-Run it, selecting _"Other General-Purpose OS" -> Ubuntu -> Ubuntu Server 24.04.1 LTS (64 bit)_
+Run it, selecting _"Other General-Purpose OS" -> Ubuntu -> Ubuntu Server 26.04.1 LTS (64 bit)_ for ROS Lyrical  (or _24.04_ for older ROS Jazzy)
 
-The Imager lets you customize the boot - choose network name, setup "ros" account and WiFi credentials.
+**Tip:** The Imager lets you customize the boot - choose network name, setup "ros" account and WiFi credentials.
 
 It will not setup Ethernet (eth0) and might mess up WiFi setup, so you better have USB keyboard and HDMI display connected until your SSH starts working.
 
@@ -41,13 +41,11 @@ sudo dpkg-reconfigure unattended-upgrades      (say No)
 ```
 Have some needed packages installed:
 ```
-sudo apt install raspi-config
-sudo apt install winbind samba smbclient net-tools wget
-sudo apt install python3-pip
+sudo apt install raspi-config winbind net-tools wget avahi-daemon python3-pip
 ```
 You should be able to ping your _turtle.local_ machine and ssh into it (```ssh ros@turtle.local``` from your Desktop machine).
 
-**Note:** if you choose to rely on _/etc/netplan_ and disable network config, you need to `sudo apt install avahi-daemon` to restore Multicast DNS (mDNS) service required for local hostname discovery.
+**Note:** `avahi-daemon` provides Multicast DNS (mDNS) service required for local hostname discovery. Your router needs it.
 
 Have the I2C support installed and tested:
 ```
@@ -74,7 +72,7 @@ bash ./build
 gpio -h
 sudo gpio readall
 ``` 
-You may need to set up a 2G-4G swap file to compensate for small RAM on RPi 3B. Compiling C++ code takes a lot of RAM and will crash without it:
+_Optional:_ You may need to set up a 2G-4G swap file to compensate for small RAM on **RPi 3B**. Compiling C++ code takes a lot of RAM and will crash without it:
 ```
 sudo swapon --show     (if nothing shows up, swap isn't set up - https://www.linuxtut.com/en/71e3874cb83ed12ec405/)
 sudo fallocate -l 4G /swapfile
@@ -87,6 +85,9 @@ Now _htop_ will show swap space, and it should persist through reboots.
 
 _Optional:_ Samba creates shared folder, accessible from Windows machines:
 ```
+# If other machines on your LAN use Windows, install Samba for file sharing:
+sudo apt install samba smbclient
+# Configure share:
 sudo mkdir /home/shared; sudo chmod og+rwx /home/shared   (+x matters for readability)
 sudo usermod -aG sambashare ros
 cp  /etc/samba/smb.conf .
@@ -108,15 +109,13 @@ Samba share - add to the end of smb.conf, use any Share name you like, e.g "Shar
 ```
 ### 2. Continue with ROS2 installation
 
-Follow these guides, selecting binary ROS2-Base Jazzy ("Bare bones" ros-jazzy-ros-base). Also, install Development tools:
+Follow these guides, selecting binary ROS2-Base Lyrical/Jazzy ("Bare bones" ros-lyrical-ros-base). Also, install Development tools:
 
-https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html
+https://docs.ros.org/en/lyrical/Get-Started/Installation/Ubuntu-Install-Debs.html
 
-https://docs.ros.org/en/jazzy/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html
-
-for "ros" account, no need to call _setup.bash_ every time - add it to _.bashrc_:
+for the "ros" account, no need to call _setup.bash_ every time - add it to _.bashrc_:
 ```
-echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
+echo "source /opt/ros/lyrical/setup.bash" >> ~/.bashrc
 ```
 _Optional:_ Try some basic things from Tutorials:
 ```
