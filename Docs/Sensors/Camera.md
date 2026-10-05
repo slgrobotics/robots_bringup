@@ -21,7 +21,7 @@ Contents:
 
 ## _Native_ Raspberry Pi Camera (_Arducam_) Setup
 
-Ubuntu 26.04.1 has the _libcamera_ figured out, it just works:
+Ubuntu 26.04.1 has the _libcamera_. The following works:
 ```
 sudo apt install libcamera-tools python3-picamera2 rpicam-apps
 
@@ -36,8 +36,12 @@ dtoverlay=imx219,cam1
 rpicam-hello --list -v
 rpicam-jpeg -o test.jpg
 ```
+Unfortunately at the moment the "standard" [binaries package](https://github.com/christianrauch/camera_ros) does not seem to work.
 
-Ubuntu 24.04 introduced breaking changes in the way the video stream is handled ("libcamera" vs. "V4L2"). 
+Use my simple [Camera Publisher](https://github.com/slgrobotics/camera_publisher) with *Arducams* and similar cameras.
+It uses GStreamer and has nodes for a Workstation (webcams) and Raspberry Pi.
+
+**Why?** Ubuntu 24.04 introduced breaking changes in the way the video stream is handled ("libcamera" vs. "V4L2"). It is still broken in 26.04.1.
 
 <details>
 <summary>Click <b>here</b> to expand instructions for 24.04</summary>
