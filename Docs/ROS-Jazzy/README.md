@@ -12,21 +12,22 @@ For your ROS setups:
 
 Here we set up a clean **Desktop PC** to become a ROS playground machine and a Ground Station (*Workstation*) for our robots.
 
-For the robot's on-board **Raspberry Pi** setup see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi
+For the robot's on-board **Raspberry Pi** setup see [this guide](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi)
 
 <img src="https://github.com/user-attachments/assets/3fe68730-c8a9-4779-809f-ecea9ec824e2" width="320">
 
 ## Install Ubuntu 26.04 ("Resolute Raccoon") or 24.04 LTS ("Noble Numbat") on a Workstation
 
-If your machine can't boot from USB Flash Drive:
+If your machine can boot up from USB media, go for the Desktop image:
+
+https://ubuntu.com/download/desktop
+
+<details>
+<summary>Click <b>here</b> if your machine can't boot from USB Flash Drive</summary>
 
 Install "server" image from DVD (Desktop image doesn't fit on DVD):
 
 https://ubuntu.com/download/server
-
-Or, if your machine can boot up from USB media, go for the Desktop image and skip the next section
-
-https://ubuntu.com/download/desktop
 
 ### Expand "server" edition to "desktop" (just add GUI):
 ```
@@ -37,6 +38,7 @@ sudo reboot now
 locale
 sudo apt install software-properties-common
 ```
+</details>
 
 ### (...set up Chrony, Samba and other OS things here...).
 
@@ -46,7 +48,7 @@ https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/README.m
 
 ## Install ROS Desktop LTS:
 
-Follow  https://docs.ros.org/en/lyrical/Get-Started/Installation/Ubuntu-Install-Debs.html
+Follow  [this guide](https://docs.ros.org/en/lyrical/Get-Started/Installation/Ubuntu-Install-Debs.html)
 
 ### Install [RQqt](https://docs.ros.org/en/jazzy/Concepts/Intermediate/About-RQt.html) with all plugins and [PlotJuggler](https://plotjuggler.io):
 ```
@@ -59,13 +61,27 @@ Run *PlotJugger* as a ROS2 process. It subscribes to topic's values (i.e. "*imu_
 ros2 run plotjuggler plotjuggler
 ```
 
-### for joystick operation - make sure your "ros" account has access to ports:
+## Joystick setup
+
+Install joystick packages:
 ```
-sudo adduser <your account> dialout
 sudo apt install ros-${ROS_DISTRO}-joy*
 ```
+Follow [this guide](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Joystick.md)
 
-## 24.04 / Jazzy: Install Gasebo Harmonic (using "Default Gazebo/ROS Pairing"):
+For joystick operation - make sure your "ros" account has access to ports:
+```
+sudo adduser "$USER" dialout
+```
+Then log out and back in for the new group membership to take effect. Verify with:
+```
+groups
+```
+You should see *dialout* in the list.
+
+### For 24.04 / Jazzy: Install Gasebo
+
+Use "Default Gazebo/ROS Pairing":
 
 https://gazebosim.org/docs/jetty/ros_installation/
 ```
@@ -90,7 +106,10 @@ export QT_ENABLE_HIGHDPI_SCALING=0
 
 ### *Optional:* Delegating Linux Desktop to a Windows machine
 
- My Windows machine has a good video card, and can act as X Window Server, relieving the Linux box.
+<details>
+<summary>Click <b>here</b> to expand instructions</summary>
+
+My Windows machine has a good video card, and can act as X Window Server, relieving the Linux box.
 
 Running Gnome Desktop on a different machine (Windows 10 with VcXsrv in my case):
 ```
@@ -103,10 +122,15 @@ export DISPLAY=<machine>.local:0.0
 gz sim -v 4 shapes.sdf
 ```
 
+</details>
+
 ## Additional installs
 
 Most of additional packages will be installed when you run *rosdep* on your project's source directory.
 You can skip this section unless you need to install something that *rosdep* missed.
+
+<details>
+<summary>Click <b>here</b> to expand instructions</summary>
 
 ### Install Controller Manager and its infrastructure:
 ```
@@ -129,10 +153,6 @@ sudo apt install ros-${ROS_DISTRO}-topic-tools
 ```
 sudo apt install ros-${ROS_DISTRO}-xacro ros-${ROS_DISTRO}-twist-mux
 ```
-### Joystick setup
-
-Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Joystick.md
-
 ### Install additional navigation and visualization components
 
 To allow GPS operation in sim install localization package, SLAM Toolbox and Nav2:
@@ -142,14 +162,15 @@ sudo apt install ros-${ROS_DISTRO}-navigation2 ros-${ROS_DISTRO}-nav2* ros-${ROS
 sudo apt install ros-${ROS_DISTRO}-cartographer-ros
 sudo apt install ros-${ROS_DISTRO}-rviz-2d-overlay-plugins
 ```
-You need to configure ROS to use Cyclone DDS. Make sure the tail of your _.bashrc_ looks like this:
+
+Default DDS usually works fine. 
+At some point later you may want to configure ROS to use Cyclone DDS. Make sure the tail of your _.bashrc_ looks like this:
 ```
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 source /opt/ros/jazzy/setup.bash
 export ROS_DOMAIN_ID=0
-# gz sim crashes without the following:
-#export QT_QPA_PLATFORM=xcb
 ```
+</details>
 
 ## Verify your installation
 
@@ -166,32 +187,6 @@ ros2 launch nav2_bringup tb3_simulation_launch.py headless:=False
 You should see Gazebo and RViz windows coming up. In RViz set _2D Pose Estimate_ as described [here](https://docs.nav2.org/getting_started/index.html#navigating).
 
 You should see costmap and should be able to set a _Nav2 Goal_ and watch the robot navigating there autonomously.
-
-## Note: Visualizing terrain maps
-
-Some robots could be designed for outdoors operation and will use GPS for localization - for example, Dragger. So, we want to see where it is on the aerial map.
-
-There are two ways of visualizing robot position on a map - *mapviz* and *rviz-satellite*
-
-Here are the links:
-
-https://swri-robotics.github.io/mapviz/
-
-https://github.com/nobleo/rviz_satellite/tree/main/
-
-There is no binary distribution of *mapviz* for Jazzy, you have to compile it from sources.
-Microsoft deprecated Bing Maps keys, and Azure keys don't seem to work with mapviz.
-I wasn't able to make the sim work with mapviz anyway.
-
-For *rviz-satellite* things are much easier. It works as an Rviz2 "AerialMap" plugin. To install it:
-```
-sudo apt install ros-${ROS_DISTRO}-rviz-satellite
-```
-Object URI ```https://tile.openstreetmap.org/{z}/{x}/{y}.png```  works just fine and doesn't require API keys.
-
-The plugin is sensitive to time stamps, so all components must use the same *use_sim_time* settings.
-
-Running the sim as described below brings Rviz2 with a map view.
 
 ## Build "articubot_one" robot codebase.
 
@@ -242,6 +237,9 @@ ros2 launch articubot_one plucky_sim.launch.py
 
 or
 ros2 launch articubot_one turtle_sim.launch.py
+
+or
+ros2 launch articubot_one fido_sim.launch.py
 ```
 You should see Gazebo and RViz GUI coming up. You may see a white 150m x 150m square ("empty_map" from *map_server*)
 or SLAM Toolbox or Cartographer should be building map as you move the robot around with joystick. If you zoom a bit out in RViz, for an outdoor robot you will see aerial map. 
@@ -252,8 +250,9 @@ The simulated robot should respond to Joystick via teleop. Make sure that your "
 You must do _"colcon build"_ in _~/robot_ws_ every time you change anything. The "_source ..._" statements above should be put in your _.bashrc_ for convenience.
 
 **Note:**
-- as of *October 2025* Plucky is retired. The code works, but will not be updated. Use [Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy) as a template from now on.
-- *Fido* is a template for [your own robot](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/MakeYourOwn) - ready to copy and modify. It closely follows *Seggy*.
+- as of *October 2025* Plucky is retired. The code works, but will not be updated. You can use [Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy) as a template.
+- [Fido](https://github.com/slgrobotics/articubot_one/tree/lyrical/robots/fido) is a cleaned up template
+for [your own robot](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/MakeYourOwn) - ready to copy and modify. It closely follows *Seggy*.
 There is no real robot that runs this code.
 
 ## Test worlds
@@ -318,6 +317,32 @@ cd ~/robot_ws
 source ~/robot_ws/install/setup.bash
 ros2 launch articubot_one turtle.launch.py
 ```
+
+## Note: Visualizing terrain maps
+
+Some robots could be designed for outdoors operation and will use GPS for localization - for example, Dragger. So, we want to see where it is on the aerial map.
+
+There are two ways of visualizing robot position on a map - *mapviz* and *rviz-satellite*
+
+Here are the links:
+
+https://swri-robotics.github.io/mapviz/
+
+https://github.com/nobleo/rviz_satellite/tree/main/
+
+There is no binary distribution of *mapviz* for Jazzy, you have to compile it from sources.
+Microsoft deprecated Bing Maps keys, and Azure keys don't seem to work with mapviz.
+I wasn't able to make the sim work with mapviz anyway.
+
+For *rviz-satellite* things are much easier. It works as an Rviz2 "AerialMap" plugin. To install it:
+```
+sudo apt install ros-${ROS_DISTRO}-rviz-satellite
+```
+Object URI ```https://tile.openstreetmap.org/{z}/{x}/{y}.png```  works just fine and doesn't require API keys.
+
+The plugin is sensitive to time stamps, so all components must use the same *use_sim_time* settings.
+
+Running the sim as described below brings Rviz2 with a map view.
 
 --------------------------------------------
 
