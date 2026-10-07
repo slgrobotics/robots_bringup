@@ -2,15 +2,21 @@
 
 _"It takes all the running you can do, to keep in the same place. If you want to get somewhere else, you must run at least twice as fast as that!"_ - Alice in Wonderland
 
-# Set up Desktop ROS Jazzy "Clean Machine" from scratch
+> If you are looking to upgrade (Ubuntu 24 -> 26, ROS2 Jazzy -> Lyrical) follow [this guide](https://github.com/slgrobotics/articubot_one/wiki/Jazzy-to-Lyrical-migration). 
 
-Here we set up a clean **Desktop PC** to become a ROS playground machine and a Ground Station for our robots.
+For your ROS setups:
+- Ubuntu 24.04 LTS Noble Numbat → ROS 2 Jazzy
+- Ubuntu 26.04 LTS Resolute Raccoon → ROS 2 Lyrical
+
+# Set up Desktop ROS  "Clean Machine" from scratch
+
+Here we set up a clean **Desktop PC** to become a ROS playground machine and a Ground Station (*Workstation*) for our robots.
 
 For the robot's on-board **Raspberry Pi** setup see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi
 
 <img src="https://github.com/user-attachments/assets/3fe68730-c8a9-4779-809f-ecea9ec824e2" width="320">
 
-## Install Ubuntu 24.04 LTS ("Noble")
+## Install Ubuntu 26.04 ("Resolute Raccoon") or 24.04 LTS ("Noble Numbat") on a Workstation
 
 If your machine can't boot from USB Flash Drive:
 
@@ -32,15 +38,15 @@ locale
 sudo apt install software-properties-common
 ```
 
-### (...set up Samba, Chrony and other OS things here...).
+### (...set up Chrony, Samba and other OS things here...).
 
 Take a look at Raspberry Pi setup and choose what is relevant to your Desktop installation:
 
 https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/README.md
 
-## Install ROS Jazzy Jalisco Desktop LTS:
+## Install ROS Desktop LTS:
 
-Follow  https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html
+Follow  https://docs.ros.org/en/lyrical/Get-Started/Installation/Ubuntu-Install-Debs.html
 
 ### Install [RQqt](https://docs.ros.org/en/jazzy/Concepts/Intermediate/About-RQt.html) with all plugins and [PlotJuggler](https://plotjuggler.io):
 ```
@@ -59,9 +65,9 @@ sudo adduser <your account> dialout
 sudo apt install ros-${ROS_DISTRO}-joy*
 ```
 
-## Install Gasebo Harmonic (using "Default Gazebo/ROS Pairing"):
+## 24.04 / Jazzy: Install Gasebo Harmonic (using "Default Gazebo/ROS Pairing"):
 
-https://gazebosim.org/docs/harmonic/ros_installation#installing-the-default-gazebo-ros-pairing
+https://gazebosim.org/docs/jetty/ros_installation/
 ```
 sudo apt install ros-${ROS_DISTRO}-ros-gz
 # see if Gazebo UI comes up without crashing:
@@ -75,7 +81,16 @@ export QT_QPA_PLATFORM=xcb
 gz sim
 gz sim -v 4 shapes.sdf
 ```
-My Windows machine has a good video card, and can act as X Window Server, relieving the Linux box.
+### "RViz2 blinking" problem
+
+RViz blinking fix:
+```
+export QT_ENABLE_HIGHDPI_SCALING=0
+```
+
+### *Optional:* Delegating Linux Desktop to a Windows machine
+
+ My Windows machine has a good video card, and can act as X Window Server, relieving the Linux box.
 
 Running Gnome Desktop on a different machine (Windows 10 with VcXsrv in my case):
 ```
@@ -88,7 +103,12 @@ export DISPLAY=<machine>.local:0.0
 gz sim -v 4 shapes.sdf
 ```
 
-## Install Controller Manager and its infrastructure:
+## Additional installs
+
+Most of additional packages will be installed when you run *rosdep* on your project's source directory.
+You can skip this section unless you need to install something that *rosdep* missed.
+
+### Install Controller Manager and its infrastructure:
 ```
 sudo apt install ros-${ROS_DISTRO}-ros2-control ros-${ROS_DISTRO}-ros2-controllers
 
@@ -113,7 +133,7 @@ sudo apt install ros-${ROS_DISTRO}-xacro ros-${ROS_DISTRO}-twist-mux
 
 Follow this guide: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Joystick.md
 
-## Install additional navigation and visualization components
+### Install additional navigation and visualization components
 
 To allow GPS operation in sim install localization package, SLAM Toolbox and Nav2:
 ```
@@ -133,7 +153,7 @@ export ROS_DOMAIN_ID=0
 
 ## Verify your installation
 
-At this point you should verify your installation by trying a "Turtlebot SIM Test", described here:
+At this point you can verify your installation by trying a "Turtlebot SIM Test", described here:
 
 https://docs.nav2.org/getting_started/index.html
 
@@ -177,7 +197,7 @@ Running the sim as described below brings Rviz2 with a map view.
 
 **Note:** If you want to browse robot's code look here: https://github.com/slgrobotics/articubot_one
 
-Here we build a ROS2 package we need to run *Seggy* *Dragger*, *Plucky* or *Turtle* in Gazebo sim - or use RViz to control physical robots.
+Here we build a ROS2 package we need to run *Seggy* *Dragger*, *Fido*, *Plucky* or *Turtle* in Gazebo sim - or use RViz to control physical robots.
 
 So, on the Desktop machine:
 
@@ -231,7 +251,10 @@ The simulated robot should respond to Joystick via teleop. Make sure that your "
 
 You must do _"colcon build"_ in _~/robot_ws_ every time you change anything. The "_source ..._" statements above should be put in your _.bashrc_ for convenience.
 
-**Note:** as of *October 2025* Plucky is retired. The code works, but will not be updated. Use [Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy) as a template from now on.
+**Note:**
+- as of *October 2025* Plucky is retired. The code works, but will not be updated. Use [Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy) as a template from now on.
+- *Fido* is a template for [your own robot](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/MakeYourOwn) - ready to copy and modify. It closely follows *Seggy*.
+There is no real robot that runs this code.
 
 ## Test worlds
 
