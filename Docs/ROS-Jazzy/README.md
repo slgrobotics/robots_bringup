@@ -91,7 +91,7 @@ source ~/.bashrc
 gz sim
 ```
 
-### Solving Gazebo crash on startup:
+### Solving Gazebo crash on startup and weird RQT display on Lyrical:
 ```
 export QT_QPA_PLATFORM=xcb
 gz sim
@@ -132,6 +132,10 @@ sudo apt install ros-${ROS_DISTRO}-depthai-ros
 sudo apt install ros-${ROS_DISTRO}-rviz-2d-overlay-plugins
 
 sudo apt install ros-${ROS_DISTRO}-vision-msgs-rviz-plugins    <- good for Jazzy, not available yet for Lyrical
+
+# Lyrical only: for rviz_attitude_plugin:
+sudo apt-get install -y qt6-base-dev
+
 ```
 
 Most of additional packages will be installed when you run *rosdep* on your project's source directory.
@@ -210,6 +214,7 @@ git clone https://github.com/slgrobotics/articubot_one.git # optionally: -b dev
 git clone https://github.com/slgrobotics/ros_battery_monitoring.git
 git clone https://github.com/slgrobotics/scan_to_range.git
 git clone https://github.com/slgrobotics/outdoors_loc_nav.git
+git clone https://github.com/slgrobotics/rviz_attitude_plugin.git     # Lyrical only
 cd ~/robot_ws
 
 sudo rosdep init    # do it once, if you haven't done it before
