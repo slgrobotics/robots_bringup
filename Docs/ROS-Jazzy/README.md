@@ -126,6 +126,14 @@ gz sim -v 4 shapes.sdf
 
 ## Additional installs
 
+There are two installs to support OAK-D camera URDF and RViz:
+```
+sudo apt install ros-${ROS_DISTRO}-depthai-ros
+sudo apt install ros-${ROS_DISTRO}-rviz-2d-overlay-plugins
+
+sudo apt install ros-${ROS_DISTRO}-vision-msgs-rviz-plugins    <- good for Jazzy, not available yet for Lyrical
+```
+
 Most of additional packages will be installed when you run *rosdep* on your project's source directory.
 You can skip this section unless you need to install something that *rosdep* missed.
 
@@ -160,7 +168,6 @@ To allow GPS operation in sim install localization package, SLAM Toolbox and Nav
 sudo apt install ros-${ROS_DISTRO}-robot-localization ros-${ROS_DISTRO}-imu-tools ros-${ROS_DISTRO}-slam-toolbox
 sudo apt install ros-${ROS_DISTRO}-navigation2 ros-${ROS_DISTRO}-nav2* ros-${ROS_DISTRO}-rmw-cyclonedds-cpp
 sudo apt install ros-${ROS_DISTRO}-cartographer-ros
-sudo apt install ros-${ROS_DISTRO}-rviz-2d-overlay-plugins
 ```
 
 Default DDS usually works fine. 
