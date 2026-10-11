@@ -4,15 +4,44 @@ _"It takes all the running you can do, to keep in the same place. If you want to
 
 > If you are looking to upgrade (Ubuntu 24 -> 26, ROS2 Jazzy -> Lyrical) follow [this guide](https://github.com/slgrobotics/articubot_one/wiki/Jazzy-to-Lyrical-migration). 
 
+# Set up Desktop ROS  "Clean Machine" from scratch
+
 For your ROS setups:
 - Ubuntu 24.04 LTS Noble Numbat → ROS 2 Jazzy
 - Ubuntu 26.04 LTS Resolute Raccoon → ROS 2 Lyrical
 
-# Set up Desktop ROS  "Clean Machine" from scratch
-
 Here we set up a clean **Desktop PC** to become a ROS playground machine and a Ground Station (*Workstation*) for our robots.
 
 For the robot's on-board **Raspberry Pi** setup see [this guide](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi)
+
+---------------------------------
+
+Contents:
+- [Install Ubuntu 26.04 ("Resolute Raccoon") or 24.04 LTS ("Noble Numbat") on a Workstation](#install-ubuntu-2604-resolute-raccoon-or-2404-lts-noble-numbat-on-a-workstation)
+  - [Expand "server" edition to "desktop" (just add GUI)]()
+  - [...set up Chrony, Samba and other OS things here...]()
+- [Install ROS Desktop LTS:]()
+  - [Install RQT with all plugins and PlotJuggler]()
+- [Joystick setup]()
+  - [For 24.04 / Jazzy: Install Gasebo](#for-2404--jazzy-install-gasebo)
+  - [Solving Gazebo crash on startup and weird RQT display on Lyrical]()
+  - [*"RViz2 blinking"* problem]()
+  - [*Optional:* Delegating Linux Desktop to a Windows machine]()
+- [Additional installs]()
+  - [Install Controller Manager and its infrastructure]()
+  - [Install xacro processor and Joystick mixer]()
+  - [Install additional navigation and visualization components]()
+- [Verify your installation]()
+- [Build "articubot_one" robot codebase]()
+- [Bringing up robot simulation in Gazebo]()
+- [Test worlds]()
+- [Running a physical robot]()
+- [Note: Visualizing terrain maps]()
+- [Optional: running Cartographer instead of Slam_Toolbox]()
+- [Optional: Explore Nav2 and Behavior Trees]()
+- [Optional: Install Husarnet VPN]()
+- [Useful links]()
+---------------------------------
 
 <img src="https://github.com/user-attachments/assets/3fe68730-c8a9-4779-809f-ecea9ec824e2" width="320">
 
