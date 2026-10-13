@@ -33,7 +33,7 @@ Contents:
   - [additional navigation and visualization components](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#additional-installs)
 - [Verify your installation](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#verify-your-installation)
 - [Build "articubot_one" robot codebase](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#build-articubot_one-robot-codebase)
-- [Bringing up robot simulation in Gazebo](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#bringing-up-robot-simulation-in-gazebo)
+- **[Bringing up robot simulation in Gazebo](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#bringing-up-robot-simulation-in-gazebo)**
 - [Test worlds](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#test-worlds)
 - [Running a physical robot](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#running-a-physical-robot)
 - [Note: Visualizing terrain maps](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#note-visualizing-terrain-maps)
@@ -289,6 +289,13 @@ or SLAM Toolbox or Cartographer should be building map as you move the robot aro
 The simulated robot should respond to Joystick via teleop. Make sure that your "enable" and "turbo" buttons are assigned correctly in _~/robot_ws/src/articubot_one/launch/joystick.launch.py_
 
 You must do _"colcon build"_ in _~/robot_ws_ every time you change anything. The "_source ..._" statements above should be put in your _.bashrc_ for convenience.
+
+**Tip:** If this happens:
+```
+[ERROR] [component_container_mt-...]: process has died ..., exit code -4, ...
+```
+The `"-4"` indicates illegal instruction crash, due to uncompatible optimization flags in the installed binaries.
+See [this guide](https://github.com/slgrobotics/articubot_one/wiki/jazzy-to-lyrical-migration#solving-nav2-mppi-crashes-on-older-intel-i7-sandbridge-cpus).
 
 **Note:**
 - as of *October 2025* Plucky is retired. The code works, but will not be updated. You can use [Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy) as a template.
