@@ -1,22 +1,24 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
-**Seggy robot** is built from a 2016 Segway Ninebot miniPRO - that's why the name. And no, it has nothing to do with "*Crabbed, cantankerous*" or "*exaggerated, stylized movement*" ;-).
+-------------
 
-**Note:** As of *October 2025* Seggy is in active development. Stable, working code is on the *[main](https://github.com/slgrobotics/articubot_one)* branch.
-For the latest code see the *[dev](https://github.com/slgrobotics/articubot_one/tree/dev)* branch.
+> - **Seggy robot** is built from a 2016 Segway Ninebot miniPRO - that's why the name.
+> And no, it has nothing to do with "*Crabbed, cantankerous*" or "*exaggerated, stylized movement*". Well, most of time... ;-).
+> - **Note:** As of *October 2026* Seggy is in active development.
+> Stable, working code is on the *[main](https://github.com/slgrobotics/articubot_one)* or *[lyrical](https://github.com/slgrobotics/articubot_one/tree/lyrical)* branches.
+> For the latest code see the *[dev](https://github.com/slgrobotics/articubot_one/tree/dev)* branch.
 
 -------------
+
+## Seggy Notes
 
 **Contents:**
 
-- [Seggy Notes](#seggy-notes)
-  - [Build and Run Instructions (on the robot's Raspberry Pi 5):](#build-and-run-instructions-on-the-robots-raspberry-pi-5)
-  - [Running the robot](#running-the-robot)
-  - [Optional: Create a Linux service for on-boot autostart](#optional-create-a-linux-service-for-on-boot-autostart)
+- [Build and Run Instructions (on the robot's Raspberry Pi 5):](#build-and-run-instructions-on-the-robots-raspberry-pi-5)
+- [Running the robot](#running-the-robot)
+- [Optional: Create a Linux service for on-boot autostart](#optional-create-a-linux-service-for-on-boot-autostart)
 
 -------------
-
-# Seggy Notes
 
 Seggy is a *"larger Turtlebot"* - running [my *articubot_one* code](https://github.com/slgrobotics/articubot_one). Desktop only needs to run RViz and joystick node for robot control.
 
