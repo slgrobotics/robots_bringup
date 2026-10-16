@@ -1,5 +1,20 @@
 ## Robots Bringup (Documentation)
 
+## Contents
+
+- [Here are the robots](#here-are-the-robots)
+  - [Seggy](#seggy)
+  - [Dragger](#dragger)
+  - [Plucky (retired)](#plucky-retired)
+  - [The Venerable Create 1 Turtlebot, now Jazzified](#the-venerable-create-1-turtlebot-now-jazzified)
+  - ["Make Your Own" robot](#make-your-own-robot)
+- [How to use this repository](#how-to-use-this-repository)
+  - [1. Just set up a "Clean Machine" to work with ROS2 Jazzy](#1-just-set-up-a-clean-machine-to-work-with-ros2-jazzy)
+  - [2. Try my robots in Gazebo simulation, browse the code (no robot hardware needed)](#2-try-my-robots-in-gazebo-simulation-browse-the-code-no-robot-hardware-needed)
+  - [3. Work on your own codebase](#3-work-on-your-own-codebase)
+  - [Found a bug? Want to contribute a fix? Have a question?](#found-a-bug-want-to-contribute-a-fix-have-a-question)
+- [Useful links](#useful-links)
+
 - For a better viewing experience, visit [Project Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 - Please take a moment to review the [Current Notes and Project Status](https://github.com/slgrobotics/articubot_one/wiki/Notes-and-Status) page
 
