@@ -2,19 +2,16 @@
 
 **Note:** as of *October 2025* Plucky is retired. The code works, but will not be updated. Use [Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy) as a template from now on.
 
--------------
+## Plucky Notes
 
 **Contents:**
 
-- [Plucky Notes](#plucky-notes)
 - [Build and Run Instructions (on the robot's Raspberry Pi 5):](#build-and-run-instructions-on-the-robots-raspberry-pi-5)
 - [Running the robot](#running-the-robot)
 - [Optional: Create a Linux service for on-boot autostart](#optional-create-a-linux-service-for-on-boot-autostart)
 - [Optional: FPV Camera and receiver Setup](#optional-fpv-camera-and-receiver-setup)
 
 -------------
-
-# Plucky Notes
 
 ```
 pluck·y /'pl?ke/ adjective
