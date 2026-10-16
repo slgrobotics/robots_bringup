@@ -9,11 +9,11 @@
 
 Dragger photos are here: https://photos.app.goo.gl/eAdKiD7YYnL9Vou6A
 
-If you want to browse robot's code look here: https://github.com/slgrobotics/articubot_one
+If you want to browse the robot's code, look here: https://github.com/slgrobotics/articubot_one
 
 Dragger is a *"larger Turtlebot"* - running all ROS2 nodes on-board. Only RViz2 runs on a desktop "ground station" computer. On board Dragger has a Raspberry Pi 5 ("dragger") [and an "FPV Drone" TV camera. - TBD].
 
-Robot's Raspberry Pi 5 (8GB) runs sensors drivers (GPS, LD14 LIDAR and MPU9250), Differential Drive Control (inspired by Articulated Robotics), SLAM Toolkit and Nav2. Arduino Mega 2650 drives wheels and reports encoder readings over serial.
+The robot's Raspberry Pi 5 (8GB) runs sensor drivers (GPS, LD14 LIDAR and MPU9250), Differential Drive Control (inspired by Articulated Robotics), SLAM Toolkit and Nav2. Arduino Mega 2650 drives wheels and reports encoder readings over serial.
 
 **Note:** You can just run Dragger robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
 refer to [this section](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README.md#build-articubot_one-robot-codebase)
@@ -22,9 +22,9 @@ refer to [this section](https://github.com/slgrobotics/robots_bringup/blob/main/
 
 Dragger has _Ubuntu 24.04 Server (64 bit)_ and _ROS2 Jazzy Base_ installed - see https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi for instructions.
 
-Dragger and Plucky both have two Arduino boards, one drives the Ultrasonic Parking Sensor - while the main Arduino Mega 2560 drives the wheels and combines all sensors data into a single serial stream for Raspberry Pi Dragger.
+Dragger and Plucky both have two Arduino boards: one drives the Ultrasonic Parking Sensor - while the main Arduino Mega 2560 drives the wheels and combines all sensor data into a single serial stream for Raspberry Pi Dragger.
 
-Dragger and Plucky use parking sensor (four ultrasonic rangers) for obstacle avoidance and mapping, converting its data to *sensor_msgs/msg/Range* messages.
+Dragger and Plucky use a parking sensor (four ultrasonic rangers) for obstacle avoidance and mapping, converting its data to *sensor_msgs/msg/Range* messages.
 
 Arduino Mega 2560 code - wheels/sensors driver, talking to Articulated Robotics ROS node: 
 
@@ -103,12 +103,12 @@ git clone https://github.com/slgrobotics/outdoors_loc_nav.git
 Dragger, Plucky and any other robot using _[diffdive_arduino](https://github.com/slgrobotics/diffdrive_arduino)_ package need a _BatteryStateBroadcaster_ component.
 In my code it is configured to use all 9 available State interfaces, not only "voltage" available in official distribution at this time.
 
-Please follow [this guide](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/BatteryStateBroadcaster.md) to install modified version,
-until the [official distribution](https://github.com/ipa320/ros_battery_monitoring/pull/3) catches up with latest changes and you could just install it using _apt_:
+Please follow [this guide](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/BatteryStateBroadcaster.md) to install the modified version,
+until the [official distribution](https://github.com/ipa320/ros_battery_monitoring/pull/3) catches up with the latest changes and you can just install it using _apt_:
 ```
 git clone https://github.com/slgrobotics/ros_battery_monitoring.git
 ```
-ROS nodes produce _robot description_ and needs to  know some basic parameters of the robot. Edit the following to match your values, for example:
+ROS nodes produce a _robot description_ and need to know some basic parameters of the robot. Edit the following to match your values, for example:
 ```
 ~/robot_ws/src/articubot_one/robots/dragger/description/ros2_control.xacro
 
@@ -145,7 +145,7 @@ colcon build
 
 ### Run the robot (on-board Raspberry 5 8GB)
 
-For convenience, create and populate _launch_ directory:
+For convenience, create and populate the _launch_ directory:
 ```
 mkdir ~/launch
 cp ~/robot_ws/src/articubot_one/launch/bootup_launch.sh ~/launch/.
@@ -165,7 +165,7 @@ source /home/ros/robot_ws/install/setup.bash
 
 ros2 launch /home/ros/robot_ws/src/articubot_one/robots/dragger/launch/dragger.launch.py
 ```
-Robot can be started with:
+The robot can be started with:
 ```
 cd ~/launch
 ./bootup_launch.sh
@@ -178,7 +178,7 @@ colcon build; ros2 launch articubot_one launch_rviz.launch.py use_sim_time:=fals
 ```
 For diagnostics, run *rqt* and *rqt_graph*
 
-If you choose to save maps (using _slam_toolkit_ RViz2 control) - the files will appear in _~/launch_ directory.
+If you choose to save maps (using _slam_toolkit_ RViz2 control) - the files will appear in the _~/launch_ directory.
 
 **Note:** See https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy  for Desktop machine setup.
 

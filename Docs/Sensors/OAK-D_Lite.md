@@ -99,7 +99,7 @@ There's plenty of information on the [Luxonis Software](https://docs.luxonis.com
 
 For a quick test there is a collection of python [examples](https://github.com/luxonis/depthai-python), which is not needed for ROS2, but is useful for testing. 
 
-It can be only installed if you have a **Desktop** edition of Ubuntu 24.04
+It can only be installed if you have a **Desktop** edition of Ubuntu 24.04
 
 Note the _virtual environment_ setup and activation.
 ```
@@ -128,7 +128,7 @@ Connected cameras: [
 Usb speed: SUPER
 Device name: OAK-D-LITE  Product name: OAK-D-LITE
 ```
-Note the "_Usb speed_" value - it will be "_SUPER_" on USB3 and "_HIGH_" if plugged into an USB2 socket.
+Note the "_Usb speed_" value - it will be "_SUPER_" on USB3 and "_HIGH_" if plugged into a USB2 socket.
 
 ## Spatial demos in Python
 
@@ -154,11 +154,11 @@ There's also a collection of experimental code [here](https://github.com/luxonis
 
 ## Configuration and Troubleshooting
 
-There's a number of [environment variables](https://docs.oakchina.cn/projects/api/components/device.html#environment-variables), which can help reconfiguring camera system.
+There are a number of [environment variables](https://docs.oakchina.cn/projects/api/components/device.html#environment-variables), which can help reconfigure the camera system.
 
 Use ```export DEPTHAI_LEVEL=info; export XLINK_LEVEL=info``` to display temperatures (default is "_warn_", see https://docs.luxonis.com/software/depthai/debugging/ for options).
 
-Most operation parameters (frame size etc.) are convigured via arguments to launch files.
+Most operation parameters (frame size etc.) are configured via arguments to launch files.
 
 # ROS2 operation
 
@@ -196,14 +196,14 @@ ros2 launch depthai_examples stereo.launch.py
 ros2 launch depthai_ros_driver pointcloud.launch.py use_rviz:=True
 ```    
 
-Other examples produce topics which can be viewed in _rqt_ (beware of ~1A power conumption and possible overheating):
+Other examples produce topics which can be viewed in _rqt_ (beware of ~1A power consumption and possible overheating):
 ```
 ros2 launch depthai_examples rgb_stereo_node.launch.py
 ros2 launch depthai_examples tracker_yolov4_node.launch.py
 ros2 launch depthai_examples tracker_yolov4_spatial_node.launch.py
 ros2 launch depthai_examples mobile_publisher.launch.py
 ```
-There are examples above that publish data from [_yolo_](https://encord.com/blog/yolo-object-detection-guide/) model. Note that camera resolution in the examples is downgraded to 300x300 or 480P, so the frame rate and CPU load becomes reasonable (I saw 10 FPS, 34 FPS).
+There are examples above that publish data from [_yolo_](https://encord.com/blog/yolo-object-detection-guide/) model. Note that camera resolution in the examples is downgraded to 300x300 or 480P, so the frame rate and CPU load become reasonable (I saw 10 FPS, 34 FPS).
 
 Refer to [this guide](https://docs.luxonis.com/software/ros/depthai-ros/driver) for more.
 
@@ -241,7 +241,7 @@ Overall, it is worth spending time exploring *launch files* in these folders:
 
 ![Screenshot from 2025-05-12 12-00-28](https://github.com/user-attachments/assets/8925174a-0dc9-4c08-8502-8fa491b42561)
 
-- My fork [here](https://github.com/slgrobotics/depthai-ros) tries to fix that 3D visualization problem (it is work in progress).
+- My fork [here](https://github.com/slgrobotics/depthai-ros) tries to fix that 3D visualization problem (it is a work in progress).
 
 ## Configuration files
 
@@ -275,7 +275,7 @@ You can usually create a custom `.yaml` file and pass it as parameter, for examp
   ros__parameters:
     desqueeze: true
 ```
-Run the example (if in doubt, provide fulll path):
+Run the example (if in doubt, provide the full path):
 ```
 ros2 launch depthai_filters spatial_bb.launch.py params_file:=my_camera.yaml
 ```
@@ -302,11 +302,11 @@ as described [here](https://docs.luxonis.com/software/ros/depthai-ros/driver#Dep
 
 ## Simulation in Gazebo
 
-To my best knowledge, DepthAI ROS Jazzy binary distribution does not contain simulation files for Gazebo Harmonic.
+To the best of my knowledge, DepthAI ROS Jazzy binary distribution does not contain simulation files for Gazebo Harmonic.
 
 Files under `/opt/ros/jazzy/share/depthai*` only contain code supporting real cameras.
 
-My *articubot_one* repository (`dev` branch) contains an URDF and other files to simulate OAK-D Lite for my Seggy robot. 
+My *articubot_one* repository (`dev` branch) contains a URDF and other files to simulate OAK-D Lite for my Seggy robot.
 It is intended to be used with RTAB-Map [package](https://github.com/slgrobotics/articubot_one/wiki/Visual-SLAM-with-RTAB%E2%80%90Map).
 
 The files are:
@@ -339,7 +339,7 @@ ros2 launch articubot_one rtabmap.launch.py use_sim_time:=true \
    publish_tf_map:=false delete_db_on_start:=true
 ```
 
-And in anoter terminal - RTAB-Map viewer:
+And in another terminal - RTAB-Map viewer:
 ```
 ros2 launch articubot_one rtabmap_viz.launch.py
 ```
@@ -356,19 +356,19 @@ When looking out through the camera lens:
 - X-Axis: Points Right   (horizontal pixel axis)
 - Y-Axis: Points Down    (vertical pixel axis)
 
-It is different from robot's REP-103 Right-Handed, Z-Up coordinate system:
+It is different from the robot's REP-103 Right-Handed, Z-Up coordinate system:
 - X-Axis (Red in RViz):   Points Forward (the direction the robot drives)
 - Y-Axis (Green in RViz): Points Left
 - Z-Axis (Blue in RViz):  Points Up (against gravity)
 
-So, the camera *body* lives in robot's frame, while the messages `frame_id` contains *optical frame* rotated as follows:
+So, the camera *body* lives in the robot's frame, while each message's `frame_id` refers to an *optical frame* rotated as follows:
 ```
 <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
 ```
 
 ## Converting *PointCloud2* to *LaserScan*
 
-It could be not practical to consume */oak/points* *PointCloud2* data due to high bandwidth required to pass it around and high CPU requirements for processing it.
+It may not be practical to consume */oak/points* *PointCloud2* data due to the high bandwidth required to pass it around and high CPU requirements for processing it.
 
 There's a `pointcloud_to_laserscan` [package](https://github.com/ros-perception/pointcloud_to_laserscan) which can be used to produce a less voluminous *sensor_msgs/msg/LaserScan* message.
 
@@ -445,9 +445,9 @@ Overall load on the WiFi link is around 200 Mbits/s (run `nload wlan0` on RPi).
 ## The "*luxonis Device crashed, but no crash dump could be extracted*" bug
 
 At the time of this writing Luxonis ROS Jazzy code (or OAK_D LITE USB hardware) has a bug, which you will very likely experience.
-It is related to camera's high power consumption and USB ports inability to deliver ~1A current to the device.
+It is related to the camera's high power consumption and USB ports' inability to deliver ~1A current to the device.
 
-After a short time (between several seconds and several minutes) of opreation, the camera "driver" freezes and its pipelines would stop delivering data.
+After a short time (between several seconds and several minutes) of operation, the camera "driver" freezes and its pipelines stop delivering data.
 
 You can see that topics are not being published anymore.
 If you interrupt your launch with _Cntrl/C_, you can see an error message cited in this section's header, for example:
@@ -471,18 +471,18 @@ This is a known bug, and it looks like Luxonis knows about it:
 
 https://discuss.luxonis.com/d/4835-oak-d-crashes-on-different-examples
 
-my testing, I experience it a lot, even when using quality USB 3.2 cables and external power through a USB 3.2 Hub. 
+In my testing, I experience it a lot, even when using quality USB 3.2 cables and external power through a USB 3.2 Hub.
 It is random, sometimes the device "just works" with USB 2.0 connections and a very basic cable.
 It can work on Raspberry Pi 5 better than on an Intel Desktop.
 
 I am not equipped to debug it for real, but after trying a lot of combinations of machines, cables and USB connections,
-I am convinced that the bug disappears when there's no other USB devices connected to hubs all the way to the machine.
+I am convinced that the bug disappears when there are no other USB devices connected to hubs all the way to the machine.
 For example, when I have all USB3 sockets unused, except for OAK-D LITE, the camera works fine forever.
 But if I connect a card reader to the USB3 socket next to it, random crashes start happening.
 
 The bug also disappears **when the camera is fed with 5V via an improvised "USB-C power T-tap"** (see above).
 
-The other (software) way to deal with it is to write a custom node with a monitoring thread, which will recreate whole set of pipelines once data stops coming.
+The other (software) way to deal with it is to write a custom node with a monitoring thread, which will recreate the whole set of pipelines once data stops coming.
 Here is my attempt to do just that: https://github.com/slgrobotics/depthai_rospi
 
 ## Useful Links

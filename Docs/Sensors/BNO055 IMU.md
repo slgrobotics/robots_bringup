@@ -43,7 +43,7 @@ Apart from the I²C address, there’s no practical difference in how they behav
 2. The "standard" ROS 2 driver relies on *smbus*, while a more advanced Python package, *[smbus2](https://pypi.org/project/smbus2/)*,
 offers improved integration with Linux and better overall reliability.
 3. When monitoring */imu/data/orientation/yaw* using [PlotJuggler](https://www.plotjuggler.io), I noticed frequent (~1..3 seconds) spikes or jumps in the data.
-It appears that neither I²C communication nor the code’s exception handling are responsible for this.
+It appears that neither I²C communication nor the code’s exception handling is responsible for this.
 
 I created a [fork](https://github.com/slgrobotics/bno055) of the driver, switched to *smbus2* and implemented a “sanity check” for incoming data — this fully resolved the issue.
 
@@ -51,14 +51,14 @@ I submitted a [report](https://github.com/flynneva/bno055/issues/80) to the orig
 
 ### Positioning sensor on the robot
 
-Here is how Adafruit BNO055 carrier board is oriented on Create 1 [Turtlebot](https://photos.app.goo.gl/ED3YbmNRm4kKt3V5A) (view from the rear):
+Here is how the Adafruit BNO055 carrier board is oriented on Create 1 [Turtlebot](https://photos.app.goo.gl/ED3YbmNRm4kKt3V5A) (view from the rear):
 
 ![BNO055_Adafruit_turtle](https://github.com/user-attachments/assets/70359a73-bc3f-421e-9e63-e41263150449)
 
 If you are using a [generic carrier board](https://www.amazon.com/dp/B0D47G672B), X axis (as printed on the PCB) should point forward, and Y - to the left of the robot.
 Note that the sensor's chip is oriented identically in both cases. 
 
-The proper orientation of either sensors is due to the launch parameter setting, and works specifically with this ROS2 driver:
+The proper orientation of either sensor is due to the launch parameter setting, and works specifically with this ROS2 driver:
 ```
 'placement_axis_remap': 'P1', # P1 - default, ENU. See Bosch BNO055 datasheet section "Axis Remap"
 ```
@@ -76,7 +76,7 @@ rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y --s
 sudo apt install python3-smbus2
 colcon build
 ``` 
-Try running it, see IMU messages in rqt:
+Try running it and view IMU messages in rqt:
 ``` 
 cd ~/robot_ws
 colcon build; source install/setup.bash; ros2 launch bno055 bno055.launch.py
@@ -91,7 +91,7 @@ Install [PlotJuggler](https://plotjuggler.io) to monitor IMU data:
 ```
 sudo apt install ros-${ROS_DISTRO}-plotjuggler-ros
 ```
-Run *PlotJugger* as a ROS2 process. It subscribes to topic's values (i.e. "*imu_data*" *yaw*) and shows them in real time:
+Run *PlotJuggler* as a ROS2 process. It subscribes to topic values (i.e. "*imu_data*" *yaw*) and shows them in real time:
 ```
 ros2 run plotjuggler plotjuggler
 ```

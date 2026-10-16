@@ -77,10 +77,10 @@ If you want to connect a BE-880 or similar GPS Receiver directly to Raspberry Pi
 - UART is enabled in
 - Console login prompt is disabled in
 - Related TTY services are stopped and disabled
-- Your GPS is connfigured using, for example, Windows u-Center utility (GPS+GLONASS+SBAS, 10Hz, NMEA, 115200)
+- Your GPS is configured using, for example, Windows u-Center utility (GPS+GLONASS+SBAS, 10Hz, NMEA, 115200)
 - The GPS is connected: 5V, GND, TX->GPIO015/Pin10  RX->GPIO014/Pin08
 
-**Note:** Devices without flash memory don't preserve their configuration an rely on software initialization every time they are being used. Avoid such devices.
+**Note:** Devices without flash memory don't preserve their configuration and rely on software initialization every time they are being used. Avoid such devices.
 
 You can install and use [raspi-config](https://linuxconfig.org/raspberry-pi-4-enable-uart), or edit files in `/boot/firmware/`
 

@@ -19,7 +19,7 @@ The *articubot_one* repository already features *Turtle* — a robot layout very
 - An iRobot *Create 1* base driven by the ROS 2 *Autonomous Labs* driver
 - Customizable *description* files
 - A comprehensive collection of *configuration* files (URDF, Nav2 etc.)
-- Structured *launch* files easily adaptable to different sensors and localizers (AMCL, SLAM Toolbox etcd.)
+- Structured *launch* files easily adaptable to different sensors and localizers (AMCL, SLAM Toolbox, etc.)
 - Support for both Gazebo simulation and physical hardware deployment
 - Support for ROS2 *Jazzy* and *Kilted* releases, and *Lyrical* as soon as its Nav2 and other packages are released.
 

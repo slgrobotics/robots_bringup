@@ -96,7 +96,7 @@ export ROS_DOMAIN_ID=0
 ```
 **Note:** Workstation's _.bashrc_ should refer to all robots' IPv6 addresses.
 
-After you source the _.bashrc_, whatever you launch (ROS2 related) will talk directly (_peer-to-peer_) across VPN, not flooding LAN with UDP trafic.
+After you source the _.bashrc_, whatever you launch (ROS2 related) will talk directly (_peer-to-peer_) across VPN, not flooding LAN with UDP traffic.
 
 And, magically, it should talk the same way while your robot is across subnets, or connected to a phone hotspot WiFi or anything similar.
 
@@ -108,7 +108,7 @@ Just in case...
 
 For example, consider two "chained" routers (_cable-modem ---> router167 ---> router168_) - each with their LANs. That makes two _subnets_.
 
-_Router168_ has firewall disabled. Both have static routing tables defined to direct trafic to each other.
+_Router168_ has firewall disabled. Both have static routing tables defined to direct traffic to each other.
 
 And the robot's _/etc/netplan/50-cloud-init.yaml_ may look like this (I am open to suggestions):
 ```

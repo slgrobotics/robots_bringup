@@ -27,7 +27,7 @@ Datasheet: https://invensense.tdk.com/wp-content/uploads/2016/06/DS-000189-ICM-2
 My fork of ROS2 driver code is here: https://github.com/slgrobotics/ros2_icm20948
 
 **Note:** as the ROS2 driver cannot use DMP, calibration is neither automatic nor optional.
-Use calibration [script](https://github.com/slgrobotics/ros2_icm20948/blob/master/tests/calibrate_mag.py) and set related parameters in the launch file.
+Use the calibration [script](https://github.com/slgrobotics/ros2_icm20948/blob/master/tests/calibrate_mag.py) and set related parameters in the launch file.
 
 ### Trying it (on Raspberry Pi)
 
@@ -77,31 +77,31 @@ $ colcon build; source install/setup.bash; ros2 launch ros2_icm20948 icm20948_no
 [icm20948_node-1] [INFO] [1767203300.978213904] [icm20948_node]:    accel_fsr=3 mul=0.0047884 m/s^2 per LSB, gyro_fsr=3 mul=0.00106423 rad/s per LSB
 [icm20948_node-1] [INFO] [1767203301.088602318] [icm20948_node]: OK: ICM20948 Node: init successful
 ```
-You should see the `/imu/data` topic in *rqt* and can display publishing rate:
+You should see the `/imu/data` topic in *rqt* and can display its publishing rate:
 ```
 ros2 topic hz /imu/data
 average rate: 200.040
 	min: 0.005s max: 0.005s std dev: 0.00004s window: 202
 ```
 To see IMU orientation in RViz2, you need to:
-- bring up RViz2 (IMU is already setup in my RViz config):
+- bring up RViz2 (IMU is already set up in my RViz config):
 ```
 ros2 launch articubot_one launch_rviz.launch.py use_sim_time:=false
 ```
-- run static transformer node to relate frames, raising *IMU frame* 1 meter up on the *map*:
+- run a static transformer node to relate frames, raising *IMU frame* 1 meter up on the *map*:
 ```
 ros2 run tf2_ros static_transform_publisher 0 0 1 0 0 0 map imu_link
 ```
-Enable the *IMU checkbox* and adjust topic to show `/imu_data`:
+Enable the *IMU checkbox* and adjust the topic to show `/imu_data`:
 
 <img width="1387" height="625" alt="Screenshot from 2025-12-31 12-46-55" src="https://github.com/user-attachments/assets/c2657cb1-19fb-4ea2-bad1-7b7a42067470" />
 
 ### Running ICM20948 node on the robot and tuning EKF filter
 
-EKF [filter](https://github.com/slgrobotics/articubot_one/blob/main/launch/ekf_odom.launch.py) fuses wheels odometry with IMU orientation data,
-deriving reliable orientation quaternion in turns and straight runs (topic *"odometry/local"*).
+EKF [filter](https://github.com/slgrobotics/articubot_one/blob/main/launch/ekf_odom.launch.py) fuses wheel odometry with IMU orientation data,
+deriving a reliable orientation quaternion in turns and straight runs (topic *"odometry/local"*).
 
-It is very important to have EKF filter tuned properly, as shown [here](https://github.com/slgrobotics/articubot_one/blob/main/robots/seggy/config/ekf_odom_params.yaml), for example.
+It is very important to have the EKF filter tuned properly, as shown [here](https://github.com/slgrobotics/articubot_one/blob/main/robots/seggy/config/ekf_odom_params.yaml), for example.
 
 More EKF tuning tips [here](https://chatgpt.com/s/t_691b80a57e588191b1528a238588b87a).
 
@@ -111,7 +111,7 @@ Install [PlotJuggler](https://plotjuggler.io) to monitor IMU data:
 ```
 sudo apt install ros-${ROS_DISTRO}-plotjuggler-ros
 ```
-Run *PlotJugger* as a ROS2 process. It subscribes to topic's values (i.e. "*imu_data*" *yaw*) and shows them in real time:
+Run *PlotJuggler* as a ROS2 process. It subscribes to topic values (i.e. "*imu_data*" *yaw*) and shows them in real time:
 ```
 ros2 run plotjuggler plotjuggler
 ```

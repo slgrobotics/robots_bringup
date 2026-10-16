@@ -2,4 +2,4 @@
 
 This document lists my recent status reports, observations, problems, and fixes. (Updated frequently.)
 
-Please see this document on [Project Wiki](https://github.com/slgrobotics/articubot_one/wiki/Notes-and-Status)
+Please see this document on the [Project Wiki](https://github.com/slgrobotics/articubot_one/wiki/Notes-and-Status)

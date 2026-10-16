@@ -85,7 +85,7 @@ sudo apt install ros-${ROS_DISTRO}-rqt* ros-${ROS_DISTRO}-plotjuggler-ros
 ```
 *rqt* and *rqt_graph* can be directly run from a command prompt. They show nodes and topics in the most friendly way.
 
-Run *PlotJugger* as a ROS2 process. It subscribes to topic's values (i.e. "*imu_data*" *yaw*) and shows them in real time:
+Run *PlotJuggler* as a ROS2 process. It subscribes to topic values (i.e. "*imu_data*" *yaw*) and shows them in real time:
 ```
 ros2 run plotjuggler plotjuggler
 ```
@@ -230,7 +230,7 @@ You should see costmap and should be able to set a _Nav2 Goal_ and watch the rob
 
 ## Build "articubot_one" robot codebase.
 
-**Note:** If you want to browse robot's code look here: https://github.com/slgrobotics/articubot_one
+**Note:** If you want to browse the robot's code, look here: https://github.com/slgrobotics/articubot_one
 
 Here we build a ROS2 package we need to run *Seggy* *Dragger*, *Fido*, *Plucky* or *Turtle* in Gazebo sim - or use RViz to control physical robots.
 

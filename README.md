@@ -1,7 +1,7 @@
 ## Robots Bringup (Documentation)
 
-- for better viewing experience visit [Project Wiki](https://github.com/slgrobotics/articubot_one/wiki)
-- please take a moment to review [Current Notes and Project Status](https://github.com/slgrobotics/articubot_one/wiki/Notes-and-Status) page
+- For a better viewing experience, visit [Project Wiki](https://github.com/slgrobotics/articubot_one/wiki)
+- Please take a moment to review the [Current Notes and Project Status](https://github.com/slgrobotics/articubot_one/wiki/Notes-and-Status) page
 
 --------------------------
 
@@ -9,11 +9,11 @@ This repository contains instructions and other [documents](https://github.com/s
 
 It is intended to run navigation on my Turtlebot-like robots - in Gazebo simulation or with physical robots, indoors or outdoors.
 
-Some of the [docs](https://github.com/slgrobotics/robots_bringup/tree/main/Docs) here deal with Desktop ("*Ground Station*") setup and operation, while others describe setup of on-board Raspberry Pi computers.
+Some of the [docs](https://github.com/slgrobotics/robots_bringup/tree/main/Docs) here deal with Desktop ("*Ground Station*") setup and operation, while others describe the setup of on-board Raspberry Pi computers.
 
-The [Sensors](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Sensors) section describes setup of GPS, Cameras, IMU and other devices.
+The [Sensors](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Sensors) section describes the setup of GPS receivers, cameras, IMUs, and other devices.
 
-Don't forget to properly setup your [WiFi](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/WiFi_Logger_Visualizer.md#wifi-testing-and-benchmarking) 
+Don't forget to properly set up your [WiFi](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/WiFi_Logger_Visualizer.md#wifi-testing-and-benchmarking)
 or [Global VPN](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README-Husarnet.md) 
 and feed your RPi5 [properly](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/README-Extra.md#properly-feeding-your-raspberry-pi-5).
 
@@ -32,7 +32,7 @@ see [ROS2 Jazzy Setup](https://github.com/slgrobotics/robots_bringup/tree/main/D
 
 ### Seggy
 
-An indoors "*tablebot*" Seggy is described here:
+An indoor "*tablebot*", Seggy, is described here:
 [Docs/Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy)
 
 ### Dragger
@@ -42,7 +42,7 @@ The outdoorsy robot Dragger (Raspberry 5, GPS) is described here:
 
 ### Plucky (retired)
 
-An indoors mapper robot Plucky is described here:
+An indoor mapping robot, Plucky, is described here:
 [Docs/Plucky](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Plucky)
 
 ### The Venerable _Create 1_ Turtlebot, now Jazzified
@@ -58,14 +58,14 @@ This section describes how to make a differential drive [robot](https://github.c
 
 **Note:** Purpose and Limitations of this Project
 
-This software is not ready for production use. It has neither been developed nor tested for a specific use case. However, the license conditions of the applicable Open Source licenses allow you to adapt the software to your needs. Before using it in a safety relevant setting, make sure that the software fulfills your requirements and adjust it according to any applicable safety standards, e.g., ISO 26262.
+This software is not ready for production use. It has neither been developed nor tested for a specific use case. However, the license conditions of the applicable Open Source licenses allow you to adapt the software to your needs. Before using it in a safety-relevant setting, make sure that the software fulfills your requirements and adjust it according to any applicable safety standards, e.g., ISO 26262.
 
 ---------
 
 ## How to use this repository
 
 **Note:** you don't need to download or build anything from this repository, just browse the [Docs](https://github.com/slgrobotics/robots_bringup/tree/main/Docs) folder.
-Actual robots' code is [here](https://github.com/slgrobotics/articubot_one).
+The robots' code is [here](https://github.com/slgrobotics/articubot_one).
 
 Here are the likely scenarios for your work.
 
@@ -73,19 +73,19 @@ Here are the likely scenarios for your work.
 
 - Desktop workstation: see [Docs/ROS-Jazzy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy) (no robot hardware required).
 
-- _Optional:_ Set up Raspberry *on-board* Raspberry Pi: see [Docs/Ubuntu-RPi](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi)
+- _Optional:_ Set up an *on-board* Raspberry Pi: see [Docs/Ubuntu-RPi](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi)
 
 ### 2. Try my robots in _Gazebo simulation_, browse the code (no robot hardware needed)
 
-- See the #1 above, then follow the build and run instructions there for _simulated_ Seggy, Dragger, Plucky or Turtle.
+- See #1 above, then follow the build and run instructions there for _simulated_ Seggy, Dragger, Plucky or Turtle.
 
-- _Bonus:_ ROS2 Jazzy comes with _Turtlebot3_ simulation, try that to see _Nav2_ working.
+- _Bonus:_ ROS2 Jazzy comes with _Turtlebot3_ simulation; try that to see _Nav2_ working.
 
-- To browse robot's code look under *~/robot_ws/src/articubot_one* - use VS Code or your favorite IDE.
+- To browse the robot's code, look under *~/robot_ws/src/articubot_one* - use VS Code or your favorite IDE.
 
 ### 3. Work on your own codebase
 
-- *articubot_one* codebase offers a working example of indoors and outdoors (GPS) operation, use Copy/Paste
+- The *articubot_one* codebase offers a working example of indoor and outdoor (GPS) operation; use copy/paste
 
 - Fork my *articubot_one* repository and make your own robot in ~/robot_ws/src/articubot_one/robots folder
 

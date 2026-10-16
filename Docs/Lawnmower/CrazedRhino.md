@@ -15,11 +15,11 @@ It was running my version (fork) of [PX4 Autopilot](https://docs.px4.io/) code. 
 Lawnmower photos are here: https://photos.app.goo.gl/jwYZRtTi1LVshQoW8
 
 **Note:** 
-1. This is **not** a ROS2 project, PX4 (https://px4.io/) is a completely different system.
+1. This is **not** a ROS2 project; PX4 (https://px4.io/) is a completely different system.
 2. Once you set up your machine for [PX4 development](https://docs.px4.io/main/en/dev_setup/getting_started.html), you can just run Lawnmower robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
 use the following command: `make px4_sitl gz_lawnmower`
-3. While a lawnmower model is included in standard PX4 codebase, my fork contains customizations needed for tighter control of vehicle speed and additional functions.
-4. PX4 plays nice with ROS2, coexists with Jazzy and shares Gazebo Harmonic installation. I use the same machine for ROS2 and PX4 development without any issues.
+3. While a lawnmower model is included in the standard PX4 codebase, my fork contains customizations needed for tighter control of vehicle speed and additional functions.
+4. PX4 plays nicely with ROS2, coexists with Jazzy and shares Gazebo Harmonic installation. I use the same machine for ROS2 and PX4 development without any issues.
 5. PX4 has a very active [Discord](https://discord.com/channels/1022170275984457759) community.
 
 ## Lessons Learned
@@ -94,9 +94,9 @@ make emlid_navio2_arm64 upload
 
 #### On the robot's Raspberry Pi:
 
-The upload creates directory *~/px4* on the RPi, which serves as a "read-only" code storage.
+The upload creates the directory *~/px4* on the RPi, which serves as a "read-only" code storage.
 
-You need to copy some helper scripts from it once for creating and maintaining a "work storage" - *px4wrk* folder.
+You need to copy some helper scripts from it once to create and maintain a "work storage" - *px4wrk* folder.
 ```
 ssh pi@pipx4.local
 ```

@@ -4,8 +4,8 @@
 
 A [video](https://youtu.be/iWyUaSFRExg) by Josh Newans explains the basics of battery monitoring.
 
-There are two ways of publishing _BatteryState_ message:
-1. Have a node (ROS or, usually, MicroROS) communicate to robot hardware and publish [_BatteryState_ message](https://docs.ros.org/en/jazzy/p/sensor_msgs/msg/BatteryState.html) directly
+There are two ways of publishing a _BatteryState_ message:
+1. Have a node (ROS or, usually, MicroROS) communicate with robot hardware and publish a [_BatteryState_ message](https://docs.ros.org/en/jazzy/p/sensor_msgs/msg/BatteryState.html) directly
 
 or,
    
@@ -13,7 +13,7 @@ or,
 
 Here we are interested in using the second option, as it best conforms to a preferred ROS2 pattern.
 
-For traditional (#1) approach, see https://automaticaddison.com/how-to-create-a-battery-state-publisher-in-ros-2/
+For the traditional (#1) approach, see https://automaticaddison.com/how-to-create-a-battery-state-publisher-in-ros-2/
 
 **Note:** when in Gazebo Sim, _BatteryState_ message originates from [Gazebo System](https://gazebosim.org/api/sim/8/battery.html) and is published by *gz_bridge*, avoiding *ros2_control* framework overall.
 So, we are talking only about real hardware here.
@@ -29,8 +29,8 @@ and configuring it is described [here](https://docs.ros.org/en/jazzy/p/battery_s
 
 There is one extra package which is installed this way - *battery_state_rviz_overlay*, enabling battery voltage to show on RViz2 display.
 
-There are limitations of the standard _BatteryStateBroadcaster_, and there are many GitHub repositories with more advanced or specialized code.
-The standard Broadcaster only publishes battery _voltage_ and cannot populate other values of _BatteryState_ message. 
+There are limitations to the standard _BatteryStateBroadcaster_, and there are many GitHub repositories with more advanced or specialized code.
+The standard Broadcaster only publishes battery _voltage_ and cannot populate other values of the _BatteryState_ message.
 So, we will be missing *SOC (State of Charge), Percentage, Capacity, Health, Status* - something that our hardware can sometimes report.
 
 ### My version of BatteryStateBroadcaster
@@ -46,7 +46,7 @@ The modified code is, naturally, here: https://github.com/slgrobotics/ros_batter
 
 ### Installation (with my version of BatteryStateBroadcaster)
 
-The repository must be cloned to Raspberry Pi machine, residing next to other packages:
+The repository must be cloned to the Raspberry Pi machine, residing next to other packages:
 ```
 ros@seggy:~$ ls ~/robot_ws/src/
 articubot_one  diffdrive_arduino  ldlidar_sl_ros2  mpu9250  *ros_battery_monitoring*  serial
@@ -95,7 +95,7 @@ rviz_overlay = Node(
 ```
 Then you can just run RViz2 and "Add" a panel "By Topic" (*/battery_display_text->TextOverlay*) or "By Type" (*rviz_2d_overlay_plugins->TextOverlay*)
 
-The overlay should appear on top-left side of the display by default:
+The overlay should appear on the top-left side of the display by default:
 
 <img width="1138" height="428" alt="Screenshot from 2026-01-14 10-01-47" src="https://github.com/user-attachments/assets/9a29d14e-11be-4d28-a5b7-2840f7a7908b" />
 
@@ -132,7 +132,7 @@ https://github.com/slgrobotics/articubot_one/blob/main/launch/launch_rviz.launch
 
 The *rviz-2d-overlay-plugins* package (installed above for battery display) contains a "_Circular Gauge Overlay_" (a.k.a. _Pie Chart_)
 [plugin](https://github.com/teamspatzenhirn/rviz_2d_overlay_plugins/tree/main/rviz_2d_overlay_plugins#circular-gauge-overlay).
-It accepts standard Float32 message, which you can publish, for example, from the command line:
+It accepts a standard Float32 message, which you can publish, for example, from the command line:
 ```
 ros2 topic pub /piechart std_msgs/Float32 "data: 0.6"
 ```
@@ -162,7 +162,7 @@ Refer to https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Cu
 
 Original code: Jonas Otto and "official" ROS2 BatteryStateBroadcaster - [ros_battery_monitoring](https://github.com/ipa320/ros_battery_monitoring)
 
-Ideas and donor code for parameters handling: _HarvestX_ team - [battery_state_broadcaster](https://github.com/HarvestX/h6x_ros2_controllers/tree/humble/battery_state_broadcaster)
+Ideas and donor code for parameter handling: _HarvestX_ team - [battery_state_broadcaster](https://github.com/HarvestX/h6x_ros2_controllers/tree/humble/battery_state_broadcaster)
 
 ### Useful links
 

@@ -9,9 +9,9 @@ For related code refer to any snapshot dated before November 1, 2025 (for exampl
 
 This is an updated and streamlined version of the prior document ( [RPi_Setup](https://github.com/slgrobotics/turtlebot_create/tree/main/RPi_Setup) ) - adjusted for ROS Jazzy.
 
-Familiarity with (now outdated) [Old README](https://github.com/slgrobotics/turtlebot_create/blob/main/README.md) is highly recommended.
+Familiarity with the (now outdated) [Old README](https://github.com/slgrobotics/turtlebot_create/blob/main/README.md) is highly recommended.
 
-My Create 1 has a Raspberry Pi 3B ("turtle"). The RPi runs sensors drivers (XV11 LIDAR and BNO055 IMU), and [Autonomy Lab _base_ code](https://github.com/slgrobotics/create_robot). 
+My Create 1 has a Raspberry Pi 3B ("turtle"). The RPi runs sensor drivers (XV11 LIDAR and BNO055 IMU), and [Autonomy Lab _base_ code](https://github.com/slgrobotics/create_robot).
 
 The rest of the robot nodes run on the Desktop, using my *articubot_one* codebase, inspired by Articulated Robotics.
 
@@ -38,13 +38,13 @@ Alternatively, use MPU9250 sensor: https://github.com/slgrobotics/robots_bringup
 
 For iRobot Create 1 (released in 2004, based on Roomba 500 series) and other roombas of 400, 500 and 600 series (https://en.wikipedia.org/wiki/IRobot_Create).
 
-It can be connected via FTDI USB Serial (_/dev/ttyUSB0_ on turtle) or via TTL Serial (pins 1-RXD and 2-TXD on the DB25 connector). A desktop machine can connect via RS232 serial, using special iRobot Create serial cable (/dev/ttyS0 on desktop).
+It can be connected via FTDI USB Serial (_/dev/ttyUSB0_ on turtle) or via TTL Serial (pins 1-RXD and 2-TXD on the DB25 connector). A desktop machine can connect via RS232 serial, using a special iRobot Create serial cable (/dev/ttyS0 on desktop).
 
 Generally, we follow this guide:
 
 https://github.com/girvenavery2022/create_robot/tree/galactic
     
-Review the following. Create 1 requires analog gyro, connected to pin 4 of its Cargo Bay DB25:
+Review the following. Create 1 requires an analog gyro, connected to pin 4 of its Cargo Bay DB25:
 
 https://github.com/AutonomyLab/create_robot/issues/28
 
@@ -54,7 +54,7 @@ https://github.com/slgrobotics/libcreate
 
 https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/MPU9250GyroTurtlebot
 
-Here are all commands on the Raspberry Pi:
+Here are all the commands to run on the Raspberry Pi:
 ```
 # mkdir -p ~/robot_ws/src
 cd ~/robot_ws/src
@@ -79,7 +79,7 @@ colcon build --parallel-workers=1 --executor sequential
 ```
 This is how it looked on my Raspberry Pi 3B with 1 GB RAM:
 
-**Note:** use HDMI monitor and USB keyboard, as SSH will be interrupted on RPi 3 for the lack of resources.
+**Note:** use an HDMI monitor and a USB keyboard, as SSH will be interrupted on RPi 3 due to a lack of resources.
 ```
 ros@turtle:~/robot_ws$ export MAKEFLAGS="-j 1"
 ros@turtle:~/robot_ws$ colcon build --parallel-workers=1 --executor sequential
@@ -147,7 +147,7 @@ cd ~/launch
 
 Check out https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Joystick.md
 
-Keep in mind, that Create 1 base expects */diff_cont/cmd_vel* - while joystick without tweaking produces */cmd_vel_joy*
+Keep in mind that the Create 1 base expects */diff_cont/cmd_vel* - while the joystick, without tweaking, produces */cmd_vel_joy*
 
 You may want to temporarily modify *joystick.launch.py* for this test.
 

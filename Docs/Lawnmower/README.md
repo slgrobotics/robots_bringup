@@ -14,7 +14,7 @@ For my (now retired) zero-turn lawnmower project see [this guide](https://github
 PowerSmart Gas Lawn Mower, 21 inches 144cc, robotized for, well, mowing my lawn.
 
 It is running my version (fork) of [PX4 Autopilot](https://docs.px4.io/) code.
-I control it using [QGroundControl app](https://qgroundcontrol.com/) on a desktop machine.
+I control it using the [QGroundControl app](https://qgroundcontrol.com/) on a desktop machine.
 I use [Path Planner](https://github.com/slgrobotics/path_planner) and related utilities for creating QGC missions.
 
 Code is [here](https://github.com/slgrobotics/PX4-Autopilot/tree/dev)
@@ -22,12 +22,12 @@ Code is [here](https://github.com/slgrobotics/PX4-Autopilot/tree/dev)
 Lawnmower photos are here: https://photos.app.goo.gl/3sNqAYzAbU29Zv7r7
 
 **Note:** 
-1. This is **not** a ROS2 project, PX4 (https://px4.io/) is a completely different system.
+1. This is **not** a ROS2 project; PX4 (https://px4.io/) is a completely different system.
 2. My now retired legacy lawnmower (a.k.a. Crazed Rhino) is described [here](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Lawnmower/CrazedRhino.md).
 3. Once you set up your machine for [PX4 development](https://docs.px4.io/main/en/dev_setup/getting_started.html), you can just run Lawnmower robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
 use the following command: `make px4_sitl gz_lawnmower`
-4. While a lawnmower model is included in standard PX4 codebase, my fork contains customizations needed for tighter control of vehicle speed and additional functions.
-5. PX4 plays nice with ROS2, coexists with Jazzy and shares Gazebo Harmonic installation. I use the same machine for ROS2 and PX4 development without any issues.
+4. While a lawnmower model is included in the standard PX4 codebase, my fork contains customizations needed for tighter control of vehicle speed and additional functions.
+5. PX4 plays nicely with ROS2, coexists with Jazzy and shares Gazebo Harmonic installation. I use the same machine for ROS2 and PX4 development without any issues.
 6. PX4 has a very active [Discord](https://discord.com/channels/1022170275984457759) community.
 
 ## Hardware
@@ -89,7 +89,7 @@ pip3 install pyros-genmsg  --break-system-packages
 pip3 install --user empy==3.3.4  --break-system-packages  # Ubuntu 26.04
 ```
 
-**Note:** the `make ...` command depends on GIT tags bein available. Here are some helpful commands:
+**Note:** the `make ...` command depends on GIT tags being available. Here are some helpful commands:
 ```
 git describe
 v1.17.0-alpha1-1860-gdfd6718986
@@ -121,7 +121,7 @@ make px4_sitl gz_lawnmower
 In *QGroundControl* use one of the mission plans from the *~/lawnmow/PX4-Autopilot/plans* folder.
 
 **Note:** the model used in simulation describes my (now retired) [Crazed Rhino](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Lawnmower/CrazedRhino.md) mower.
-There is no model for current project yet.
+There is no model for the current project yet.
 
 There are many other vehicle models available for simulation, for example:
 ```
@@ -176,9 +176,9 @@ etc/scripts/update_wrk.sh
 
 #### On the robot's Raspberry Pi:
 
-The upload creates directory *~/px4* on the RPi, which serves as a "read-only" code storage.
+The upload creates the directory *~/px4* on the RPi, which serves as a "read-only" code storage.
 
-You need to copy some helper scripts from it once for creating and maintaining a "work storage" - *px4wrk* folder.
+You need to copy some helper scripts from it once to create and maintain a "work storage" - *px4wrk* folder.
 ```
 ssh pi@pipx4.local
 ```

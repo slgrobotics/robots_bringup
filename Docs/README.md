@@ -1,5 +1,5 @@
 
-- for better viewing experience visit [Project Wiki](https://github.com/slgrobotics/articubot_one/wiki)
+- For a better viewing experience, visit [Project Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
 ------------
 
@@ -13,7 +13,7 @@ Besides several robot-specific folders, here are instructions on common topics:
 
 - **Sensors** - Setting up your Raspberry Pi 3B/4/5 sensors - GPS, LIDAR, IMU etc.
 
-If you want to browse robot's code look here:
+If you want to browse the robot's code, look here:
 
 https://github.com/slgrobotics/articubot_one
 

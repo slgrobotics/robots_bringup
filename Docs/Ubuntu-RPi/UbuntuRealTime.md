@@ -32,7 +32,7 @@ to [ros2_control](https://control.ros.org/jazzy/doc/ros2_control/controller_mana
 
 There is an official release of [Real-time Ubuntu](https://ubuntu.com/real-time), including a version for Raspberry Pi: https://ubuntu.com/blog/enable-real-time-ubuntu
 
-There's also a pre-configured image, which I tried - it worked fine **on a Raspberry Pi 4**  for me, but beware of security risk. See the section at the end.
+There's also a pre-configured image, which I tried - it worked fine **on a Raspberry Pi 4**  for me, but beware of the security risk. See the section at the end.
 
 If you already have a configured Ubuntu 24.04 Server **on a Raspberry Pi 5** - just use the following command:
 ```
@@ -49,7 +49,7 @@ So, here is *PREEMPT_RT* OS:
 ros@urt:~$ uname -a
 Linux urt 6.8.4-rt11-raspi #1 SMP PREEMPT_RT Mon May  5 16:51:52 UTC 2025 aarch64 aarch64 aarch64 GNU/Linux
 ```
-Opposed to standard *PREEMPT_DYNAMIC* installation:
+As opposed to the standard *PREEMPT_DYNAMIC* installation:
 ```
 ros@seggy:~$ uname -a
 Linux seggy 6.8.0-1040-raspi #44-Ubuntu SMP PREEMPT_DYNAMIC Wed Sep 24 18:30:35 UTC 2025 aarch64 aarch64 aarch64 GNU/Linux
@@ -105,7 +105,7 @@ export ROS_DOMAIN_ID=0
 
 I loosely followed my notes here: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi
 
-The "*rosdep*" installed a huge bunch of packages, hard to say what was actually needed. Took very long time.
+The "*rosdep*" installed a huge bunch of packages, hard to say what was actually needed. It took a very long time.
 ```
 sudo apt install colcon
 ```
@@ -118,7 +118,7 @@ So, the RT image is usable for all my robots - with some elbow grease applied.
 I have 56% of 16GB SD card used (81% after additional packages were installed for Plucky robot).
 
 **Note:**
-- I initially configured the the SD card on a RPi 4, and then plugged in RPi 5 on Plucky robot. I haven't seen any adverse effects.
+- I initially configured the SD card on a RPi 4, and then plugged in RPi 5 on Plucky robot. I haven't seen any adverse effects.
 - Beware of [boot sequence](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/NVM-SSD.md#booting-from-an-sd-card-with-nvm-drive-present) when you have NVM (SSD) and boot from an SD.
 
 #### Compressing the SD card for backup:

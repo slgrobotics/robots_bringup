@@ -77,7 +77,7 @@ Here is my setup:
 **Note:**
 - I plugged the cable in "CAM/DISP 1" port - you might use port 0 instead. I haven't tried.
 - Dual cameras use both ports.
-- [Amazon](https://www.amazon.com/dp/B0DLGMT7XN) has good image showing proper orientation of cable (contacts toward Ethernet connector).
+- [Amazon](https://www.amazon.com/dp/B0DLGMT7XN) has a good image showing the proper orientation of the cable (contacts toward Ethernet connector).
 - Make sure you use cable "locks" properly and secure the cable 
 
 ![arducam-rpi](https://github.com/user-attachments/assets/e03df469-85ec-4ac9-98a2-d751ef0daf2f)
@@ -119,7 +119,7 @@ sudo apt upgrade
 # on my machine previously installed "libcamera" package was automatically upgraded with Marco's binary.
 sudo apt install libcamera-tools rpicam-apps-lite python3-picamera2
 ```
-Make sure you are a member of group "_video_", for example my "_ros_" account already is:
+Make sure you are a member of the group "_video_"; for example, my "_ros_" account already is:
 ```
 ros@plucky:~$ sudo adduser ros video
 [sudo] password for ros: 
@@ -127,7 +127,7 @@ info: The user `ros' is already a member of `video'.
 ```
 Reboot
 
-**Note:** Marco's packages provide specific version of *libcamera* libraries (0.7 for example).
+**Note:** Marco's packages provide a specific version of *libcamera* libraries (0.7 for example).
 ROS binaries could be compiled against a more recent version, in which case you'll have to contact Marco or compile them yourself. 
 
 If you need to update Marco's libcamera, purging helps:

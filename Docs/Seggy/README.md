@@ -18,7 +18,7 @@ Seggy photos are here: https://photos.app.goo.gl/yHXs7fP7u7ae8fa78 - and a story
 **Note:** You can just run Seggy robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
 refer to [this section](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README.md#build-articubot_one-robot-codebase)
 
-Onboard Seggy has a Raspberry Pi 5 8GB ("seggy"). It runs sensors drivers ([LD14 LIDAR](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/LD14.md),
+Onboard, Seggy has a Raspberry Pi 5 8GB ("seggy"). It runs sensor drivers ([LD14 LIDAR](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/LD14.md),
 [MPU9250](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/MPU9250.md),
 [OAK-D Lite](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md),
 [Gesture sensor](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/FaceGesture.md))
@@ -46,7 +46,7 @@ https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger
 
 After all components are installed in *~/robot_ws* folder:
 
-For convenience, create and populate _launch_ directory:
+For convenience, create and populate the _launch_ directory:
 ```
 mkdir ~/launch
 cp ~/robot_ws/src/articubot_one/launch/bootup_launch.sh ~/launch/.
@@ -66,7 +66,7 @@ source /home/ros/robot_ws/install/setup.bash
 
 ros2 launch /home/ros/robot_ws/src/articubot_one/robots/seggy/launch/seggy.launch.py
 ```
-Robot can be started with:
+The robot can be started with:
 ```
 cd ~/launch
 ./bootup_launch.sh

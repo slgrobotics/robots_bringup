@@ -30,7 +30,7 @@ _Cons_: I won't be able to save the whole OS image anymore, as imaging whole 256
 
 You might have another Ubuntu 24.04 image on an SD card (in my case, [Real Time OS](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/UbuntuRealTime.md)).
 
-Inserting such SD card and booting the RPi5 can be done safely, with the following caveat: the boot sequence **might** use the NVM's `/boot/firmware` partition.
+Inserting such an SD card and booting the RPi5 can be done safely, with the following caveat: the boot sequence **might** use the NVM's `/boot/firmware` partition.
 "*Cold*" boot and rebooting seem to behave the same.
 
 As a result, some essential configuration could be inherited from the NVM resident OS - for example, SD card's machine name is "*urt*", and the system booted under the name "*plucky*":
@@ -54,7 +54,7 @@ This is how SD card mount looks:
 There might be other less obvious consequences. To find out, ask your AI-enabled browser: 
 - *"Raspberry pi 5 ubuntu 24.04 /boot/firmware configuration - what is possible to configure?"*
 
-I didn't see any damage to the original OS after removing SD card and booting from NVM as usual.
+I didn't see any damage to the original OS after removing the SD card and booting from NVM as usual.
 
 To have the *boot* partition from the SD card mounted, you can specify its UUID in `/etc/fstab`, for example:
 ```
@@ -72,7 +72,7 @@ ros@plucky:~/sys/nvm$ sudo blkid
 /dev/nvme0n1p1: LABEL_FATBOOT="system-boot" LABEL="system-boot" UUID="F526-0340" BLOCK_SIZE="512" TYPE="vfat" PARTUUID="0529037a-01"
 /dev/nvme0n1p2: LABEL="writable" UUID="1305c13b-200a-49e8-8083-80cd01552617" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="0529037a-02"
 ```
-It is also possible to specify UUID of the root system in `/boot/firmware/cmdline.txt`, if NVM's *ext4* partition is wrongly mounted as "/" when booting from the SD card.
+It is also possible to specify the UUID of the root system in `/boot/firmware/cmdline.txt`, if NVM's *ext4* partition is wrongly mounted as "/" when booting from the SD card.
 
 Useful commands:
 - rpi-eeprom-config

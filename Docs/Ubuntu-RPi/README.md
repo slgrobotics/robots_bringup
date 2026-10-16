@@ -2,26 +2,26 @@
 
 # Set up your Raspberry Pi 3B/4/5 with Ubuntu Server and ROS Base
 
-We need to copy a _Ubuntu 26.04.1 Server 64 bit_ image to an SD card, install _ROS2 Lyrical Base_ and add necessary ROS packages.
+We need to copy an _Ubuntu 26.04.1 Server 64 bit_ image to an SD card, install _ROS2 Lyrical Base_ and add necessary ROS packages.
 
 **Note: (Advanced)** Alternatively you can use real-time OS image with ROS2 Jazzy preinstalled - 
 described [here](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/UbuntuRealTime.md).
 
 ### 1. Set up a Ubuntu 26.04.1 or 24.04 Server 64 bit
 
-Download _Raspberry Pi Imager_ from official Raspberry OS site: https://www.raspberrypi.com/software/
+Download _Raspberry Pi Imager_ from the official Raspberry OS site: https://www.raspberrypi.com/software/
 
 Run it, selecting _"Other General-Purpose OS" -> Ubuntu -> Ubuntu Server 26.04.1 LTS (64 bit)_ for ROS Lyrical  (or _24.04_ for older ROS Jazzy)
 
-**Tip:** The Imager lets you customize the boot - choose network name, setup "ros" account and WiFi credentials.
+**Tip:** The Imager lets you customize the boot - choose a network name, set up a "ros" account and WiFi credentials.
 
-It will not setup Ethernet (eth0) and might mess up WiFi setup, so you better have USB keyboard and HDMI display connected until your SSH starts working.
+It will not set up Ethernet (eth0) and might mess up WiFi setup, so you should have a USB keyboard and an HDMI display connected until your SSH starts working.
 
-For faster set up and updates, better use Ethernet cable initially. Later on, WiFi should be adequate.
+For faster setup and updates, use an Ethernet cable initially. Later on, WiFi should be adequate.
 
-_Optional:_ You may want to get better grip on your network setup, using ```/etc/netplan/*``` directly. Scroll to the end for directions.
+_Optional:_ You may want to get a better grip on your network setup, using ```/etc/netplan/*``` directly. Scroll to the end for directions.
 
-After your RPi boots up, make sure your other accounts (if any) are privileged and are in _dialout_ group. Fix that - if not already set by Imager. For example:
+After your RPi boots up, make sure your other accounts (if any) are privileged and are in the _dialout_ group. Fix that - if not already set by Imager. For example:
 ```
 sudo adduser <other account> sudo
 sudo adduser ros dialout
@@ -83,7 +83,7 @@ echo '/swapfile swap swap defaults 0 0' | sudo tee -a /etc/fstab
 ```
 Now _htop_ will show swap space, and it should persist through reboots.
 
-_Optional:_ Samba creates shared folder, accessible from Windows machines:
+_Optional:_ Samba creates a shared folder, accessible from Windows machines:
 ```
 # If other machines on your LAN use Windows, install Samba for file sharing:
 sudo apt install samba smbclient

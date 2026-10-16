@@ -29,8 +29,8 @@ Datasheet: https://www.ceva-ip.com/wp-content/uploads/BNO080_085-Datasheet.pdf
 My fork of ROS2 driver code is here: https://github.com/slgrobotics/bno08x_ros2_driver
 (original [here](https://github.com/bnbhat/bno08x_ros2_driver))
 
-**Note:** the original driver does not publish orientation covariences (or any other),
-which causes extreme confusion of the EKF filter, which fuses wheels odometry and UMU.
+**Note:** the original driver does not publish orientation covariances (or any other),
+which severely confuses the EKF filter, which fuses wheel odometry and IMU data.
 What happens and why it matters is explained [here](https://chatgpt.com/s/t_691b60f38e1c8191a0a309cbcf99e478).
 I created an issue [here](https://github.com/bnbhat/bno08x_ros2_driver/issues/16).
 
@@ -50,7 +50,7 @@ A runtime parameter `enable_6dof_mode` (bool, default *false*) selects the orien
 - *false* (default): SH2_ROTATION_VECTOR      (9-DOF, accel+gyro+mag)
 - *true*:            SH2_GAME_ROTATION_VECTOR (6-DOF, accel+gyro)
 
-Default preserves upstream 9-DOF behavior and matches the sensor's advertised capability.
+The default preserves upstream 9-DOF behavior and matches the sensor's advertised capability.
 Users on setups where the magnetometer cannot calibrate can force 6-DOF orientation, giving up absolute
 (magnetic-north) yaw in exchange for a working `/imu/data` stream.
 
@@ -84,22 +84,22 @@ Run the sensor node:
 ```
 ros2 launch bno08x_driver bno085_i2c.launch.py
 ```
-You should see the `/imu` topic in *rqt* and can display publishing rate:
+You should see the `/imu` topic in *rqt* and can display its publishing rate:
 ```
 ros2 topic hz /imu
 average rate: 101.149
 	min: 0.000s max: 0.019s std dev: 0.00167s window: 102
 ```
 To see IMU orientation in RViz2, you need to:
-- bring up RViz2 (IMU is already setup in my RViz config):
+- bring up RViz2 (IMU is already set up in my RViz config):
 ```
 ros2 launch articubot_one launch_rviz.launch.py use_sim_time:=false
 ```
-- run static transformer node to relate frames, raising *IMU frame* 1 meter up on the *map*:
+- run a static transformer node to relate frames, raising *IMU frame* 1 meter up on the *map*:
 ```
 ros2 run tf2_ros static_transform_publisher 0 0 1 0 0 0 map bno085
 ```
-Enable the *IMU checkbox* and adjust topic to show `/imu`:
+Enable the *IMU checkbox* and adjust the topic to show `/imu`:
 
 <img width="1593" height="1088" alt="Screenshot from 2025-11-16 11-15-49" src="https://github.com/user-attachments/assets/405656a8-ca31-4bec-8351-71ad57412543" />
 
@@ -107,10 +107,10 @@ Enable the *IMU checkbox* and adjust topic to show `/imu`:
 
 Refer to [this file](https://github.com/slgrobotics/articubot_one/blob/main/robots/seggy/launch/seggy.sensors.launch.py) for real-life parameters for running BNO085 node.
 
-EKF [filter](https://github.com/slgrobotics/articubot_one/blob/main/launch/ekf_odom.launch.py) fuses wheels odometry with IMU orientation data,
-deriving reliable orientation quaternion in turns and straight runs (topic *"odometry/local"*).
+EKF [filter](https://github.com/slgrobotics/articubot_one/blob/main/launch/ekf_odom.launch.py) fuses wheel odometry with IMU orientation data,
+deriving a reliable orientation quaternion in turns and straight runs (topic *"odometry/local"*).
 
-It is very important to have EKF filter tuned properly, as shown [here](https://github.com/slgrobotics/articubot_one/blob/main/robots/seggy/config/ekf_odom_params.yaml), for example.
+It is very important to have the EKF filter tuned properly, as shown [here](https://github.com/slgrobotics/articubot_one/blob/main/robots/seggy/config/ekf_odom_params.yaml), for example.
 
 More EKF tuning tips [here](https://chatgpt.com/s/t_691b80a57e588191b1528a238588b87a).
 
@@ -131,7 +131,7 @@ Install [PlotJuggler](https://plotjuggler.io) to monitor IMU data:
 ```
 sudo apt install ros-${ROS_DISTRO}-plotjuggler-ros
 ```
-Run *PlotJugger* as a ROS2 process. It subscribes to topic's values (i.e. "*imu_data*" *yaw*) and shows them in real time:
+Run *PlotJuggler* as a ROS2 process. It subscribes to topic values (i.e. "*imu_data*" *yaw*) and shows them in real time:
 ```
 ros2 run plotjuggler plotjuggler
 ```

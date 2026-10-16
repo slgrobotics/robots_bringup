@@ -14,10 +14,10 @@ and [Dragger](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragg
 
 The [Turtle](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1) (based on the iRobot Create 1) is a bit different, and can be replicated almost exactly if you have an iRobot Create 1 or 2 base.
 
-Building a robot "from scratch" (including wheels, motors, and electronics) might be overwhelming. Instead, consider a Neato, Create 1/2/3 or any other proven base with available ROS2 driver. 
+Building a robot "from scratch" (including wheels, motors, and electronics) might be overwhelming. Instead, consider a Neato, Create 1/2/3 or any other proven base with an available ROS2 driver.
 
 Once you've assembled all recommended hardware, [my software](https://github.com/slgrobotics/articubot_one) should work with only minimal changes. 
-It will run on almost any hardware, once you figured out how to move the wheels with *cmd_vel* topic and publish wheel encoder ticks through a joint broadcaster.
+It will run on almost any hardware, once you have figured out how to move the wheels with the *cmd_vel* topic and publish wheel encoder ticks through a joint broadcaster.
 
 ## General Considerations
 
@@ -30,10 +30,10 @@ It is important to **start with a complete example project** where all configura
 You can then modify and expand it without breaking the structure. 
 Starting with a simplistic “tutorial-quality” sample offers no easy path forward.
 Refer to [this guide](https://github.com/slgrobotics/robots_bringup?tab=readme-ov-file#how-to-use-this-repository) 
-for a solid starting-point robot code.
+for robot code that provides a solid starting point.
 
 In my experience, simulation is key.
-It is very important to **have your robot work in simulated environment**, with simulated hardware.
+It is very important to **have your robot work in a simulated environment**, with simulated hardware.
 If your robot works in simulation using Gazebo, it will likely work in the real world.
 Simulation lets you learn the system before spending any money. 
 Start by “building” your robot virtually using a URDF/.xacro robot description, then transition to physical hardware.
@@ -42,7 +42,7 @@ When working with robots you need a _Workstation_ - typically a gaming-class des
 You will need a [joystick](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Joystick.md) connected to it for control.
 Confirm your setup by running Seggy, Plucky, Dragger or Turtle in Gazebo [simulation](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#bringing-up-robot-simulation-in-gazebo).
 
-Your physical robot will likely have a Raspberry 5 SBC, preferrably with 8 Gb RAM. Install the OS using [this guide](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi).
+Your physical robot will likely have a Raspberry 5 SBC, preferably with 8 Gb RAM. Install the OS using [this guide](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi).
 
 Reliable WiFi is essential - test it using [this guide](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/WiFi_Logger_Visualizer.md#wifi-testing-and-benchmarking).
 
@@ -50,7 +50,7 @@ Note that _VS Code_ IDE works very well with ROS2 code, and _GitHub_ is an excel
 
 **Warning:** ROS, ROS2 and Gazebo have a long [history](https://en.wikipedia.org/wiki/Robot_Operating_System) and had many breaking changes.
 As a result of this, most of your searches for information, documentation and code will lead to obsolete,
-wrong pieces of old documentation and code, and suggested solutions won't work with current release (ROS2 Jazzy).
+wrong pieces of old documentation and code, and suggested solutions won't work with the current release (ROS2 Jazzy).
 The ability of AI tools to hallucinate and lie about ROS is legendary.
 Support is in general non-existent and some packages are not production quality at all.
 Your best friend is a working code example which you've tested yourself and your ability to find _current_ documentation.
@@ -81,7 +81,7 @@ You can also experiment with cameras, sonars, point clouds, and AI-based object 
 ## Bill of Materials (BoM)
 
 It is totally up to you how large and complex your robot will be.
-Here we would think of a Roomba-size to a wheelchair sized robot.
+Here we are considering robots ranging from Roomba-sized to wheelchair-sized.
 This list assumes you're building it from scratch (not using Create/Neato bases).
 Basic soldering and Arduino-like microcontroller experience is assumed.
 
@@ -134,12 +134,12 @@ You can find his work [here](https://articulatedrobotics.xyz/category/getting-re
 The _ros2_control_ architecture is described [here](https://articulatedrobotics.xyz/tutorials/mobile-robot/applications/ros2_control-concepts),
 official documentation is [here](https://control.ros.org/jazzy/doc/ros2_control/doc/index.html).
 
-ROS2 nodes control wheels rotation by publishing to the */diff_cont/cmd_vel* topic.
+ROS2 nodes control wheel rotation by publishing to the */diff_cont/cmd_vel* topic.
 In return, wheel positions must be reported by the driver via the */joint_states* (and */diff_cont/odom*) topics.
 
 The **ROS2 [driver](https://github.com/slgrobotics/diffdrive_arduino)** operates under the Control Manager, and consists of _DiffDriveController_ and _JointStateBroadcaster_.
 
-To control the wheels the ROS2 driver opens a serial connection to an Arduino Mega 2560 or Teensy 4.0 microcontroller running custom firmware.
+To control the wheels, the ROS2 driver opens a serial connection to an Arduino Mega 2560 or Teensy 4.0 microcontroller running custom firmware.
 
 The **Arduino [firmware](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/DraggerROS)** is responsible for:
 - Generating PWM signals for H-Bridges (DraggerMotors.ino)

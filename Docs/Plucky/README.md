@@ -16,7 +16,7 @@ Plucky is a *"larger Turtlebot"* - running [my *articubot_one* code](https://git
 **Note:** You can just run Plucky robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
 refer to [this section](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README.md#build-articubot_one-robot-codebase)
 
-Onboard Plucky has a Raspberry Pi 5 8GB ("plucky"). It runs sensors drivers (LD14 LIDAR, MPU9250 and GPS) and Differential Drive Control (inspired by Articulated Robotics), as well as localization and navigation packages.
+Onboard, Plucky has a Raspberry Pi 5 8GB ("plucky"). It runs sensor drivers (LD14 LIDAR, MPU9250 and GPS) and Differential Drive Control (inspired by Articulated Robotics), as well as localization and navigation packages.
 
 Plucky has two Arduino boards, one drives Ultrasonic Parking Sensor, and the other, main Arduino Mega 2560, drives the wheels and combines odometry and health data into a single serial stream for the Raspberry Pi.
 
@@ -44,7 +44,7 @@ https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger
 
 ## Running the robot
 
-For convenience, create and populate _launch_ directory:
+For convenience, create and populate the _launch_ directory:
 ```
 mkdir ~/launch
 cp ~/robot_ws/src/articubot_one/launch/bootup_launch.sh ~/launch/.
@@ -64,7 +64,7 @@ source /home/ros/robot_ws/install/setup.bash
 
 ros2 launch /home/ros/robot_ws/src/articubot_one/robots/plucky/launch/plucky.launch.py
 ```
-Robot can be started with:
+The robot can be started with:
 ```
 cd ~/launch
 ./bootup_launch.sh

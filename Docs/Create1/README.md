@@ -1,13 +1,13 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
 **Note:**
-- Familiarity with (now outdated) [Old README](https://github.com/slgrobotics/turtlebot_create/blob/main/README.md) is highly recommended.
+- Familiarity with the (now outdated) [Old README](https://github.com/slgrobotics/turtlebot_create/blob/main/README.md) is highly recommended.
 - For the legacy RPi 3B version refer to [this guide](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1_RPi3B).
 
 ## Turtlebot Create 1 with Raspberry Pi 4/8Gb (ROS2 Jazzy)
 
 My Create 1 now has a Raspberry Pi 4/8Gb ("turtle").
-The RPi runs sensors drivers (XV11 LIDAR and BNO055 IMU), [Autonomy Lab _base_ code](https://github.com/slgrobotics/create_robot), and the usual localization and Nav2 nodes. 
+The RPi runs sensor drivers (XV11 LIDAR and BNO055 IMU), [Autonomy Lab _base_ code](https://github.com/slgrobotics/create_robot), and the usual localization and Nav2 nodes.
 The code (inspired by Articulated Robotics) is [here](https://github.com/slgrobotics/articubot_one) (*dev* branch is usually more current).
 
 On the Desktop just run RViz2 as described below.
@@ -39,11 +39,11 @@ free -h
 # Note: for ongoing clock monitoring
 #        watch -n 1 "vcgencmd measure_clock arm"
 ```
-Most RPi 4's can run at 2 GHz with a minimal heat sink.
+Most RPi 4s can run at 2 GHz with a minimal heat sink.
 
 See https://forums.raspberrypi.com/viewtopic.php?t=313280 for detailed info.
 
-**Warning:** When I had "*arm_freq_min=100*" my overclocked RPi 4's were showing wrong "*date*" - system clock has slowed to a crawl.
+**Warning:** When I had "*arm_freq_min=100*" my overclocked RPi 4s were showing wrong "*date*" - the system clock had slowed to a crawl.
 Chrony was running, but not synching. So - keep *arm_freq_min* at 600. See [this](https://github.com/MichaIng/DietPi/issues/4455).
 
 To enable overclocking, edit (sudo) */boot/firmware/config.txt* - the "[pi4]" section should look like this:
@@ -80,13 +80,13 @@ Alternatively, use MPU9250 sensor: https://github.com/slgrobotics/robots_bringup
 
 For iRobot Create 1 (released in 2004, based on Roomba 500 series) and other roombas of 400, 500 and 600 series (https://en.wikipedia.org/wiki/IRobot_Create).
 
-It can be connected via FTDI USB Serial (_/dev/ttyUSB0_ on turtle) or via TTL Serial (pins 1-RXD and 2-TXD on the DB25 connector). A desktop machine can connect via RS232 serial, using special iRobot Create serial cable (/dev/ttyS0 on desktop).
+It can be connected via FTDI USB Serial (_/dev/ttyUSB0_ on turtle) or via TTL Serial (pins 1-RXD and 2-TXD on the DB25 connector). A desktop machine can connect via RS232 serial, using a special iRobot Create serial cable (/dev/ttyS0 on desktop).
 
 Generally, we follow this guide:
 
 https://github.com/girvenavery2022/create_robot/tree/galactic
     
-Review the following. Create 1 requires analog gyro, connected to pin 4 of its Cargo Bay DB25:
+Review the following. Create 1 requires an analog gyro, connected to pin 4 of its Cargo Bay DB25:
 
 https://github.com/AutonomyLab/create_robot/issues/28
 
@@ -96,7 +96,7 @@ https://github.com/slgrobotics/libcreate
 
 https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/MPU9250GyroTurtlebot
 
-Here are all commands on the Raspberry Pi:
+Here are all the commands to run on the Raspberry Pi:
 ```
 # mkdir -p ~/robot_ws/src
 cd ~/robot_ws/src
@@ -123,7 +123,7 @@ rosdep update
 # this will take a while, many additional packages installed:
 rosdep install --from-paths src --ignore-src -r -y
 ```
-For the build on RPi 4/2Gb/4Gb you may limit number of parallel threads, no need to do it for RPi 5 8GB:
+For the build on RPi 4/2Gb/4Gb, you may limit the number of parallel threads; there is no need to do this for RPi 5 8GB:
 ```
 export MAKEFLAGS="-j 1"
 colcon build --parallel-workers=1 --executor sequential
@@ -183,7 +183,7 @@ cd ~/launch
 
 Check out https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Joystick.md
 
-Keep in mind, that Create 1 base expects */diff_cont/cmd_vel* - while joystick without tweaking produces */cmd_vel_joy*
+Keep in mind that the Create 1 base expects */diff_cont/cmd_vel* - while the joystick, without tweaking, produces */cmd_vel_joy*
 
 You may want to temporarily modify *joystick.launch.py* for this test.
 
@@ -243,7 +243,7 @@ By adjusting them you make odometry (reported by *Create base [driver](https://g
 'gyro_scale': 1.19,     - adjusts gyro sensitivity in turns
 'distance_scale': 1.02  - adjusts for wheel encoders discrepancy
 ```
-First, **compensate for _gyro dift_** - make sure that the ROS2 gyro driver can adjust it to zero when Turtle is stationary.
+First, **compensate for _gyro drift_** - make sure that the ROS2 gyro driver can adjust it to zero when Turtle is stationary.
 
 The "*Cargo Bay Analog Signal*", as read by *Create 1 base* on DB25 pin 4, is connected (in our case) to gyro output.
 
@@ -271,13 +271,13 @@ Adjust it accordingly in the launch file.
 
 With *gyro drift* compensated, proceed to **calibrating gyro sensitivity** (a.k.a. *gyro turn rate*).
 
-Start Turtle in ROS2. You need to bring up Rviz2 to see odometry vector. The best way is to follow "On the Desktop" section above.
+Start Turtle in ROS2. You need to bring up Rviz2 to see the odometry vector. The best way is to follow "On the Desktop" section above.
 
 The turn rate scale, as reported by gyro, usually needs adjustment. Drive the robot using joystick - turn it 360 degrees and see if the Odometry vector (showing *diff_cont/odom*) is lagging behind or gaining over the robot's orientation. Adjust `'gyro_scale'` to have them match.
 
 The *distance_scale* can be adjusted so that *diff_cont/odom* **pose** reports proper distance when robot is driven forward or backward.
 
-As a **final test**, you need to drive the robot forward a couple meters and watch the odom point in Rviz to stay at the launch point.
+As a **final test**, you need to drive the robot forward a couple of meters and verify that the odom point in Rviz stays at the launch point.
 Adjust the RViz as shown in the screenshot below - showing *odom* and *map* frames.
 Then turn the robot and watch the *odom* point move. You should strive for minimal *odom* displacement from *map* during straight runs and rotations:
 

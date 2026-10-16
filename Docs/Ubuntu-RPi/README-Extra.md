@@ -43,9 +43,9 @@ Follow [this guide](https://code.visualstudio.com/docs/remote/ssh-tutorial).
 I rarely have a need to use Raspberry Pi UARTs,
 so for useful information please refer to the source - Michael Wimble's repository.
 
-To use Raspberry Pi UARTs refer to the following section.
+To use Raspberry Pi UARTs, refer to the following section.
 
-**Warning:** I will not accept any resposibility for damage to any device as a result of you following these instructions. Neither will Michael Wimble, the original author.
+**Warning:** I will not accept any responsibility for damage to any device as a result of you following these instructions. Neither will Michael Wimble, the original author.
 
 https://github.com/wimblerobotics/ros2_roboclaw_driver?tab=readme-ov-file#using-uarts-on-the-raspberry-pi-5
 
@@ -93,9 +93,9 @@ https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README-Hu
 
 Please review tips [here](https://articulatedrobotics.xyz/tutorials/ready-for-ros/networking).
 
-It is possible, that after the initial boot your network won't be set up properly.
+It is possible that after the initial boot your network won't be set up properly.
 
-On top of that, your mobile robot will work much better, if it is assigned static network address and it doesn't have to query DHCP service on your router.
+On top of that, your mobile robot will work much better, if it is assigned a static network address and it doesn't have to query DHCP service on your router.
 
 Ubuntu uses "_cloud-init_" service to set up your network every time you boot up. Turn it off:
 
@@ -140,9 +140,9 @@ network:
           addresses:
             - 192.168.1.1
 ```	
-**Note:** static addresses you assign should be within the "exclusion zone" of your router's DHCP service. This is easy setup on the router side.
+**Note:** static addresses you assign should be within the "exclusion zone" of your router's DHCP service. This is easy to set up on the router side.
 
-Now reload configuration and check the result:
+Now reload the configuration and check the result:
 ```
 sudo netplan apply
 
@@ -233,7 +233,7 @@ echo "GPU: " `vcgencmd measure_temp` | sed 's/temp=//'
 
 ### _Optional:_ Making compressed backups of an SD card
 
-Your SD card isn't immortal, and might fail if left without power for several months, for other reasons or without a reason at all. You need to make a backup on a less volatile media - for example, your PC. If you read 16 GB SD card into an image file, it will take the same 16 GB of PC disk space, and compression does not always helps to shrink it.
+Your SD card isn't immortal, and might fail if left without power for several months, for other reasons or without a reason at all. You need to make a backup on less volatile media - for example, your PC. If you read a 16 GB SD card into an image file, it will take the same 16 GB of PC disk space, and compression does not always help to shrink it.
 
 There are many methods available (Pishrink etc.), some work on a live (mounted) system volume and rely on the file system's ability to recover a "live" image on boot.
 
@@ -249,7 +249,7 @@ rm zero.file
 
 Then make an img file:
 - Windows: using, for example, _Win32DiskImager_, and zip it on a PC. To restore it to an SD card, use _Balena Etcher_ (it accepts compressed images).
-- Ubuntu: _gnome-disks_ can be used to create image of SD card or write (restore) an image to SD card. _Balena Etcher_ is also available on Linux. You can compress image file using right-click menu in File Manager.
+- Ubuntu: _gnome-disks_ can be used to create an image of an SD card or write (restore) an image to SD card. _Balena Etcher_ is also available on Linux. You can compress the image file using right-click menu in File Manager.
 
 Here is more info:
 

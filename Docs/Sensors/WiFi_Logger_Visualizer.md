@@ -2,7 +2,7 @@
 
 ## WiFi Logger Visualizer
 
-There's a package created by Michael Wimble to log and visualize WiFi signal strength along robot's path.
+There's a package created by Michael Wimble to log and visualize WiFi signal strength along the robot's path.
 
 The original is here: https://github.com/wimblerobotics/wifi_logger_visualizer
 
@@ -16,7 +16,7 @@ Please review tips [here](https://articulatedrobotics.xyz/tutorials/ready-for-ro
 
 For in-depth analysis refer to this [paper](https://arxiv.org/html/2508.11366v1) and related [repository](https://github.com/csi-dgist/DDS-Optimizer-for-Wirelss-Large-Payload-Transfer).
 
-There are many useful commands to discover and measure performance of WiFi interfaces:
+There are many useful commands to discover and measure the performance of WiFi interfaces:
 ```
 ip a
 ifconfig -a
@@ -76,8 +76,8 @@ The test above is between a Raspberry Pi 5 and an Intel I7 desktop. A mesh WiFi6
 The realistic range of WiFi could be 50 meters indoors and about 100 meters outdoors, with 5 GHz links being less by at least 10 percent.
 
 
-**Note:** Raspberry Pi 5 doesn't have SMA connector for WiFi antennas and uses a PCB trace for this purpose. 
-Its "_antenna_" can be easily obstructed by metal active cooler and hats.
+**Note:** Raspberry Pi 5 doesn't have an SMA connector for WiFi antennas and uses a PCB trace for this purpose.
+Its "_antenna_" can be easily obstructed by a metal active cooler and HATs.
 [Here](https://community.element14.com/products/raspberry-pi/f/forum/53868/how-good-is-wifi-in-raspberry-pi-5) is more info on this topic.
 
 ## WiFi 6 Mesh Networks and Travel Routers
@@ -95,7 +95,7 @@ to a specific access point in the mesh network if you want to prevent it from ro
 
 ## Direct WiFi between your laptop and the robot
 
-For many use scenarios, especially outdoors, you can avoid using routers and establish direct WiFi connection between your workstation (laptop) and the robot's Raspberry Pi 5.
+For many use scenarios, especially outdoors, you can avoid using routers and establish a direct WiFi connection between your workstation (laptop) and the robot's Raspberry Pi 5.
 
 Refer to an excellent instructional by Nathan Lewis [here](https://nrlewis.dev/blog/rpi-hotspot/).
 
@@ -106,13 +106,13 @@ While Raspberry Pi WiFi might be marginally adequate for in-home use, an outdoor
 My [Dragger](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger) robot
 has a [WiFi 6 Travel Router](https://www.amazon.com/dp/B0D41G5N95) in Client mode, with a 9/12V USB C [power adapter](https://www.amazon.com/dp/B0C8TBM2QM).
 
-Raspberry Pi 5 is connected to the router via an Ethernet cable, so that the trafic goes through it. I keep the RPi's `wlan0` running, so that *wifi_logger* node could use it for signal strengh measurement. 
+Raspberry Pi 5 is connected to the router via an Ethernet cable, so that the traffic goes through it. I keep the RPi's `wlan0` running, so that the *wifi_logger* node can use it for signal strength measurement.
 
 **Note:**
 - After disabling network config, you need to `sudo apt install avahi-daemon` to restore Multicast DNS (mDNS) service required for local hostname discovery. 
 - It is very important to have the "routes:" section below, or your ping delay could be very random
 
-Here is how I configure Dragger's network, with `eth0` operating at fixed address (put your network real addresses there):
+Here is how I configure Dragger's network, with `eth0` operating at a fixed address (put your network's actual addresses there):
 ```
 ros@dragger:~$ sudo cat /etc/netplan/50-cloud-init.yaml 
 [sudo] password for ros: 
@@ -235,9 +235,9 @@ Connecting to host desktop5.local, port 5201
 
 iperf Done.
 ```
-The `ping` stays within 3..10 ms range. Connection becomes not reliable (for ROS2, at least) above the 35 meters range in my case.
+The `ping` stays within 3..10 ms range. The connection becomes unreliable (for ROS2, at least) above the 35 meters range in my case.
 
-As the result, Dragger can travel within the 35 meter range from the garage router and measure the "heatmap":
+As a result, Dragger can travel within a 35-meter range from the garage router and measure the "heatmap":
 
 ![Screenshot from 2025-04-09 20-14-39](https://github.com/user-attachments/assets/2394d7a5-2d2c-40e1-b79d-1ae8dd8c0083)
 
