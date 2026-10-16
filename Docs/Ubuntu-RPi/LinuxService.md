@@ -1,5 +1,15 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
+-------------
+
+**Contents:**
+
+- [Optional: Create a Linux service for on-boot autostart](#optional-create-a-linux-service-for-on-boot-autostart)
+  - [Here are the steps:](#here-are-the-steps)
+  - [Here are some useful commands:](#here-are-some-useful-commands)
+
+-------------
+
 ## _Optional:_ Create a Linux service for on-boot autostart
 
 **Tip:** this complicates making changes to robot software, use with caution. 

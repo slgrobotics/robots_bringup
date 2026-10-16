@@ -5,6 +5,23 @@
 For related code refer to any snapshot dated before November 1, 2025 (for example, Commit [34c7d2c](https://github.com/slgrobotics/articubot_one/commit/34c7d2ca4b689123a60aec02c53af94c93cc77d3)).
 - Currently my Turtle robot has *Raspberry Pi 4/8GB* and related notes are [here](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1).
 
+-------------
+
+**Contents:**
+
+- [Turtlebot Create 1 with Raspberry Pi 3B Notes (Jazzy version)](#turtlebot-create-1-with-raspberry-pi-3b-notes-jazzy-version)
+  - [Turtle Raspberry Pi 3B Build and Run Instructions:](#turtle-raspberry-pi-3b-build-and-run-instructions)
+    - [XV11 LIDAR setup](#xv11-lidar-setup)
+    - [ROS2 driver for BNO055 9DOF IMU](#ros2-driver-for-bno055-9dof-imu)
+    - [Compile forked Autonomy Lab ROS2 driver for Create 1 base](#compile-forked-autonomy-lab-ros2-driver-for-create-1-base)
+    - [Populate launch folder: /home/ros/launch](#populate-launch-folder-homeroslaunch)
+  - [Test-driving Create 1 Turtlebot with teleop](#test-driving-create-1-turtlebot-with-teleop)
+  - [Optional: Create a Linux service for on-boot autostart](#optional-create-a-linux-service-for-on-boot-autostart)
+  - [On the Desktop:](#on-the-desktop)
+  - [Tuning your Gyro (only for Create 1)](#tuning-your-gyro-only-for-create-1)
+
+-------------
+
 # Turtlebot Create 1 with Raspberry Pi 3B Notes (Jazzy version)
 
 This is an updated and streamlined version of the prior document ( [RPi_Setup](https://github.com/slgrobotics/turtlebot_create/tree/main/RPi_Setup) ) - adjusted for ROS Jazzy.

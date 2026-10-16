@@ -1,5 +1,17 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
+-------------
+
+**Contents:**
+
+- [WiFi Logger Visualizer](#wifi-logger-visualizer)
+- [WiFi testing and benchmarking](#wifi-testing-and-benchmarking)
+- [WiFi 6 Mesh Networks and Travel Routers](#wifi-6-mesh-networks-and-travel-routers)
+- [Direct WiFi between your laptop and the robot](#direct-wifi-between-your-laptop-and-the-robot)
+- [Improving your WiFi](#improving-your-wifi)
+
+-------------
+
 ## WiFi Logger Visualizer
 
 There's a package created by Michael Wimble to log and visualize WiFi signal strength along the robot's path.

@@ -1,5 +1,17 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
+-------------
+
+**Contents:**
+
+- [Ubuntu Server 24.04 Real Time Kernel and ROS2 for Raspberry Pi 3B/4/5](#ubuntu-server-2404-real-time-kernel-and-ros2-for-raspberry-pi-3b45)
+  - [Real-time Ubuntu community kernel from Canonical (did not work for me on Nov 1, 2025)](#real-time-ubuntu-community-kernel-from-canonical-did-not-work-for-me-on-nov-1-2025)
+  - [A third-party image installation - worked for me on Raspberry Pi 4 and 5  (use at your own risk)](#a-third-party-image-installation---worked-for-me-on-raspberry-pi-4-and-5--use-at-your-own-risk)
+    - [Next steps](#next-steps)
+    - [Compressing the SD card for backup:](#compressing-the-sd-card-for-backup)
+
+-------------
+
 ## Ubuntu Server 24.04 Real Time Kernel and ROS2 for Raspberry Pi 3B/4/5
 
 ---------------------------------

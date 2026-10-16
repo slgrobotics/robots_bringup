@@ -2,6 +2,19 @@
 
 _"hus·​sar (ˌ)hə-ˈzär  -ˈsär : a member of any of various European military units originally modeled on the Hungarian light cavalry of the 15th century"_
 
+-------------
+
+**Contents:**
+
+- [Set up Husarnet VPN](#set-up-husarnet-vpn)
+  - [Creating Husarnet account](#creating-husarnet-account)
+  - [Installing Husarnet](#installing-husarnet)
+  - [Configuring Cyclone DDS](#configuring-cyclone-dds)
+  - [Note: I am using static IPv4 addresses and subnets](#note-i-am-using-static-ipv4-addresses-and-subnets)
+  - [Useful Links:](#useful-links)
+
+-------------
+
 # Set up Husarnet VPN
 
 Here we set up a virtual private network (VPN), specifically designed to overcome limitations of ROS2 DDS.

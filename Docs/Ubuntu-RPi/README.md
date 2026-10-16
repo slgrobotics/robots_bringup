@@ -1,5 +1,17 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
+-------------
+
+**Contents:**
+
+- [Set up your Raspberry Pi 3B/4/5 with Ubuntu Server and ROS Base](#set-up-your-raspberry-pi-3b45-with-ubuntu-server-and-ros-base)
+  - [1. Set up a Ubuntu 26.04.1 or 24.04 Server 64 bit](#1-set-up-a-ubuntu-26041-or-2404-server-64-bit)
+  - [2. Continue with ROS2 installation](#2-continue-with-ros2-installation)
+  - [3. Make sure your WiFi is up to the task](#3-make-sure-your-wifi-is-up-to-the-task)
+  - [4. Install control packages needed for our ROS nodes](#4-install-control-packages-needed-for-our-ros-nodes)
+
+-------------
+
 # Set up your Raspberry Pi 3B/4/5 with Ubuntu Server and ROS Base
 
 We need to copy an _Ubuntu 26.04.1 Server 64 bit_ image to an SD card, install _ROS2 Lyrical Base_ and add necessary ROS packages.

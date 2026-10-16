@@ -5,6 +5,17 @@
 **Note:** As of *October 2025* Seggy is in active development. Stable, working code is on the *[main](https://github.com/slgrobotics/articubot_one)* branch.
 For the latest code see the *[dev](https://github.com/slgrobotics/articubot_one/tree/dev)* branch.
 
+-------------
+
+**Contents:**
+
+- [Seggy Notes](#seggy-notes)
+  - [Build and Run Instructions (on the robot's Raspberry Pi 5):](#build-and-run-instructions-on-the-robots-raspberry-pi-5)
+  - [Running the robot](#running-the-robot)
+  - [Optional: Create a Linux service for on-boot autostart](#optional-create-a-linux-service-for-on-boot-autostart)
+
+-------------
+
 # Seggy Notes
 
 Seggy is a *"larger Turtlebot"* - running [my *articubot_one* code](https://github.com/slgrobotics/articubot_one). Desktop only needs to run RViz and joystick node for robot control.

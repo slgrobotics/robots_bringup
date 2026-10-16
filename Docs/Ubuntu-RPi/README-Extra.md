@@ -1,5 +1,25 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
+-------------
+
+**Contents:**
+
+- [Raspberry Pi 3B/4/5 with Ubuntu - extra steps](#raspberry-pi-3b45-with-ubuntu---extra-steps)
+  - [Disabling optional services:](#disabling-optional-services)
+  - [Monitoring temperature](#monitoring-temperature)
+  - [Properly feeding your Raspberry Pi 5](#properly-feeding-your-raspberry-pi-5)
+  - [Optional: VS Code Remote Development](#optional-vs-code-remote-development)
+  - [Optional: Using UARTs on the Raspberry Pi 5](#optional-using-uarts-on-the-raspberry-pi-5)
+  - [Optional: Playing sound with aplay](#optional-playing-sound-with-aplay)
+  - [Optional: Create a Linux service for on-boot autostart](#optional-create-a-linux-service-for-on-boot-autostart)
+  - [Optional: Husarnet VPN for better DDS communication](#optional-husarnet-vpn-for-better-dds-communication)
+  - [Optional: better network control using /etc/netplan/ directly](#optional-better-network-control-using-etcnetplan-directly)
+  - [Optional: time sync using chrony](#optional-time-sync-using-chrony)
+  - [Optional: Making compressed backups of an SD card](#optional-making-compressed-backups-of-an-sd-card)
+  - [Optional: Replace SD card with NVM on Raspberry 5](#optional-replace-sd-card-with-nvm-on-raspberry-5)
+
+-------------
+
 ## Raspberry Pi 3B/4/5 with Ubuntu - extra steps
 
 *for fine-tuning your Raspberry Pi Ubuntu installation, review the following:*

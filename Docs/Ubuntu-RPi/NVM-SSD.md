@@ -1,5 +1,15 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
+-------------
+
+**Contents:**
+
+- [Replace SD card with NVM on Raspberry 5](#replace-sd-card-with-nvm-on-raspberry-5)
+  - [Booting from an SD card with NVM drive present](#booting-from-an-sd-card-with-nvm-drive-present)
+  - [Here is how NVM hardware looks:](#here-is-how-nvm-hardware-looks)
+
+-------------
+
 ## Replace SD card with NVM on Raspberry 5
 
 I upgraded my RPi5 on Plucky and Dragger, replacing the SD card with an SSD.

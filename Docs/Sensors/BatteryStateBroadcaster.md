@@ -1,5 +1,22 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
+-------------
+
+**Contents:**
+
+- [BatteryStateBroadcaster setup](#batterystatebroadcaster-setup)
+  - [Installation (standard ROS2 Jazzy binary)](#installation-standard-ros2-jazzy-binary)
+  - [My version of BatteryStateBroadcaster](#my-version-of-batterystatebroadcaster)
+  - [Installation (with my version of BatteryStateBroadcaster)](#installation-with-my-version-of-batterystatebroadcaster)
+  - [Displaying battery state data in RViz2](#displaying-battery-state-data-in-rviz2)
+  - [Pie Chart Display](#pie-chart-display)
+  - [Beyond just voltage - monitoring current](#beyond-just-voltage---monitoring-current)
+  - [Credits](#credits)
+  - [Useful links](#useful-links)
+  - [Tip: use the following commands for troubleshooting](#tip-use-the-following-commands-for-troubleshooting)
+
+-------------
+
 ## BatteryStateBroadcaster setup
 
 A [video](https://youtu.be/iWyUaSFRExg) by Josh Newans explains the basics of battery monitoring.

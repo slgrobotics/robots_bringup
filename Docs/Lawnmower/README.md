@@ -3,6 +3,22 @@
 
 For my (now retired) zero-turn lawnmower project see [this guide](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Lawnmower/CrazedRhino.md)
 
+-------------
+
+**Contents:**
+
+- [A perfect summer day is when the sun is shining, the breeze is blowing, the birds are singing, and the lawn mower is broken.](#a-perfect-summer-day-is-when-the-sun-is-shining-the-breeze-is-blowing-the-birds-are-singing-and-the-lawn-mower-is-broken)
+- [Grassroamer Notes](#grassroamer-notes)
+  - [Hardware](#hardware)
+  - [Power source](#power-source)
+  - [Build and Run Instructions](#build-and-run-instructions)
+    - [Run simulation in Gazebo:](#run-simulation-in-gazebo)
+    - [Build it on the Desktop for upload to Raspberry Pi:](#build-it-on-the-desktop-for-upload-to-raspberry-pi)
+    - [On the robot's Raspberry Pi:](#on-the-robots-raspberry-pi)
+  - [Path planning and execution](#path-planning-and-execution)
+
+-------------
+
 ### A perfect summer day is when the sun is shining, the breeze is blowing, the birds are singing, and the lawn mower is broken.
 
 <img width="768" alt="ChatGPT Image Sep 8, 2025, 12_23_28 PM" src="https://github.com/user-attachments/assets/afbfa7ed-81ef-4a9e-b931-8bec7c6ddef3" />

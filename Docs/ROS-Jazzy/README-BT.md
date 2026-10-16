@@ -1,5 +1,18 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
+-------------
+
+**Contents:**
+
+- [Behavior Trees in Nav2 package](#behavior-trees-in-nav2-package)
+  - [Behavior Tree for Gesture and Face Detection Sensor](#behavior-tree-for-gesture-and-face-detection-sensor)
+  - [Using Groot2](#using-groot2)
+  - [Using bt2img.py imaging tool](#using-bt2imgpy-imaging-tool)
+  - [Behavior Trees and RViz2](#behavior-trees-and-rviz2)
+  - [Range sensors in costmap layer](#range-sensors-in-costmap-layer)
+
+-------------
+
 ## Behavior Trees in Nav2 package
 
 Your typical *nav2_params.yaml* file contains sections related to behavior trees, the most obvious are:

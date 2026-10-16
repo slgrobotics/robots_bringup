@@ -1,5 +1,13 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
+-------------
+
+**Contents:**
+
+- [Making USB devices persistent](#making-usb-devices-persistent)
+
+-------------
+
 # Making USB devices persistent
 
 Typically, a robot has three USB-to-Serial devices: Arduino "wheels/base", GPS and LIDAR.
