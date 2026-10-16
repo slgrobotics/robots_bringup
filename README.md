@@ -1,6 +1,9 @@
+- For a better viewing experience, visit [Project Wiki](https://github.com/slgrobotics/articubot_one/wiki)
+- Please take a moment to review the [Current Notes and Project Status](https://github.com/slgrobotics/articubot_one/wiki/Notes-and-Status) page
+
 ## Robots Bringup (Documentation)
 
-## Contents
+### Contents
 
 - [Here are the robots](#here-are-the-robots)
   - [Seggy](#seggy)
@@ -14,9 +17,6 @@
   - [3. Work on your own codebase](#3-work-on-your-own-codebase)
   - [Found a bug? Want to contribute a fix? Have a question?](#found-a-bug-want-to-contribute-a-fix-have-a-question)
 - [Useful links](#useful-links)
-
-- For a better viewing experience, visit [Project Wiki](https://github.com/slgrobotics/articubot_one/wiki)
-- Please take a moment to review the [Current Notes and Project Status](https://github.com/slgrobotics/articubot_one/wiki/Notes-and-Status) page
 
 --------------------------
 
