@@ -7,15 +7,13 @@ For my (now retired) zero-turn lawnmower project see [this guide](https://github
 
 **Contents:**
 
-- [A perfect summer day is when the sun is shining, the breeze is blowing, the birds are singing, and the lawn mower is broken.](#a-perfect-summer-day-is-when-the-sun-is-shining-the-breeze-is-blowing-the-birds-are-singing-and-the-lawn-mower-is-broken)
-- [Grassroamer Notes](#grassroamer-notes)
-  - [Hardware](#hardware)
-  - [Power source](#power-source)
-  - [Build and Run Instructions](#build-and-run-instructions)
-    - [Run simulation in Gazebo:](#run-simulation-in-gazebo)
-    - [Build it on the Desktop for upload to Raspberry Pi:](#build-it-on-the-desktop-for-upload-to-raspberry-pi)
-    - [On the robot's Raspberry Pi:](#on-the-robots-raspberry-pi)
-  - [Path planning and execution](#path-planning-and-execution)
+- [Hardware](#hardware)
+- [Power source](#power-source)
+- [Build and Run Instructions](#build-and-run-instructions)
+  - [Run simulation in Gazebo:](#run-simulation-in-gazebo)
+  - [Build it on the Desktop for upload to Raspberry Pi:](#build-it-on-the-desktop-for-upload-to-raspberry-pi)
+  - [On the robot's Raspberry Pi:](#on-the-robots-raspberry-pi)
+- [Path planning and execution](#path-planning-and-execution)
 
 -------------
 
