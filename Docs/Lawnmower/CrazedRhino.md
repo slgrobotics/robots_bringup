@@ -9,16 +9,16 @@ For my current lawnmower project see [this guide](https://github.com/slgrobotics
 **Contents:**
 
 - [Lawnmower Notes (Legacy, now retired Husqvarna Z254F)](#lawnmower-notes-legacy-now-retired-husqvarna-z254f)
-  - [Lessons Learned](#lessons-learned)
-  - [Hardware](#hardware)
-  - [Build and Run Instructions](#build-and-run-instructions)
-    - [Run simulation in Gazebo:](#run-simulation-in-gazebo)
-    - [Build it on the Desktop for upload to Raspberry Pi:](#build-it-on-the-desktop-for-upload-to-raspberry-pi)
-    - [On the robot's Raspberry Pi:](#on-the-robots-raspberry-pi)
+- [Lessons Learned](#lessons-learned)
+- [Hardware](#hardware)
+- [Build and Run Instructions](#build-and-run-instructions)
+  - [Run simulation in Gazebo:](#run-simulation-in-gazebo)
+  - [Build it on the Desktop for upload to Raspberry Pi:](#build-it-on-the-desktop-for-upload-to-raspberry-pi)
+  - [On the robot's Raspberry Pi:](#on-the-robots-raspberry-pi)
 
 -------------
 
-# Lawnmower Notes (Legacy, now retired Husqvarna Z254F)
+## Lawnmower Notes (Legacy, now retired Husqvarna Z254F)
 
 Lawnmower (a.k.a. *Crazed Rhino*) was an actual [Husqvarna Z254F](https://www.husqvarna.com/us/zero-turn-mowers/z254f-special-edition) zero-turn riding mower, robotized for, well, mowing my lawn.
 
