@@ -1,17 +1,14 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
--------------
+## MockBots Initiative
 
 **Contents:**
 
-- [MockBots Initiative](#mockbots-initiative)
 - [MockBots and the articubot_one Codebase](#mockbots-and-the-articubot_one-codebase)
 - [Why bother?](#why-bother)
 - [How to start](#how-to-start)
 
 -------------
-
-## MockBots Initiative
 
 The MockBots project was initiated by members of the HomeBrew Robotics [club](https://www.hbrobotics.org/)
 to create instructions for building a better, modern version of the TurtleBot.

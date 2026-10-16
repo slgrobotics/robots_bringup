@@ -1,16 +1,13 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
--------------
+## Graceful Shutdown
 
 **Contents:**
 
-- [Graceful Shutdown](#graceful-shutdown)
 - [For Raspberry Pi Zero to 4](#for-raspberry-pi-zero-to-4)
 - [Alternative way](#alternative-way)
 
 -------------
-
-## Graceful Shutdown
 
 When you turn off power to your Raspberry Pi, there's a chance that the system will be writing something to the SD card.
 In this case the file system on the SD card can be corrupted, and the Pi will become unbootable.

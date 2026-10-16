@@ -1,16 +1,13 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
--------------
+## GPS setup
 
 **Contents:**
 
-- [GPS setup](#gps-setup)
 - [GPS on Raspberry Pi UART (GPIO 14,15)](#gps-on-raspberry-pi-uart-gpio-1415)
 - [Useful Links](#useful-links)
 
 -------------
-
-## GPS setup
 
 **Note:**
 - this guide can be used for other NMEA capable GPS (in fact, almost any GPS)

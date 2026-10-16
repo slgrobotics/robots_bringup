@@ -4,7 +4,8 @@
 
 # Camera Sensors
 
-Contents:
+**Contents:**
+
 - [Native_ Raspberry Pi Camera (_Arducam_) Setup](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#native-raspberry-pi-camera-arducam-setup)
 - [Installation](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#installation)
 - [Basic testing](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#basic-testing)
@@ -17,7 +18,7 @@ Contents:
 - [Additional Python tests - libcamera, Picamera2, dual cameras](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#additional-python-tests---libcamera-picamera2-dual-cameras)
 - [Useful links](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md#useful-links)
 
--------------------------------
+-------------
 
 ## _Native_ Raspberry Pi Camera (_Arducam_) Setup
 

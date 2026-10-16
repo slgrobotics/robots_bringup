@@ -1,13 +1,5 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
--------------
-
-**Contents:**
-
-- [FPV Camera and receiver Setup](#fpv-camera-and-receiver-setup)
-
--------------
-
 # FPV Camera and receiver Setup
 
 Here is my attempt to provide a zero-delay video link between robot and ROS2 Camera Publisher.

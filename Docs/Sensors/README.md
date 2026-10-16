@@ -1,13 +1,5 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
--------------
-
-**Contents:**
-
-- [Sensors](#sensors)
-
--------------
-
 # Sensors
 
 This section describes ROS2 sensor setup, as referenced by the instructions for specific robots.

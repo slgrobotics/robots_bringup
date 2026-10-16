@@ -1,18 +1,15 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
--------------
+## "Turtle" XV11 LIDAR setup
 
 **Contents:**
 
-- ["Turtle" XV11 LIDAR setup](#turtle-xv11-lidar-setup)
-  - [Positioning on the robot](#positioning-on-the-robot)
-  - [ROS2 Driver](#ros2-driver)
-  - [Compile and install](#compile-and-install)
-  - [Test](#test)
+- [Positioning on the robot](#positioning-on-the-robot)
+- [ROS2 Driver](#ros2-driver)
+- [Compile and install](#compile-and-install)
+- [Test](#test)
 
 -------------
-
-## "Turtle" XV11 LIDAR setup
 
 Surreal XV Lidar controller v1.2 (Neato Lidar) - connected via USB
 

@@ -2,23 +2,20 @@
 
 **Note:** please review [Tips and Lessons](https://github.com/slgrobotics/articubot_one/wiki/IMUs-%E2%80%90-Tips-and-Lessons) for IMU use in ROS2
 
--------------
+## ROS2 driver for BNO085 IMU
 
 **Contents:**
 
-- [ROS2 driver for BNO085 IMU](#ros2-driver-for-bno085-imu)
-  - [Connections](#connections)
-  - [Info and tests](#info-and-tests)
-  - [Note: 9DOF vs 6DOF operation (ROS2)](#note-9dof-vs-6dof-operation-ros2)
-  - [Trying it](#trying-it)
-  - [Running BNO085 node on the robot and tuning EKF filter](#running-bno085-node-on-the-robot-and-tuning-ekf-filter)
-  - [Positioning sensor on the robot](#positioning-sensor-on-the-robot)
-  - [Real-time monitoring of IMU orientation data](#real-time-monitoring-of-imu-orientation-data)
-  - [Useful Links](#useful-links)
+- [Connections](#connections)
+- [Info and tests](#info-and-tests)
+- [Note: 9DOF vs 6DOF operation (ROS2)](#note-9dof-vs-6dof-operation-ros2)
+- [Trying it](#trying-it)
+- [Running BNO085 node on the robot and tuning EKF filter](#running-bno085-node-on-the-robot-and-tuning-ekf-filter)
+- [Positioning sensor on the robot](#positioning-sensor-on-the-robot)
+- [Real-time monitoring of IMU orientation data](#real-time-monitoring-of-imu-orientation-data)
+- [Useful Links](#useful-links)
 
 -------------
-
-## ROS2 driver for BNO085 IMU
 
 [BNO085](https://www.ceva-ip.com/wp-content/uploads/BNO080_085-Datasheet.pdf) "...integrates a triaxial accelerometer,
 triaxial gyroscope, magnetometer and a 32-bit ARM® Cortex™-M0+ microcontroller running CEVA's SH-2

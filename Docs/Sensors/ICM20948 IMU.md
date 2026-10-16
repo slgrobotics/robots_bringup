@@ -2,21 +2,18 @@
 
 **Note:** please review [Tips and Lessons](https://github.com/slgrobotics/articubot_one/wiki/IMUs-%E2%80%90-Tips-and-Lessons) for IMU use in ROS2
 
--------------
+## ROS2 driver for ICM20948 IMU
 
 **Contents:**
 
-- [ROS2 driver for ICM20948 IMU](#ros2-driver-for-icm20948-imu)
-  - [Connections:](#connections)
-  - [Info and tests](#info-and-tests)
-  - [Trying it (on Raspberry Pi)](#trying-it-on-raspberry-pi)
-  - [Running ICM20948 node on the robot and tuning EKF filter](#running-icm20948-node-on-the-robot-and-tuning-ekf-filter)
-  - [Real-time monitoring of IMU orientation data](#real-time-monitoring-of-imu-orientation-data)
-  - [Useful Links](#useful-links)
+- [Connections:](#connections)
+- [Info and tests](#info-and-tests)
+- [Trying it (on Raspberry Pi)](#trying-it-on-raspberry-pi)
+- [Running ICM20948 node on the robot and tuning EKF filter](#running-icm20948-node-on-the-robot-and-tuning-ekf-filter)
+- [Real-time monitoring of IMU orientation data](#real-time-monitoring-of-imu-orientation-data)
+- [Useful Links](#useful-links)
 
 -------------
-
-## ROS2 driver for ICM20948 IMU
 
 SparkFun: "...The [ICM-20948](https://www.sparkfun.com/sparkfun-9dof-imu-breakout-icm-20948-qwiic.html) is an extremely low-powered, I2C and SPI-enabled 9-axis motion tracking device..."
 

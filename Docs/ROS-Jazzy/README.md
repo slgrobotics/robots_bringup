@@ -14,9 +14,8 @@ Here we set up a clean **Desktop PC** to become a ROS playground machine and a G
 
 For the robot's on-board **Raspberry Pi** setup see [this guide](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi)
 
----------------------------------
+**Contents:**
 
-Contents:
 - [Install Ubuntu 26.04 ("Resolute Raccoon") or 24.04 LTS ("Noble Numbat") on a Workstation](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#install-ubuntu-2604-resolute-raccoon-or-2404-lts-noble-numbat-on-a-workstation)
   - [Expand "server" edition to "desktop" (just add GUI)](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#expand-server-edition-to-desktop-just-add-gui)
   - [...set up Chrony, Samba and other OS things here...](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#set-up-chrony-samba-and-other-os-things-here)
@@ -41,7 +40,8 @@ Contents:
 - [Optional: Explore Nav2 and Behavior Trees](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#optional-explore-nav2-and-behavior-trees)
 - [Optional: Install Husarnet VPN](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#optional-install-husarnet-vpn)
 - [Useful links](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#useful-links)
----------------------------------
+
+-------------
 
 <img src="https://github.com/user-attachments/assets/3fe68730-c8a9-4779-809f-ecea9ec824e2" width="320">
 

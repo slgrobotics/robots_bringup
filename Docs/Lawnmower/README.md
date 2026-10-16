@@ -3,7 +3,11 @@
 
 For my (now retired) zero-turn lawnmower project see [this guide](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Lawnmower/CrazedRhino.md)
 
--------------
+### A perfect summer day is when the sun is shining, the breeze is blowing, the birds are singing, and the lawn mower is broken.
+
+<img width="768" alt="ChatGPT Image Sep 8, 2025, 12_23_28 PM" src="https://github.com/user-attachments/assets/afbfa7ed-81ef-4a9e-b931-8bec7c6ddef3" />
+
+# Grassroamer Notes
 
 **Contents:**
 
@@ -16,12 +20,6 @@ For my (now retired) zero-turn lawnmower project see [this guide](https://github
 - [Path planning and execution](#path-planning-and-execution)
 
 -------------
-
-### A perfect summer day is when the sun is shining, the breeze is blowing, the birds are singing, and the lawn mower is broken.
-
-<img width="768" alt="ChatGPT Image Sep 8, 2025, 12_23_28 PM" src="https://github.com/user-attachments/assets/afbfa7ed-81ef-4a9e-b931-8bec7c6ddef3" />
-
-# Grassroamer Notes
 
 *Grassroamer* is an actual
 [Walmart](https://www.walmart.com/ip/PowerSmart-Gas-Lawn-Mower-21-inches-144cc-2-in-1-Walk-Behind-Side-Discharge-Push-Lawn-Mower/475461862) 

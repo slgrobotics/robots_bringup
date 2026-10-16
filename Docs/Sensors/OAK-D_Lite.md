@@ -7,7 +7,8 @@ It doesn't have an IMU, but otherwise should be identical to units produced late
 
 This guide describes how to run it under Ubuntu 24.04 and ROS2 Jazzy - first on an Intel 5 Desktop, an then on Raspberry 4 or 5 under the Ubuntu 24.04 Server and ROS2 Jazzy Base.
 
-Contents:
+**Contents:**
+
 - [Basic hardware test](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md#basic-hardware-test)
 - [*Important:* Power consumption and USB connection requirements](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md#important-power-consumption-and-usb-connection-requirements)
 - [Luxonis Software Installation](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md#luxonis-software-installation)
@@ -24,7 +25,7 @@ Contents:
   - [The *"luxonis Device crashed, but no crash dump could be extracted"* bug](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md#the-luxonis-device-crashed-but-no-crash-dump-could-be-extracted-bug)
 - [Useful Links](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/OAK-D_Lite.md#useful-links)
 
----------------------------
+-------------
 
 ## Basic hardware test
 

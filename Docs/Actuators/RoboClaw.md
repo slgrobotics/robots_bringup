@@ -1,13 +1,5 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
--------------
-
-**Contents:**
-
-- [RoboClaw Motor Controller Setup](#roboclaw-motor-controller-setup)
-
--------------
-
 ## RoboClaw Motor Controller Setup
 
 I don't have personal experience with [RoboClaw](https://www.pololu.com/category/124/roboclaw-motor-controllers) motor controllers,

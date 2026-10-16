@@ -1,17 +1,14 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
--------------
+## Joystick setup
 
 **Contents:**
 
-- [Joystick setup](#joystick-setup)
-  - [Test your joystick](#test-your-joystick)
-  - [Installation (with my articubot_one codebase)](#installation-with-my-articubot_one-codebase)
-  - [Useful links](#useful-links)
+- [Test your joystick](#test-your-joystick)
+- [Installation (with my articubot_one codebase)](#installation-with-my-articubot_one-codebase)
+- [Useful links](#useful-links)
 
 -------------
-
-## Joystick setup
 
 I am using _Microsoft Wireless Xbox 360 Controller_ as a joystick, which is well supported in ROS2.
 

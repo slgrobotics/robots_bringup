@@ -2,19 +2,16 @@
 
 _"To invent, you need a good imagination and a pile of junk."_ - Thomas A. Edison
 
--------------
+## Make Your Own Robot
 
 **Contents:**
 
-- [Make Your Own Robot](#make-your-own-robot)
 - [General Considerations](#general-considerations)
 - [Building Robot in "Layers"](#building-robot-in-layers)
 - [Bill of Materials (BoM)](#bill-of-materials-bom)
 - [Base Control - the Arduino way](#base-control---the-arduino-way)
 
 -------------
-
-## Make Your Own Robot
 
 **Important:** This guide provides educational information for DIY robotics projects, which carry inherent risks, including electrical, battery, and mechanical hazards. The author assumes no liability for damages or injuries resulting from the use or misuse of this information. Users proceed entirely at their own risk.
 

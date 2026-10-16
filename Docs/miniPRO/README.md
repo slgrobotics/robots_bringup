@@ -1,18 +1,15 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
--------------
+## Ninebot _miniPRO_ Notes
 
 **Contents:**
 
-- [Ninebot miniPRO Notes](#ninebot-minipro-notes)
-  - [Success: simpleFOC approach](#success-simplefoc-approach)
+- [Success: simpleFOC approach](#success-simplefoc-approach)
 - [Having fun: The "all wrong solutions"](#having-fun-the-all-wrong-solutions)
   - [Brute-force approach](#brute-force-approach)
   - [The Bluetooth approach](#the-bluetooth-approach)
 
 -------------
-
-## Ninebot _miniPRO_ Notes
 
 I have an original _2016 Ninebot miniPRO N3M320_. That was the first model to be sold in the US.
 
