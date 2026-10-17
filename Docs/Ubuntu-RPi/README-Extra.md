@@ -4,7 +4,7 @@
 
 **Contents:**
 
-- [Disabling optional services:](#disabling-optional-services)
+- [Disabling optional services](#disabling-optional-services)
 - [Monitoring temperature](#monitoring-temperature)
 - [Properly feeding your Raspberry Pi 5](#properly-feeding-your-raspberry-pi-5)
 - [Optional: VS Code Remote Development](#optional-vs-code-remote-development)

@@ -5,7 +5,7 @@
 **Contents:**
 
 - [Booting from an SD card with NVM drive present](#booting-from-an-sd-card-with-nvm-drive-present)
-- [Here is how NVM hardware looks:](#here-is-how-nvm-hardware-looks)
+- [Here is how NVM hardware looks](#here-is-how-nvm-hardware-looks)
 
 -------------
 

@@ -10,7 +10,7 @@ _"hus·​sar (ˌ)hə-ˈzär  -ˈsär : a member of any of various European mili
 - [Installing Husarnet](#installing-husarnet)
 - [Configuring Cyclone DDS](#configuring-cyclone-dds)
 - [Note: I am using static IPv4 addresses and subnets](#note-i-am-using-static-ipv4-addresses-and-subnets)
-- [Useful Links:](#useful-links)
+- [Useful Links](#useful-links)
 
 -------------
 

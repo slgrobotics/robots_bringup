@@ -6,8 +6,8 @@
 
 **Contents:**
 
-- [Connections:](#connections)
-- [Info and tests:](#info-and-tests)
+- [Connections](#connections)
+- [Info and tests](#info-and-tests)
 - [Issues When Using the “Standard” ROS 2 Driver](#issues-when-using-the-standard-ros-2-driver)
 - [Positioning sensor on the robot](#positioning-sensor-on-the-robot)
 - [Installation](#installation)

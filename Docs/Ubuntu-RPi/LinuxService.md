@@ -4,8 +4,8 @@
 
 **Contents:**
 
-- [Here are the steps:](#here-are-the-steps)
-- [Here are some useful commands:](#here-are-some-useful-commands)
+- [Here are the steps](#here-are-the-steps)
+- [Here are some useful commands](#here-are-some-useful-commands)
 
 -------------
 

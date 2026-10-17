@@ -10,14 +10,14 @@
 
 - [Optional: Use REAL-TIME kernel on Raspberry Pi 4](#optional-use-real-time-kernel-on-raspberry-pi-4)
 - [Optional: Overclocking Raspberry Pi 4 to 2 GHz](#optional-overclocking-raspberry-pi-4-to-2-ghz)
-- [Turtle Raspberry Pi 4/8Gb Build and Run Instructions:](#turtle-raspberry-pi-48gb-build-and-run-instructions)
+- [Turtle Raspberry Pi 4/8Gb Build and Run Instructions](#turtle-raspberry-pi-48gb-build-and-run-instructions)
   - [XV11 LIDAR setup](#xv11-lidar-setup)
   - [ROS2 driver for BNO055 9DOF IMU](#ros2-driver-for-bno055-9dof-imu)
   - [Compile forked Autonomy Lab ROS2 driver for Create 1 base](#compile-forked-autonomy-lab-ros2-driver-for-create-1-base)
   - [Populate launch folder: /home/ros/launch](#populate-launch-folder-homeroslaunch)
 - [Optional: Test-driving Create 1 Turtlebot with teleop](#optional-test-driving-create-1-turtlebot-with-teleop)
 - [Optional: Create a Linux service for on-boot autostart](#optional-create-a-linux-service-for-on-boot-autostart)
-- [On the Desktop:](#on-the-desktop)
+- [On the Desktop](#on-the-desktop)
 - [Tuning your Gyro (only for Create 1)](#tuning-your-gyro-only-for-create-1)
 
 -------------

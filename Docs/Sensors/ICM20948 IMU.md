@@ -6,7 +6,7 @@
 
 **Contents:**
 
-- [Connections:](#connections)
+- [Connections](#connections)
 - [Info and tests](#info-and-tests)
 - [Trying it (on Raspberry Pi)](#trying-it-on-raspberry-pi)
 - [Running ICM20948 node on the robot and tuning EKF filter](#running-icm20948-node-on-the-robot-and-tuning-ekf-filter)

@@ -19,7 +19,7 @@ For the robot's on-board **Raspberry Pi** setup see [this guide](https://github.
 - [Install Ubuntu 26.04 ("Resolute Raccoon") or 24.04 LTS ("Noble Numbat") on a Workstation](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#install-ubuntu-2604-resolute-raccoon-or-2404-lts-noble-numbat-on-a-workstation)
   - [Expand "server" edition to "desktop" (just add GUI)](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#expand-server-edition-to-desktop-just-add-gui)
   - [...set up Chrony, Samba and other OS things here...](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#set-up-chrony-samba-and-other-os-things-here)
-- [Install ROS Desktop LTS:](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#install-ros-desktop-lts)
+- [Install ROS Desktop LTS](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#install-ros-desktop-lts)
   - [Install RQT with all plugins and PlotJuggler](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#install-rqqt-with-all-plugins-and-plotjuggler)
 - [Joystick setup](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#joystick-setup)
 - [For 24.04 / Jazzy: Install Gasebo](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#for-2404--jazzy-install-gasebo)
