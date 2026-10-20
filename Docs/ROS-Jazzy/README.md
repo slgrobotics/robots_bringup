@@ -1,7 +1,5 @@
 **Back to** [Wiki](https://github.com/slgrobotics/articubot_one/wiki)
 
-_"It takes all the running you can do, to keep in the same place. If you want to get somewhere else, you must run at least twice as fast as that!"_ - Alice in Wonderland
-
 > If you are looking to upgrade (Ubuntu 24 -> 26, ROS2 Jazzy -> Lyrical) follow [this guide](https://github.com/slgrobotics/articubot_one/wiki/Jazzy-to-Lyrical-migration). 
 
 # Set up Desktop ROS  "Clean Machine" from scratch
@@ -13,6 +11,13 @@ For your ROS setups:
 Here we set up a clean **Desktop PC** to become a ROS playground machine and a Ground Station (*Workstation*) for our robots.
 
 For the robot's on-board **Raspberry Pi** setup see [this guide](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi)
+
+--------------------
+
+`Lewis Carroll, Alice’s Adventures in Wonderland, Chapter XII`
+- _“Begin at the beginning,”_ the King said gravely, _“and go on till you come to the end: then stop.”_
+
+--------------------------------
 
 **Contents:**
 
