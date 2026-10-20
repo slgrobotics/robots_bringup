@@ -3,7 +3,7 @@
 ## Behavior Trees in Nav2 package
 
 `Lewis Carroll, Alice’s Adventures in Wonderland, Chapter VI`
-- _“That depends a good deal on where you want to get to,”_ said the Cat.
+- _“That depends a good deal on where you want to get to,”_ said the Cat (sitting in a tree).
 - _“Oh, you’re sure to do that,”_ said the Cat, _“if you only walk long enough.”_
 
 ---------------------------
