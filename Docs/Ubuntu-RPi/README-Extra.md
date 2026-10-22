@@ -246,7 +246,7 @@ sudo vi /etc/chrony/chrony.conf
 
 Your setup might look like this:
 ```
-# See http://www.pool.ntp.org/join.html for more information.
+# The Ubuntu NTP pool servers configuration was moved to /etc/chrony/sources.d/ubuntu-ntp-pools.sources
 server 192.168.1.130 iburst prefer
 # optionally:
 #server 192.168.1.130 iburst trust prefer
@@ -262,6 +262,8 @@ sourcedir /etc/chrony/sources.d
 - Comment out *sources from DHCP* and *NTP sources from sources.d* if exclusive synchronization is desired.
 The disadvantage is that if your desktop is unavailable, the Raspberry Pi loses its external time reference and eventually drifts.
 - Neither `trust` nor `prefer` is necessary when there is only one source.
+- You can put the server definition in `/etc/chrony/sources.d/ubuntu-ntp-pools.sources` - I prefer to leave it intact in case Chrony files auto-update.
+- Ubuntu 26 prefers NTS (NTP with built-in security), but regular NTP services are still supported.
 
 Here is a shell script to see how your time sync is performing (and see CPU/GPU temperatures):
 
