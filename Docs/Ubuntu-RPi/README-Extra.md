@@ -174,54 +174,58 @@ ROS nodes rely on tight time synchronization between participating machines. Def
 
 There's a ROS2 specific [test](https://github.com/Boston-Robot-Hackers/handy) to see if your Workstation and on-board Pi are synchronized.
 
-Time sync info:
+In **Ubuntu 24.04**, time synchronization is handled by **systemd-timesyncd** - a lightweight client-only NTP.
 
-https://ubuntu.com/server/docs/network-ntp
+> Time sync info:
+> - https://ubuntu.com/server/docs/network-ntp
+> - https://chrony.tuxfamily.org/doc/3.4/chrony.conf.html
+> - https://chrony.tuxfamily.org/examples.html			
+> 
+> When chrony is not installed - check your time setup:
+> ```
+> sudo systemctl status systemd-timesyncd
+> timedatectl timesync-status
+> timedatectl status
+> timedatectl show-timesync -a
+> ll /run/systemd/timesync/synchronized     (see timestamp = last successful sync, every 34 minutes)
+> 	
+> https://wiki.archlinux.org/title/systemd-timesyncd
+> 	
+> sudo vi /etc/systemd/timesyncd.conf
+> ```
+> 
+> Chrony (full NTP with server option) replaces/masks `systemd-timesyncd` can be installed:
+> ```
+> sudo apt install chrony ntpdate
+> ```
 
-https://chrony.tuxfamily.org/doc/3.4/chrony.conf.html
+In **Ubuntu 26.04.1**, time synchronization is handled by **Chrony by default**
 
-https://chrony.tuxfamily.org/examples.html			
-
-Normally preinstalled service is _systemd-timesyncd_ (a lightweight client-only NTP)
-
-When chrony is not installed - check your time setup:
-```
-sudo systemctl status systemd-timesyncd
-timedatectl timesync-status
-timedatectl status
-timedatectl show-timesync -a
-ll /run/systemd/timesync/synchronized     (see timestamp = last successful sync, every 34 minutes)
-	
-https://wiki.archlinux.org/title/systemd-timesyncd
-	
-vi /etc/systemd/timesyncd.conf
-```
-
-Chrony (full NTP with server option) replaces/masks systemd-timesyncd if installed.
-```
-sudo apt install chrony ntpdate
-```
 Check if it works:
 ```
 sudo systemctl status chronyd
 chronyc -n tracking
 chronyc sources
 chronyc sourcestats
-
 ```
+
+To make time synchronization more precise and robust, set up a **local NTP server** on one of your machines.
+
 On the Linux desktop (to be assigned as NTP server, in my case - 192.168.1.130, with static address):
 ```
-vi /etc/chrony/chrony.conf
+sudo vi /etc/chrony/chrony.conf
 
-add to the end : add network range you allow to receive time syncing requests from clients
+# add to the end : add the network range you allow to receive time syncing requests from clients
 
 allow 192.168.1.0/24
+
+sudo systemctl restart chronyd
 ```
 On the Raspberry Pi:
 
 _Note:_ Offset 0.01 allows RPi to be a bit behind the server, avoiding "lookup into future"
 ```
-vi /etc/chrony/chrony.conf
+sudo vi /etc/chrony/chrony.conf
 
 server 192.168.1.130 iburst offset 0.01
 initstepslew 30 192.168.1.130
