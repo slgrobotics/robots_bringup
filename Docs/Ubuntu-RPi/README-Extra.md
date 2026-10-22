@@ -51,7 +51,7 @@ Please review [this guide](https://github.com/slgrobotics/articubot_one/wiki/Pro
 
 ### _Optional:_ VS Code Remote Development
 
-You can work on the Desktop machine with repositories/folders on Raspberry Pi.
+You can work on the Desktop machine with repositories/folders on a Raspberry Pi.
 
 Follow [this guide](https://code.visualstudio.com/docs/remote/ssh-tutorial).
 
@@ -88,7 +88,7 @@ card 2: Set [C-Media USB Headphone Set], device 0: USB Audio [USB Audio]
   Subdevices: 1/1
   Subdevice #0: subdevice #0
 ```
-For some reason, the _aplay_ works with HDMI display connected (even on a "headless" Server), but if not - you have to explicitly specify which "card" you want _aplay_ to use:
+For some reason, _aplay_ works with an HDMI display connected (even on a "headless" Server), but if not - you have to explicitly specify which "card" you want _aplay_ to use:
 ```
 vi ~/.asoundrc
 
@@ -96,7 +96,7 @@ vi ~/.asoundrc
 defaults.pcm.card 2
 defaults.ctl.card 2
 ```
-Alternatively you can create file _/etc/asound.conf_ with the same content for system-wide settings.
+Alternatively you can create a file _/etc/asound.conf_ with the same content for system-wide settings.
 
 ### _Optional:_ Create a Linux service for on-boot autostart
 
@@ -112,9 +112,9 @@ Please review tips [here](https://articulatedrobotics.xyz/tutorials/ready-for-ro
 
 It is possible that after the initial boot your network won't be set up properly.
 
-On top of that, your mobile robot will work much better, if it is assigned a static network address and it doesn't have to query DHCP service on your router.
+On top of that, your mobile robot will work much better if it is assigned a static network address and it doesn't have to query the DHCP service on your router.
 
-Ubuntu uses "_cloud-init_" service to set up your network every time you boot up. Turn it off:
+Ubuntu uses the "_cloud-init_" service to set up your network every time you boot up. Turn it off:
 
 In sudo mode, create a file _/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg_ with the following content:
 ```
@@ -125,7 +125,7 @@ Now, in sudo mode, you can edit _/etc/netplan/50-cloud-init.yaml_ directly - set
 
 Google "_how to assign static ip address on ubuntu 24.04 server_" for details.
 
-This is an example file I use in _/etc/netplan/50-cloud-init.yaml_ - to assign "192.168.1.137 address (your local network may be other than ```192.168.*.*```):
+This is an example file I use in _/etc/netplan/50-cloud-init.yaml_ - to assign the address 192.168.1.137 (your local network may be other than ```192.168.*.*```):
 ```	
 # This file is generated from information provided by the datasource.  Changes
 # to it will not persist across an instance reboot.  To disable cloud-init's
@@ -170,7 +170,7 @@ ip a
 
 ### _Optional:_ time sync using _chrony_
 
-ROS nodes rely on tight time synchronization between participating machines. Default setup might not work well for you.
+ROS nodes rely on tight time synchronization between participating machines. The default setup might not work well for you.
 
 When two machines have different clocks, TF2 can produce errors such as:
 ```
@@ -183,7 +183,7 @@ Lookup would require extrapolation into the past
 
 There's a ROS2 specific [test](https://github.com/Boston-Robot-Hackers/handy) to see if your Workstation and on-board Pi are synchronized.
 
-In **Ubuntu 24.04**, time synchronization is handled by **systemd-timesyncd** - a lightweight client-only NTP.
+In **Ubuntu 24.04**, time synchronization is handled by **systemd-timesyncd** - a lightweight client-only NTP implementation.
 
 > Time sync info:
 > - https://ubuntu.com/server/docs/network-ntp
@@ -203,7 +203,7 @@ In **Ubuntu 24.04**, time synchronization is handled by **systemd-timesyncd** - 
 > sudo vi /etc/systemd/timesyncd.conf
 > ```
 > 
-> Chrony (full NTP with server option) replaces/masks `systemd-timesyncd` can be installed:
+> Chrony (full NTP with a server option) replaces/masks `systemd-timesyncd` and can be installed:
 > ```
 > sudo apt install chrony ntpdate
 > ```
@@ -221,11 +221,11 @@ chronyc sourcestats
 To make time synchronization more precise and robust, set up a **local NTP server** on one of your machines.
 Local NTP improves consistency between machines, but does not automatically guarantee better absolute time accuracy.
 
-On the Linux desktop (to be assigned as NTP server, in my case - 192.168.1.130, with static address):
+On the Linux desktop (to be assigned as an NTP server, in my case - 192.168.1.130, with a static address):
 ```
 sudo vi /etc/chrony/chrony.conf
 ```
-Keep the existing upstream NTP sources. Add the network range you allow to receive time syncing requests from clients.
+Keep the existing upstream NTP sources. Add the network range from which you allow time syncing requests from clients.
 
 Add the following to the end:
 ```
@@ -299,9 +299,9 @@ echo "CPU: " `gawk '{print $1/1000," C"}' /sys/class/thermal/thermal_zone0/temp`
 
 Your SD card isn't immortal, and might fail if left without power for several months, for other reasons or without a reason at all. You need to make a backup on less volatile media - for example, your PC. If you read a 16 GB SD card into an image file, it will take the same 16 GB of PC disk space, and compression does not always help to shrink it.
 
-There are many methods available (Pishrink etc.), some work on a live (mounted) system volume and rely on the file system's ability to recover a "live" image on boot.
+There are many methods available (Pishrink etc.); some work on a live (mounted) system volume and rely on the file system's ability to recover a "live" image on boot.
 
-I prefer a safer method - fill unused space with zeroes and let the Zip shrink the SD image efficiently:
+I prefer a safer method - fill unused space with zeroes and let Zip shrink the SD image efficiently:
 ```
 sudo apt autoremove
 sudo apt clean
@@ -313,7 +313,7 @@ rm zero.file
 
 Then make an img file:
 - Windows: using, for example, _Win32DiskImager_, and zip it on a PC. To restore it to an SD card, use _Balena Etcher_ (it accepts compressed images).
-- Ubuntu: _gnome-disks_ can be used to create an image of an SD card or write (restore) an image to SD card. _Balena Etcher_ is also available on Linux. You can compress the image file using right-click menu in File Manager.
+- Ubuntu: _gnome-disks_ can be used to create an image of an SD card or write (restore) an image to an SD card. _Balena Etcher_ is also available on Linux. You can compress the image file using the right-click menu in File Manager.
 
 Here is more info:
 
