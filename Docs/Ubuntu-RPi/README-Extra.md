@@ -226,14 +226,22 @@ On the Raspberry Pi:
 _Note:_ Offset 0.01 allows RPi to be a bit behind the server, avoiding "lookup into future"
 ```
 sudo vi /etc/chrony/chrony.conf
+```
 
+Your setup might look like this:
+```
+# See http://www.pool.ntp.org/join.html for more information.
 server 192.168.1.130 iburst offset 0.01
 initstepslew 30 192.168.1.130
-#pool ntp.ubuntu.com        iburst maxsources 4
-#pool 0.ubuntu.pool.ntp.org iburst maxsources 1
-#pool 1.ubuntu.pool.ntp.org iburst maxsources 1
-#pool 2.ubuntu.pool.ntp.org iburst maxsources 2
+
+# Use time sources from DHCP.
+sourcedir /run/chrony-dhcp
+
+# Use NTP sources found in /etc/chrony/sources.d.
+sourcedir /etc/chrony/sources.d
 ```
+You may want to comment out sources from DHCP and `sources.d` - in which case your client machine will only use your local NTP server.
+
 A shell script to see how your time sync is performing (and see CPU/GPU temperatures):
 
 **Note:** you need to `sudo usermod -a -G video $(whoami)` for GPU access
