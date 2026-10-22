@@ -22,7 +22,7 @@
 
 ## _Native_ Raspberry Pi Camera (_Arducam_) Setup
 
-Ubuntu 26.04.1 has the _libcamera_. The following works:
+Ubuntu 26.04.1 has _libcamera_. The following works:
 ```
 sudo apt install libcamera-tools python3-picamera2 rpicam-apps
 
@@ -76,7 +76,7 @@ Here is my setup:
 -  Waveshare binocular camera [modules](https://www.amazon.com/IMX219-83-Stereo-Camera-Compatible-Applications/dp/B088RFT412) do not come with RPi5 cables, and there are no such cables on the market. Research before buying.
 
 **Note:**
-- I plugged the cable in "CAM/DISP 1" port - you might use port 0 instead. I haven't tried.
+- I plugged the cable in the "CAM/DISP 1" port - you might use port 0 instead. I haven't tried.
 - Dual cameras use both ports.
 - [Amazon](https://www.amazon.com/dp/B0DLGMT7XN) has a good image showing the proper orientation of the cable (contacts toward Ethernet connector).
 - Make sure you use cable "locks" properly and secure the cable 
@@ -88,7 +88,7 @@ Here is my setup:
 <details>
 <summary>Click <b>here</b> to expand instructions for 24.04</summary>
 
-Following Marco's recommendations, review Arducam guide:
+Following Marco's recommendations, review the Arducam guide:
 
 https://docs.arducam.com/Raspberry-Pi-Camera/Native-camera/8MP-IMX219/#software-configuration
 
@@ -99,7 +99,7 @@ camera_auto_detect=0
 #Find the line: [all], add the following item under it:
 dtoverlay=imx219
 ```
-The last line can explicitly specify port - _cam0_ or _cam1_ ("CAM/DISP 1" port is located closer to HDMI and power connectors):
+The last line can explicitly specify a port - _cam0_ or _cam1_ ("CAM/DISP 1" port is located closer to HDMI and power connectors):
 ```
 dtoverlay=imx219,cam0
 ```
@@ -239,7 +239,7 @@ Available cameras
     SyncMode : [0..2]
 ```
 
-If you have a Ubuntu with GUI ("*Desktop*" edition) - 
+If you have Ubuntu with a GUI ("*Desktop*" edition) - 
 try [GNOME Snapshot](https://discourse.ubuntu.com/t/whats-happening-in-noble-repositories/43729/40) or _Cheese_.
 
 **Note:** _Cheese_ has been removed in Ubuntu 24.04 - replaced by _gnome-snapshot_. It can be still installed via _snap_.
@@ -284,7 +284,7 @@ ros@plucky:~/camera_ws/tests$ ll
 ...
 -rw-rw-r-- 1 ros ros   27835 Mar 21 14:14 image.jpg
 ```
-With a little help from OpenCV (and Marco ;-)) we can get more processing powers:
+With a little help from OpenCV (and Marco ;-)) we can get more processing power:
 ```
 from picamera2 import Picamera2, Preview
 import cv2
@@ -319,7 +319,7 @@ cap = cv2.VideoCapture(0)
 ...
 ```
 It doesn't work with Raspberry Pi _native_ cameras and _libcamera_. 
-Fortunately, OpenCV can be built with [GStreamer](https://gstreamer.freedesktop.org/features/) support, and _libcamerasrc_ plugin feeds the pipeline, if _libcamera_ is working properly.
+Fortunately, OpenCV can be built with [GStreamer](https://gstreamer.freedesktop.org/features/) support, and the _libcamerasrc_ plugin feeds the pipeline, if _libcamera_ is working properly.
 
 First, we need to install required components:
 ```
@@ -381,7 +381,7 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 ```
-To see discussions about this, follow to these links:
+To see discussions about this, follow these links:
 - https://github.com/raspberrypi/libcamera/issues/163
 - https://github.com/opencv/opencv/issues/25072
 - https://libcamera.org/getting-started.html
@@ -398,11 +398,11 @@ ros2 run camera_ros camera_node --ros-args -p width:=640 -p height:=480  -p Fram
 There are other options though.
 Here is the code I used for FPV camera before on the Desktop machine: [camera_publisher](https://github.com/slgrobotics/camera_publisher/blob/main/cv_basics/webcam_pub.py)
 
-It relies on OpenCV _V4L2_ bindings, which don't work for IMX219 sensor with ```cv2.VideoCapture(0)``` - see above chapter.
+It relies on OpenCV _V4L2_ bindings, which don't work for the IMX219 sensor with ```cv2.VideoCapture(0)``` - see the above chapter.
 
 Using OpenCV allows some image processing and publishing custom topics. 
 For example, I could detect color blobs and publish their offsets.
-Image processing in a camera node makes sense in FPV scenario (NTSC receiver connected to the Desktop, where resources are plentiful), but not on the robot's resource-limited RPi.
+Image processing in a camera node makes sense in an FPV scenario (NTSC receiver connected to the Desktop, where resources are plentiful), but not on the robot's resource-limited RPi.
 
 It is possible to create a version of my *camera_publisher* to capture the image using *pycamera2*, not OpenCV - or use GStreamer to feed OpenCV properly.
 With Pycamera2, the tricky part is "*CvBridge # Package to convert between ROS and OpenCV Images*" - whatever I capture in Pycamera2 must be converted to ROS2 format.
@@ -469,7 +469,7 @@ ros2 run image_view image_view --ros-args -r image:=/camera/image_raw -p image_t
 
 ## Camera calibration
 
-Camera optics may distort image, especially when FOV is wide ("fisheye" 160 degree lenses, for example).
+Camera optics may distort the image, especially when FOV is wide ("fisheye" 160 degree lenses, for example).
 
 Here are images from *Arducam* fish-eye (sensor **1640x1232** *SBGGR10_1X10/RAW*) in different streaming modes - default (800x600) and cropped (640x480):
 
@@ -527,7 +527,7 @@ Your downstream packages can now subscribe to `/image_rectified` to receive a fl
 ## Global Shutter Camera
 
 There's a [Global Shutter Camera](https://www.raspberrypi.com/products/raspberry-pi-global-shutter-camera/) available for Raspberry Pi.
-It is intended for applications where standard cameras "*rolling shutter*" [distortion](https://en.wikipedia.org/wiki/Rolling_shutter) is undesirable.
+It is intended for applications where standard cameras' "*rolling shutter*" [distortion](https://en.wikipedia.org/wiki/Rolling_shutter) is undesirable.
 I have no personal experience with these and don't know if they will work with the setup described here.
 
 ## Additional Python tests - *libcamera*, *Picamera2*, dual cameras

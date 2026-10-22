@@ -4,7 +4,7 @@
 
 Typically, a robot has three USB-to-Serial devices: Arduino "wheels/base", GPS and LIDAR.
 
-While the Arduino Mega is the only one at _/dev/ttyACM0_, GPS and LIDAR can take any name under _/dev/ttyUSB*_ pattern.
+While the Arduino Mega is the only one at _/dev/ttyACM0_, GPS and LIDAR can take any name under the _/dev/ttyUSB*_ pattern.
 
 To avoid reassigning device names in the launch file after reboots, symlinks are created using the following recipe:
 
@@ -28,9 +28,9 @@ crw-rw---- 1 root dialout 188, 1 Nov 21  2023 /dev/ttyUSB1
 lrwxrwxrwx 1 root root         7 Nov 21  2023 /dev/ttyUSBGPS -> ttyUSB1
 lrwxrwxrwx 1 root root         7 Nov 21  2023 /dev/ttyUSBLDR -> ttyUSB0
 ```
-Check the GPS stream (note the baud rate, yours might be different):
+Check the GPS stream (note the baud rate; yours might be different):
 
-**To exit picocom:** Press _Ctrl_ button and then without releasing it press **a** and then **q**.
+**To exit picocom:** Press the _Ctrl_ button and then without releasing it press **a** and then **q**.
 
 ```
 sudo apt-get install picocom

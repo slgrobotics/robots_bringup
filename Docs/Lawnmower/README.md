@@ -36,10 +36,10 @@ Lawnmower photos are here: https://photos.app.goo.gl/3sNqAYzAbU29Zv7r7
 **Note:** 
 1. This is **not** a ROS2 project; PX4 (https://px4.io/) is a completely different system.
 2. My now retired legacy lawnmower (a.k.a. Crazed Rhino) is described [here](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Lawnmower/CrazedRhino.md).
-3. Once you set up your machine for [PX4 development](https://docs.px4.io/main/en/dev_setup/getting_started.html), you can just run Lawnmower robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
+3. Once you set up your machine for [PX4 development](https://docs.px4.io/main/en/dev_setup/getting_started.html), you can just run the Lawnmower robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
 use the following command: `make px4_sitl gz_lawnmower`
 4. While a lawnmower model is included in the standard PX4 codebase, my fork contains customizations needed for tighter control of vehicle speed and additional functions.
-5. PX4 plays nicely with ROS2, coexists with Jazzy and shares Gazebo Harmonic installation. I use the same machine for ROS2 and PX4 development without any issues.
+5. PX4 plays nicely with ROS2, coexists with Jazzy and shares the Gazebo Harmonic installation. I use the same machine for ROS2 and PX4 development without any issues.
 6. PX4 has a very active [Discord](https://discord.com/channels/1022170275984457759) community.
 
 ## Hardware
@@ -49,7 +49,7 @@ Onboard, Lawnmower has a Raspberry Pi 4 8GB ("pipx4") - an upgrade from RPi 3B w
 There's also:
 - an [MPU9250](https://www.amazon.com/HiLetgo-Gyroscope-Acceleration-Accelerator-Magnetometer/dp/B01I1J0Z7Y) on SPI,
 - two SparkFun u-blox ZED-9P [boards](https://www.sparkfun.com/sparkfun-gps-rtk-sma-breakout-zed-f9p-qwiic.html) on USB-serial,
-- a Teensy 3.2 for interfacing R/C receiver on I2C - code [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/RC_PPM_Receiver),
+- a Teensy 3.2 for interfacing with an R/C receiver on I2C - code [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/RC_PPM_Receiver),
 - Pixhawk color [LED](https://www.amazon.com/TYXTTGY-Pixhawk-PX4-External-Extension-Module/dp/B0F29BV7WC) (I2C)
 - PCA9685 [board](https://www.amazon.com/dp/B0CRV3MK14) (I2C) (you can use a Teensy emulator instead - code is [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/Teensy_PCA9685)).
 - a RoboteQ [AX2850](https://www.bipom.com/documents/roboteq/ax2550quickstart19b-060107.pdf) motor controller.
@@ -82,7 +82,7 @@ Set up your Ubuntu 24.04 or 26.04 Desktop machine for [PX4 development](https://
 > sudo apt install libopengl0    # required for stable builds, not daily
 > ```
 
-Clone the [repository](https://github.com/slgrobotics/PX4-Autopilot/tree/dev) - *dev* branch is default:
+Clone the [repository](https://github.com/slgrobotics/PX4-Autopilot/tree/dev) - the *dev* branch is the default:
 ```
 mkdir ~/lawnmow
 cd ~/lawnmow
@@ -141,7 +141,7 @@ make px4_sitl gz_rover_differential_lawn
 make px4_sitl gz_r1_rover
 make px4_sitl gz_x500_forest
 ```
-**Note:** the `_lawn`, `_forest` postfixes define Gazebo Worlds and can be omitted for default behavior.
+**Note:** the `_lawn` and `_forest` postfixes define Gazebo Worlds and can be omitted for default behavior.
 
 See `~/lawnmow/PX4-Autopilot/Tools/simulation/gz/worlds` for options.
 
@@ -158,7 +158,7 @@ make emlid_navio2_arm64
 make emlid_navio2_arm64 upload
 ```
 
-**Note:** the `upload` command needs to resolve network name `navio`. Add it to your `/etc/hosts` file:
+**Note:** the `upload` command needs to resolve the network name `navio`. Add it to your `/etc/hosts` file:
 ```
 # your lawnmower's Raspberry Pi IP address:
 192.168.1.123 navio
@@ -188,9 +188,9 @@ etc/scripts/update_wrk.sh
 
 #### On the robot's Raspberry Pi:
 
-The upload creates the directory *~/px4* on the RPi, which serves as a "read-only" code storage.
+The upload creates the directory *~/px4* on the RPi, which serves as "read-only" code storage.
 
-You need to copy some helper scripts from it once to create and maintain a "work storage" - *px4wrk* folder.
+You need to copy some helper scripts from it once to create and maintain "work storage" - a *px4wrk* folder.
 ```
 ssh pi@pipx4.local
 ```
@@ -206,7 +206,7 @@ Now you can run the PX4 code:
 sudo ./run.sh
 ```
 While running, PX4 creates another "work storage" - `/fs` and puts *.ulg* files in the `/fs/log` folder.
-These files can be viewed with [PlotJuggler](https://plotjuggler.io/) app or analyzed with https://review.px4.io/ - for example, [this plot](https://review.px4.io/plot_app?log=f2393d38-2560-4423-b948-ec367bcb7f20).
+These files can be viewed with the [PlotJuggler](https://plotjuggler.io/) app or analyzed with https://review.px4.io/ - for example, [this plot](https://review.px4.io/plot_app?log=f2393d38-2560-4423-b948-ec367bcb7f20).
 
 **Note:**
 If you modify any of the C++ source files, make sure that *astyle* formatting checkups are enforced:
@@ -225,7 +225,7 @@ make px4_raspberrypi_arm64
 
 ## Path planning and execution
 
-I control the robot using [QGroundControl app](https://qgroundcontrol.com/) from a desktop machine running Ubuntu 26.04.
+I control the robot using the [QGroundControl app](https://qgroundcontrol.com/) from a desktop machine running Ubuntu 26.04.
 
 I use [Path Planner](https://github.com/slgrobotics/path_planner) and related utilities for creating QGC missions.
 

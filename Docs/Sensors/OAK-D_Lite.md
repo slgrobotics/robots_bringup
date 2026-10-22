@@ -5,7 +5,7 @@
 I have a "_Kickstarter Edition_" OAK-D Lite stereo [camera](https://shop.luxonis.com/products/oak-d-lite-1).
 It doesn't have an IMU, but otherwise should be identical to units produced later.
 
-This guide describes how to run it under Ubuntu 24.04 and ROS2 Jazzy - first on an Intel 5 Desktop, an then on Raspberry 4 or 5 under the Ubuntu 24.04 Server and ROS2 Jazzy Base.
+This guide describes how to run it under Ubuntu 24.04 and ROS2 Jazzy - first on an Intel 5 Desktop, and then on Raspberry 4 or 5 under the Ubuntu 24.04 Server and ROS2 Jazzy Base.
 
 **Contents:**
 
@@ -29,7 +29,7 @@ This guide describes how to run it under Ubuntu 24.04 and ROS2 Jazzy - first on 
 
 ## Basic hardware test
 
-The camera requires a quality USB3 cable and _prefers_ a USB3 socket, but will work if plugged into USB2 socket. 
+The camera requires a quality USB3 cable and _prefers_ a USB3 socket, but will work if plugged into a USB2 socket. 
 
 After plugging it in, see if it shows up:
 ```
@@ -44,7 +44,7 @@ sudo dmesg
 lsusb
 Look for "ID 03e7:2485 Intel Movidius MyriadX"
 ```
-Do not expect _/dev/video*_ descriptor appear, OAK-D uses different mechanism for accessing hardware.
+Do not expect the _/dev/video*_ descriptor to appear; OAK-D uses a different mechanism for accessing hardware.
 
 Prepare and apply _udev_ rules:
 ```
@@ -66,12 +66,12 @@ In my experiments, 5V power drain for my OAK-D LITE is as follows:
 
 **Note:** USB 2.0 ports can [deliver](https://en.wikipedia.org/wiki/USB_hardware#:~:text=Allowable%20current%20draw) 100 to 500 mA, while USB 3.1/3.2 ports - 900 mA. That's if you are lucky, of course.
 
-In practice, low quality or busy USB hubs wouldn't comply with OAK-D power requirements, which causes device pipelines crashing.
+In practice, low quality or busy USB hubs wouldn't comply with OAK-D power requirements, which causes device pipelines to crash.
 
 My OAK-D Lite was unstable when connected to most USB ports I tried (see *The "luxonis Device crashed..." bug* below).
-Either on an Intel PC, or on Raspberry Pi 5, the best results (relative stability) is reached when there are no other devices connected to the same motherboard USB hub.
+Either on an Intel PC, or on Raspberry Pi 5, the best results (relative stability) are reached when there are no other devices connected to the same motherboard USB hub.
 
-On the Raspberry Pi 5, when not running NNs, you may get lucky using lower USB3 (blue) slot, leaving the other empty.
+On the Raspberry Pi 5, when not running NNs, you may get lucky using the lower USB3 (blue) slot, leaving the other empty.
 Use a [quality USB hub](https://www.amazon.com/dp/B0CJ95CR8X) to extend one of the USB2 (black) slots to connect other devices.
 
 To ensure proper feeding of the camera from a 5V power source, Luxonis [sells](https://shop.luxonis.com/products/oak-y-adapter) an "OAK Y Adapter".
@@ -82,7 +82,7 @@ It takes power from my robot's 5V bus, which can deliver many amperes. Once I pu
 
 ![Screenshot from 2025-05-10 12-10-56](https://github.com/user-attachments/assets/680aa6cb-4f37-452f-be52-8ab65cba5749)
 
-Connectios: *D+ to D+*, *D- to D-*, *GND to GND*. The 5V *on the camera side* and *common GND* go to the 5V power source. Capacitors optional.
+Connections: *D+ to D+*, *D- to D-*, *GND to GND*. The 5V *on the camera side* and *common GND* go to the 5V power source. Capacitors optional.
 
 **Note:**
 - This simple wiring works at USB 2.0 speeds ("HIGH"). For actual USB 3.1 wiring refer to [this article](https://www.pshinecable.com/article/usb-c-cable-wiring-diagram.html).
@@ -165,7 +165,7 @@ Most operation parameters (frame size etc.) are configured via arguments to laun
 
 ## Installation
 
-ROS2 Jazzy has binary distribution - a collection of [depthai_ros](https://github.com/luxonis/depthai-ros) packages.
+ROS2 Jazzy has a binary distribution - a collection of [depthai_ros](https://github.com/luxonis/depthai-ros) packages.
 You may also want to install *[vision_msgs_rviz_plugins](https://github.com/ros-perception/vision_msgs/blob/ros2/vision_msgs_rviz_plugins/README.md)* package
 (*[vision_msgs](https://github.com/ros-perception/vision_msgs)* should be already installed)
 ```
@@ -204,7 +204,7 @@ ros2 launch depthai_examples tracker_yolov4_node.launch.py
 ros2 launch depthai_examples tracker_yolov4_spatial_node.launch.py
 ros2 launch depthai_examples mobile_publisher.launch.py
 ```
-There are examples above that publish data from [_yolo_](https://encord.com/blog/yolo-object-detection-guide/) model. Note that camera resolution in the examples is downgraded to 300x300 or 480P, so the frame rate and CPU load become reasonable (I saw 10 FPS, 34 FPS).
+There are examples above that publish data from a [_yolo_](https://encord.com/blog/yolo-object-detection-guide/) model. Note that camera resolution in the examples is downgraded to 300x300 or 480P, so the frame rate and CPU load become reasonable (I saw 10 FPS, 34 FPS).
 
 Refer to [this guide](https://docs.luxonis.com/software/ros/depthai-ros/driver) for more.
 
@@ -223,7 +223,7 @@ Here is how to run one of the examples:
 #     /oak/points (PointCloud2) - oak_rgb_camera_optical_frame
 ros2 launch depthai_filters spatial_bb.launch.py
 ```
-Note the _MarkerArray_ for `spatial_bb` topic - that's Luxonis way of tagging 3D objects,
+Note the _MarkerArray_ for `spatial_bb` topic - that's Luxonis' way of tagging 3D objects,
 different from standard _Detection3dArray_ [visualization](https://github.com/ros-perception/vision_msgs?tab=readme-ov-file#rviz-plugins).
 
 ![Screenshot from 2025-05-18 13-04-33](https://github.com/user-attachments/assets/9d599bb9-1ff9-42e5-88dd-16a179cf082a)
@@ -236,7 +236,7 @@ Overall, it is worth spending time exploring *launch files* in these folders:
 /opt/ros/jazzy/share/depthai_ros_driver/launch
 ```
 **Note:**
-- Trying to view _PointCloud2_ in _RViz2_ causes **~800 MBits/sec load** on your network. If it goes between RPi and Desktop - try Ethernet cable, not WiFi first.
+- Trying to view _PointCloud2_ in _RViz2_ causes **~800 MBits/sec load** on your network. If it goes between RPi and Desktop - try an Ethernet cable, not WiFi first.
 - Luxonis uses custom messages (depthai_ros_msgs/msg/*) which don't seem to have corresponding RViz2 plugins.
 - at this time Luxonis code wrongly places 2D values _in millimeters_ into 3D boundary box topics ("bbox"). This makes proper 3D visualization using *vision_msgs_rviz_plugins* impossible:
 
@@ -247,7 +247,7 @@ Overall, it is worth spending time exploring *launch files* in these folders:
 ## Configuration files
 
 There's a lot of configuring that's going on behind the scenes when you run launch files.
-You can usually create a custom `.yaml` file and pass it as parameter, for example:
+You can usually create a custom `.yaml` file and pass it as a parameter, for example:
 
 1. Take an original file:
 ```
@@ -292,7 +292,7 @@ ros2 param list /rectify_color_node
 ```
 You can find another sample file [here](https://github.com/slgrobotics/depthai-ros/blob/jazzy/depthai_filters/config/spatial_bb.yaml).
 
-Find complete list of parameters [here](https://docs.luxonis.com/software/ros/depthai-ros/driver/#DepthAI%20ROS%20Driver-List%20of%20parameters).
+Find the complete list of parameters [here](https://docs.luxonis.com/software/ros/depthai-ros/driver/#DepthAI%20ROS%20Driver-List%20of%20parameters).
 
 **Note:** 
 - RGB Camera output normally goes through ISP (image signal processor)
@@ -308,7 +308,7 @@ To the best of my knowledge, DepthAI ROS Jazzy binary distribution does not cont
 Files under `/opt/ros/jazzy/share/depthai*` only contain code supporting real cameras.
 
 My *articubot_one* repository (`dev` branch) contains a URDF and other files to simulate OAK-D Lite for my Seggy robot.
-It is intended to be used with RTAB-Map [package](https://github.com/slgrobotics/articubot_one/wiki/Visual-SLAM-with-RTAB%E2%80%90Map).
+It is intended to be used with the RTAB-Map [package](https://github.com/slgrobotics/articubot_one/wiki/Visual-SLAM-with-RTAB%E2%80%90Map).
 
 The files are:
 - [description/camera_oakd.xacro](https://github.com/slgrobotics/articubot_one/blob/dev/description/camera_oakd.xacro) - defines joints and links for real robot and gazebo `rgbd` sensor
@@ -391,7 +391,7 @@ You should see depth information presented as a LIDAR scan in RViz2, with only s
 
 ## Real life scenario
 
-I have OAK-D Lite camera on my Plucky robot, which runs Ubuntu 24.04 Server - a "headless" configuration, no way to run examples that require Desktop.
+I have an OAK-D Lite camera on my Plucky robot, which runs Ubuntu 24.04 Server - a "headless" configuration, no way to run examples that require Desktop.
 
 So, to see the PointCloud (`ros2 launch depthai_examples stereo.launch.py`) I had to separate _RViz2_ from other nodes.
 
@@ -473,7 +473,7 @@ This is a known bug, and it looks like Luxonis knows about it:
 https://discuss.luxonis.com/d/4835-oak-d-crashes-on-different-examples
 
 In my testing, I experience it a lot, even when using quality USB 3.2 cables and external power through a USB 3.2 Hub.
-It is random, sometimes the device "just works" with USB 2.0 connections and a very basic cable.
+It is random; sometimes the device "just works" with USB 2.0 connections and a very basic cable.
 It can work on Raspberry Pi 5 better than on an Intel Desktop.
 
 I am not equipped to debug it for real, but after trying a lot of combinations of machines, cables and USB connections,

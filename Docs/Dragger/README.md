@@ -32,9 +32,9 @@ If you want to browse the robot's code, look here: https://github.com/slgrobotic
 
 Dragger is a *"larger Turtlebot"* - running all ROS2 nodes on-board. Only RViz2 runs on a desktop "ground station" computer. On board Dragger has a Raspberry Pi 5 ("dragger") [and an "FPV Drone" TV camera. - TBD].
 
-The robot's Raspberry Pi 5 (8GB) runs sensor drivers (GPS, LD14 LIDAR and MPU9250), Differential Drive Control (inspired by Articulated Robotics), SLAM Toolkit and Nav2. Arduino Mega 2650 drives wheels and reports encoder readings over serial.
+The robot's Raspberry Pi 5 (8GB) runs sensor drivers (GPS, LD14 LIDAR and MPU9250), Differential Drive Control (inspired by Articulated Robotics), SLAM Toolkit and Nav2. Arduino Mega 2650 drives the wheels and reports encoder readings over serial.
 
-**Note:** You can just run Dragger robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
+**Note:** You can just run the Dragger robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
 refer to [this section](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README.md#build-articubot_one-robot-codebase)
 
 ## Raspberry Pi 5 ("dragger") Build and Run Instructions
@@ -86,7 +86,7 @@ Install as described [here](https://github.com/slgrobotics/robots_bringup/blob/m
 
 ## Installing additional navigation components
 
-To allow GPS operation in sim install localization package:
+To allow GPS operation in sim, install the localization package:
 ```
 sudo apt install ros-${ROS_DISTRO}-robot-localization ros-${ROS_DISTRO}-imu-tools ros-${ROS_DISTRO}-slam-toolbox
 sudo apt install ros-${ROS_DISTRO}-navigation2 ros-${ROS_DISTRO}-nav2-bringup
@@ -119,8 +119,8 @@ git clone https://github.com/joshnewans/serial.git
 git clone https://github.com/slgrobotics/articubot_one.git
 git clone https://github.com/slgrobotics/outdoors_loc_nav.git
 ```
-Dragger, Plucky and any other robot using _[diffdive_arduino](https://github.com/slgrobotics/diffdrive_arduino)_ package need a _BatteryStateBroadcaster_ component.
-In my code it is configured to use all 9 available State interfaces, not only "voltage" available in official distribution at this time.
+Dragger, Plucky and any other robot using the _[diffdive_arduino](https://github.com/slgrobotics/diffdrive_arduino)_ package need a _BatteryStateBroadcaster_ component.
+In my code it is configured to use all 9 available State interfaces, not only "voltage" available in the official distribution at this time.
 
 Please follow [this guide](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/BatteryStateBroadcaster.md) to install the modified version,
 until the [official distribution](https://github.com/ipa320/ros_battery_monitoring/pull/3) catches up with the latest changes and you can just install it using _apt_:

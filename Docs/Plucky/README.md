@@ -20,18 +20,18 @@ Synonyms of plucky: SPIRITED, BRAVE
 ```
 Plucky photos are here: https://photos.app.goo.gl/YdYQ8kQrNmLkVXTM7
 
-Plucky is a *"larger Turtlebot"* - running [my *articubot_one* code](https://github.com/slgrobotics/articubot_one). Desktop only needs to run RViz for robot control.
+Plucky is a *"larger Turtlebot"* - running [my *articubot_one* code](https://github.com/slgrobotics/articubot_one). The Desktop only needs to run RViz for robot control.
 
-**Note:** You can just run Plucky robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
+**Note:** You can just run the Plucky robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
 refer to [this section](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README.md#build-articubot_one-robot-codebase)
 
 Onboard, Plucky has a Raspberry Pi 5 8GB ("plucky"). It runs sensor drivers (LD14 LIDAR, MPU9250 and GPS) and Differential Drive Control (inspired by Articulated Robotics), as well as localization and navigation packages.
 
-Plucky has two Arduino boards, one drives Ultrasonic Parking Sensor, and the other, main Arduino Mega 2560, drives the wheels and combines odometry and health data into a single serial stream for the Raspberry Pi.
+Plucky has two Arduino boards: one drives the Ultrasonic Parking Sensor, and the other, main Arduino Mega 2560, drives the wheels and combines odometry and health data into a single serial stream for the Raspberry Pi.
 
-There's an option of having an "FPV Drone" TV camera and using _Ultrasonic Parking Sensor_ ("_rangers_" in ROS2 terminology). Parking sensors data will be likely used later, as ROS2 supports rangers for obstacle avoidance and mapping.
+There's an option of having an "FPV Drone" TV camera and using _Ultrasonic Parking Sensor_ ("_rangers_" in ROS2 terminology). Parking sensor data will be likely used later, as ROS2 supports rangers for obstacle avoidance and mapping.
 
-The Raspberry Pi 5 on Plucky have Ubuntu 24.04 Server 64 bit and ROS2 Jazzy Base installed - https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html
+The Raspberry Pi 5 on Plucky has Ubuntu 24.04 Server 64 bit and ROS2 Jazzy Base installed - https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html
 
 Arduino Mega 2560 code - wheels/sensors driver: 
 
@@ -47,7 +47,7 @@ https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/ParkingSensor
 
 ## Build and Run Instructions (on the robot's Raspberry Pi 5):
 
-Follow "Dragger" robot guide starting with "_Raspberry Pi 5 ("dragger") Build and Run Instructions_":
+Follow the "Dragger" robot guide starting with "_Raspberry Pi 5 ("dragger") Build and Run Instructions_":
 
 https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger
 

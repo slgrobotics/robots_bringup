@@ -11,7 +11,7 @@
 
 **Note:**
 - this guide can be used for other NMEA capable GPS (in fact, almost any GPS)
-- review an add-on [Outdoors Localization](https://github.com/slgrobotics/outdoors_loc_nav) package used for Dragger robot
+- review an add-on [Outdoors Localization](https://github.com/slgrobotics/outdoors_loc_nav) package used for the Dragger robot
 
 Dragger has a _"BE-880 GPS Receiver Module with Flash HMC5883L Compass 10th Chip GPS Antenna"_, available on Amazon. A u-blox NEO-M10N module is part of it.
 
@@ -40,7 +40,7 @@ Connector: 1.25mm 6pin
 ```
 Default baud rate is 38400, and it works out of the box at 1 Hz.
 
-You can use _u-center_ Windows app to set up the device initially, saving settings to its Flash memory. Specifically, set NMEA at 115200 baud at 10 Hz to be streaming on USB.
+You can use the _u-center_ Windows app to set up the device initially, saving settings to its Flash memory. Specifically, set NMEA at 115200 baud at 10 Hz to be streaming on USB.
 
 Check it (Use Ctrl/A + Ctrl/X to exit):
 ```
@@ -80,7 +80,7 @@ GPS Node will be run as part of the _dragger.launch.py_ process.
 
 ## GPS on Raspberry Pi UART (GPIO 14,15)
 
-If you want to connect a BE-880 or similar GPS Receiver directly to Raspberry Pi UART, you have to make sure that:
+If you want to connect a BE-880 or similar GPS Receiver directly to a Raspberry Pi UART, you have to make sure that:
 - UART is enabled in
 - Console login prompt is disabled in
 - Related TTY services are stopped and disabled

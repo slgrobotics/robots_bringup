@@ -33,10 +33,10 @@ See "Useful links" below.
 
 **Note:** 
 1. The left joystick controls the robot's movements; the "A" and "Y" buttons serve as "Enable" and "Turbo". Hold the "Enable" button while operating the left joystick.
-2. In ROS2 Jazzy *cmd_vel* messages are now **TwistStamped** type, my code has been modified to support it.
+2. In ROS2 Jazzy *cmd_vel* messages are now of the **TwistStamped** type; my code has been modified to support it.
    I also added remappings to _/diff_cont/*_ to match Jazzy Controller architecture.
    Your regular _teleop_ might not work with your robot _base_; use the instructions below.
-3. There's a **twist_mux** node, which is run by each robot _*.launch.py_ file. It combines various *cmd_vel* inputs and delivers a filtered message to the robot's base. Pay close attention to names of these topics.
+3. There's a **twist_mux** node, which is run by each robot _*.launch.py_ file. It combines various *cmd_vel* inputs and delivers a filtered message to the robot's base. Pay close attention to the names of these topics.
 
 ![twist_mux](https://github.com/user-attachments/assets/7007fc56-699a-475a-b5d8-a371beb6be31)
 
@@ -59,7 +59,7 @@ Do ```cd ~/robot_ws; colcon build``` after all changes.
 
 Now you can run the driver, or let your robot's desktop-side launch file do it at startup. 
 
-For example, you should be able to use teleop with Create 1 base alone (not running the *turtle.launch.py*)
+For example, you should be able to use teleop with the Create 1 base alone (not running the *turtle.launch.py*)
 ```
 ros2 launch articubot_one joystick.launch.py &
 ```

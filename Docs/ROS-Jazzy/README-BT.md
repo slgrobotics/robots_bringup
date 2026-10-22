@@ -18,7 +18,7 @@
 
 -------------
 
-Your typical *nav2_params.yaml* file contains sections related to behavior trees, the most obvious are:
+Your typical *nav2_params.yaml* file contains sections related to behavior trees; the most obvious are:
 ```
 # see https://docs.nav2.org/configuration/packages/configuring-bt-navigator.html
 bt_navigator:
@@ -37,7 +37,7 @@ behavior_server:
     local_footprint_topic: local_costmap/published_footprint
   ...
 ```
-Here are some original docs to help understanding Nav2 architecture and operation:
+Here are some original docs to help you understand Nav2 architecture and operation:
 
 - https://roscon.ros.org/2019/talks/roscon2019_navigation2_overview_final.pdf
 - https://docs.nav2.org/configuration/packages/configuring-bt-navigator.html
@@ -58,7 +58,7 @@ _Groot2_ is a visualization tool for Behavior Trees.
 
 First, install it - https://www.behaviortree.dev/groot/
 
-You can choose either of the two Linux installation options, here is how to run *AppImage* after downloading:
+You can choose either of the two Linux installation options; here is how to run *AppImage* after downloading:
 ```
 cd ~/Downloads
 chmod +x Groot2-v1.6.1-x86_64.AppImage 
@@ -72,15 +72,15 @@ Refer to https://docs.nav2.org/tutorials/docs/using_groot.html for instructions
 
 ### Using bt2img.py imaging tool
 
-Nav2 [source](https://github.com/ros-navigation/navigation2) on Github contains [bt2img.py](https://github.com/ros-navigation/navigation2/blob/main/tools/bt2img.py) imaging tool.
-See [this topic](https://github.com/ros-navigation/navigation2/issues/5811) for usage example.
+Nav2 [source](https://github.com/ros-navigation/navigation2) on Github contains the [bt2img.py](https://github.com/ros-navigation/navigation2/blob/main/tools/bt2img.py) imaging tool.
+See [this topic](https://github.com/ros-navigation/navigation2/issues/5811) for a usage example.
 
 ### Behavior Trees and RViz2
 
 Navigator plugins expose _service ports_, which accept requests from other programs.
 RViz2 can connect to two "*standard*" ports, and therefore interact with two "*standard*" plugins.
 
-When you click on "*Nav2 Goal*" button or use "*Navigate through poses*" mode in RViz2 left panel, those service ports are called. 
+When you click on the "*Nav2 Goal*" button or use "*Navigate through poses*" mode in the RViz2 left panel, those service ports are called. 
 
 Here is the *nav2_params.yaml* code which allows such interaction:
 ```
@@ -104,7 +104,7 @@ To substitute either of these trees, the following code in "*_nav.launch.py" can
     }
   ...
 ```
-In the above case, when you click on "*Nav2 Goal*" button and then anywhere on the map area, the "odometry_calibration.xml" will be activated.
+In the above case, when you click on the "*Nav2 Goal*" button and then anywhere on the map area, "odometry_calibration.xml" will be activated.
 
 Refer to https://github.com/slgrobotics/articubot_one for actual code. _Dev_ branch is usually more current, while _main_ is stable.
 

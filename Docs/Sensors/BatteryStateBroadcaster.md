@@ -23,13 +23,13 @@ There are two ways of publishing a _BatteryState_ message:
 
 or,
    
-2. Use _ros2_control_ infrastructure to pass necessary data through State interfaces and let specialized _BatteryStateBroadcaster_ component publish it.
+2. Use _ros2_control_ infrastructure to pass necessary data through State interfaces and let a specialized _BatteryStateBroadcaster_ component publish it.
 
 Here we are interested in using the second option, as it best conforms to a preferred ROS2 pattern.
 
 For the traditional (#1) approach, see https://automaticaddison.com/how-to-create-a-battery-state-publisher-in-ros-2/
 
-**Note:** when in Gazebo Sim, _BatteryState_ message originates from [Gazebo System](https://gazebosim.org/api/sim/8/battery.html) and is published by *gz_bridge*, avoiding *ros2_control* framework overall.
+**Note:** when in Gazebo Sim, the _BatteryState_ message originates from [Gazebo System](https://gazebosim.org/api/sim/8/battery.html) and is published by *gz_bridge*, avoiding the *ros2_control* framework overall.
 So, we are talking only about real hardware here.
 
 ### Installation (standard ROS2 Jazzy binary)
@@ -41,7 +41,7 @@ sudo apt install ros-${ROS_DISTRO}-battery-state-broadcaster
 The source code is [here](https://github.com/ipa320/ros_battery_monitoring)
 and configuring it is described [here](https://docs.ros.org/en/jazzy/p/battery_state_broadcaster/)
 
-There is one extra package which is installed this way - *battery_state_rviz_overlay*, enabling battery voltage to show on RViz2 display.
+There is one extra package which is installed this way - *battery_state_rviz_overlay*, enabling battery voltage to show on the RViz2 display.
 
 There are limitations to the standard _BatteryStateBroadcaster_, and there are many GitHub repositories with more advanced or specialized code.
 The standard Broadcaster only publishes battery _voltage_ and cannot populate other values of the _BatteryState_ message.
@@ -49,9 +49,9 @@ So, we will be missing *SOC (State of Charge), Percentage, Capacity, Health, Sta
 
 ### My version of BatteryStateBroadcaster
 
-It was a relatively trivial task to find a more advanced version on GitHub and copy some code from it to a fork of *ipa320/ros_battery_monitoring* repository.
+It was a relatively trivial task to find a more advanced version on GitHub and copy some code from it to a fork of the *ipa320/ros_battery_monitoring* repository.
 
-The donor code is here: https://github.com/HarvestX/h6x_ros2_controllers/tree/humble/battery_state_broadcaster - and all credits for this work go to _HarvestX_ team.
+The donor code is here: https://github.com/HarvestX/h6x_ros2_controllers/tree/humble/battery_state_broadcaster - and all credits for this work go to the _HarvestX_ team.
 
 The modified code is, naturally, here: https://github.com/slgrobotics/ros_battery_monitoring
 

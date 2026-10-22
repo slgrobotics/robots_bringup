@@ -20,15 +20,15 @@
 
 ### Connections:
 
-Connect to Raspberry Pi  **I2C**: **SCL** - pin 05, **SDA** - pin 03
+Connect to the Raspberry Pi  **I2C**: **SCL** - pin 05, **SDA** - pin 03
 
 RPi GPIO header pinout: https://www.raspberrypi.com/documentation/computers/images/GPIO-Pinout-Diagram-2.png
 
-_Optional:_ Consider 3 KOhm to 6.8 KOhm pull-up resistors from SDA and SCL to 3.3 V bus.
+_Optional:_ Consider 3 KOhm to 6.8 KOhm pull-up resistors from SDA and SCL to the 3.3 V bus.
 
 Use ```i2cdetect -y 1``` to see **address 0x28**
 
-**Note:** Adafruit sensor will show 0x28, [GY-BNO055 clone](https://www.amazon.com/dp/B0D47G672B) - 0x29 (with both jumpers closed). These addresses are used in launch files.
+**Note:** The Adafruit sensor will show 0x28, [GY-BNO055 clone](https://www.amazon.com/dp/B0D47G672B) - 0x29 (with both jumpers closed). These addresses are used in launch files.
 
 ### Info and tests:
 
@@ -67,7 +67,7 @@ Here is how the Adafruit BNO055 carrier board is oriented on Create 1 [Turtlebot
 
 ![BNO055_Adafruit_turtle](https://github.com/user-attachments/assets/70359a73-bc3f-421e-9e63-e41263150449)
 
-If you are using a [generic carrier board](https://www.amazon.com/dp/B0D47G672B), X axis (as printed on the PCB) should point forward, and Y - to the left of the robot.
+If you are using a [generic carrier board](https://www.amazon.com/dp/B0D47G672B), the X axis (as printed on the PCB) should point forward, and Y - to the left of the robot.
 Note that the sensor's chip is oriented identically in both cases. 
 
 The proper orientation of either sensor is due to the launch parameter setting, and works specifically with this ROS2 driver:
@@ -88,14 +88,14 @@ rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -r -y --s
 sudo apt install python3-smbus2
 colcon build
 ``` 
-Try running it and view IMU messages in rqt:
+Try running it and viewing IMU messages in rqt:
 ``` 
 cd ~/robot_ws
 colcon build; source install/setup.bash; ros2 launch bno055 bno055.launch.py
 ```
-Refer to [this file](https://github.com/slgrobotics/articubot_one/blob/main/robots/turtle/launch/turtle.sensors.launch.py) for real-life parameters for running BNO055 node.
+Refer to [this file](https://github.com/slgrobotics/articubot_one/blob/main/robots/turtle/launch/turtle.sensors.launch.py) for real-life parameters for running the BNO055 node.
 
-**Tip:** look at `imu/calib_status` topic. BNO055 self-calibrates ("FMC feature") - but if calibration status is not "3" (good), you may want to rotate it a bit to let it tune up.
+**Tip:** look at the `imu/calib_status` topic. BNO055 self-calibrates ("FMC feature") - but if calibration status is not "3" (good), you may want to rotate it a bit to let it tune up.
 
 ### PlotJuggler for monitoring data
 

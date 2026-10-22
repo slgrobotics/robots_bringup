@@ -13,10 +13,10 @@
 
 ---------------------------------
 
-**VERY Important:** ROS2 *Control Manager* discovers RT kernel and will adjust its scheduling to run at higher priority.
+**VERY Important:** ROS2 *Control Manager* discovers the RT kernel and will adjust its scheduling to run at higher priority.
 It will fail in subtle ways if not allowed to do so.
 
-To enable scheduling adjustment, follow [this guide](https://control.ros.org/jazzy/doc/ros2_control/controller_manager/doc/userdoc.html) - create *realtime* group:
+To enable scheduling adjustment, follow [this guide](https://control.ros.org/jazzy/doc/ros2_control/controller_manager/doc/userdoc.html) - create a *realtime* group:
 ```
 sudo addgroup realtime
 sudo usermod -a -G realtime $(whoami)
@@ -76,9 +76,9 @@ To decompress:
 ```
 zstd ubuntu-24.04.2-rt-ros2-arm64+raspi.img.zst -d -o ubuntu-24.04.2-rt-ros2-arm64+raspi.img
 ```
-I used *balenaEtcher* to flash the 4.3GB image, *Raspberry Pi imager* or Ubuntu *Disks app* can do it too (on the Ubuntu 24.04 Desktop machine).
+I used *balenaEtcher* to flash the 4.3GB image; *Raspberry Pi imager* or Ubuntu *Disks app* can do it too (on the Ubuntu 24.04 Desktop machine).
 
-I put the card in RPi 4, Ethernet cable, HDMI monitor and keyboard/mouse connected. Watch for password change prompts.
+I put the card in RPi 4, with an Ethernet cable, HDMI monitor and keyboard/mouse connected. Watch for password change prompts.
 
 Terminal font looks OK on an average large monitor (yes, a bit small).
 
@@ -114,20 +114,20 @@ export ROS_DOMAIN_ID=0
 
 I loosely followed my notes here: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Ubuntu-RPi
 
-The "*rosdep*" installed a huge bunch of packages, hard to say what was actually needed. It took a very long time.
+"*rosdep*" installed a huge bunch of packages, hard to say what was actually needed. It took a very long time.
 ```
 sudo apt install colcon
 ```
-Compiled and ran Plucky "articubot_one" code, starts OK, but my RPi4 isn't on a robot - I see lots of missing hardware run-time messages from the nodes.
+Compiled and ran Plucky "articubot_one" code; it starts OK, but my RPi4 isn't on a robot - I see lots of missing hardware run-time messages from the nodes.
 
-**P.S.** I moved the SD card to the RPi5 on Plucky, and it worked well. NVM SSD is still in place, the OS [boots](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/NVM-SSD.md#booting-from-an-sd-card-with-nvm-drive-present) off the SD card.
+**P.S.** I moved the SD card to the RPi5 on Plucky, and it worked well. NVM SSD is still in place; the OS [boots](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/NVM-SSD.md#booting-from-an-sd-card-with-nvm-drive-present) off the SD card.
 
 So, the RT image is usable for all my robots - with some elbow grease applied.
 
-I have 56% of 16GB SD card used (81% after additional packages were installed for Plucky robot).
+I have 56% of a 16GB SD card used (81% after additional packages were installed for Plucky robot).
 
 **Note:**
-- I initially configured the SD card on a RPi 4, and then plugged in RPi 5 on Plucky robot. I haven't seen any adverse effects.
+- I initially configured the SD card on an RPi 4, and then plugged it into RPi 5 on the Plucky robot. I haven't seen any adverse effects.
 - Beware of [boot sequence](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/NVM-SSD.md#booting-from-an-sd-card-with-nvm-drive-present) when you have NVM (SSD) and boot from an SD.
 
 #### Compressing the SD card for backup:

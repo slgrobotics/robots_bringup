@@ -28,7 +28,7 @@ The code (inspired by Articulated Robotics) is [here](https://github.com/slgrobo
 
 On the Desktop just run RViz2 as described below.
 
-**Note:** You can just run Turtle robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
+**Note:** You can just run the Turtle robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
 refer to [this section](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README.md#build-articubot_one-robot-codebase)
 
 #### Optional: Use REAL-TIME kernel on Raspberry Pi 4
@@ -37,7 +37,7 @@ Refer to [this guide](https://github.com/slgrobotics/robots_bringup/blob/main/Do
 
 #### Optional: Overclocking Raspberry Pi 4 to 2 GHz
 
-Here is a script to see clock-related status of RPi 4 (you need to `sudo usermod -a -G video $(whoami)`)
+Here is a script to see the clock-related status of RPi 4 (you need to `sudo usermod -a -G video $(whoami)`)
 ```
 #!/bin/bash
 echo "CPU: " `gawk '{print $1/1000," C"}' /sys/class/thermal/thermal_zone0/temp`
@@ -59,7 +59,7 @@ Most RPi 4s can run at 2 GHz with a minimal heat sink.
 
 See https://forums.raspberrypi.com/viewtopic.php?t=313280 for detailed info.
 
-**Warning:** When I had "*arm_freq_min=100*" my overclocked RPi 4s were showing wrong "*date*" - the system clock had slowed to a crawl.
+**Warning:** When I had "*arm_freq_min=100*" my overclocked RPi 4s were showing the wrong "*date*" - the system clock had slowed to a crawl.
 Chrony was running, but not synching. So - keep *arm_freq_min* at 600. See [this](https://github.com/MichaIng/DietPi/issues/4455).
 
 To enable overclocking, edit (sudo) */boot/firmware/config.txt* - the "[pi4]" section should look like this:
@@ -84,13 +84,13 @@ Turtle has _Ubuntu 24.04 Server (64 bit)_ and _ROS2 Jazzy Base_ installed - see 
 
 Refer to https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/XV11_LIDAR.md
 
-Alternatively, use LD14 LIDAR: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/LD14.md
+Alternatively, use an LD14 LIDAR: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/LD14.md
 
 #### ROS2 driver for BNO055 9DOF IMU
 
 Refer to https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/BNO055%20IMU.md
 
-Alternatively, use MPU9250 sensor: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/MPU9250.md
+Alternatively, use an MPU9250 sensor: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/MPU9250.md
 
 #### Compile forked Autonomy Lab ROS2 driver for Create 1 base
 
@@ -144,7 +144,7 @@ For the build on RPi 4/2Gb/4Gb, you may limit the number of parallel threads; th
 export MAKEFLAGS="-j 1"
 colcon build --parallel-workers=1 --executor sequential
 ```
-Or, just build it on an RPi 4/8Gb (build will take about 5-7 minutes, less on a RPi 5):
+Or, just build it on an RPi 4/8Gb (build will take about 5-7 minutes, less on an RPi 5):
 ```
 colcon build
 ```
@@ -174,7 +174,7 @@ You can see appropriate ROS2 topics appear in _rqt_, among them:
 - */joint_states*
 - */odom*
 
-**Tip:** Any time you need to produce a robot URDF from ```.xacro``` files, use "_xacro_" command, for example:
+**Tip:** Any time you need to produce a robot URDF from ```.xacro``` files, use the "_xacro_" command, for example:
 ```
 source ~/robot_ws/install/setup.bash
 xacro ~/robot_ws/install/articubot_one/share/articubot_one/robots/turtle/description/robot.urdf.xacro sim_mode:=true > /tmp/robot.urdf
@@ -217,7 +217,7 @@ cd ~/robot_ws
 colcon build
 ros2 launch articubot_one launch_rviz.launch.py use_sim_time:=false
 ```
-The command above also runs _joystick_ node, so that you can drive the robot using _Xbox 360 Controller_ or _Logitech Gamepad F710_.
+The command above also runs the _joystick_ node, so that you can drive the robot using _Xbox 360 Controller_ or _Logitech Gamepad F710_.
 
 Consult [running-a-physical-robot](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/ROS-Jazzy#running-a-physical-robot)
 
@@ -227,13 +227,13 @@ If you have an original *Create 1* base - it needs a gyro to compensate for a fi
 
 Any analog gyro will do. The original accessory interface board which plugs into the Cargo Bay DB25 connector has an analog gyro, ADXR613. 
 
-I had to create an _"analog gyro emulator"_ by connecting arduino mini to MPU9250 - and producing the same analog signal via PWM (https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/MPU9250GyroTurtlebot).
+I had to create an _"analog gyro emulator"_ by connecting an arduino mini to an MPU9250 - and producing the same analog signal via PWM (https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/MPU9250GyroTurtlebot).
 
 *Create base* does not read the gyro (or gyro emulator) directly - it just passes it through from the analog input (DB25 pin 4 of Cargo Bay) to the serial stream (which sends all sensor data every 15ms).
 
-When stationary, the gyro output will produce an ADC value between 0 and 1024, hopefully around 512, and that value will vary with rotation (reflecting, naturally, robot's turn rate).
+When stationary, the gyro output will produce an ADC value between 0 and 1024, hopefully around 512, and that value will vary with rotation (reflecting, naturally, the robot's turn rate).
 
-Autonomy Lab *Create driver* [with my modifications](https://github.com/slgrobotics/create_robot) reads this value, adds gyro_offset and multiplies it by gyro_scale - and then integrates it (by dt) to produce turn angle.
+Autonomy Lab *Create driver* [with my modifications](https://github.com/slgrobotics/create_robot) reads this value, adds gyro_offset and multiplies it by gyro_scale - and then integrates it (by dt) to produce a turn angle.
 
 https://github.com/slgrobotics/libcreate/blob/master/src/create.cpp : 148
 ```
@@ -245,8 +245,8 @@ angleF = angleF * 0.25 * getGyroScale(); // gyro calibration factor
 deltaYaw = angleF * (util::PI / 180.0); // D2R
 ```
 
-Create driver needs *angle* to correctly publish *diff_cont/odom* topic, which is important for robot localization as it moves.
-Correct wheel joints rotation is the best indication of normal operation of odometry calculations.
+The Create driver needs *angle* to correctly publish the *diff_cont/odom* topic, which is important for robot localization as it moves.
+Correct rotation of the wheel joints is the best indication of normal operation of odometry calculations.
 
 You will need to calibrate your gyro, and adjust related parameters in Turtle [launch file](https://github.com/slgrobotics/articubot_one/blob/main/robots/turtle/launch/turtle.launch.py).
 
@@ -264,7 +264,7 @@ First, **compensate for _gyro drift_** - make sure that the ROS2 gyro driver can
 The "*Cargo Bay Analog Signal*", as read by *Create 1 base* on DB25 pin 4, is connected (in our case) to gyro output.
 
 The ROS2 [driver](https://github.com/slgrobotics/create_robot) expects it to be 512 when the robot is stationary.
-If it differs (say, reads 202 when robot doesn't move) - the `'gyro_offset'` must compensate for that (say, 512-202=310 - the 310 is your `'gyro_offset'`).
+If it differs (say, reads 202 when the robot doesn't move) - the `'gyro_offset'` must compensate for that (say, 512-202=310 - the 310 is your `'gyro_offset'`).
 
 Read it using an autonomous helper program:
 ```
@@ -287,14 +287,14 @@ Adjust it accordingly in the launch file.
 
 With *gyro drift* compensated, proceed to **calibrating gyro sensitivity** (a.k.a. *gyro turn rate*).
 
-Start Turtle in ROS2. You need to bring up Rviz2 to see the odometry vector. The best way is to follow "On the Desktop" section above.
+Start Turtle in ROS2. You need to bring up Rviz2 to see the odometry vector. The best way is to follow the "On the Desktop" section above.
 
-The turn rate scale, as reported by gyro, usually needs adjustment. Drive the robot using joystick - turn it 360 degrees and see if the Odometry vector (showing *diff_cont/odom*) is lagging behind or gaining over the robot's orientation. Adjust `'gyro_scale'` to have them match.
+The turn rate scale, as reported by the gyro, usually needs adjustment. Drive the robot using a joystick - turn it 360 degrees and see if the Odometry vector (showing *diff_cont/odom*) is lagging behind or gaining over the robot's orientation. Adjust `'gyro_scale'` to have them match.
 
-The *distance_scale* can be adjusted so that *diff_cont/odom* **pose** reports proper distance when robot is driven forward or backward.
+The *distance_scale* can be adjusted so that *diff_cont/odom* **pose** reports the proper distance when the robot is driven forward or backward.
 
 As a **final test**, you need to drive the robot forward a couple of meters and verify that the odom point in Rviz stays at the launch point.
-Adjust the RViz as shown in the screenshot below - showing *odom* and *map* frames.
+Adjust RViz as shown in the screenshot below - showing *odom* and *map* frames.
 Then turn the robot and watch the *odom* point move. You should strive for minimal *odom* displacement from *map* during straight runs and rotations:
 
 <img width="2133" height="1176" alt="Screenshot from 2025-11-06 13-57-44" src="https://github.com/user-attachments/assets/bd486e40-1d16-418b-b4e1-9bee1a1084b3" />

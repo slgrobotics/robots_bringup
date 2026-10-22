@@ -104,7 +104,7 @@ Here are the likely scenarios for your work.
 
 - The *articubot_one* codebase offers a working example of indoor and outdoor (GPS) operation; use copy/paste
 
-- Fork my *articubot_one* repository and make your own robot in ~/robot_ws/src/articubot_one/robots folder
+- Fork my *articubot_one* repository and make your own robot in the ~/robot_ws/src/articubot_one/robots folder
 
 ### Found a bug? Want to contribute a fix? Have a question?
 

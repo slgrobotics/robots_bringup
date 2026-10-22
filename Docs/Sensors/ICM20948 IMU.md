@@ -21,11 +21,11 @@ Also, GY-ICM20948 is available from [Amazon](https://www.amazon.com/5pcs-GY-ICM2
 
 ### Connections:
 
-Connect to Raspberry Pi  **I2C**: **SCL** - pin 05, **SDA** - pin 03 **VCC** - pin 01 (3.3V) **GND** - pin 06 or 09
+Connect to the Raspberry Pi  **I2C**: **SCL** - pin 05, **SDA** - pin 03 **VCC** - pin 01 (3.3V) **GND** - pin 06 or 09
 
 RPi GPIO header pinout: https://www.raspberrypi.com/documentation/computers/images/GPIO-Pinout-Diagram-2.png
 
-_Optional:_ Consider 3 KOhm to 6.8 KOhm pull-up resistors from SDA and SCL to 3.3 V bus.
+_Optional:_ Consider 3 KOhm to 6.8 KOhm pull-up resistors from SDA and SCL to the 3.3 V bus.
 
 Use ```i2cdetect -y 1``` to see **address 0x68** or **0x69**
 
@@ -35,7 +35,7 @@ Sensor information: https://www.sparkfun.com/sparkfun-9dof-imu-breakout-icm-2094
 
 Datasheet: https://invensense.tdk.com/wp-content/uploads/2016/06/DS-000189-ICM-20948-v1.3.pdf
 
-My fork of ROS2 driver code is here: https://github.com/slgrobotics/ros2_icm20948
+My fork of the ROS2 driver code is here: https://github.com/slgrobotics/ros2_icm20948
 
 **Note:** as the ROS2 driver cannot use DMP, calibration is neither automatic nor optional.
 Use the calibration [script](https://github.com/slgrobotics/ros2_icm20948/blob/master/tests/calibrate_mag.py) and set related parameters in the launch file.
@@ -99,7 +99,7 @@ To see IMU orientation in RViz2, you need to:
 ```
 ros2 launch articubot_one launch_rviz.launch.py use_sim_time:=false
 ```
-- run a static transformer node to relate frames, raising *IMU frame* 1 meter up on the *map*:
+- run a static transformer node to relate frames, raising the *IMU frame* 1 meter up on the *map*:
 ```
 ros2 run tf2_ros static_transform_publisher 0 0 1 0 0 0 map imu_link
 ```
@@ -109,7 +109,7 @@ Enable the *IMU checkbox* and adjust the topic to show `/imu_data`:
 
 ### Running ICM20948 node on the robot and tuning EKF filter
 
-EKF [filter](https://github.com/slgrobotics/articubot_one/blob/main/launch/ekf_odom.launch.py) fuses wheel odometry with IMU orientation data,
+The EKF [filter](https://github.com/slgrobotics/articubot_one/blob/main/launch/ekf_odom.launch.py) fuses wheel odometry with IMU orientation data,
 deriving a reliable orientation quaternion in turns and straight runs (topic *"odometry/local"*).
 
 It is very important to have the EKF filter tuned properly, as shown [here](https://github.com/slgrobotics/articubot_one/blob/main/robots/seggy/config/ekf_odom_params.yaml), for example.

@@ -19,7 +19,7 @@ For my current lawnmower project see [this guide](https://github.com/slgrobotics
 
 Lawnmower (a.k.a. *Crazed Rhino*) was an actual [Husqvarna Z254F](https://www.husqvarna.com/us/zero-turn-mowers/z254f-special-edition) zero-turn riding mower, robotized for, well, mowing my lawn.
 
-It was running my version (fork) of [PX4 Autopilot](https://docs.px4.io/) code. I controled it using [QGroundControl app](https://qgroundcontrol.com/) on a desktop machine.
+It was running my version (fork) of [PX4 Autopilot](https://docs.px4.io/) code. I controlled it using the [QGroundControl app](https://qgroundcontrol.com/) on a desktop machine.
 
 (old) Code is [here](https://github.com/slgrobotics/PX4-Autopilot/tree/rhino_legacy)  **Note:** see "dev" branch for my new lawnmower code.
 
@@ -27,26 +27,26 @@ Lawnmower photos are here: https://photos.app.goo.gl/jwYZRtTi1LVshQoW8
 
 **Note:** 
 1. This is **not** a ROS2 project; PX4 (https://px4.io/) is a completely different system.
-2. Once you set up your machine for [PX4 development](https://docs.px4.io/main/en/dev_setup/getting_started.html), you can just run Lawnmower robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
+2. Once you set up your machine for [PX4 development](https://docs.px4.io/main/en/dev_setup/getting_started.html), you can just run the Lawnmower robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
 use the following command: `make px4_sitl gz_lawnmower`
 3. While a lawnmower model is included in the standard PX4 codebase, my fork contains customizations needed for tighter control of vehicle speed and additional functions.
-4. PX4 plays nicely with ROS2, coexists with Jazzy and shares Gazebo Harmonic installation. I use the same machine for ROS2 and PX4 development without any issues.
+4. PX4 plays nicely with ROS2, coexists with Jazzy and shares the Gazebo Harmonic installation. I use the same machine for ROS2 and PX4 development without any issues.
 5. PX4 has a very active [Discord](https://discord.com/channels/1022170275984457759) community.
 
 ## Lessons Learned
 
 There are some lessons learned from this project, spanning April 2020 - August 2025.
 1. It is possible to "robotize" a large machine, using DIY servos and common hobby robotics components.
-2. Reliability of these servos and components turned out to be very high, under vibrations and outdoors environment.
+2. Reliability of these servos and components turned out to be very high, under vibration and in an outdoor environment.
 3. PX4 Autopilot software is excellent for the task.
-4. RTK GPS is a must for precision tasks on the ground, "moving base" configuration helps a lot.
+4. RTK GPS is a must for precision tasks on the ground; a "moving base" configuration helps a lot.
 5. Obstacle avoidance is not necessary for the job.
 6. Vehicles with gas driven (hydraulics driven) wheels are hard to control with ~20 cm precision.
 7. Electric drive is preferable, as wheel encoders allow tight control over the drive.
 8. The 22 Hp engine's battery charging system supplies adequate power for servos and electronics.
 9. WiFi doesn't work well, but PX4/Mavlink does well over point-to-point Ethernet links.
 
-Overall, the project was a success, but my [smaller](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Lawnmower/README.md) lawnmower does better job (and is lower maintenance) mowing my lawns.
+Overall, the project was a success, but my [smaller](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Lawnmower/README.md) lawnmower does a better job (and is lower maintenance) mowing my lawns.
 
 ## Hardware
 
@@ -55,7 +55,7 @@ Onboard, Lawnmower has a Raspberry Pi 4 8GB ("pipx4") - an upgrade from RPi 3B w
 There's also:
 - an [MPU9250](https://www.amazon.com/HiLetgo-Gyroscope-Acceleration-Accelerator-Magnetometer/dp/B01I1J0Z7Y) on SPI,
 - two SparkFun u-blox ZED-9P [boards](https://www.sparkfun.com/sparkfun-gps-rtk-sma-breakout-zed-f9p-qwiic.html) on USB-serial,
-- a Teensy 3.2 for interfacing R/C receiver on I2C - code [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/RC_PPM_Receiver),
+- a Teensy 3.2 for interfacing with an R/C receiver on I2C - code [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/RC_PPM_Receiver),
 - Pixhawk color [LED](https://www.amazon.com/TYXTTGY-Pixhawk-PX4-External-Extension-Module/dp/B0F29BV7WC) (I2C)
 - a Teensy 4.0, emulating a PCA9685 with optocouplers (I2C) - code [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/Teensy_PCA9685).
 - a point-to-point [Ethernet link](https://www.amazon.com/dp/B09WMBD1S7).
@@ -86,7 +86,7 @@ make px4_sitl gz_rover_differential_lawn
 make px4_sitl gz_r1_rover
 make px4_sitl gz_x500_forest
 ```
-**Note:** the `_lawn`, `_forest` postfixes define Gazebo Worlds and can be omitted for default behavior.
+**Note:** the `_lawn` and `_forest` postfixes define Gazebo Worlds and can be omitted for default behavior.
 
 See `~/lawnmow/PX4-Autopilot/Tools/simulation/gz/worlds` for options.
 
@@ -105,9 +105,9 @@ make emlid_navio2_arm64 upload
 
 #### On the robot's Raspberry Pi:
 
-The upload creates the directory *~/px4* on the RPi, which serves as a "read-only" code storage.
+The upload creates the directory *~/px4* on the RPi, which serves as "read-only" code storage.
 
-You need to copy some helper scripts from it once to create and maintain a "work storage" - *px4wrk* folder.
+You need to copy some helper scripts from it once to create and maintain "work storage" - a *px4wrk* folder.
 ```
 ssh pi@pipx4.local
 ```
@@ -123,7 +123,7 @@ Now you can run the PX4 code:
 sudo ./run.sh
 ```
 While running, PX4 creates another "work storage" - `/fs` and puts *.ulg* files in the `/fs/log` folder.
-These files can be viewed with [PlotJuggler](https://plotjuggler.io/) app or analyzed with https://review.px4.io/ - for example, [this plot](https://review.px4.io/plot_app?log=f2393d38-2560-4423-b948-ec367bcb7f20).
+These files can be viewed with the [PlotJuggler](https://plotjuggler.io/) app or analyzed with https://review.px4.io/ - for example, [this plot](https://review.px4.io/plot_app?log=f2393d38-2560-4423-b948-ec367bcb7f20).
 
 **Note:**
 If you modify any of the C++ source files, make sure that *astyle* formatting checkups are enforced:

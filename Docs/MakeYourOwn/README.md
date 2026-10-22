@@ -57,12 +57,12 @@ Reliable WiFi is essential - test it using [this guide](https://github.com/slgro
 
 Note that _VS Code_ IDE works very well with ROS2 code, and _GitHub_ is an excellent tool for collaboration and version control.
 
-**Warning:** ROS, ROS2 and Gazebo have a long [history](https://en.wikipedia.org/wiki/Robot_Operating_System) and had many breaking changes.
+**Warning:** ROS, ROS2 and Gazebo have a long [history](https://en.wikipedia.org/wiki/Robot_Operating_System) and have had many breaking changes.
 As a result of this, most of your searches for information, documentation and code will lead to obsolete,
 wrong pieces of old documentation and code, and suggested solutions won't work with the current release (ROS2 Jazzy).
 The ability of AI tools to hallucinate and lie about ROS is legendary.
 Support is in general non-existent and some packages are not production quality at all.
-Your best friend is a working code example which you've tested yourself and your ability to find _current_ documentation.
+Your best friends are a working code example which you've tested yourself and your ability to find _current_ documentation.
 
 ## Building Robot in "Layers"
 
@@ -161,9 +161,9 @@ The **Arduino [firmware](https://github.com/slgrobotics/Misc/tree/master/Arduino
 A similar **Teensy 4.x [firmware](https://github.com/slgrobotics/Misc/blob/master/Arduino/Sketchbook/WheelsROS_Seggy/WheelsROS_Seggy.ino) for BLDC Wheel Motors** is "plug-in compatible" with the above, when it comes to serial communication to the ROS2 driver.
 
 While you may need to adapt the Arduino software to match your specific robot base, the ROS 2 "*diffdrive_arduino*" driver can be used as-is.
-The firmware was written for and tested on Arduino Mega 2560, but should run fine with minimal modifications on any microcontroller which can be programmed using Arduino IDE (Raspberry Pi Pico, for example).
+The firmware was written for and tested on an Arduino Mega 2560, but should run fine with minimal modifications on any microcontroller which can be programmed using the Arduino IDE (Raspberry Pi Pico, for example).
 
-The Teensy 4.x BLDC driver is proven on [Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy) robot.
+The Teensy 4.x BLDC driver is proven on the [Seggy](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Seggy) robot.
 
 ----------------
 

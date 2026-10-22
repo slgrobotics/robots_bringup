@@ -25,11 +25,11 @@ and calibrated angular velocity..."
 
 ### Connections
 
-Connect to Raspberry Pi  **I2C**: **SCL** - pin 05, **SDA** - pin 03
+Connect to the Raspberry Pi  **I2C**: **SCL** - pin 05, **SDA** - pin 03
 
 RPi GPIO header pinout: https://www.raspberrypi.com/documentation/computers/images/GPIO-Pinout-Diagram-2.png
 
-_Optional:_ Consider 3 KOhm to 6.8 KOhm pull-up resistors from SDA and SCL to 3.3 V bus.
+_Optional:_ Consider 3 KOhm to 6.8 KOhm pull-up resistors from SDA and SCL to the 3.3 V bus.
 
 Use ```i2cdetect -y 1``` to see **address 0x4b**
 
@@ -39,10 +39,10 @@ Information: https://www.adafruit.com/product/4754
 
 Datasheet: https://www.ceva-ip.com/wp-content/uploads/BNO080_085-Datasheet.pdf
 
-My fork of ROS2 driver code is here: https://github.com/slgrobotics/bno08x_ros2_driver
+My fork of the ROS2 driver code is here: https://github.com/slgrobotics/bno08x_ros2_driver
 (original [here](https://github.com/bnbhat/bno08x_ros2_driver))
 
-**Note:** the original driver does not publish orientation covariances (or any other),
+**Note:** the original driver does not publish orientation covariances (or any others),
 which severely confuses the EKF filter, which fuses wheel odometry and IMU data.
 What happens and why it matters is explained [here](https://chatgpt.com/s/t_691b60f38e1c8191a0a309cbcf99e478).
 I created an issue [here](https://github.com/bnbhat/bno08x_ros2_driver/issues/16).
@@ -108,7 +108,7 @@ To see IMU orientation in RViz2, you need to:
 ```
 ros2 launch articubot_one launch_rviz.launch.py use_sim_time:=false
 ```
-- run a static transformer node to relate frames, raising *IMU frame* 1 meter up on the *map*:
+- run a static transformer node to relate frames, raising the *IMU frame* 1 meter up on the *map*:
 ```
 ros2 run tf2_ros static_transform_publisher 0 0 1 0 0 0 map bno085
 ```
@@ -118,9 +118,9 @@ Enable the *IMU checkbox* and adjust the topic to show `/imu`:
 
 ### Running BNO085 node on the robot and tuning EKF filter
 
-Refer to [this file](https://github.com/slgrobotics/articubot_one/blob/main/robots/seggy/launch/seggy.sensors.launch.py) for real-life parameters for running BNO085 node.
+Refer to [this file](https://github.com/slgrobotics/articubot_one/blob/main/robots/seggy/launch/seggy.sensors.launch.py) for real-life parameters for running the BNO085 node.
 
-EKF [filter](https://github.com/slgrobotics/articubot_one/blob/main/launch/ekf_odom.launch.py) fuses wheel odometry with IMU orientation data,
+The EKF [filter](https://github.com/slgrobotics/articubot_one/blob/main/launch/ekf_odom.launch.py) fuses wheel odometry with IMU orientation data,
 deriving a reliable orientation quaternion in turns and straight runs (topic *"odometry/local"*).
 
 It is very important to have the EKF filter tuned properly, as shown [here](https://github.com/slgrobotics/articubot_one/blob/main/robots/seggy/config/ekf_odom_params.yaml), for example.

@@ -2,11 +2,11 @@
 
 # FPV Camera and receiver Setup
 
-Here is my attempt to provide a zero-delay video link between robot and ROS2 Camera Publisher.
+Here is my attempt to provide a zero-delay video link between the robot and the ROS2 Camera Publisher.
 
 **Note:** for Raspberry Pi _native_ camera setup see https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md
 
-Initially I used an affordable FPV drone camera with analog (NTSC) video transmitter, and an analog receiver capable of feeding video stream to computer via USB.
+Initially I used an affordable FPV drone camera with an analog (NTSC) video transmitter, and an analog receiver capable of feeding a video stream to a computer via USB.
 
 "*WT07 Micro 5.8GHz 25mW FPV Transmitter and 600TVL Camera with OSD Interface for FPV Quadcopter Drone Wireless Radio Transmission*":
 https://www.amazon.com/dp/B06VY7L1N4
@@ -14,9 +14,9 @@ https://www.amazon.com/dp/B06VY7L1N4
 "*FPV Receiver 5.8G 150CH OTG Receiver UVC Video VTX 5dBi SMA Female*":
 https://www.amazon.com/dp/B07Q5MPC8V
 
-Camera with transmitter, of course, resides on the robot. The receiver is plugged into a Ubuntu 22.04 **Desktop USB port**, it shows up as _/dev/video0_ and _/dev/video1_
+Camera with transmitter, of course, resides on the robot. The receiver is plugged into an Ubuntu 22.04 **Desktop USB port**; it shows up as _/dev/video0_ and _/dev/video1_
 
-It works with Linux Cheese app and can be read by Python/OpenCV scripts, including custom ROS nodes written in Python.
+It works with the Linux Cheese app and can be read by Python/OpenCV scripts, including custom ROS nodes written in Python.
 
 Here is the code I use for the camera **on the Desktop side**: https://github.com/slgrobotics/camera_publisher
 
@@ -28,9 +28,9 @@ I've chosen to use a more powerful FPV set on my Dragger robot, keeping the same
 
 **Notes:** 
 1. The cameras and receiver I tested are designed to work outdoors within visual range, without obstructions. Indoors they were performing poorly.
-2. TS832 transmitter runs _very_ hot at 12V. You better feed it with 7 to 9 volts via a DC-DC [converter](https://www.amazon.com/Converter-DROK-Voltage-Regulator-Waterproof/dp/B0B6PP65S1).
-3. Any transmitter will be burned if antenna is not connected or is not of good quality or is not designed for 5.8 GHz.
-4. Use "_cheese_" app on your Desktop machine to view video stream. GNOME "_snapshot_" doesn't seem to work with this USB receiver.
+2. TS832 transmitter runs _very_ hot at 12V. You had better feed it with 7 to 9 volts via a DC-DC [converter](https://www.amazon.com/Converter-DROK-Voltage-Regulator-Waterproof/dp/B0B6PP65S1).
+3. Any transmitter will be burned if the antenna is not connected or is not of good quality or is not designed for 5.8 GHz.
+4. Use the "_cheese_" app on your Desktop machine to view the video stream. GNOME "_snapshot_" doesn't seem to work with this USB receiver.
 5. Video quality is 480x320 - very poor. Good enough for "driving blind" though.
 6. Ubuntu 24.04 introduced breaking changes in the way the video stream is handled ("libcamera" vs. "V4L2").
 Cameras on Raspberry Pi 5 don't work anymore (at least, without extra [setup effort](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/Camera.md)).

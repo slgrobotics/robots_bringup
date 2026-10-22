@@ -25,7 +25,7 @@ It ultimately became a base for my [Seggy robot](https://github.com/slgrobotics/
 
 ### Success: simpleFOC approach
 
-Discouraged by the brute-force approach (described in detail below), I implemented direct control over wheels using [_simpleFOC_](https://github.com/simplefoc) library and compatible driver boards.
+Discouraged by the brute-force approach (described in detail below), I implemented direct control over the wheels using the [_simpleFOC_](https://github.com/simplefoc) library and compatible driver boards.
 
 Photos link above. Teensy code [here](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/WheelsROS_Seggy),
 ROS2 code - [here](https://github.com/slgrobotics/diffdrive_arduino).
@@ -55,7 +55,7 @@ It can be easily "robotized" now - except that wheel odometry isn't accessible. 
 
 **Note:** there are two small buttons under the rubber foot pads. When a person stands on miniPRO, these buttons are depressed and balance control logic
 becomes more aggressive in keeping the robot in horizontal alignment. I added a couple of small servos to press these buttons at the R/C switch command (to enable "God mode").
-When activated, the robot can roll up slopes and drive over grass lawn. It needs very close supervision and quick action on the R/C, as it may become unruly with wrong inputs.
+When activated, the robot can roll up slopes and drive over a grass lawn. It needs very close supervision and quick action on the R/C, as it may become unruly with wrong inputs.
 In "normal" mode it can only drive on flat relatively smooth surfaces (i.e. indoors).
 
 ### The Bluetooth approach
@@ -84,7 +84,7 @@ git clone https://github.com/slgrobotics/minipro.git
 ```
 At this point you have to figure out how to use Bluetooth and try enabling your BT/LE adapter.
 
-With a bit of luck, you'll have a single BT-LE device, supported by Ubuntu - and you'll be able to see powered-up miniPRO in *Settings/Bluetooth*.
+With a bit of luck, you'll have a single BT-LE device, supported by Ubuntu - and you'll be able to see the powered-up miniPRO in *Settings/Bluetooth*.
 
 Use ```lsusb (-v)```, ```bluetoothctl (list/show/devices)``` and ```bt-device -l``` to discover your hardware and connections.
 
@@ -109,7 +109,7 @@ Added devices:
 17-86-B6-F9-11-5C (17:86:B6:F9:11:5C)
  NinebotMini0671 (AA:BB:CC:DD:EE:FF)  <- your Bluetooth address will be here
 ```
-You may want to use VS Code to open *~/ninebot/src/minipro* folder, or just use your favorite editor (_vi_, of course)
+You may want to use VS Code to open the *~/ninebot/src/minipro* folder, or just use your favorite editor (_vi_, of course)
 
 4. Edit *t_minipro.cpp* file:
 ```
@@ -134,10 +134,10 @@ Caution: miniPRO is a beast!
 - the code works for my miniPRO with _original firmware_. Yours could be with "_safety upgrade_" and might not work. I haven't tested that.
 - not all miniPRO models had a remote control feature.
 - while I set a pairing code when I bought the miniPRO, this program doesn't need it and connects fine without it.
-- original XBox 340 joystick code misinterpreted joystick events, so that turns were handled by triggers. I fixed that in my fork, the miniPRO is now controlled by _left thumbstick_ only.
-- the code sends commands, but doesn't read BT stream. The program (*t_minipro*) hangs after several minutes of driving.
+- original XBox 340 joystick code misinterpreted joystick events, so that turns were handled by triggers. I fixed that in my fork; the miniPRO is now controlled by _left thumbstick_ only.
+- the code sends commands, but doesn't read the BT stream. The program (*t_minipro*) hangs after several minutes of driving.
 - the included _bluez_ code is old, but seems to work fine. If it ain't broken, don't fix it.
-- there is also _gattclient_ program there (part of _lib/bluez_), I have to investigate it later:
+- there is also a _gattclient_ program there (part of _lib/bluez_); I have to investigate it later:
 ```
 me@mycomp:~/ninebot/build/minipro$ ./gattclient --help
 btgatt-client

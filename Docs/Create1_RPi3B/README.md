@@ -29,7 +29,7 @@ My Create 1 has a Raspberry Pi 3B ("turtle"). The RPi runs sensor drivers (XV11 
 
 The rest of the robot nodes run on the Desktop, using my *articubot_one* codebase, inspired by Articulated Robotics.
 
-**Note:** You can just run Turtle robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
+**Note:** You can just run the Turtle robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
 refer to [this section](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README.md#build-articubot_one-robot-codebase)
 
 ## Turtle Raspberry Pi 3B Build and Run Instructions:
@@ -40,13 +40,13 @@ Turtle has _Ubuntu 24.04 Server (64 bit)_ and _ROS2 Jazzy Base_ installed - see 
 
 Refer to https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/XV11_LIDAR.md
 
-Alternatively, use LD14 LIDAR: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/LD14.md
+Alternatively, use an LD14 LIDAR: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/LD14.md
 
 ### ROS2 driver for BNO055 9DOF IMU
 
 Refer to https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/BNO055%20IMU.md
 
-Alternatively, use MPU9250 sensor: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/MPU9250.md
+Alternatively, use an MPU9250 sensor: https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/MPU9250.md
 
 ### Compile forked Autonomy Lab ROS2 driver for Create 1 base
 

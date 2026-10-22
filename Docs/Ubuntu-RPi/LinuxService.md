@@ -9,7 +9,7 @@
 
 -------------
 
-**Tip:** this complicates making changes to robot software, use with caution. 
+**Tip:** this complicates making changes to robot software; use with caution. 
 
 **Note:** This guide is written for _Create 1 Turtlebot_, but it applies to any other robot with minor changes.
 
@@ -21,7 +21,7 @@ We need some files - copy them from this repository, under and around https://gi
 
 ### Here are the steps:
 
-1. Create and populate launch folder: /home/ros/launch
+1. Create and populate the launch folder: /home/ros/launch
 ```
 mkdir ~/launch
 cd ~/launch
@@ -32,7 +32,7 @@ chmod +x ~/launch/bootup_launch.sh
 ```
 Try running the _bootup_launch.sh_ from the command line to see if anything fails.
 
-2. Create service description file (as _"sudo"_) - _/etc/systemd/system/robot.service_ :
+2. Create a service description file (as _"sudo"_) - _/etc/systemd/system/robot.service_ :
 ```
 # /etc/systemd/system/robot.service
 [Unit]
@@ -61,8 +61,8 @@ sudo systemctl start robot.service
 If all went well, the service will start automatically after you reboot the RPi, and all related nodes will show up on _rpt_ and _rpt_graph_
 
 **Note:** 
-1. Logs are stored in _/home/ros/.ros/log_ folder - these can grow if things go wrong.
-2. Raspberry Pi 3B is adequate for the _"headless"_ Turtlebot (except for the 14+ hours compilation) - it runs at <30% CPU load and low memory consumption.
+1. Logs are stored in the _/home/ros/.ros/log_ folder - these can grow if things go wrong.
+2. Raspberry Pi 3B is adequate for the _"headless"_ Turtlebot (except for the 14+ hours of compilation) - it runs at <30% CPU load and low memory consumption.
 
 ### Here are some useful commands:
 ```

@@ -3,7 +3,7 @@
 -------------
 
 > - **Seggy robot** is built from a 2016 Segway Ninebot miniPRO - that's why the name.
-> And no, it has nothing to do with "*Crabbed, cantankerous*" or "*exaggerated, stylized movement*". Well, most of time... ;-).
+> And no, it has nothing to do with "*Crabbed, cantankerous*" or "*exaggerated, stylized movement*". Well, most of the time... ;-).
 > - **Note:** As of *October 2026* Seggy is in active development.
 > Stable, working code is on the *[main](https://github.com/slgrobotics/articubot_one)* or *[lyrical](https://github.com/slgrobotics/articubot_one/tree/lyrical)* branches.
 > For the latest code see the *[dev](https://github.com/slgrobotics/articubot_one/tree/dev)* branch.
@@ -20,15 +20,15 @@
 
 -------------
 
-Seggy is a *"larger Turtlebot"* - running [my *articubot_one* code](https://github.com/slgrobotics/articubot_one). Desktop only needs to run RViz and joystick node for robot control.
+Seggy is a *"larger Turtlebot"* - running [my *articubot_one* code](https://github.com/slgrobotics/articubot_one). The Desktop only needs to run RViz and the joystick node for robot control.
 
-Seggy pretends to be a helpful Tablebot, it can carry a tray. Its body is made of painted plywood, it is designed for easy access to all components.
+Seggy pretends to be a helpful Tablebot; it can carry a tray. Its body is made of painted plywood; it is designed for easy access to all components.
 
 <img alt="seggy_robot" src="https://github.com/user-attachments/assets/eb79dae3-d573-4854-9cb2-10e07c480db9" />
 
 Seggy photos are here: https://photos.app.goo.gl/yHXs7fP7u7ae8fa78 - and a story of trying to "robotize" it - [here](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/miniPRO).
 
-**Note:** You can just run Seggy robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
+**Note:** You can just run the Seggy robot in Gazebo sim on a Desktop machine (no robot hardware required) - 
 refer to [this section](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README.md#build-articubot_one-robot-codebase)
 
 Onboard, Seggy has a Raspberry Pi 5 8GB ("seggy"). It runs sensor drivers ([LD14 LIDAR](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Sensors/LD14.md),
@@ -51,13 +51,13 @@ While each robot uses different sensors, the main difference lies in the specifi
 
 All robot-specific files (*configuration*, *description*, and *launch*) are placed under the `~/robot_ws/install` directory — you simply need to choose the appropriate *launch file* for your robot to run.
 
-Follow "Dragger" robot guide starting with "_Raspberry Pi 5 ("dragger") Build and Run Instructions_":
+Follow the "Dragger" robot guide starting with "_Raspberry Pi 5 ("dragger") Build and Run Instructions_":
 
 https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger
 
 ## Running the robot
 
-After all components are installed in *~/robot_ws* folder:
+After all components are installed in the *~/robot_ws* folder:
 
 For convenience, create and populate the _launch_ directory:
 ```

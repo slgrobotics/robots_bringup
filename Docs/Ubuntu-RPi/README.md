@@ -13,7 +13,7 @@
 
 We need to copy an _Ubuntu 26.04.1 Server 64 bit_ image to an SD card, install _ROS2 Lyrical Base_ and add necessary ROS packages.
 
-**Note: (Advanced)** Alternatively you can use real-time OS image with ROS2 Jazzy preinstalled - 
+**Note: (Advanced)** Alternatively you can use a real-time OS image with ROS2 Jazzy preinstalled - 
 described [here](https://github.com/slgrobotics/robots_bringup/blob/main/Docs/Ubuntu-RPi/UbuntuRealTime.md).
 
 ### 1. Set up a Ubuntu 26.04.1 or 24.04 Server 64 bit
@@ -65,7 +65,7 @@ sudo i2cdetect -y 1
 ```
 _Optional:_ Set up commonly used Python GPIO packages: https://ubuntu.com/tutorials/gpio-on-raspberry-pi#1-overview
 
-**Note:** traditional _pip3_ installation method doesn't work on Ubuntu 24.04, as its Python enforces _virtual environment_ use.
+**Note:** the traditional _pip3_ installation method doesn't work on Ubuntu 24.04, as its Python enforces _virtual environment_ use.
 The "*python3-*" prefix relates to packages that can be installed globally, avoiding the *venv* inconvenience.
 ```
 sudo apt install python3-lgpio python3-gpiozero python3-RPi.GPIO
@@ -149,7 +149,7 @@ As your robot will be using WiFi, having ROS2 transport (DDS) optimized becomes 
 sudo apt install ros-${ROS_DISTRO}-ros2-control ros-${ROS_DISTRO}-ros2-controllers ros-${ROS_DISTRO}-xacro ros-${ROS_DISTRO}-twist-mux
 sudo apt install libi2c-dev
 ```
-Now your Raspberry Pi should be ready for installing and compiling your robot's Nodes in ```~/robot_ws``` folder.
+Now your Raspberry Pi should be ready for installing and compiling your robot's Nodes in the ```~/robot_ws``` folder.
 
 Choose one of the robots here: https://github.com/slgrobotics/robots_bringup/tree/main/Docs
 

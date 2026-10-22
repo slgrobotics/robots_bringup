@@ -18,7 +18,7 @@ Here we set up a virtual private network (VPN), specifically designed to overcom
 
 Any ROS2 DDS implementation (here we are interested in Cyclone DDS specifically):
 
-- floods LAN with UDP packets
+- floods the LAN with UDP packets
 - cannot go across LAN subnets
 - cannot "go global" - over LTE, 5G or even wired Internet
 
@@ -57,7 +57,7 @@ sudo husarnet join <your private key here>
 
 husarnet status
 ```
-Run "_ifconfig -a hnet0_" and make a list of you machine's IPv6 addresses:
+Run "_ifconfig -a hnet0_" and make a list of your machines' IPv6 addresses:
 ```
 mydesktop: ab35:f451:xxx:xxx:xxx:xxx:xxx:678
 plucky:    ab35:69d9:xxx:xxx:xxx:xxx:xxx:123
@@ -106,11 +106,11 @@ export ROS_DOMAIN_ID=0
 ```
 **Note:** Workstation's _.bashrc_ should refer to all robots' IPv6 addresses.
 
-After you source the _.bashrc_, whatever you launch (ROS2 related) will talk directly (_peer-to-peer_) across VPN, not flooding LAN with UDP traffic.
+After you source the _.bashrc_, whatever you launch (ROS2 related) will talk directly (_peer-to-peer_) across the VPN, not flooding the LAN with UDP traffic.
 
 And, magically, it should talk the same way while your robot is across subnets, or connected to a phone hotspot WiFi or anything similar.
 
-**Note:** after a reboot, the "_husarnet status_" shows that everything is operational, but the machine is "_not joined_". ROS still works across the subnets, and it _seems_ that the joining operation is only needed for larger scope (across the Internet, 5G and similar). There is no "_unjoin_" operation.
+**Note:** after a reboot, the "_husarnet status_" shows that everything is operational, but the machine is "_not joined_". ROS still works across the subnets, and it _seems_ that the joining operation is only needed for a larger scope (across the Internet, 5G and similar). There is no "_unjoin_" operation.
 
 ## Note: I am using static IPv4 addresses and subnets
 
@@ -118,7 +118,7 @@ Just in case...
 
 For example, consider two "chained" routers (_cable-modem ---> router167 ---> router168_) - each with their LANs. That makes two _subnets_.
 
-_Router168_ has firewall disabled. Both have static routing tables defined to direct traffic to each other.
+_Router168_ has its firewall disabled. Both have static routing tables defined to direct traffic to each other.
 
 And the robot's _/etc/netplan/50-cloud-init.yaml_ may look like this (I am open to suggestions):
 ```
@@ -151,7 +151,7 @@ network:
             - 192.168.1.1
 ```
 
-Desktop/Workstation is residing on _LAN168 subnet_, robot - on _LAN167 subnet_, that's why the routing. So, as ROS doesn't go across subnets with its UDP discovery - I needed Husarnet to work across subnets.
+Desktop/Workstation is residing on the _LAN168 subnet_, and the robot is on the _LAN167 subnet_; that's why the routing. So, as ROS doesn't go across subnets with its UDP discovery - I needed Husarnet to work across subnets.
 
 ## Useful Links:
 

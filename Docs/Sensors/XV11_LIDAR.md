@@ -49,7 +49,7 @@ colcon build
 ```
 ### Test
 
-Try running it on _turtle_, see _/scan_ messages in rqt on the Desktop:
+Try running it on _turtle_ and see _/scan_ messages in rqt on the Desktop:
 ```
 source ~/robot_ws/install/setup.bash
 ros2 run xv_11_driver xv_11_driver &

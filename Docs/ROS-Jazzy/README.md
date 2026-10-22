@@ -59,7 +59,7 @@ https://ubuntu.com/download/desktop
 <details>
 <summary>Click <b>here</b> if your machine can't boot from USB Flash Drive</summary>
 
-Install "server" image from DVD (Desktop image doesn't fit on DVD):
+Install the "server" image from DVD (the Desktop image doesn't fit on DVD):
 
 https://ubuntu.com/download/server
 
@@ -143,7 +143,7 @@ export QT_ENABLE_HIGHDPI_SCALING=0
 <details>
 <summary>Click <b>here</b> to expand instructions</summary>
 
-My Windows machine has a good video card, and can act as X Window Server, relieving the Linux box.
+My Windows machine has a good video card, and can act as an X Window Server, relieving the Linux box.
 
 Running Gnome Desktop on a different machine (Windows 10 with VcXsrv in my case):
 ```
@@ -172,7 +172,7 @@ sudo apt-get install -y qt6-base-dev
 
 ```
 
-Most of additional packages will be installed when you run *rosdep* on your project's source directory.
+Most of the additional packages will be installed when you run *rosdep* on your project's source directory.
 You can skip this section unless you need to install something that *rosdep* missed.
 
 <details>
@@ -188,7 +188,7 @@ sudo apt install ros-${ROS_DISTRO}-gz-ros2-control
 # some extras just in case:
 sudo apt install ros-${ROS_DISTRO}-joint-state-publisher ros-${ROS_DISTRO}-joint-state-publisher-gui
 ```
-Install _"topic relay"_ tool for remapping - in case you ever need it.
+Install the _"topic relay"_ tool for remapping - in case you ever need it.
 
 See https://github.com/ros-tooling/topic_tools/blob/jazzy/README.md for details.
 ```
@@ -201,7 +201,7 @@ sudo apt install ros-${ROS_DISTRO}-xacro ros-${ROS_DISTRO}-twist-mux
 ```
 ### Install additional navigation and visualization components
 
-To allow GPS operation in sim install localization package, SLAM Toolbox and Nav2:
+To allow GPS operation in sim, install the localization package, SLAM Toolbox and Nav2:
 ```
 sudo apt install ros-${ROS_DISTRO}-robot-localization ros-${ROS_DISTRO}-imu-tools ros-${ROS_DISTRO}-slam-toolbox
 sudo apt install ros-${ROS_DISTRO}-navigation2 ros-${ROS_DISTRO}-nav2* ros-${ROS_DISTRO}-rmw-cyclonedds-cpp
@@ -231,7 +231,7 @@ ros2 launch nav2_bringup tb3_simulation_launch.py headless:=False
 ```
 You should see Gazebo and RViz windows coming up. In RViz set _2D Pose Estimate_ as described [here](https://docs.nav2.org/getting_started/index.html#navigating).
 
-You should see costmap and should be able to set a _Nav2 Goal_ and watch the robot navigating there autonomously.
+You should see a costmap and should be able to set a _Nav2 Goal_ and watch the robot navigating there autonomously.
 
 ## Build "articubot_one" robot codebase.
 
@@ -261,8 +261,8 @@ The `colcon build` command will place all necessary files in the `~/robot_ws/ins
 will be ready to run - in sim or [for real](https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Dragger#run-the-robot-on-board-raspberry-5-8gb).
 
 If all goes well, we can now:
-1. Use joystick to control the robots - simulated or physical.
-2. Run any robot in Gazebo with RViz to monitor simulated robot.
+1. Use a joystick to control the robots - simulated or physical.
+2. Run any robot in Gazebo with RViz to monitor the simulated robot.
 3. Run RViz alone to monitor a physical robot.
 
 ## Bringing up robot simulation in Gazebo
@@ -288,7 +288,7 @@ or
 ros2 launch articubot_one fido_sim.launch.py
 ```
 You should see Gazebo and RViz GUI coming up. You may see a white 150m x 150m square ("empty_map" from *map_server*)
-or SLAM Toolbox or Cartographer should be building map as you move the robot around with joystick. If you zoom a bit out in RViz, for an outdoor robot you will see aerial map. 
+or SLAM Toolbox or Cartographer should be building a map as you move the robot around with a joystick. If you zoom a bit out in RViz, for an outdoor robot you will see an aerial map. 
 (The Aerial Map plugin in RViz needs a push - flip the topic's *Reliability Policy* to see the map). 
 
 The simulated robot should respond to Joystick via teleop. Make sure that your "enable" and "turbo" buttons are assigned correctly in _~/robot_ws/src/articubot_one/launch/joystick.launch.py_
@@ -299,7 +299,7 @@ You must do _"colcon build"_ in _~/robot_ws_ every time you change anything. The
 ```
 [ERROR] [component_container_mt-...]: process has died ..., exit code -4, ...
 ```
-The `"-4"` indicates illegal instruction crash, due to uncompatible optimization flags in the installed binaries.
+The `"-4"` indicates an illegal instruction crash due to incompatible optimization flags in the installed binaries.
 See [this guide](https://github.com/slgrobotics/articubot_one/wiki/jazzy-to-lyrical-migration#solving-nav2-mppi-crashes-on-older-intel-i7-sandbridge-cpus).
 
 **Note:**
@@ -353,9 +353,9 @@ Note that *baylands* world model is massive, and its rendering in Gazebo may tak
 - Turtle: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/Create1
 - A _"Make Your Own"_ DIY robot: https://github.com/slgrobotics/robots_bringup/tree/main/Docs/MakeYourOwn
 
-You are unlikely to have an exact clone of _Seggy_, _Dragger_ or _Plucky_, although and old _Create 1 Turtlebot_ might be still alive in your collection. Or you could've created files for your own robot in the _robots/_ directory.
+You are unlikely to have an exact clone of _Seggy_, _Dragger_ or _Plucky_, although an old _Create 1 Turtlebot_ might be still alive in your collection. Or you could've created files for your own robot in the _robots/_ directory.
 
-There are launch files in _robots/_ directories for real robots, intended to *run on their Raspbery Pi's*. So, once the Pi is up and is running robot's nodes, this is how to launch RViz alone on the Desktop computer:
+There are launch files in _robots/_ directories for real robots, intended to *run on their Raspberry Pis*. So, once the Pi is up and is running the robot's nodes, this is how to launch RViz alone on the Desktop computer:
 ```
 cd ~/robot_ws
 source ~/robot_ws/install/setup.bash
@@ -373,7 +373,7 @@ ros2 launch articubot_one turtle.launch.py
 
 ## Note: Visualizing terrain maps
 
-Some robots could be designed for outdoors operation and will use GPS for localization - for example, Dragger. So, we want to see where it is on the aerial map.
+Some robots could be designed for outdoor operation and will use GPS for localization - for example, Dragger. So, we want to see where it is on the aerial map.
 
 There are two ways of visualizing robot position on a map - *mapviz* and *rviz-satellite*
 
@@ -383,7 +383,7 @@ https://swri-robotics.github.io/mapviz/
 
 https://github.com/nobleo/rviz_satellite/tree/main/
 
-There is no binary distribution of *mapviz* for Jazzy, you have to compile it from sources.
+There is no binary distribution of *mapviz* for Jazzy; you have to compile it from sources.
 Microsoft deprecated Bing Maps keys, and Azure keys don't seem to work with mapviz.
 I wasn't able to make the sim work with mapviz anyway.
 
@@ -401,13 +401,13 @@ Running the sim as described below brings Rviz2 with a map view.
 
 ## Optional: running Cartographer instead of Slam_Toolbox
 
-Cartographer is just one of localaizers - *slam_toolbox* and *map_server* being the other two I use. It can be run from a robot's launch file or separately, as described here.
+Cartographer is just one of the localizers - *slam_toolbox* and *map_server* being the other two I use. It can be run from a robot's launch file or separately, as described here.
 
-Cartographer nodes are normally commented out in my _*.launch.py_ files, you need to edit them to try Cartographer.
+Cartographer nodes are normally commented out in my _*.launch.py_ files; you need to edit them to try Cartographer.
 
 ## Optional: Explore Nav2 and Behavior Trees
 
-Robot's path planning and its ability to reach its goals is programmed in Nav2 package. Behavior Trees library is used it that package.
+The robot's path planning and its ability to reach its goals are programmed in the Nav2 package. The Behavior Trees library is used in that package.
 
 See https://github.com/slgrobotics/robots_bringup/blob/main/Docs/ROS-Jazzy/README-BT.md
 

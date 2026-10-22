@@ -52,13 +52,13 @@ For benchmarking, _iperf3_ can be used. It must be installed on both ends of the
 ```
 sudo apt install iperf3
 ```
-During the installation it asks if the daemon should be started, answer _Yes_. Use the following commands to control the daemon:
+During the installation it asks if the daemon should be started; answer _Yes_. Use the following commands to control the daemon:
 ```
 systemctl status iperf3
 sudo systemctl stop iperf3
 sudo systemctl start iperf3
 ```
-Then you can benchmark the connection to any computer where _iperf3_ daemon is running:
+Then you can benchmark the connection to any computer where the _iperf3_ daemon is running:
 ```
 iperf3 -c plucky.local
   or
@@ -80,7 +80,7 @@ Connecting to host plucky.local, port 5201
 [  7][RX-C]   0.00-10.20  sec  50.2 MBytes  41.3 Mbits/sec                  receiver
 iperf Done.
 ```
-The test above is between a Raspberry Pi 5 and an Intel I7 desktop. A mesh WiFi6 router is within 10' from the robot. A ROS2 robot might need 200+ Mbits/s bandwidth.
+The test above is between a Raspberry Pi 5 and an Intel I7 desktop. A mesh WiFi6 router is within 10' of the robot. A ROS2 robot might need 200+ Mbits/s bandwidth.
 
 The realistic range of WiFi could be 50 meters indoors and about 100 meters outdoors, with 5 GHz links being less by at least 10 percent.
 
@@ -97,7 +97,7 @@ This works well, if the client device also supports that feature, but might caus
 Older client devices often connect to a far-away router node and keep that connection.
 Mesh networks can be configured to assign router nodes to client devices ("preferred connection" setting), but that works only for stationary devices.
 
-This issue can be solved by using a good WiFi 6 capable [travel router](https://www.amazon.com/dp/B0D41G5N95) in client mode, and using Ethernet cable between the router and RPi.
+This issue can be solved by using a good WiFi 6 capable [travel router](https://www.amazon.com/dp/B0D41G5N95) in client mode, and using an Ethernet cable between the router and RPi.
 
 The *mesh* feature can be either a blessing or a curse, depending on your use case. You may want to pin your robot's router or Raspberry Pi
 to a specific access point in the mesh network if you want to prevent it from roaming and renegotiating connections with other APs.
@@ -164,9 +164,9 @@ network:
 ```
 **Note:**
 - Write a file `/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg` with the following: `network: {config: disabled}` to disable *NetworkManager* and use *netplan/networkd* instead.
-- the `macaddress:` part is important - many routers want to see real, not *private* MAC address.
-Your Raspberry Pi network devices have factory-assigned physical MAC addresses, print them with `ip link show` command.
-- the `dhcp4-overrides:` section ensures that WiFi interface remains secondary/backup, with all traffic normally going through *eth0*
+- the `macaddress:` part is important - many routers want to see a real, not *private* MAC address.
+Your Raspberry Pi network devices have factory-assigned physical MAC addresses; print them with `ip link show` command.
+- the `dhcp4-overrides:` section ensures that the WiFi interface remains secondary/backup, with all traffic normally going through *eth0*
 - Check your kernel messages periodically with `sudo dmesg|tail -20` - it shouldn't show any recent messages, especially related to network connections.
 - Useful network commands:
   - `resolvectl status`
@@ -244,7 +244,7 @@ Connecting to host desktop5.local, port 5201
 
 iperf Done.
 ```
-The `ping` stays within 3..10 ms range. The connection becomes unreliable (for ROS2, at least) above the 35 meters range in my case.
+The `ping` stays within the 3..10 ms range. The connection becomes unreliable (for ROS2, at least) above the 35 meters range in my case.
 
 As a result, Dragger can travel within a 35-meter range from the garage router and measure the "heatmap":
 
