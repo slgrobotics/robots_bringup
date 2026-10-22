@@ -257,11 +257,13 @@ sourcedir /run/chrony-dhcp
 # Use NTP sources found in /etc/chrony/sources.d.
 sourcedir /etc/chrony/sources.d
 ```
-**Note:** Comment out *sources from DHCP* and *NTP sources from sources.d* if exclusive synchronization is desired.
+**Note:** 
+- your router's DHCP server might not serve NTP sources.
+- Comment out *sources from DHCP* and *NTP sources from sources.d* if exclusive synchronization is desired.
 The disadvantage is that if your desktop is unavailable, the Raspberry Pi loses its external time reference and eventually drifts.
-Neither `trust` nor `prefer` is necessary when there is only one source.
+- Neither `trust` nor `prefer` is necessary when there is only one source.
 
-A shell script to see how your time sync is performing (and see CPU/GPU temperatures):
+Here is a shell script to see how your time sync is performing (and see CPU/GPU temperatures):
 
 **Note:** you need to `sudo usermod -a -G video $(whoami)` for GPU access
 ```
