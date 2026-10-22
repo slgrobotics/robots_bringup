@@ -266,11 +266,25 @@ The disadvantage is that if your desktop is unavailable, the Raspberry Pi loses 
 - Ubuntu 26 prefers NTS (NTP with built-in security), but regular NTP services are still supported.
 
 Here is a shell script to see how your time sync is performing (and see CPU/GPU temperatures):
-
-**Note:** you need to `sudo usermod -a -G video $(whoami)` for GPU access
 ```
 #!/bin/bash
-set -x
+
+uname -a
+lsb_release -a | grep Description
+uptime -p
+
+# Capture the raw seconds from chronyc
+raw_seconds=$(chronyc -n tracking | grep "System time" | awk '{print $4}')
+# Convert seconds to microseconds (multiply by 1,000,000) using awk
+# Using "%.0f" ensures it outputs as a clean integer with no decimal trailing zeros
+microseconds=$(awk -v sec="$raw_seconds" 'BEGIN {printf "%.0f", sec * 1000000}')
+echo "System time shift: ${microseconds} µs  (positive - fast / ahead of NTP time)"
+chronyc sources | grep "^\^\*"
+```
+
+Another script with health stats:
+```
+#!/bin/bash
 systemctl status chronyd
 chronyc sources
 chronyc sourcestats
@@ -278,9 +292,7 @@ chronyc sourcestats
 ntpdate -q time.windows.com
 timedatectl status
 chronyc tracking
-set +x
 echo "CPU: " `gawk '{print $1/1000," C"}' /sys/class/thermal/thermal_zone0/temp`
-echo "GPU: " `vcgencmd measure_temp` | sed 's/temp=//'
 ```
 
 ### _Optional:_ Making compressed backups of an SD card
