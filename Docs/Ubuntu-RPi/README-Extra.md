@@ -172,6 +172,15 @@ ip a
 
 ROS nodes rely on tight time synchronization between participating machines. Default setup might not work well for you.
 
+When two machines have different clocks, TF2 can produce errors such as:
+```
+Lookup would require extrapolation into the future
+```
+or:
+```
+Lookup would require extrapolation into the past
+```
+
 There's a ROS2 specific [test](https://github.com/Boston-Robot-Hackers/handy) to see if your Workstation and on-board Pi are synchronized.
 
 In **Ubuntu 24.04**, time synchronization is handled by **systemd-timesyncd** - a lightweight client-only NTP.
@@ -210,20 +219,27 @@ chronyc sourcestats
 ```
 
 To make time synchronization more precise and robust, set up a **local NTP server** on one of your machines.
+Local NTP improves consistency between machines, but does not automatically guarantee better absolute time accuracy.
 
 On the Linux desktop (to be assigned as NTP server, in my case - 192.168.1.130, with static address):
 ```
 sudo vi /etc/chrony/chrony.conf
+```
+Keep the existing upstream NTP sources. Add the network range you allow to receive time syncing requests from clients.
 
-# add to the end : add the network range you allow to receive time syncing requests from clients
-
+Add the following to the end:
+```
+# Allow local ROS2 machines to synchronize:
 allow 192.168.1.0/24
-
-sudo systemctl restart chronyd
+# Continue serving local time if upstream synchronization is lost:
+local stratum 10
+```
+Restart Chrony:
+```
+sudo systemctl restart chrony
 ```
 On the Raspberry Pi:
 
-_Note:_ Offset 0.01 allows RPi to be a bit behind the server, avoiding "lookup into future"
 ```
 sudo vi /etc/chrony/chrony.conf
 ```
@@ -231,8 +247,9 @@ sudo vi /etc/chrony/chrony.conf
 Your setup might look like this:
 ```
 # See http://www.pool.ntp.org/join.html for more information.
-server 192.168.1.130 iburst offset 0.01
-initstepslew 30 192.168.1.130
+server 192.168.1.130 iburst prefer
+# optionally:
+#server 192.168.1.130 iburst trust prefer
 
 # Use time sources from DHCP.
 sourcedir /run/chrony-dhcp
@@ -240,7 +257,9 @@ sourcedir /run/chrony-dhcp
 # Use NTP sources found in /etc/chrony/sources.d.
 sourcedir /etc/chrony/sources.d
 ```
-You may want to comment out sources from DHCP and `sources.d` - in which case your client machine will only use your local NTP server.
+**Note:** Comment out *sources from DHCP* and *NTP sources from sources.d* if exclusive synchronization is desired.
+The disadvantage is that if your desktop is unavailable, the Raspberry Pi loses its external time reference and eventually drifts.
+Neither `trust` nor `prefer` is necessary when there is only one source.
 
 A shell script to see how your time sync is performing (and see CPU/GPU temperatures):
 
