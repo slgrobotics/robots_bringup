@@ -265,7 +265,7 @@ The disadvantage is that if your desktop is unavailable, the Raspberry Pi loses 
 - You can put the server definition in `/etc/chrony/sources.d/ubuntu-ntp-pools.sources` - I prefer to leave it intact in case Chrony files auto-update.
 - Ubuntu 26 prefers NTS (NTP with built-in security), but regular NTP services are still supported.
 
-Here is a shell script to see how your time sync is performing (and see CPU/GPU temperatures):
+Here is a shell script to see how your time sync is performing:
 ```
 #!/bin/bash
 
@@ -282,7 +282,7 @@ echo "System time shift: ${microseconds} µs  (positive - fast / ahead of NTP ti
 chronyc sources | grep "^\^\*"
 ```
 
-Another script with health stats:
+Another script with health stats (including CPU temperature):
 ```
 #!/bin/bash
 systemctl status chronyd
