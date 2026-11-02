@@ -11,13 +11,11 @@
 
 -------------
 
-There's a package created by Michael Wimble to log and visualize WiFi signal strength along the robot's path.
-
-The original is here: https://github.com/wimblerobotics/wifi_logger_visualizer
-
-The fork I use for testing is a default here: https://github.com/slgrobotics/wifi_logger_visualizer
-
-**Note:** the V1 and V2 versions of the package are VERY different. I recommend V2.
+> **Note:**
+> - there's a package created by Michael Wimble to log and visualize WiFi signal strength along the robot's path.
+> - the original is here: https://github.com/wimblerobotics/wifi_logger_visualizer
+> - the fork I use for testing is a default here: https://github.com/slgrobotics/wifi_logger_visualizer
+> - the V1 and V2 versions of the package are VERY different. I recommend V2.
 
 ----------------
 
