@@ -15,7 +15,9 @@ There's a package created by Michael Wimble to log and visualize WiFi signal str
 
 The original is here: https://github.com/wimblerobotics/wifi_logger_visualizer
 
-The fork I use for testing is here: https://github.com/slgrobotics/wifi_logger_visualizer
+The fork I use for testing is a default here: https://github.com/slgrobotics/wifi_logger_visualizer
+
+**Note:** the V1 and V2 versions of the package are VERY different. I recommend V2.
 
 ----------------
 
@@ -246,7 +248,7 @@ iperf Done.
 ```
 The `ping` stays within the 3..10 ms range. The connection becomes unreliable (for ROS2, at least) above the 35 meters range in my case.
 
-As a result, Dragger can travel within a 35-meter range from the garage router and measure the "heatmap":
+As a result, Dragger can travel within a 35-meter range from the garage router and measure the "heatmap" in the V1 version of the Wi-Fi Logger and Visualizer:
 
 ![Screenshot from 2025-04-09 20-14-39](https://github.com/user-attachments/assets/2394d7a5-2d2c-40e1-b79d-1ae8dd8c0083)
 
