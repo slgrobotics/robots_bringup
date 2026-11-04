@@ -97,10 +97,51 @@ This works well, if the client device also supports that feature, but might caus
 Older client devices often connect to a far-away router node and keep that connection.
 Mesh networks can be configured to assign router nodes to client devices ("preferred connection" setting), but that works only for stationary devices.
 
-This issue can be solved by using a good WiFi 6 capable [travel router](https://www.amazon.com/dp/B0D41G5N95) in client mode, and using an Ethernet cable between the router and RPi.
+> The *mesh* feature can be either a blessing or a curse, depending on your use case. You may want to pin your robot's router or Raspberry Pi
+> to a specific access point in the mesh network if you want to prevent it from roaming and renegotiating connections with other APs.
 
-The *mesh* feature can be either a blessing or a curse, depending on your use case. You may want to pin your robot's router or Raspberry Pi
-to a specific access point in the mesh network if you want to prevent it from roaming and renegotiating connections with other APs.
+This issue can be solved by using a good WiFi 6 capable travel router in *client mode*, and using an Ethernet cable between the router and RPi.
+
+I've been using two varieties:
+- TP-Link Roam 6 AX1500 Portable Wi-Fi 6 [Travel Router](https://www.amazon.com/dp/B0D41G5N95) (TL-WR1502X) on Seggy
+  - needs a 12V DC to USB Type C PD [charger](https://www.amazon.com/dp/B0C8TBM2QM) (negotiating USB C power delivery adapter) to power it.
+- TP-Link Roam 6 AX3000 Dual-Band Wi-Fi 6 [Travel Router](https://www.amazon.com/dp/B0DY8K122V) (TL-WR3002X) on Dragger - outdoors.
+  - powered by regular 5V DC, mostly less than 1A, comes with USB-C to USB-A cable and a universal 15W USB charger.
+
+Here is how it looks in real life with the AX3000 on the 5 GHz:
+```
+ros@dragger:~$ iperf3 -c xxx.local
+Connecting to host xxx.local, port 5201
+[  5] local xxx port 59392 connected to xxx port 5201
+[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+[  5]   0.00-1.00   sec   102 MBytes   857 Mbits/sec    0   3.81 MBytes       
+[  5]   1.00-2.00   sec   110 MBytes   921 Mbits/sec    0   4.01 MBytes
+           .......
+[  5]   9.00-10.00  sec   108 MBytes   909 Mbits/sec    0   4.01 MBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-10.00  sec  1.05 GBytes   901 Mbits/sec    0   sender
+[  5]   0.00-10.01  sec  1.05 GBytes   900 Mbits/sec        receiver
+
+ros@dragger:~$ iperf3 -c xxx.local -R
+Connecting to host xxx.local, port 5201
+Reverse mode, remote host xxx.local is sending
+[  5] local xxx port 56978 connected to xxx port 5201
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-1.00   sec  89.6 MBytes   751 Mbits/sec                  
+[  5]   1.00-2.00   sec   103 MBytes   865 Mbits/sec                  
+           .......
+[  5]   8.00-9.00   sec   105 MBytes   878 Mbits/sec                  
+[  5]   9.00-10.00  sec   105 MBytes   878 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-10.01  sec  1.01 GBytes   869 Mbits/sec    0   sender
+[  5]   0.00-10.00  sec  1.01 GBytes   868 Mbits/sec        receiver
+
+PING xxx.local (xxx) 56(84) bytes of data.
+64 bytes from xxx: icmp_seq=1 ttl=64 time=2.26 ms
+64 bytes from xxx: icmp_seq=2 ttl=64 time=2.22 ms
+```
 
 ## Direct WiFi between your laptop and the robot
 
