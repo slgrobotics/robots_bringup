@@ -27,7 +27,14 @@ ros2 topic echo /joy       # <-- Run in second terminal
 ```
 You can see the response of buttons and thumbsticks in the _echo_ output.
 
-See "Useful links" below.
+**Tips:**
+- joystick packages can be installed by: `sudo apt install ros-${ROS_DISTRO}-joy*` - if missing
+- For joystick operation - make sure your "ros" account has access to ports: `sudo adduser "$USER" dialout`
+- Check out files:
+  - [joystick.launch.py](https://github.com/slgrobotics/articubot_one/blob/lyrical/launch/joystick.launch.py)
+  - [joystick.yaml](https://github.com/slgrobotics/articubot_one/blob/lyrical/config/joystick.yaml)
+
+See "[Useful links](#useful-links)" below.
 
 ### Installation (with my articubot_one codebase)
 
