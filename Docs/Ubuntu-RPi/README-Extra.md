@@ -306,7 +306,8 @@ I prefer a safer method - fill unused space with zeroes and let Zip shrink the S
 sudo apt autoremove
 sudo apt clean
 
-cat /dev/zero > zero.file
+# Run a command with a default lower priority (niceness of 10):
+nice cat /dev/zero > zero.file
 (takes about an hour on RPi4, about 5 minutes on RPi5 to write 18.7 GB on 32 GB SD Card)
 rm zero.file
 ```
