@@ -100,7 +100,7 @@ Roughly, here is a BoM for it:
   - Gearboxes
   - Motors with Quadrature Encoders
   - H-Bridges - (e.g. [IBT-2/BTS7960](https://www.amazon.com/BTS7960-H-bridge-Double-Current-Diagnostic/dp/B09W8VV6RH) - one per motor)
-  - Arduino Mega or similar _base controller_ with [software](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/DraggerROS)
+  - Arduino Mega or similar _base controller_ with [software](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/WheelsROS_Dragger)
 
 - or, Hoverboard Base (BLDC Wheel motors)
   - Motor Wheels - most used hoverboards will do
@@ -150,7 +150,7 @@ The **ROS2 [driver](https://github.com/slgrobotics/diffdrive_arduino)** operates
 
 To control the wheels, the ROS2 driver opens a serial connection to an Arduino Mega 2560 or Teensy 4.0 microcontroller running custom firmware.
 
-The **Arduino [firmware](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/DraggerROS)** is responsible for:
+The **Arduino [firmware](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/WheelsROS_Dragger)** is responsible for:
 - Generating PWM signals for H-Bridges (DraggerMotors.ino)
 - Reading quadrature encoders (DraggerEncoders.ino)
 - Calculating PID control values (DraggerCalculate.ino)

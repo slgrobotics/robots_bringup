@@ -47,7 +47,7 @@ Dragger and Plucky use a parking sensor (four ultrasonic rangers) for obstacle a
 
 Arduino Mega 2560 code - wheels/sensors driver, talking to Articulated Robotics ROS node: 
 
-https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/DraggerROS
+https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/WheelsROS_Dragger
 
 Parking sensor info and driver:
 
