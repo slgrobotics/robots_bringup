@@ -104,7 +104,7 @@ Roughly, here is a BoM for it:
 
 - or, Hoverboard Base (BLDC Wheel motors)
   - Motor Wheels - most used hoverboards will do
-  - SimpleFOC driver board(s) - for example, a dual motor board here: https://www.amazon.com/gp/product/B0FTX8PN2M
+  - SimpleFOC driver board(s) - see https://docs.simplefoc.com/bldc_drivers#high-performance-boards
   - Teensy 4.0 or 4.1 _base controller_ with [software](https://github.com/slgrobotics/Misc/tree/master/Arduino/Sketchbook/WheelsROS_Seggy)
   - Note:
     - most motor wheels will produce plenty of torque with 12 V batteries, no need to use higher (36 V) voltage.
