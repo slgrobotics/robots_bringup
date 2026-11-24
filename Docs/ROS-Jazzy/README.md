@@ -312,6 +312,7 @@ There is no real robot that runs this code.
 
 By default, robots are spawned in the *test_robot_world*. Several additional worlds are available in the *assets/worlds* directory:
 - empty_world
+- four_rooms (see [README_patrol](https://github.com/slgrobotics/articubot_one/blob/lyrical/README_patrol.md))
 - sonoma_racetrack
 - warehouse
 - baylands
